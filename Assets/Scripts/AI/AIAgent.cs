@@ -6,8 +6,11 @@ enum State
 {
     WAITING,
     GRABBING_RESOURCE,
+    CARRYING_RESOURCE,
     ELABORATING,
-    DELIVERING
+    DELIVERING,
+    FIGHTING,
+    REPAIRING
 }
 
 public class AIAgent : MonoBehaviour

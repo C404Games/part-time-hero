@@ -6,8 +6,7 @@ public enum NodeType
 {
     AND,
     OR,
-    ALWAYS_TRUE,
-    ALWAYS_FALSE
+    LEAF
 }
 
 public class BehaviourNode
