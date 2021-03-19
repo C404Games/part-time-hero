@@ -1,0 +1,150 @@
+{
+    "Products":[        
+        {
+            "id":0,
+            "name": "PROD_TOMATO",
+            "type":0,
+            "appearence":"Products/tomato"
+        },
+        {
+            "id":1,
+            "name": "PROD_LETTUCE",
+            "type":0,
+            "appearence":"Products/lettuce"
+        },
+        {
+            "id":2,
+            "name": "PROD_BREAD",
+            "type":0,
+            "appearence":"Products/bread"
+        },
+        {
+            "id":3,
+            "name": "PROD_HONEY",
+            "type":0,
+            "appearence":"Products/Honey"
+        },
+        {
+            "id":4,
+            "name": "PROD_MEAT",
+            "type":0,
+            "appearence":"Products/meat"
+        },
+        {
+            "id":5,
+            "name": "PROD_CHERRY",
+            "type":0,
+            "appearence":"Products/cherry"
+        },
+
+        {
+            "id":6,
+            "name": "TOOL_POT",
+            "type":3,
+            "appearence":"Tools/Pot"
+        },
+        {
+            "id":7,
+            "name": "TOOL_PLATE",
+            "type":3,
+            "appearence":"Tools/plate"
+        },
+        {
+            "id":8,
+            "name": "TOOL_BOTTLE",
+            "type":3,
+          "appearence": "Tools/Bottle",
+            "transitions":[
+                {
+                    "src":12,
+                    "dst":13,
+                    "time":0
+                }
+            ]
+        },
+        {
+            "id":9,
+            "name": "TOOL_JAR",
+            "type":3,
+            "appearence":"Tools/jar"
+        },        
+
+        {
+            "id":10,
+            "name": "PROD_WATER_POT",
+            "type":1,
+            "appearence":"Products/Water Pot",
+            "transitions":[
+                {
+                    "src":3,
+                    "dst":11,
+                    "time":0
+                }
+            ]
+        },
+        {
+            "id":11,
+            "name": "PROD_WATER_HONEY_POT",
+            "type":1,
+            "appearence":"Products/Wate Pot"
+        },
+        {
+            "id":12,
+            "name": "PROD_WATER_HONEY_POT_COOKED",
+            "type":1,
+            "appearence":"Products/Water Pot"
+            
+        },
+        {
+            "id":13,
+            "name": "PROD_CARBONATED_HONEY",
+            "type":2,
+          "appearence": "Products/Honey"
+            
+        }                               
+    ],
+
+    "Stations":[
+        {
+            "id":0,
+            "name":"STAT_BOARD",
+            "auto":false,
+            "transitions":[
+                {
+                    "src": 0,
+                    "dst": 12,
+                    "time": 2
+                },
+                {
+                    "src": 2,
+                    "dst": 13,
+                    "time": 2
+                }
+            ]
+        },
+        {
+            "id":1,
+            "name":"STAT_KITCHEN",
+            "auto":true,
+            "transitions":[
+                {
+                    "src":11,
+                    "dst": 12,
+                    "time": 10
+                }
+            ]
+        },
+        {
+            "id":2,
+            "name":"STAT_TAP",
+            "auto":true,
+            "transitions":[
+                {
+                    "src":6,
+                    "dst": 10,
+                    "time": 0
+                }
+            ]
+        }
+    ]
+}
