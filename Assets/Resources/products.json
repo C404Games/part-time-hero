@@ -22,7 +22,7 @@
             "id":3,
             "name": "PROD_HONEY",
             "type":0,
-            "appearence":"Products/honey"
+            "appearence":"Products/Honey"
         },
         {
             "id":4,
@@ -41,7 +41,7 @@
             "id":6,
             "name": "TOOL_POT",
             "type":3,
-            "appearence":"Tools/pot"
+            "appearence":"Tools/Pot"
         },
         {
             "id":7,
@@ -53,7 +53,7 @@
             "id":8,
             "name": "TOOL_BOTTLE",
             "type":3,
-            "appearence":"Tools/bottle",
+          "appearence": "Tools/Bottle",
             "transitions":[
                 {
                     "src":12,
@@ -73,7 +73,7 @@
             "id":10,
             "name": "PROD_WATER_POT",
             "type":1,
-            "appearence":"Products/water_pot",
+            "appearence":"Products/Water Pot",
             "transitions":[
                 {
                     "src":3,
@@ -86,20 +86,20 @@
             "id":11,
             "name": "PROD_WATER_HONEY_POT",
             "type":1,
-            "appearence":"Products/water_honey_pot"
+            "appearence":"Products/Wate Pot"
         },
         {
             "id":12,
             "name": "PROD_WATER_HONEY_POT_COOKED",
             "type":1,
-            "appearence":"Products/water_honey_pot_cooked"
+            "appearence":"Products/Water Pot"
             
         },
         {
             "id":13,
             "name": "PROD_CARBONATED_HONEY",
             "type":2,
-            "appearence":"Products/carbonated_honey"
+          "appearence": "Products/Honey"
             
         }                               
     ],

@@ -8,11 +8,14 @@ public class ProductInstance : MonoBehaviour
 
     private Product blueprint;
 
+    private GameObject appearence;
+
     #region MonoBehavior
     // Start is called before the first frame update
     void Start()
     {
         blueprint = ProductManager.productBlueprints[id];
+        updateAppearence();
     }
 
     // Update is called once per frame
@@ -40,7 +43,13 @@ public class ProductInstance : MonoBehaviour
     public IEnumerator transformProduct(int dst, float time)
     {
         yield return new WaitForSeconds(time);
-        Destroy(blueprint.appearence);
         blueprint = ProductManager.productBlueprints[id];
+        updateAppearence();
+    }
+
+    private void updateAppearence()
+    {
+        Destroy(appearence);
+        appearence = Instantiate(blueprint.appearence);
     }
 }
