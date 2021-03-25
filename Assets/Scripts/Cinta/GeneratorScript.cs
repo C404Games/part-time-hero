@@ -42,4 +42,23 @@ public class GeneratorScript : MonoBehaviour
             tiempo = 0;
         }
     }
+
+    private void actualizarValores()
+    {
+        foreach(GameObject g in listaElementos)
+        {
+            Product p = g.GetComponent<Product>();
+            p.probabilidadAcumulada = 1;
+
+            if (false) //p esta en lista de pedidos pendientes
+            {
+                //Sumar a p.probabilidadAcumulada el número de elementos pedidos
+            }
+            if (false) //p esta la cinta
+            {
+                //Restar a p.probabilidadAcumulada el número de elementos en cinta
+            }
+
+        }
+    }
 }
