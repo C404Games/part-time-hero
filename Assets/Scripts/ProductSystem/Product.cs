@@ -22,6 +22,8 @@ public class Product
 
     public List<Transition> transitions;
 
+    public int probabilidadAcumulada;
+
     public Product(int id, string name, ProductType type, GameObject appearence, List<Transition> transitions)
     {
         this.name = name;
