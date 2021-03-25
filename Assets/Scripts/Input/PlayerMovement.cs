@@ -6,9 +6,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float health = 0;
+    public float punctuation = 0;
+    public float volume = 0.5f;
+    public float powerUpIncreaseValueHealth = 5.0f;
+    public float powerUpIncreaseValuePunctuation = 5.0f;
     public float speed = 5.0f;
     public float rotSpeed = 10.0f;
     public Animator animator;
+
+    private AudioSource audioSource;
 
     Controls controls;
 
@@ -30,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         velocity = new Vector2(0, 0);
@@ -94,6 +102,42 @@ public class PlayerMovement : MonoBehaviour
                 agent.isStopped = false;
             }
         }
+    }
+
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.transform.parent != null && collision.transform.parent.gameObject.tag == "PowerUp")
+        {
+            audioSource.Play();
+            if (collision.gameObject.GetComponent<PowerUpBehaviour>() != null)
+            {
+                switch (collision.gameObject.GetComponent<PowerUpBehaviour>().type)
+                {
+                    case "health":
+                        {
+                            this.PowerUpHealth(powerUpIncreaseValueHealth);
+                            break;
+                        }
+                    case "money":
+                        {
+                            this.PowerUpPunctuation(powerUpIncreaseValuePunctuation);
+                            break;
+                        }
+                }
+            }
+            Destroy(collision.transform.parent.gameObject);
+        }
+    }
+
+    public void PowerUpHealth(float value)
+    {
+        health += value;
+    }
+
+    public void PowerUpPunctuation(float value)
+    {
+        punctuation += value;
     }
 
 }
