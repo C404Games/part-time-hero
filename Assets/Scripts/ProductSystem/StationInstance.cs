@@ -9,12 +9,15 @@ public class StationInstance : MonoBehaviour
 
     public ProductInstance holding;
 
-    Station blueprint;    
+    Station blueprint;
+
+    int health;
 
     // Start is called before the first frame update
     void Start()
     {
         blueprint = ProductManager.stationBlueprints[id];
+        health = 5;
     }
 
     // Update is called once per frame
@@ -39,6 +42,20 @@ public class StationInstance : MonoBehaviour
         }
         holding = product;
         return true;
+    }
+
+    public void takeHealth(int h)
+    {
+        health -= h;
+        if(health <= 0)
+        {
+            // Cambiar apariencia
+        }
+    }
+
+    public int getHealth()
+    {
+        return health;
     }
 
 }
