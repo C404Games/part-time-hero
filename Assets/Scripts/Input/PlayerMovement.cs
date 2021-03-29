@@ -6,14 +6,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float health = 0;
-    public float punctuation = 0;
+    private float health = 100;
+    private float punctuation = 0;
     public float volume = 0.5f;
     public float powerUpIncreaseValueHealth = 5.0f;
     public float powerUpIncreaseValuePunctuation = 5.0f;
     public float speed = 5.0f;
     public float rotSpeed = 10.0f;
     public Animator animator;
+    public int matchId;
+    public float frozenTime;
+    private bool isFrozen;
+    private bool melting;
+    private float timer;
 
     private AudioSource audioSource;
 
@@ -59,19 +64,29 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Vector2 dx = velocity * Time.deltaTime;
-        //transform.position += new Vector3(dx.y, 0.0f, -dx.x);
-        rb.velocity = velocity;
-        if (velocity.sqrMagnitude != 0 && (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime * rotSpeed);
-        if ((!agent.hasPath || agent.velocity.sqrMagnitude == 0f) && rb.velocity == new Vector3(0, 0, 0))
-        {
-            animator.SetBool("isRunning", false);
+        timer += Time.deltaTime;
+        if (isFrozen || melting) {
+            isFrozen = false;
+            if (timer > frozenTime)
+            {
+                melting = false;
+            }
+        } else {
+            //Vector2 dx = velocity * Time.deltaTime;
+            //transform.position += new Vector3(dx.y, 0.0f, -dx.x);
+            rb.velocity = velocity;
+            if (velocity.sqrMagnitude != 0 && (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime * rotSpeed);
+            if ((!agent.hasPath || agent.velocity.sqrMagnitude == 0f) && rb.velocity == new Vector3(0, 0, 0))
+            {
+                animator.SetBool("isRunning", false);
+            }
+            else
+            {
+                animator.SetBool("isRunning", true);
+            }
         }
-        else
-        {
-            animator.SetBool("isRunning", true);
-        }
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -124,6 +139,11 @@ public class PlayerMovement : MonoBehaviour
                             this.PowerUpPunctuation(powerUpIncreaseValuePunctuation);
                             break;
                         }
+                    case "frozen":
+                        {
+                            this.isFrozen = true;
+                            break;
+                        }
                 }
             }
             Destroy(collision.transform.parent.gameObject);
@@ -132,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void PowerUpHealth(float value)
     {
-        health += value;
+        health = (health < 100)? health + value : health;
     }
 
     public void PowerUpPunctuation(float value)
@@ -140,4 +160,44 @@ public class PlayerMovement : MonoBehaviour
         punctuation += value;
     }
 
+    public int getMatchId()
+    {
+        return this.matchId;
+    }
+
+    public void setMatchId(int matchId)
+    {
+        this.matchId = matchId;
+    }
+
+
+    public float getPunctuation()
+    {
+        return this.punctuation;
+    }
+
+    public void setPunctuation(float punctuation)
+    {
+        this.punctuation = punctuation;
+    }
+
+    public float getHealth()
+    {
+        return this.health;
+    }
+
+    public void setHealth(float health)
+    {
+        this.health = health;
+    }
+
+    public bool getIsFrozen()
+    {
+        return this.isFrozen;
+    }
+
+    public void setIsFrozen(bool isFrozen)
+    {
+        this.isFrozen = isFrozen;
+    }
 }

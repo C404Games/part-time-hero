@@ -35,7 +35,6 @@ public class ProductManager : MonoBehaviour
         productBlueprints.Clear();
         stationBlueprints.Clear();
 
-
         string json = Resources.Load<TextAsset>(filename).text;
         Dictionary<string, dynamic> dic = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(json);
 
@@ -72,4 +71,15 @@ public class ProductManager : MonoBehaviour
             stationBlueprints.Add((int)entry["id"], new Station((int)entry["id"], (string)entry["name"], (bool)entry["auto"], transitions));
         }
     }
+
+    public int getProductBlueprintsLength()
+    {
+        return productBlueprints.Count;
+    }
+
+    public int getStationBlueprintsLength()
+    {
+        return stationBlueprints.Count;
+    }
+
 }
