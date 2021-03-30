@@ -57,6 +57,6 @@ public class ProductInstance : MonoBehaviour
         // Esto es una ñapa cutre...
         appearence.transform.localScale = new Vector3(5, 5, 5);
 
-        appearence.transform.position = new Vector3(0, 0, 0);
+        appearence.transform.localPosition = new Vector3(0, 0, 0);
     }
 }

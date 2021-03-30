@@ -22,10 +22,9 @@ public class Product
 
     public List<Transition> transitions;
 
-    public int probabilidadAcumulada;
-
     public Product(int id, string name, ProductType type, GameObject appearence, List<Transition> transitions)
     {
+        this.id = id;
         this.name = name;
         this.type = type;
         this.appearence = appearence;

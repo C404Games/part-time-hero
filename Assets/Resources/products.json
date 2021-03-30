@@ -10,31 +10,31 @@
             "id":1,
             "name": "PROD_LETTUCE",
             "type":0,
-            "appearence":"Products/Tabern/lettuce"
+            "appearence":"Products/Tabern/salad"
         },
         {
             "id":2,
             "name": "PROD_BREAD",
             "type":0,
-            "appearence":"Products/Tabern/bread"
+            "appearence":"Products/Tabern/loaf"
         },
         {
             "id":3,
             "name": "PROD_HONEY",
             "type":0,
-            "appearence":"Products/Tabern/Honey"
+            "appearence":"Products/Tabern/honey"
         },
         {
             "id":4,
             "name": "PROD_MEAT",
             "type":0,
-            "appearence":"Products/Tabern/meat"
+            "appearence":"Products/Tabern/meatRaw"
         },
         {
             "id":5,
             "name": "PROD_CHERRY",
             "type":0,
-            "appearence":"Products/Tabern/cherry"
+            "appearence":"Products/Tabern/cherries"
         },
 
         {

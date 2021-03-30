@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class GeneratorScript : MonoBehaviour
 {
-    public List<GameObject> listaElementos;
+    //List<GameObject> listaElementos;
     public double tiempoAparicion;
 
     private double tiempo = 0;
 
+    private List<int> cumulativeProbabilities;
+
     // Start is called before the first frame update
     void Start()
     {
-        foreach(GameObject p in listaElementos)
-        {
-            p.GetComponent<Product>().probabilidadAcumulada = 1;
-        }
+        cumulativeProbabilities = new List<int>();
+        for(int i = 0; i < ProductManager.rawProducts.Count; i++)
+            cumulativeProbabilities.Add(1);
+
+        actualizarValores();
     }
 
     // Update is called once per frame
@@ -24,20 +27,17 @@ public class GeneratorScript : MonoBehaviour
         tiempo += Time.deltaTime;
         if(tiempo >= tiempoAparicion)
         {
-            List<GameObject> listaUniforme = new List<GameObject>();
+            List<int> uniformList = new List<int>();
 
-            //actualizar valores
-
-            foreach(GameObject p in listaElementos)
+            for(int i = 0; i < ProductManager.rawProducts.Count; i++)
             {
-                for(int i = 0; i< p.GetComponent<Product>().probabilidadAcumulada; i++)
-                {
-                    listaUniforme.Add(p);
-                }
+                uniformList.AddRange(System.Linq.Enumerable.Repeat(ProductManager.rawProducts[i].id, cumulativeProbabilities[i]));
             }
 
-            int num = Random.Range(0, listaUniforme.Count);
-            Instantiate(listaUniforme[num], Vector3.zero, Quaternion.identity);
+            int num = Random.Range(0, uniformList.Count);
+
+            generateProduct(num);
+            //Instantiate(listaUniforme[num], Vector3.zero, Quaternion.identity);
 
             tiempo = 0;
         }
@@ -45,20 +45,19 @@ public class GeneratorScript : MonoBehaviour
 
     private void actualizarValores()
     {
-        foreach(GameObject g in listaElementos)
+
+        for (int i = 0; i < cumulativeProbabilities.Count; i++)
         {
-            Product p = g.GetComponent<Product>();
-            p.probabilidadAcumulada = 1;
-
-            if (false) //p esta en lista de pedidos pendientes
-            {
-                //Sumar a p.probabilidadAcumulada el número de elementos pedidos
-            }
-            if (false) //p esta la cinta
-            {
-                //Restar a p.probabilidadAcumulada el número de elementos en cinta
-            }
-
+            cumulativeProbabilities[i] = 1;
         }
+    }
+
+    private void generateProduct(int idx)
+    {
+        GameObject newProduct = new GameObject();
+        newProduct.transform.position = transform.position;
+        ProductInstance instance = newProduct.AddComponent<ProductInstance>();
+        instance.id = ProductManager.rawProducts[idx].id;
+        
     }
 }
