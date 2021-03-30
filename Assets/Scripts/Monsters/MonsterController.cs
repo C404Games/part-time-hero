@@ -15,6 +15,8 @@ enum MonsterState
 public class MonsterController : MonoBehaviour
 {
 
+    public GameObject healthBar;
+
     MonsterState state;
 
     NavMeshAgent nvAgent;
@@ -25,6 +27,7 @@ public class MonsterController : MonoBehaviour
     double lastTime = 0.0;
 
     int health;
+    int initHealth = 5;
 
     Animator animator;
 
@@ -35,7 +38,8 @@ public class MonsterController : MonoBehaviour
     {
         state = MonsterState.WAITING;
         nvAgent = GetComponent<NavMeshAgent>();
-        health = 5;
+        health = initHealth;
+        healthBar.SetActive(false);
         animator = GetComponent<Animator>();
         //productManager = FindObjectOfType<ProductManager>();
     }
@@ -86,6 +90,7 @@ public class MonsterController : MonoBehaviour
                 }
                 break;
         }
+        healthBar.transform.forward = -Camera.main.transform.forward;
     }
 
     public void takeHealth(int h)
@@ -99,11 +104,23 @@ public class MonsterController : MonoBehaviour
         else
         {
             animator.SetTrigger("Hit");
+            healthBar.transform.GetChild(0).localScale = new Vector3((float)(health)/ initHealth, 1, 1);
+            healthBar.SetActive(true);
+            StartCoroutine(hideHealthBar(health));
         }
     }
 
     public void die()
     {
         Destroy(this.gameObject);
+    }
+
+    private IEnumerator hideHealthBar(int lastHealth)
+    {
+        yield return new WaitForSeconds(2);
+        if (health == lastHealth)
+        {
+            healthBar.SetActive(false);
+        }
     }
 }

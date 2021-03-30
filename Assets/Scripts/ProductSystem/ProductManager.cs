@@ -16,6 +16,7 @@ public class ProductManager : MonoBehaviour
         productBlueprints = new Dictionary<int, Product>();
         stationBlueprints = new Dictionary<int, Station>();
         rawProducts = new List<Product>();
+        finalProducts = new List<Product>();
         loadProducts("products");
     }
 
