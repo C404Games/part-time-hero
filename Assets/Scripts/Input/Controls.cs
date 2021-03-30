@@ -43,7 +43,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""Action"",
                     ""type"": ""Button"",
                     ""id"": ""f0ba642c-504c-4e2c-a2f5-48c7f88e6015"",
                     ""expectedControlType"": ""Button"",
@@ -136,7 +136,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Attack"",
+                    ""action"": ""Action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -150,7 +150,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_MouseClick = m_Gameplay.FindAction("MouseClick", throwIfNotFound: true);
         m_Gameplay_MousePosition = m_Gameplay.FindAction("MousePosition", throwIfNotFound: true);
-        m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
+        m_Gameplay_Action = m_Gameplay.FindAction("Action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -203,7 +203,7 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_MouseClick;
     private readonly InputAction m_Gameplay_MousePosition;
-    private readonly InputAction m_Gameplay_Attack;
+    private readonly InputAction m_Gameplay_Action;
     public struct GameplayActions
     {
         private @Controls m_Wrapper;
@@ -211,7 +211,7 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @MouseClick => m_Wrapper.m_Gameplay_MouseClick;
         public InputAction @MousePosition => m_Wrapper.m_Gameplay_MousePosition;
-        public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
+        public InputAction @Action => m_Wrapper.m_Gameplay_Action;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -230,9 +230,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MousePosition.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMousePosition;
-                @Attack.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
+                @Action.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAction;
+                @Action.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAction;
+                @Action.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAction;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -246,9 +246,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
-                @Attack.started += instance.OnAttack;
-                @Attack.performed += instance.OnAttack;
-                @Attack.canceled += instance.OnAttack;
+                @Action.started += instance.OnAction;
+                @Action.performed += instance.OnAction;
+                @Action.canceled += instance.OnAction;
             }
         }
     }
@@ -258,6 +258,6 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnMouseClick(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
+        void OnAction(InputAction.CallbackContext context);
     }
 }

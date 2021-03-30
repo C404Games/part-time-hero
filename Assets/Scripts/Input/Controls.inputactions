@@ -30,7 +30,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Attack",
+                    "name": "Action",
                     "type": "Button",
                     "id": "f0ba642c-504c-4e2c-a2f5-48c7f88e6015",
                     "expectedControlType": "Button",
@@ -123,7 +123,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "Action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

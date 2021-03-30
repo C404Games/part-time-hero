@@ -49,7 +49,14 @@ public class ProductInstance : MonoBehaviour
 
     private void updateAppearence()
     {
-        Destroy(appearence);
+        if(appearence != null)
+            Destroy(appearence);
         appearence = Instantiate(blueprint.appearence);
+        appearence.transform.parent = transform;
+
+        // Esto es una ñapa cutre...
+        appearence.transform.localScale = new Vector3(5, 5, 5);
+
+        appearence.transform.position = new Vector3(0, 0, 0);
     }
 }

@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
 
     private AudioSource audioSource;
-    public GameObject sword;
 
     Controls controls;
 
@@ -51,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Movement.started += c => OnMove(c);
         controls.Gameplay.Movement.canceled += c => OnMove(c);
         controls.Gameplay.MouseClick.performed += c => onClick(c);
-        controls.Gameplay.Attack.performed += c => onAttack(c);
+        controls.Gameplay.Action.performed += c => onAction(c);
         controls.Gameplay.Enable();
     }
 
@@ -107,6 +106,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void onAction(InputAction.CallbackContext context)
+    {
+        if (monsterInReach != null)
+            attack();
+        // Otras acciones dependiento del contexto
+    }
+
 
     void OnTriggerEnter(Collider collision)
     {
@@ -155,13 +161,14 @@ public class PlayerMovement : MonoBehaviour
     {
         punctuation += value;
 
-    }
+    }    
 
-    public void onAttack(InputAction.CallbackContext context)
+
+    public void attack()
     {
         animator.SetTrigger("Attack");
-        if(monsterInReach != null)
-            monsterInReach.takeHealth(1);
+        monsterInReach.takeHealth(1);
     }
+
 
 }
