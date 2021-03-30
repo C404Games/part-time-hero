@@ -68,7 +68,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: 33dc077497c001d4dbd4b5b117a64c8d,
+  m_Motion: {fileID: 1827226128182048838, guid: 1a1a17817c3fbb04ab49daf608ce7728,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -114,13 +114,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -186,7 +186,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 6200578666267062213, guid: 33dc077497c001d4dbd4b5b117a64c8d,
+  m_Motion: {fileID: 6200578666267062213, guid: 1a1a17817c3fbb04ab49daf608ce7728,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -218,6 +218,18 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &4940428679600483055
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ce92905f702104caa73c7b1b135dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1102 &7303384687809127501
 AnimatorState:
   serializedVersion: 5
@@ -291,7 +303,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -6239216113759591374, guid: 33dc077497c001d4dbd4b5b117a64c8d,
+  m_Motion: {fileID: -6239216113759591374, guid: 1a1a17817c3fbb04ab49daf608ce7728,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 

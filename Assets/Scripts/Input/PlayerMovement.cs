@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     Vector3 destination;
 
     MonsterController monsterInReach;
-    bool attackBusy = false;
 
 
     private void Awake()
@@ -133,9 +132,9 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.transform.parent.gameObject);
         }
 
-        if (monsterInReach == null && other.gameObject.tag.Equals("Monster"))
+        if (monsterInReach == null && collision.gameObject.tag.Equals("Monster"))
         {
-            monsterInReach = other.GetComponent<MonsterController>();
+            monsterInReach = collision.GetComponent<MonsterController>();
         }
     }
 
@@ -155,12 +154,14 @@ public class PlayerMovement : MonoBehaviour
     public void PowerUpPunctuation(float value)
     {
         punctuation += value;
+
+    }
+
     public void onAttack(InputAction.CallbackContext context)
     {
-
-            animator.SetTrigger("Attack");
+        animator.SetTrigger("Attack");
+        if(monsterInReach != null)
             monsterInReach.takeHealth(1);
-            attackBusy = true;
     }
 
 }

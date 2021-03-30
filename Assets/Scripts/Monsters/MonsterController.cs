@@ -4,7 +4,7 @@ using UnityEngine.AI;
 using UnityEngine;
 using System.Linq;
 
-public enum MonsterState
+enum MonsterState
 {
     ATTACKING,
     WALKING, 
@@ -47,6 +47,8 @@ public class MonsterController : MonoBehaviour
         {
             case MonsterState.WAITING:
                 IEnumerable<StationInstance> stations = FindObjectsOfType<StationInstance>().Where(s => s.getHealth() > 0);
+                if(stations.Count() <= 0)
+                    break;
                 int randIdx = Random.Range(0, stations.Count() - 1);
                 target = stations.ElementAt(randIdx);
                 nvAgent.SetDestination(target.gameObject.transform.position);
@@ -92,11 +94,16 @@ public class MonsterController : MonoBehaviour
         if(health <= 0)
         {
             animator.SetBool("Dead", true);
-            //Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
         else
         {
             animator.SetTrigger("Hit");
         }
+    }
+
+    public void die()
+    {
+        Destroy(this.gameObject);
     }
 }
