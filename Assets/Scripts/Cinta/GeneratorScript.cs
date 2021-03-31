@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GeneratorScript : MonoBehaviour
 {
-    //List<GameObject> listaElementos;
     public double tiempoAparicion;
     public GameObject prefab;
 

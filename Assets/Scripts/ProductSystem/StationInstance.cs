@@ -7,6 +7,8 @@ public class StationInstance : MonoBehaviour
 
     public int id;
 
+    public Transform waitPosition;
+
     ProductInstance heldProduct;
 
     Station blueprint;
@@ -26,6 +28,11 @@ public class StationInstance : MonoBehaviour
         
     }
 
+    public Vector3 getWaitPos()
+    {
+        return waitPosition.position;
+    }
+
     public bool putProduct(ProductInstance product)
     {
 
@@ -42,10 +49,27 @@ public class StationInstance : MonoBehaviour
         {
             heldProduct = product;
             heldProduct.transform.parent = transform;
-            heldProduct.transform.localPosition = new Vector3(0, 0, 0);
+            //heldProduct.transform.localPosition = new Vector3(0, 0, 0);
             return true;
         }
 
+    }
+
+    // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto.
+    public float activate()
+    {
+        if(heldProduct != null)
+        {
+            foreach(Transition transition in blueprint.transitions)
+            {
+                if(heldProduct.id == transition.src)
+                {
+                    StartCoroutine(heldProduct.transformProduct(transition.dst, transition.time));
+                    return blueprint.auto ? 0 : transition.time;
+                }
+            }
+        }
+        return 0;
     }
 
     public ProductInstance takeProduct()

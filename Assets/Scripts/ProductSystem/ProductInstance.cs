@@ -12,6 +12,8 @@ public class ProductInstance : MonoBehaviour
 
     private GameObject appearence;
 
+    private float clampSpeed = 10;
+
     #region MonoBehavior
     // Start is called before the first frame update
     void Start()
@@ -24,7 +26,8 @@ public class ProductInstance : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(transform.parent != null)
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * clampSpeed);
     }
     #endregion
 
@@ -43,9 +46,10 @@ public class ProductInstance : MonoBehaviour
         return false;
     }
 
-    private IEnumerator transformProduct(int dst, float time)
+    public IEnumerator transformProduct(int dst, float time)
     {
         yield return new WaitForSeconds(time);
+        id = dst;
         blueprint = ProductManager.productBlueprints[id];
         updateAppearence();
     }
@@ -56,9 +60,6 @@ public class ProductInstance : MonoBehaviour
             Destroy(appearence);
         appearence = Instantiate(blueprint.appearence);
         appearence.transform.parent = transform;
-
-        // Esto es una ñapa cutre...
-        appearence.transform.localScale = new Vector3(5, 5, 5);
 
         appearence.transform.localPosition = new Vector3(0, 0, 0);
     }

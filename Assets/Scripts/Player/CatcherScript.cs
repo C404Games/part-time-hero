@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class CatcherScript : MonoBehaviour
 {
+
+    public PlayerMovement playerMovement;
+
     private HashSet<StationInstance> listaTargets;
     private HashSet<ProductInstance> listaObjetos;
 
@@ -72,7 +75,7 @@ public class CatcherScript : MonoBehaviour
             listaObjetos.Remove(other.GetComponent<ProductInstance>());
     }
 
-    public void OnAction(InputAction.CallbackContext context)
+    public void OnGrab(InputAction.CallbackContext context)
     {
         StationInstance station = targetMasCercano();
 
@@ -88,9 +91,7 @@ public class CatcherScript : MonoBehaviour
                     ProductInstance p = station.takeProduct();
                     if (p != null)
                     {
-                        heldObject = p;
-                        heldObject.transform.SetParent(transform);
-                        listaObjetos.Remove(p);
+                        holdProduct(p);
                         return;
                     }
                 }
@@ -98,10 +99,7 @@ public class CatcherScript : MonoBehaviour
                 ProductInstance product = objetoMasCercano();
                 if (product != null && !product.held)
                 {
-                    heldObject = product;
-                    product.held = true;
-                    product.transform.SetParent(transform);
-                    listaObjetos.Remove(product);
+                    holdProduct(product);
                 }
             }
 
@@ -121,8 +119,34 @@ public class CatcherScript : MonoBehaviour
                     heldObject.transform.SetParent(null);
                     heldObject = null;
                 }
-
             }
         }
+    }
+
+    public void OnAction(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            StationInstance station = targetMasCercano();
+            if (station != null)
+            {
+                float time = station.activate();
+                playerMovement.blockMovement(time, station.getWaitPos());
+            }
+        }
+    }
+
+    private void holdProduct(ProductInstance product)
+    {
+        heldObject = product;
+        product.held = true;
+        product.transform.SetParent(transform);
+        listaObjetos.Remove(product);
+    }
+
+    private IEnumerator unblockPlayer(float time)
+    {
+        yield return new WaitForSeconds(time);
+        playerMovement.blocked = false;
     }
 }

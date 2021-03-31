@@ -14,11 +14,13 @@ public class PlayerMovement : MonoBehaviour
     public float powerUpIncreaseValuePunctuation = 5.0f;
     public float speed = 5.0f;
     public float rotSpeed = 10.0f;
+    public bool blocked = false;
+
     public Animator animator;
 
     private AudioSource audioSource;
 
-    //Controls controls;
+    private Vector3 waitPosition;
 
     Vector3 velocity;
     
@@ -31,11 +33,6 @@ public class PlayerMovement : MonoBehaviour
     MonsterController monsterInReach;
 
 
-    private void Awake()
-    {
-        //controls = new Controls();
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -45,35 +42,27 @@ public class PlayerMovement : MonoBehaviour
         velocity = new Vector2(0, 0);
     }
 
-    private void OnEnable()
-    {
-        //controls.Gameplay.Movement.performed += c => OnMove(c);
-        //controls.Gameplay.Movement.started += c => OnMove(c);
-        //controls.Gameplay.Movement.canceled += c => OnMove(c);
-        //controls.Gameplay.MouseClick.performed += c => onClick(c);
-        //controls.Gameplay.Action.performed += c => onAction(c);
-        //controls.Gameplay.Enable();
-    }
-
-    private void OnDisable()
-    {
-        //controls.Disable();
-    }
     // Update is called once per frame
     void Update()
     {
-        //Vector2 dx = velocity * Time.deltaTime;
-        //transform.position += new Vector3(dx.y, 0.0f, -dx.x);
-        rb.velocity = velocity;
-        if (velocity.sqrMagnitude != 0 && (!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f))
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime * rotSpeed);
-        if ((!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f) && rb.velocity == new Vector3(0, 0, 0))
+        if (!blocked)
         {
-            animator.SetBool("isRunning", false);
+            rb.velocity = velocity;
+            if (velocity.sqrMagnitude != 0 && (!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f))
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime * rotSpeed);
+            if ((!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f) && rb.velocity == new Vector3(0, 0, 0))
+            {
+                animator.SetBool("isRunning", false);
+            }
+            else
+            {
+                animator.SetBool("isRunning", true);
+            }
+
         }
         else
         {
-            animator.SetBool("isRunning", true);
+            transform.position = Vector3.Lerp(transform.position, waitPosition, Time.deltaTime * 10);
         }
     }    
 
@@ -94,24 +83,30 @@ public class PlayerMovement : MonoBehaviour
 
     public void onMouseClick(InputAction.CallbackContext context)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
-            if (hit.collider.tag.Equals("Floor"))
+        if (!blocked) {
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
             {
-                destination = hit.point;
-                nvAgent.SetDestination(destination);
-                nvAgent.isStopped = false;
+                if (hit.collider.tag.Equals("Floor"))
+                {
+                    destination = hit.point;
+                    nvAgent.SetDestination(destination);
+                    nvAgent.isStopped = false;
+                }
             }
         }
+
     }
 
     public void onAction(InputAction.CallbackContext context)
     {
-        if (monsterInReach != null)
-            attack();
-        // Otras acciones dependiento del contexto
+        if (context.performed)
+        {
+            if (monsterInReach != null)
+                attack();
+            // Otras acciones dependiento del contexto
+        }
     }
 
 
@@ -161,7 +156,6 @@ public class PlayerMovement : MonoBehaviour
     public void PowerUpPunctuation(float value)
     {
         punctuation += value;
-
     }    
 
 
@@ -169,6 +163,19 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.SetTrigger("Attack");
         monsterInReach.takeHealth(1);
+    }
+
+    public void blockMovement(float time, Vector3 waitPosition)
+    {
+        blocked = true;
+        this.waitPosition = waitPosition;
+        StartCoroutine(unlockMovement(time));
+    }
+
+    private IEnumerator unlockMovement(float time)
+    {
+        yield return new WaitForSeconds(time);
+        blocked = false;
     }
 
 
