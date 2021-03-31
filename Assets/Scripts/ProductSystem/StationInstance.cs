@@ -7,7 +7,7 @@ public class StationInstance : MonoBehaviour
 
     public int id;
 
-    public ProductInstance holding;
+    ProductInstance holding;
 
     Station blueprint;
 
@@ -41,7 +41,14 @@ public class StationInstance : MonoBehaviour
             return false;
         }
         holding = product;
+        holding.transform.parent = transform;
+        holding.transform.localPosition = new Vector3(0, 0, 0);
         return true;
+    }
+
+    public ProductInstance takeProduct()
+    {
+        return holding;
     }
 
     public void takeHealth(int h)

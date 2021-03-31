@@ -6,6 +6,7 @@ public class GeneratorScript : MonoBehaviour
 {
     //List<GameObject> listaElementos;
     public double tiempoAparicion;
+    public GameObject prefab;
 
     private double tiempo = 0;
 
@@ -37,7 +38,6 @@ public class GeneratorScript : MonoBehaviour
             int num = Random.Range(0, uniformList.Count);
 
             generateProduct(num);
-            //Instantiate(listaUniforme[num], Vector3.zero, Quaternion.identity);
 
             tiempo = 0;
         }
@@ -54,9 +54,9 @@ public class GeneratorScript : MonoBehaviour
 
     private void generateProduct(int idx)
     {
-        GameObject newProduct = new GameObject();
+        GameObject newProduct = Instantiate(prefab, transform.position, Quaternion.identity);
         newProduct.transform.position = transform.position;
-        ProductInstance instance = newProduct.AddComponent<ProductInstance>();
+        ProductInstance instance = newProduct.GetComponent<ProductInstance>();
         instance.id = ProductManager.rawProducts[idx].id;
         
     }

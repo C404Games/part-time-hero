@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CatcherScript : MonoBehaviour
 {
     private List<GameObject> listaTargets;
     private List<GameObject> listaObjetos;
+
+    private GameObject heldObject;
 
     public GameObject objetoMasCercano()
     {
@@ -52,6 +55,7 @@ public class CatcherScript : MonoBehaviour
         listaTargets = new List<GameObject>();
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Target")
@@ -66,5 +70,37 @@ public class CatcherScript : MonoBehaviour
             listaTargets.Remove(other.gameObject);
         else if (other.tag == "Item")
             listaObjetos.Remove(other.gameObject);
+    }
+
+    public void OnAction(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (heldObject == null)
+            {
+                GameObject obj = objetoMasCercano();
+
+                if (obj != null)
+                {
+                    heldObject = obj;
+                    obj.transform.SetParent(transform);
+                }
+            }
+            else
+            {
+
+                // SI lo podemos dejar en un mueble, lo dejamos
+                GameObject target = targetMasCercano();
+                if (target != null)
+                {
+                    StationInstance station = target.GetComponent<StationInstance>();
+                    if (station.putProduct(heldObject.GetComponent<ProductInstance>()))
+                    {
+                        heldObject = null;
+                    }
+                }
+
+            }
+        }
     }
 }

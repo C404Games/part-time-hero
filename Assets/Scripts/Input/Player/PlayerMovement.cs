@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     private AudioSource audioSource;
 
-    Controls controls;
+    //Controls controls;
 
     Vector3 velocity;
     
@@ -32,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        controls = new Controls();
+        //controls = new Controls();
     }
 
     // Start is called before the first frame update
@@ -46,17 +47,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Gameplay.Movement.performed += c => OnMove(c);
-        controls.Gameplay.Movement.started += c => OnMove(c);
-        controls.Gameplay.Movement.canceled += c => OnMove(c);
-        controls.Gameplay.MouseClick.performed += c => onClick(c);
-        controls.Gameplay.Action.performed += c => onAction(c);
-        controls.Gameplay.Enable();
+        //controls.Gameplay.Movement.performed += c => OnMove(c);
+        //controls.Gameplay.Movement.started += c => OnMove(c);
+        //controls.Gameplay.Movement.canceled += c => OnMove(c);
+        //controls.Gameplay.MouseClick.performed += c => onClick(c);
+        //controls.Gameplay.Action.performed += c => onAction(c);
+        //controls.Gameplay.Enable();
     }
 
     private void OnDisable()
     {
-        controls.Disable();
+        //controls.Disable();
     }
     // Update is called once per frame
     void Update()
@@ -76,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }    
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMovement(InputAction.CallbackContext context)
     {
         Vector3 input = context.ReadValue<Vector2>();
         var forward = Camera.main.transform.forward;
@@ -91,9 +92,9 @@ public class PlayerMovement : MonoBehaviour
         nvAgent.isStopped = true;
     }
 
-    public void onClick(InputAction.CallbackContext context)
+    public void onMouseClick(InputAction.CallbackContext context)
     {
-        Ray ray = Camera.main.ScreenPointToRay(controls.Gameplay.MousePosition.ReadValue<Vector2>());
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
