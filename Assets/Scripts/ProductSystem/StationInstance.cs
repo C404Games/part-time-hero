@@ -7,7 +7,7 @@ public class StationInstance : MonoBehaviour
 
     public int id;
 
-    ProductInstance holding;
+    ProductInstance heldProduct;
 
     Station blueprint;
 
@@ -28,27 +28,31 @@ public class StationInstance : MonoBehaviour
 
     public bool putProduct(ProductInstance product)
     {
-        if (holding)
+
+        if (heldProduct != null) 
         {
-            foreach(Transition t in blueprint.transitions)
+            if (heldProduct.applyResource(product.id))
             {
-                if(t.src == product.id)
-                {
-                    StartCoroutine(holding.transformProduct(t.src, t.time));
-                    return true;
-                }
+                Destroy(product.gameObject);
+                return true;
             }
             return false;
         }
-        holding = product;
-        holding.transform.parent = transform;
-        holding.transform.localPosition = new Vector3(0, 0, 0);
-        return true;
+        else
+        {
+            heldProduct = product;
+            heldProduct.transform.parent = transform;
+            heldProduct.transform.localPosition = new Vector3(0, 0, 0);
+            return true;
+        }
+
     }
 
     public ProductInstance takeProduct()
     {
-        return holding;
+        ProductInstance product = heldProduct;
+        heldProduct = null;
+        return product;
     }
 
     public void takeHealth(int h)

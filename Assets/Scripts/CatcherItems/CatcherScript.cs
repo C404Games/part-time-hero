@@ -5,99 +5,121 @@ using UnityEngine.InputSystem;
 
 public class CatcherScript : MonoBehaviour
 {
-    private List<GameObject> listaTargets;
-    private List<GameObject> listaObjetos;
+    private HashSet<StationInstance> listaTargets;
+    private HashSet<ProductInstance> listaObjetos;
 
-    private GameObject heldObject;
+    private ProductInstance heldObject;
 
-    public GameObject objetoMasCercano()
+    public ProductInstance objetoMasCercano()
     {
         double minDistance = Mathf.Infinity;
-        GameObject minDistanceObject = null;
+        ProductInstance minDistanceObject = null;
 
-        foreach (GameObject gameObject in listaObjetos)
+        foreach (ProductInstance product in listaObjetos)
         {
-            if(Vector3.Distance(gameObject.transform.position, transform.position) < minDistance)
+            if(Vector3.Distance(product.transform.position, transform.position) < minDistance)
             {
-                minDistance = Vector3.Distance(gameObject.transform.position, transform.position);
-                minDistanceObject = gameObject;
+                minDistance = Vector3.Distance(product.transform.position, transform.position);
+                minDistanceObject = product;
             }
         }
 
         return minDistanceObject;
     }
 
-    public GameObject targetMasCercano()
+    public StationInstance targetMasCercano()
     {
         double minDistance = Mathf.Infinity;
-        GameObject minDistanceTarget = null;
+        StationInstance minDistanceTarget = null;
 
-        foreach (GameObject gameObject in listaTargets)
+        foreach (StationInstance station in listaTargets)
         {
-            if (Vector3.Distance(gameObject.transform.position, transform.position) < minDistance)
+            if (Vector3.Distance(station.transform.position, transform.position) < minDistance)
             {
-                minDistance = Vector3.Distance(gameObject.transform.position, transform.position);
-                minDistanceTarget = gameObject;
+                minDistance = Vector3.Distance(station.transform.position, transform.position);
+                minDistanceTarget = station;
             }
         }
 
         return minDistanceTarget;
     }
 
-    public void elimiarObjeto(GameObject objeto)
+    public void eliminarObjeto(ProductInstance product)
     {
-        listaObjetos.Remove(objeto);
+        listaObjetos.Remove(product);
     }
 
     private void Start()
     {
-        listaObjetos = new List<GameObject>();
-        listaTargets = new List<GameObject>();
+        listaObjetos = new HashSet<ProductInstance>();
+        listaTargets = new HashSet<StationInstance>();
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Target")
-            listaTargets.Add(other.gameObject);
+            listaTargets.Add(other.GetComponent<StationInstance>());
         else if (other.tag == "Item")
-            listaObjetos.Add(other.gameObject);
+            listaObjetos.Add(other.GetComponent<ProductInstance>());
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Target")
-            listaTargets.Remove(other.gameObject);
+            listaTargets.Remove(other.GetComponent<StationInstance>());
         else if (other.tag == "Item")
-            listaObjetos.Remove(other.gameObject);
+            listaObjetos.Remove(other.GetComponent<ProductInstance>());
     }
 
     public void OnAction(InputAction.CallbackContext context)
     {
+        StationInstance station = targetMasCercano();
+
         if (context.performed)
         {
+            // SI no llevamos nada
             if (heldObject == null)
             {
-                GameObject obj = objetoMasCercano();
 
-                if (obj != null)
+                //Cogemos el objeto del target si hay
+                if (station != null)
                 {
-                    heldObject = obj;
-                    obj.transform.SetParent(transform);
+                    ProductInstance p = station.takeProduct();
+                    if (p != null)
+                    {
+                        heldObject = p;
+                        heldObject.transform.SetParent(transform);
+                        listaObjetos.Remove(p);
+                        return;
+                    }
+                }
+                //Cogemos el objeto libre cercano si hay
+                ProductInstance product = objetoMasCercano();
+                if (product != null && !product.held)
+                {
+                    heldObject = product;
+                    product.held = true;
+                    product.transform.SetParent(transform);
+                    listaObjetos.Remove(product);
                 }
             }
+
+            // SI llevamos algo
             else
             {
-
                 // SI lo podemos dejar en un mueble, lo dejamos
-                GameObject target = targetMasCercano();
-                if (target != null)
+                if (station != null && station.putProduct(heldObject))
                 {
-                    StationInstance station = target.GetComponent<StationInstance>();
-                    if (station.putProduct(heldObject.GetComponent<ProductInstance>()))
-                    {
                         heldObject = null;
-                    }
+                }
+                // Si no, al suelo
+                else
+                {
+                    heldObject.held = false;
+                    listaObjetos.Add(heldObject);
+                    heldObject.transform.SetParent(null);
+                    heldObject = null;
                 }
 
             }

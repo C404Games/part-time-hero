@@ -6,6 +6,8 @@ public class ProductInstance : MonoBehaviour
 {
     public int id;
 
+    public bool held;
+
     private Product blueprint;
 
     private GameObject appearence;
@@ -14,6 +16,7 @@ public class ProductInstance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        held = false;
         blueprint = ProductManager.productBlueprints[id];
         updateAppearence();
     }
@@ -27,11 +30,11 @@ public class ProductInstance : MonoBehaviour
 
 
     // Si hay alguna transición con este producto, se hace
-    public bool applyResource(Product resource)
+    public bool applyResource(int resourceId)
     {
         foreach (Transition t in blueprint.transitions)
         {
-            if (t.src == resource.id)
+            if (t.src == resourceId)
             {
                 StartCoroutine(transformProduct(t.dst, t.time));
                 return true;
@@ -40,7 +43,7 @@ public class ProductInstance : MonoBehaviour
         return false;
     }
 
-    public IEnumerator transformProduct(int dst, float time)
+    private IEnumerator transformProduct(int dst, float time)
     {
         yield return new WaitForSeconds(time);
         blueprint = ProductManager.productBlueprints[id];
