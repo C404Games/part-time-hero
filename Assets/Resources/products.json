@@ -41,7 +41,7 @@
             "id":6,
             "name": "TOOL_POT",
             "type":3,
-            "appearence":"Tools/Tabern/Pot"
+            "appearence":"Tools/Tabern/pot"
         },
         {
             "id":7,
@@ -53,7 +53,7 @@
             "id":8,
             "name": "TOOL_BOTTLE",
             "type":3,
-          "appearence": "Tools/Tabern/Bottle",
+          "appearence": "Tools/Tabern/bottle",
             "transitions":[
                 {
                     "src":12,
@@ -66,14 +66,14 @@
             "id":9,
             "name": "TOOL_JAR",
             "type":3,
-            "appearence":"Tools/Tabern/jar"
+            "appearence":"Tools/Tabern/cup"
         },        
 
         {
             "id":10,
             "name": "PROD_WATER_POT",
             "type":1,
-            "appearence":"Products/Tabern/Water Pot",
+            "appearence":"Products/Tabern/potStew",
             "transitions":[
                 {
                     "src":3,
@@ -86,20 +86,20 @@
             "id":11,
             "name": "PROD_WATER_HONEY_POT",
             "type":1,
-            "appearence":"Products/Tabern/Wate Pot"
+            "appearence":"Products/Tabern/potStew"
         },
         {
             "id":12,
             "name": "PROD_WATER_HONEY_POT_COOKED",
             "type":1,
-            "appearence":"Products/Tabern/Water Pot"
+            "appearence":"Products/Tabern/plateDinner"
             
         },
         {
             "id":13,
             "name": "PROD_CARBONATED_HONEY",
             "type":2,
-          "appearence": "Products/Tabern/Honey"
+          "appearence": "Products/Tabern/burger"
             
         }                               
     ],

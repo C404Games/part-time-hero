@@ -7,7 +7,9 @@ public class StationInstance : MonoBehaviour
 
     public int id;
 
-    public ProductInstance holding;
+    public Transform waitPosition;
+
+    ProductInstance heldProduct;
 
     Station blueprint;
 
@@ -26,22 +28,55 @@ public class StationInstance : MonoBehaviour
         
     }
 
+    public Vector3 getWaitPos()
+    {
+        return waitPosition.position;
+    }
+
     public bool putProduct(ProductInstance product)
     {
-        if (holding)
+
+        if (heldProduct != null) 
         {
-            foreach(Transition t in blueprint.transitions)
+            if (heldProduct.applyResource(product.id))
             {
-                if(t.src == product.id)
-                {
-                    StartCoroutine(holding.transformProduct(t.src, t.time));
-                    return true;
-                }
+                Destroy(product.gameObject);
+                return true;
             }
             return false;
         }
-        holding = product;
-        return true;
+        else
+        {
+            heldProduct = product;
+            heldProduct.transform.parent = transform;
+            //heldProduct.transform.localPosition = new Vector3(0, 0, 0);
+            return true;
+        }
+
+    }
+
+    // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto.
+    public float activate()
+    {
+        if(heldProduct != null)
+        {
+            foreach(Transition transition in blueprint.transitions)
+            {
+                if(heldProduct.id == transition.src)
+                {
+                    StartCoroutine(heldProduct.transformProduct(transition.dst, transition.time));
+                    return blueprint.auto ? 0 : transition.time;
+                }
+            }
+        }
+        return 0;
+    }
+
+    public ProductInstance takeProduct()
+    {
+        ProductInstance product = heldProduct;
+        heldProduct = null;
+        return product;
     }
 
     public void takeHealth(int h)
