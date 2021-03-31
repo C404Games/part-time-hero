@@ -111,14 +111,6 @@ public class CatcherScript : MonoBehaviour
                 {
                         heldObject = null;
                 }
-                // Si no, al suelo
-                else
-                {
-                    heldObject.held = false;
-                    listaObjetos.Add(heldObject);
-                    heldObject.transform.SetParent(null);
-                    heldObject = null;
-                }
             }
         }
     }
