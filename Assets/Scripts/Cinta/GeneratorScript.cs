@@ -54,7 +54,6 @@ public class GeneratorScript : MonoBehaviour
     private void generateProduct(int idx)
     {
         GameObject newProduct = Instantiate(prefab, transform.position, Quaternion.identity);
-        newProduct.transform.position = transform.position;
         ProductInstance instance = newProduct.GetComponent<ProductInstance>();
         instance.id = ProductManager.rawProducts[idx].id;
         

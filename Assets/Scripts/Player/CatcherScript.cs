@@ -133,6 +133,7 @@ public class CatcherScript : MonoBehaviour
         heldObject = product;
         product.held = true;
         product.transform.SetParent(transform);
+        product.GetComponent<Rigidbody>().isKinematic = true;
         listaObjetos.Remove(product);
     }
 
