@@ -472,7 +472,6 @@ GameObject:
   m_Component:
   - component: {fileID: 557036107}
   - component: {fileID: 557036110}
-  - component: {fileID: 557036109}
   - component: {fileID: 557036108}
   m_Layer: 5
   m_Name: Player 1
@@ -534,18 +533,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 20
   m_Text: Player 1
---- !u!114 &557036109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 557036106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38846b0fc9ab2b4478c93d9975facf40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &557036110
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1360,7 +1347,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2093369767}
   - component: {fileID: 2093369770}
-  - component: {fileID: 2093369769}
   - component: {fileID: 2093369768}
   m_Layer: 5
   m_Name: Player 1 (1)
@@ -1422,18 +1408,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 20
   m_Text: Player 2
---- !u!114 &2093369769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2093369766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38846b0fc9ab2b4478c93d9975facf40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &2093369770
 CanvasRenderer:
   m_ObjectHideFlags: 0
