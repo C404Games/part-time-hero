@@ -15,9 +15,12 @@ public class StationInstance : MonoBehaviour
 
     int health;
 
+    RadialClockController clockController;
+
     // Start is called before the first frame update
     void Start()
     {
+        clockController = FindObjectOfType<RadialClockController>();
         blueprint = ProductManager.stationBlueprints[id];
         health = 5;
     }
@@ -65,6 +68,10 @@ public class StationInstance : MonoBehaviour
                 if(heldProduct.id == transition.src)
                 {
                     StartCoroutine(heldProduct.transformProduct(transition.dst, transition.time));
+
+                    if(transition.time > 0)
+                        clockController.startClock(this, transition.time);
+
                     return blueprint.auto ? 0 : transition.time;
                 }
             }
