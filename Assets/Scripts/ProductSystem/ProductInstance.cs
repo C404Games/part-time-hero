@@ -31,6 +31,11 @@ public class ProductInstance : MonoBehaviour
     }
     #endregion
 
+    public ProductType getProductType()
+    {
+        return blueprint.type;
+    }
+
 
     // Si hay alguna transición con este producto, se hace
     public bool applyResource(int resourceId)

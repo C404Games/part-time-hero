@@ -11,6 +11,8 @@ public class CatcherScript : MonoBehaviour
     private HashSet<StationInstance> listaTargets;
     private HashSet<ProductInstance> listaObjetos;
 
+    private DeliverySpot deliverySpot;
+
     private ProductInstance heldObject;
 
     public ProductInstance objetoMasCercano()
@@ -66,9 +68,11 @@ public class CatcherScript : MonoBehaviour
         else if (other.tag == "Item")
         {
             ProductInstance product = other.GetComponent<ProductInstance>();
-            if(!product.held)
+            if (!product.held)
                 listaObjetos.Add(product);
         }
+        else if (other.tag == "Delivery")
+            deliverySpot = other.GetComponent<DeliverySpot>();
     }
 
     private void OnTriggerExit(Collider other)
@@ -77,6 +81,9 @@ public class CatcherScript : MonoBehaviour
             listaTargets.Remove(other.GetComponent<StationInstance>());
         else if (other.tag == "Item")
             listaObjetos.Remove(other.GetComponent<ProductInstance>());
+        else if (other.tag == "Delivery")
+            deliverySpot = null;
+            
     }
 
     public void OnGrab(InputAction.CallbackContext context)
@@ -110,10 +117,12 @@ public class CatcherScript : MonoBehaviour
             // SI llevamos algo
             else
             {
-                // SI lo podemos dejar en un mueble, lo dejamos
-                if (station != null)
+                // SI lo podemos dejar en un punto de entrega, lo dejamos
+                // SI no... Si lo podemos dejar en un mueble, lo dejamos
+                if (!(deliverySpot != null && deliverySpot.deliverProduct(heldObject))
+                    && station != null)
                 {
-                    float time = station.putProduct(heldObject);
+                    float time = station.putProduct(heldObject, transform.parent.position);
                     if (time < 0)
                         return;
                     if (time > 0)
@@ -131,7 +140,7 @@ public class CatcherScript : MonoBehaviour
             StationInstance station = targetMasCercano();
             if (station != null)
             {
-                float time = station.activate();
+                float time = station.activate(transform.parent.position);
                 if(time > 0)
                     playerMovement.blockMovement(time, station.getWaitPos());
             }
