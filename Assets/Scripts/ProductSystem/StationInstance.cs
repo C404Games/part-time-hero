@@ -33,7 +33,8 @@ public class StationInstance : MonoBehaviour
         return waitPosition.position;
     }
 
-    public bool putProduct(ProductInstance product)
+    // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto.
+    public float putProduct(ProductInstance product)
     {
 
         if (heldProduct != null) 
@@ -41,16 +42,15 @@ public class StationInstance : MonoBehaviour
             if (heldProduct.applyResource(product.id))
             {
                 Destroy(product.gameObject);
-                return true;
+                return 0;
             }
-            return false;
+            return -1;
         }
         else
         {
             heldProduct = product;
             heldProduct.transform.parent = transform;
-            //heldProduct.transform.localPosition = new Vector3(0, 0, 0);
-            return true;
+            return activate();
         }
 
     }

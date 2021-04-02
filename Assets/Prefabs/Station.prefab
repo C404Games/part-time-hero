@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8609220199597709597}
   - component: {fileID: 8073282221380481234}
   - component: {fileID: 2947360533387817346}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Station
   m_TagString: Target
   m_Icon: {fileID: 0}
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  waitPosition: {fileID: 0}
 --- !u!135 &2947360533387817346
 SphereCollider:
   m_ObjectHideFlags: 0
