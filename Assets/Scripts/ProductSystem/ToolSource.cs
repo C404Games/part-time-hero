@@ -23,6 +23,7 @@ public class ToolSource : MonoBehaviour
         {
             heldTool = Instantiate(prefab, transform.position, Quaternion.identity);
             heldTool.GetComponent<ProductInstance>().id = toolId;
+            heldTool.GetComponent<Rigidbody>().isKinematic = true;
             heldTool.transform.SetParent(transform);
         }
     }

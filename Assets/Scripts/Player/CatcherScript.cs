@@ -64,7 +64,11 @@ public class CatcherScript : MonoBehaviour
         if (other.tag == "Target")
             listaTargets.Add(other.GetComponent<StationInstance>());
         else if (other.tag == "Item")
-            listaObjetos.Add(other.GetComponent<ProductInstance>());
+        {
+            ProductInstance product = other.GetComponent<ProductInstance>();
+            if(!product.held)
+                listaObjetos.Add(product);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -107,9 +111,14 @@ public class CatcherScript : MonoBehaviour
             else
             {
                 // SI lo podemos dejar en un mueble, lo dejamos
-                if (station != null && station.putProduct(heldObject))
+                if (station != null)
                 {
-                        heldObject = null;
+                    float time = station.putProduct(heldObject);
+                    if (time < 0)
+                        return;
+                    if (time > 0)
+                        playerMovement.blockMovement(time, station.getWaitPos());
+                    heldObject = null;
                 }
             }
         }
@@ -123,7 +132,8 @@ public class CatcherScript : MonoBehaviour
             if (station != null)
             {
                 float time = station.activate();
-                playerMovement.blockMovement(time, station.getWaitPos());
+                if(time > 0)
+                    playerMovement.blockMovement(time, station.getWaitPos());
             }
         }
     }
@@ -137,9 +147,4 @@ public class CatcherScript : MonoBehaviour
         listaObjetos.Remove(product);
     }
 
-    private IEnumerator unblockPlayer(float time)
-    {
-        yield return new WaitForSeconds(time);
-        playerMovement.blocked = false;
-    }
 }
