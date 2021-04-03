@@ -122,7 +122,7 @@
       "id": 12,
       "name": "PROD_WATER_HONEY_POT_COOKED",
       "type": 1,
-      "appearence": "Products/Products/potStew",
+      "appearence": "Products/Tabern/potStew",
       "transitions": [
         {
           "src": 108,
@@ -136,7 +136,7 @@
       "id": 13,
       "name": "PROD_CARBONATED_HONEY",
       "type": 2,
-      "appearence": "Products/Tools/bottle"
+      "appearence": "Tools/Tabern/bottle"
 
     },
 

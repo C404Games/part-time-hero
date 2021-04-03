@@ -130,7 +130,7 @@ public class CatcherScript : MonoBehaviour
                     if (time < 0)
                         return;
                     if (time > 0)
-                        playerMovement.blockMovement(time, station.getWaitPos());
+                        playerMovement.blockMovement(time, station.getWaitPos(), station.getWaitRot());
                     heldObject = null;
                     animator.SetBool("Hold", false);
                 }
@@ -147,7 +147,7 @@ public class CatcherScript : MonoBehaviour
             {
                 float time = station.activate(transform.parent.position);
                 if(time > 0)
-                    playerMovement.blockMovement(time, station.getWaitPos());
+                    playerMovement.blockMovement(time, station.getWaitPos(), station.getWaitRot());
             }
         }
     }

@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource audioSource;
 
     private Vector3 waitPosition;
+    private Vector3 waitRotation;
 
     Vector3 velocity;
     
@@ -63,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             transform.position = Vector3.Lerp(transform.position, waitPosition, Time.deltaTime * 10);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(waitRotation), Time.deltaTime * rotSpeed);
         }
     }    
 
@@ -165,17 +167,20 @@ public class PlayerMovement : MonoBehaviour
         monsterInReach.takeHealth(1);
     }
 
-    public void blockMovement(float time, Vector3 waitPosition)
+    public void blockMovement(float time, Vector3 waitPosition, Vector3 waitRotation)
     {
         blocked = true;
         this.waitPosition = waitPosition;
+        this.waitRotation = waitRotation;
         StartCoroutine(unlockMovement(time));
+        animator.SetBool("Chop", true);
     }
 
     private IEnumerator unlockMovement(float time)
     {
         yield return new WaitForSeconds(time);
         blocked = false;
+        animator.SetBool("Chop", false);
     }
 
 
