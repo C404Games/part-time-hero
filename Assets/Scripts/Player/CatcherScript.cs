@@ -7,6 +7,7 @@ public class CatcherScript : MonoBehaviour
 {
 
     public PlayerMovement playerMovement;
+    public Animator animator;
 
     private HashSet<StationInstance> listaTargets;
     private HashSet<ProductInstance> listaObjetos;
@@ -118,9 +119,12 @@ public class CatcherScript : MonoBehaviour
             else
             {
                 // SI lo podemos dejar en un punto de entrega, lo dejamos
+                if (deliverySpot != null && deliverySpot.deliverProduct(heldObject))
+                {
+                    animator.SetBool("Holding", false);
+                }
                 // SI no... Si lo podemos dejar en un mueble, lo dejamos
-                if (!(deliverySpot != null && deliverySpot.deliverProduct(heldObject))
-                    && station != null)
+                else if (station != null)
                 {
                     float time = station.putProduct(heldObject, transform.parent.position);
                     if (time < 0)
@@ -128,6 +132,7 @@ public class CatcherScript : MonoBehaviour
                     if (time > 0)
                         playerMovement.blockMovement(time, station.getWaitPos());
                     heldObject = null;
+                    animator.SetBool("Holding", false);
                 }
             }
         }
@@ -149,6 +154,7 @@ public class CatcherScript : MonoBehaviour
 
     private void holdProduct(ProductInstance product)
     {
+        animator.SetBool("Holding", true);
         heldObject = product;
         product.held = true;
         product.transform.SetParent(transform);
