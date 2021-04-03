@@ -17,6 +17,8 @@ public class StationInstance : MonoBehaviour
 
     RadialClockController clockController;
 
+    bool busy = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,21 +46,27 @@ public class StationInstance : MonoBehaviour
     // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto. Devuelve -1 si no se puede dejar
     public float putProduct(ProductInstance product, Vector3 origin)
     {
-
-        if (heldProduct != null) 
+        if (!busy)
         {
-            if (heldProduct.applyResource(product.id))
+            if (heldProduct != null)
             {
-                Destroy(product.gameObject);
-                return 0;
+                if (heldProduct.applyResource(product.id))
+                {
+                    Destroy(product.gameObject);
+                    return 0;
+                }
+                return -1;
             }
-            return -1;
+            else
+            {
+                heldProduct = product;
+                heldProduct.transform.parent = transform;
+                return activate(origin);
+            }
         }
         else
         {
-            heldProduct = product;
-            heldProduct.transform.parent = transform;
-            return activate(origin);
+            return -1;
         }
 
     }
@@ -66,18 +74,19 @@ public class StationInstance : MonoBehaviour
     // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto.
     public float activate(Vector3 origin)
     {
-        if(heldProduct != null && isReachable(origin))
+        if(!busy && heldProduct != null && isReachable(origin))
         {
             foreach(Transition transition in blueprint.transitions)
             {
                 if(heldProduct.id == transition.src)
                 {
+                    busy = true;
                     StartCoroutine(heldProduct.transformProduct(transition.dst, transition.time));
 
                     if(transition.time > 0)
                         clockController.startClock(this, transition.time);
-                    if(transition.time == 0)
-                        StartCoroutine(reactivate(transition.time + 0.1f));
+                    
+                    StartCoroutine(reactivate(transition.time + 0.1f));
 
                     return blueprint.auto ? 0 : transition.time;
                 }
@@ -118,6 +127,7 @@ public class StationInstance : MonoBehaviour
     private IEnumerator reactivate(float time)
     {
         yield return new WaitForSeconds(time);
+        busy = false;
         activate(waitPosition.position);
     }
 

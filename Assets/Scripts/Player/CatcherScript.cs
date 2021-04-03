@@ -89,52 +89,10 @@ public class CatcherScript : MonoBehaviour
 
     public void OnGrab(InputAction.CallbackContext context)
     {
-        StationInstance station = targetMasCercano();
 
         if (context.performed)
         {
-            // SI no llevamos nada
-            if (heldObject == null)
-            {
-
-                //Cogemos el objeto del target si hay
-                if (station != null)
-                {
-                    ProductInstance p = station.takeProduct();
-                    if (p != null)
-                    {
-                        holdProduct(p);
-                        return;
-                    }
-                }
-                //Cogemos el objeto libre cercano si hay
-                ProductInstance product = objetoMasCercano();
-                if (product != null && !product.held)
-                {
-                    holdProduct(product);
-                }
-            }
-
-            // SI llevamos algo
-            else
-            {
-                // SI lo podemos dejar en un punto de entrega, lo dejamos
-                if (deliverySpot != null && deliverySpot.deliverProduct(heldObject))
-                {
-                    animator.SetBool("Hold", false);
-                }
-                // SI no... Si lo podemos dejar en un mueble, lo dejamos
-                else if (station != null)
-                {
-                    float time = station.putProduct(heldObject, transform.parent.position);
-                    if (time < 0)
-                        return;
-                    if (time > 0)
-                        playerMovement.blockMovement(time, station.getWaitPos(), station.getWaitRot());
-                    heldObject = null;
-                    animator.SetBool("Hold", false);
-                }
-            }
+            grabBehaviour(targetMasCercano());
         }
     }
 
@@ -152,14 +110,62 @@ public class CatcherScript : MonoBehaviour
         }
     }
 
-    private void holdProduct(ProductInstance product)
+    public void grabBehaviour(StationInstance station)
     {
-        animator.SetBool("Hold", true);
-        heldObject = product;
-        product.held = true;
-        product.transform.SetParent(transform);
-        product.GetComponent<Rigidbody>().isKinematic = true;
-        listaObjetos.Remove(product);
+
+        // SI no llevamos nada
+        if (heldObject == null)
+        {
+
+            //Cogemos el objeto del target si hay
+            if (station != null)
+            {
+                ProductInstance p = station.takeProduct();
+                if (p != null)
+                {
+                    holdProduct(p);
+                    return;
+                }
+            }
+            //Cogemos el objeto libre cercano si hay
+            ProductInstance product = objetoMasCercano();
+            holdProduct(product);
+        }
+
+        // SI llevamos algo
+        else
+        {
+            // SI lo podemos dejar en un punto de entrega, lo dejamos
+            if (deliverySpot != null && deliverySpot.deliverProduct(heldObject))
+            {
+                animator.SetBool("Hold", false);
+            }
+            // SI no... Si lo podemos dejar en un mueble, lo dejamos
+            else if (station != null)
+            {
+                float time = station.putProduct(heldObject, transform.parent.position);
+                if (time < 0)
+                    return;
+                if (time > 0)
+                    playerMovement.blockMovement(time, station.getWaitPos(), station.getWaitRot());
+                heldObject.held = false;
+                heldObject = null;
+                animator.SetBool("Hold", false);
+            }
+        }
+    }
+
+    public void holdProduct(ProductInstance product)
+    {
+        if (heldObject == null && product != null && !product.held)
+        {
+            animator.SetBool("Hold", true);
+            heldObject = product;
+            product.held = true;
+            product.transform.SetParent(transform);
+            product.GetComponent<Rigidbody>().isKinematic = true;
+            listaObjetos.Remove(product);
+        }
     }
 
 }
