@@ -121,7 +121,7 @@ public class CatcherScript : MonoBehaviour
                 // SI lo podemos dejar en un punto de entrega, lo dejamos
                 if (deliverySpot != null && deliverySpot.deliverProduct(heldObject))
                 {
-                    animator.SetBool("Holding", false);
+                    animator.SetBool("Hold", false);
                 }
                 // SI no... Si lo podemos dejar en un mueble, lo dejamos
                 else if (station != null)
@@ -132,7 +132,7 @@ public class CatcherScript : MonoBehaviour
                     if (time > 0)
                         playerMovement.blockMovement(time, station.getWaitPos());
                     heldObject = null;
-                    animator.SetBool("Holding", false);
+                    animator.SetBool("Hold", false);
                 }
             }
         }
@@ -154,7 +154,7 @@ public class CatcherScript : MonoBehaviour
 
     private void holdProduct(ProductInstance product)
     {
-        animator.SetBool("Holding", true);
+        animator.SetBool("Hold", true);
         heldObject = product;
         product.held = true;
         product.transform.SetParent(transform);
