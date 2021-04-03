@@ -1,17 +1,23 @@
 fileFormatVersion: 2
-guid: 1a1a17817c3fbb04ab49daf608ce7728
+guid: d51f64e8c7cf52e41ae719e2c19bfd9e
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: idle
+    second: idle2
   - first:
-      74: 6200578666267062213
-    second: run
+      74: 5128389309265931517
+    second: run2
   - first:
-      74: -6239216113759591374
-    second: attack
+      74: -5612658629409835226
+    second: attack2
+  - first:
+      74: -3648202250331621436
+    second: hold2
+  - first:
+      74: 4109925815647291415
+    second: chop2
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -44,7 +50,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: idle
+      name: idle2
       takeName: Take 001
       internalID: 0
       firstFrame: 0
@@ -71,9 +77,9 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0.96
+      additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: run
+      name: run2
       takeName: Take 001
       internalID: 0
       firstFrame: 60
@@ -100,9 +106,9 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0.96
+      additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: attack
+      name: attack2
       takeName: Take 001
       internalID: 0
       firstFrame: 85
@@ -113,7 +119,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -125,21 +131,65 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.07849829
-        functionName: animationStart
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.8001421
-        functionName: animationEnd
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hold2
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 108
+      lastFrame: 109
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0.96
+    - serializedVersion: 16
+      name: chop2
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 110
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -331,13 +381,13 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: anims(Clone)
+    - name: anim2(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: hip
-      parentName: anims(Clone)
+      parentName: anim2(Clone)
       position: {x: -0.000165876, y: 0.038030267, z: 0.0034127207}
       rotation: {x: 0.7071019, y: -0.707045, z: -0.009346219, w: -0.0026372364}
       scale: {x: 1, y: 1, z: 1}

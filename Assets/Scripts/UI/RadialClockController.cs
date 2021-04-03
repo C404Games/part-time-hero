@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class RadialClockController : MonoBehaviour
 {
-
-    public List<StationInstance> stations;
     public GameObject radialClockPrefab;
-
+    List<StationInstance> stations;
     List<Image> clocks;
 
     Vector3 offset;
@@ -18,6 +16,7 @@ public class RadialClockController : MonoBehaviour
     {
         offset = new Vector3(0.0f, 30.0f, 0.0f);
         clocks = new List<Image>();
+        stations = new List<StationInstance>(FindObjectsOfType<StationInstance>());
         foreach(StationInstance station in stations)
         {
             GameObject clock = Instantiate(radialClockPrefab);

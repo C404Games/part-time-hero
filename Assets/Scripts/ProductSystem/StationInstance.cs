@@ -36,8 +36,13 @@ public class StationInstance : MonoBehaviour
         return waitPosition.position;
     }
 
-    // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto.
-    public float putProduct(ProductInstance product)
+    public Vector3 getWaitRot()
+    {
+        return transform.position - waitPosition.position;
+    }
+
+    // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto. Devuelve -1 si no se puede dejar
+    public float putProduct(ProductInstance product, Vector3 origin)
     {
 
         if (heldProduct != null) 
@@ -53,15 +58,15 @@ public class StationInstance : MonoBehaviour
         {
             heldProduct = product;
             heldProduct.transform.parent = transform;
-            return activate();
+            return activate(origin);
         }
 
     }
 
     // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto.
-    public float activate()
+    public float activate(Vector3 origin)
     {
-        if(heldProduct != null)
+        if(heldProduct != null && isReachable(origin))
         {
             foreach(Transition transition in blueprint.transitions)
             {
@@ -71,6 +76,8 @@ public class StationInstance : MonoBehaviour
 
                     if(transition.time > 0)
                         clockController.startClock(this, transition.time);
+                    if(transition.time == 0)
+                        StartCoroutine(reactivate(transition.time + 0.1f));
 
                     return blueprint.auto ? 0 : transition.time;
                 }
@@ -86,6 +93,14 @@ public class StationInstance : MonoBehaviour
         return product;
     }
 
+    // Devuelve true si se puede utilizar desde la posición que se le pasa
+    public bool isReachable(Vector3 position)
+    {
+        Vector3 dir = (position - transform.position).normalized;
+        float cosAngle = Vector3.Dot(dir, waitPosition.localPosition);
+        return cosAngle > 0;
+    }
+
     public void takeHealth(int h)
     {
         health -= h;
@@ -98,6 +113,12 @@ public class StationInstance : MonoBehaviour
     public int getHealth()
     {
         return health;
+    }
+
+    private IEnumerator reactivate(float time)
+    {
+        yield return new WaitForSeconds(time);
+        activate(waitPosition.position);
     }
 
 }

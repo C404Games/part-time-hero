@@ -65,6 +65,11 @@
           "src": 16,
           "dst": 22,
           "time": 0
+        },
+        {
+          "src": 18,
+          "dst": 19,
+          "time": 0
         }
       ]
     },
@@ -103,16 +108,9 @@
 
     {
       "id": 10,
-      "name": "PROD_WATER_POT",
+      "name": "PROD_HONEY_POT",
       "type": 1,
-      "appearence": "Products/Tabern/potStew",
-      "transitions": [
-        {
-          "src": 3,
-          "dst": 11,
-          "time": 0
-        }
-      ]
+      "appearence": "Products/Tabern/potStew"
     },
     {
       "id": 11,
@@ -138,7 +136,7 @@
       "id": 13,
       "name": "PROD_CARBONATED_HONEY",
       "type": 2,
-      "appearence": "Products/Tabern/bottle"
+      "appearence": "Tools/Tabern/bottle"
 
     },
 
@@ -303,14 +301,29 @@
       "auto": true,
       "transitions": [
         {
+          "src": 3,
+          "dst": 10,
+          "time": 0
+        },
+        {
           "src": 11,
           "dst": 12,
           "time": 10
         },
         {
+          "src": 16,
+          "dst": 17,
+          "time": 0
+        },
+        {
           "src": 17,
           "dst": 18,
           "time": 10
+        },
+        {
+          "src": 4,
+          "dst": 27,
+          "time": 0
         },
         {
           "src": 27,
@@ -325,9 +338,9 @@
       "auto": true,
       "transitions": [
         {
-          "src": 106,
-          "dst": 10,
-          "time": 0
+          "src": 10,
+          "dst": 11,
+          "time": 2
         }
       ]
     },
@@ -341,6 +354,13 @@
           "dst": 14,
           "time": 15
         }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "STAT_TABLE",
+      "auto": true,
+      "transitions": [
       ]
     }
   ]
