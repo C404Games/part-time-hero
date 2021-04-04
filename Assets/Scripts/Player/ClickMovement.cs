@@ -30,8 +30,6 @@ public class ClickMovement : MonoBehaviour
     ToolSource targetSource;
     MonsterController targetMonster;
 
-    Vector3 destination;
-
     clickTargetType targetType = clickTargetType.FLOOR;
 
     // Start is called before the first frame update
@@ -52,7 +50,8 @@ public class ClickMovement : MonoBehaviour
                 case clickTargetType.FLOOR:
                     break;
                 case clickTargetType.STATION:
-                    catcher.grabBehaviour(targetStation);
+                    if(catcher.isStationOnReach(targetStation))
+                        catcher.grabBehaviour(targetStation);
                     break;
                 case clickTargetType.BELT:
                     catcher.grabBehaviour(null);
@@ -96,6 +95,7 @@ public class ClickMovement : MonoBehaviour
         {
             // Ignorar Layer de Items
             int layerMask = LayerMask.GetMask("Item", "Player");
+
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~layerMask))
@@ -104,7 +104,6 @@ public class ClickMovement : MonoBehaviour
                 if (hit.collider.tag.Equals("Floor"))
                 {
                     targetType = clickTargetType.FLOOR;
-                    destination = hit.point;
                     nvAgent.SetDestination(hit.point);
                     nvAgent.isStopped = false;
                 }
@@ -119,26 +118,24 @@ public class ClickMovement : MonoBehaviour
                     }
                     else
                     {
+                        // CUIDADO! Puede dar problemas si se colocan de forma rara los muebles
                         Vector3 dir = targetStation.transform.position - targetStation.getWaitPos();
                         dest = targetStation.transform.position + dir;
                     }
                     nvAgent.SetDestination(dest);
-                    destination = targetStation.transform.position;
                     nvAgent.isStopped = false;
                 }
                 else if (hit.collider.tag.Equals("Belt"))
                 {
                     targetType = clickTargetType.BELT;
-                    destination = hit.point;
-                    nvAgent.SetDestination(destination);
+                    nvAgent.SetDestination(hit.point);
                     nvAgent.isStopped = false;
                 }
                 else if (hit.collider.tag.Equals("ToolSource"))
                 {
                     targetType = clickTargetType.TOOLSOURCE;
                     targetSource = hit.collider.GetComponent<ToolSource>();
-                    destination = hit.point;
-                    nvAgent.SetDestination(destination);
+                    nvAgent.SetDestination(hit.point);
                     nvAgent.isStopped = false;
                 }
                 else if (hit.collider.tag.Equals("Monster"))

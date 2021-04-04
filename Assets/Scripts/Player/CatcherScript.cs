@@ -50,6 +50,11 @@ public class CatcherScript : MonoBehaviour
         return minDistanceTarget;
     }
 
+    public bool isStationOnReach(StationInstance station)
+    {
+        return listaTargets.Contains(station);
+    }
+
     public void eliminarObjeto(ProductInstance product)
     {
         listaObjetos.Remove(product);
