@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwordVisibility : MonoBehaviour
 {
-
+    public PlayerMovement playerMovement;
     public GameObject sword;
 
     // Start is called before the first frame update
@@ -20,6 +20,7 @@ public class SwordVisibility : MonoBehaviour
 
     public void animationEnd() {
         sword.SetActive(false);
+        playerMovement.attackBusy = false;
     }
 
 }

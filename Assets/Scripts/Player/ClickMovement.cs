@@ -12,6 +12,7 @@ enum clickTargetType
     FLOOR,
     BELT,
     TOOLSOURCE,
+    MONSTER,
     NONE
 }
 
@@ -27,6 +28,7 @@ public class ClickMovement : MonoBehaviour
 
     StationInstance targetStation;
     ToolSource targetSource;
+    MonsterController targetMonster;
 
     Vector3 destination;
 
@@ -42,6 +44,7 @@ public class ClickMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // SI hemos llegado
         if (!nvAgent.hasPath)
         {
             switch (targetType)
@@ -57,14 +60,33 @@ public class ClickMovement : MonoBehaviour
                 case clickTargetType.TOOLSOURCE:
                     catcher.holdProduct(targetSource.heldTool.GetComponent<ProductInstance>());
                     break;
+                case clickTargetType.MONSTER:
+                    playerMovement.attack();
+                    break;
                 default:
                     break;
             }
             targetType = clickTargetType.NONE;
         }
+        // SI estamos de camino
         else
         {
-            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(destination - transform.position), Time.deltaTime * 10);
+            switch (targetType)
+            {
+                case clickTargetType.MONSTER:
+                    if (targetMonster != null)
+                    {
+                        nvAgent.SetDestination(targetMonster.transform.position);
+                        if(nvAgent.remainingDistance <= 2)
+                        {
+                            nvAgent.isStopped = true;
+                            nvAgent.ResetPath();
+                        }
+                    }
+                    else
+                        targetType = clickTargetType.NONE;
+                    break;
+            }
         }
     }
 
@@ -117,6 +139,13 @@ public class ClickMovement : MonoBehaviour
                     targetSource = hit.collider.GetComponent<ToolSource>();
                     destination = hit.point;
                     nvAgent.SetDestination(destination);
+                    nvAgent.isStopped = false;
+                }
+                else if (hit.collider.tag.Equals("Monster"))
+                {
+                    targetType = clickTargetType.MONSTER;
+                    targetMonster = hit.collider.GetComponent<MonsterController>();
+                    nvAgent.SetDestination(targetMonster.transform.position);
                     nvAgent.isStopped = false;
                 }
             }

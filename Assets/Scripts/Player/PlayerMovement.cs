@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     NavMeshAgent nvAgent;
 
     MonsterController monsterInReach;
+    public bool attackBusy = false;
 
 
     // Start is called before the first frame update
@@ -144,8 +145,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void attack()
     {
-        animator.SetTrigger("Attack");
-        monsterInReach.takeHealth(1);
+        if (!attackBusy)
+        {
+            attackBusy = true;
+            animator.SetTrigger("Attack");
+            monsterInReach.takeHealth(1);
+        }
     }
 
     public void blockMovement(float time, Vector3 waitPosition, Vector3 waitRotation)
