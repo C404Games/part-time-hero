@@ -16,7 +16,7 @@ MonoBehaviour:
     docsId: 17f0dQawb-s_Fd7DHgmVvJoEGDMH_yoSd8EYigrb0zmM
     sheetId: 296134756
     format: 1
-    textAsset: {fileID: 4900000, guid: c4dc0d059266d8d47862f46460cf8f31, type: 3}
+    textAsset: {fileID: 0}
     downloadOnStart: 0
   customDocument:
     docsId: 

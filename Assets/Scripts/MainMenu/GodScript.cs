@@ -10,6 +10,9 @@ public class GodScript : MonoBehaviour
     public Transform point1;
     public Transform point2;
 
+    [SerializeField] 
+    private GameObject[] subMenus;
+
     private Vector3 point;
 
     private void Start()
@@ -22,9 +25,17 @@ public class GodScript : MonoBehaviour
         mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, point, Time.deltaTime * speed);
     }
 
-    public void inicioButton()
+    public void accionButton(int position)
     {
+        foreach (GameObject subMenu in subMenus)
+        {
+            subMenu.SetActive(false);
+        }
+
+        subMenus[position].SetActive(true);
+
         point = point2.position;
+
     }
 
     public void volverButton()
