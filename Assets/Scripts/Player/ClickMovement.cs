@@ -124,10 +124,7 @@ public class ClickMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~layerMask))
             {
-                if (hit.collider.tag.Equals("Player"))
-                {
-                    Debug.Log("ESTA FEO ESO");
-                }
+
                 if (hit.collider.tag.Equals("Floor"))
                 {
                     targetType = clickTargetType.FLOOR;

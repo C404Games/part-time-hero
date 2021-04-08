@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86fcbb8a50d7b034388e4fcb57abec2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 1904938714388850742}
   sword: {fileID: 1634483938421785332}
 --- !u!1 &1904938712653406918
 GameObject:
@@ -24,7 +25,7 @@ GameObject:
   - component: {fileID: 1904938712653406917}
   - component: {fileID: 1904938712653406923}
   - component: {fileID: 1904938712653406916}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Catcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,6 +90,7 @@ GameObject:
   - component: {fileID: 1904938714388850740}
   - component: {fileID: 1904938714388850747}
   - component: {fileID: 1904938714388850745}
+  - component: {fileID: 1922267102965046940}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -194,6 +196,7 @@ MonoBehaviour:
   rotSpeed: 10
   blocked: 0
   animator: {fileID: 5405768722779119169}
+  attackBusy: 0
 --- !u!195 &1904938714388850741
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -288,7 +291,7 @@ MonoBehaviour:
     m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1904938714388850742}
+      - m_Target: {fileID: 1922267102965046940}
         m_MethodName: onMouseClick
         m_Mode: 0
         m_Arguments:
@@ -351,6 +354,19 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1922267102965046940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904938714388850739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e3c74135435fc42ab6eb8e4d9ab957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  catcher: {fileID: 1904938712653406923}
 --- !u!1001 &1904938712420810661
 PrefabInstance:
   m_ObjectHideFlags: 0
