@@ -29,6 +29,7 @@ public class ClickMovement : MonoBehaviour
     StationInstance targetStation;
     ToolSource targetSource;
     MonsterController targetMonster;
+    ProductInstance targetProduct;
 
     clickTargetType targetType = clickTargetType.FLOOR;
 
@@ -50,16 +51,20 @@ public class ClickMovement : MonoBehaviour
                 case clickTargetType.FLOOR:
                     break;
                 case clickTargetType.STATION:
-                    if(catcher.isStationOnReach(targetStation))
+                    if (catcher.isStationOnReach(targetStation))
                         catcher.grabBehaviour(targetStation);
                     break;
                 case clickTargetType.BELT:
-                    catcher.grabBehaviour(null);
+                    if (targetProduct != null && catcher.isProductOnReach(targetProduct))
+                        catcher.holdProduct(targetProduct);
+                    else
+                        catcher.grabBehaviour(null);
                     break;
                 case clickTargetType.TOOLSOURCE:
                     catcher.holdProduct(targetSource.heldTool.GetComponent<ProductInstance>());
                     break;
                 case clickTargetType.MONSTER:
+                    transform.LookAt(targetMonster.transform);
                     playerMovement.attack();
                     break;
                 default:
@@ -76,7 +81,7 @@ public class ClickMovement : MonoBehaviour
                     if (targetMonster != null)
                     {
                         nvAgent.SetDestination(targetMonster.transform.position);
-                        if(nvAgent.remainingDistance <= 2)
+                        if(playerMovement.isMonsterOnReach(targetMonster))
                         {
                             nvAgent.isStopped = true;
                             nvAgent.ResetPath();
@@ -84,6 +89,25 @@ public class ClickMovement : MonoBehaviour
                     }
                     else
                         targetType = clickTargetType.NONE;
+                    break;
+                case clickTargetType.STATION:
+                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetStation.transform.position - transform.position), Time.deltaTime * playerMovement.rotSpeed);
+                    break;
+                case clickTargetType.BELT:
+                    if (targetProduct != null && !targetProduct.held)
+                    {
+                        nvAgent.SetDestination(targetProduct.transform.position);
+                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetProduct.transform.position - transform.position), Time.deltaTime * playerMovement.rotSpeed);
+                        if (catcher.isProductOnReach(targetProduct))
+                        {
+                            nvAgent.isStopped = true;
+                            nvAgent.ResetPath();
+                        }
+                    }
+                    else
+                    {
+                        targetProduct = null;
+                    }
                     break;
             }
         }
@@ -94,13 +118,16 @@ public class ClickMovement : MonoBehaviour
         if (context.performed && !playerMovement.blocked)
         {
             // Ignorar Layer de Items
-            int layerMask = LayerMask.GetMask("Item", "Player");
+            int layerMask = LayerMask.GetMask("Item", "Player", "Catcher");
 
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~layerMask))
             {
-
+                if (hit.collider.tag.Equals("Player"))
+                {
+                    Debug.Log("ESTA FEO ESO");
+                }
                 if (hit.collider.tag.Equals("Floor"))
                 {
                     targetType = clickTargetType.FLOOR;
@@ -128,6 +155,17 @@ public class ClickMovement : MonoBehaviour
                 else if (hit.collider.tag.Equals("Belt"))
                 {
                     targetType = clickTargetType.BELT;
+
+                    // Volvemos a hacer raycast pero para buscar objeto
+                    layerMask = LayerMask.GetMask("Item");
+                    targetProduct = null;
+                    if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+                    {
+                        ProductInstance hitProduct = hit.collider.GetComponent<ProductInstance>();
+                        if (!hitProduct.held)
+                            targetProduct = hitProduct;
+                    }
+
                     nvAgent.SetDestination(hit.point);
                     nvAgent.isStopped = false;
                 }

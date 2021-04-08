@@ -55,6 +55,11 @@ public class CatcherScript : MonoBehaviour
         return listaTargets.Contains(station);
     }
 
+    public bool isProductOnReach(ProductInstance product)
+    {
+        return listaObjetos.Contains(product);
+    }
+
     public void eliminarObjeto(ProductInstance product)
     {
         listaObjetos.Remove(product);

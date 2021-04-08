@@ -68,6 +68,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }    
 
+    public bool isMonsterOnReach(MonsterController monster)
+    {
+        return monster == monsterInReach;
+    }
+
     public void OnMovement(InputAction.CallbackContext context)
     {
         Vector3 input = context.ReadValue<Vector2>();
