@@ -9,7 +9,7 @@ public class ToolSource : MonoBehaviour
 
     public GameObject prefab;
 
-    GameObject heldTool;
+    public GameObject heldTool;
 
     // Start is called before the first frame update
     void Start()

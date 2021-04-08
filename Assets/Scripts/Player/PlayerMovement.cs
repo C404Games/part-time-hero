@@ -29,9 +29,8 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     NavMeshAgent nvAgent;
 
-    Vector3 destination;
-
     MonsterController monsterInReach;
+    public bool attackBusy = false;
 
 
     // Start is called before the first frame update
@@ -61,12 +60,18 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
+        // SI estamos bloqueados, vamos a la posición de "espera"
         else
         {
             transform.position = Vector3.Lerp(transform.position, waitPosition, Time.deltaTime * 10);
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(waitRotation), Time.deltaTime * rotSpeed);
         }
     }    
+
+    public bool isMonsterOnReach(MonsterController monster)
+    {
+        return monster == monsterInReach;
+    }
 
     public void OnMovement(InputAction.CallbackContext context)
     {
@@ -81,24 +86,6 @@ public class PlayerMovement : MonoBehaviour
         velocity = (forward * input.y + right * input.x) * speed;        
 
         nvAgent.isStopped = true;
-    }
-
-    public void onMouseClick(InputAction.CallbackContext context)
-    {
-        if (!blocked) {
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.tag.Equals("Floor"))
-                {
-                    destination = hit.point;
-                    nvAgent.SetDestination(destination);
-                    nvAgent.isStopped = false;
-                }
-            }
-        }
-
     }
 
     public void onAction(InputAction.CallbackContext context)
@@ -163,8 +150,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void attack()
     {
-        animator.SetTrigger("Attack");
-        monsterInReach.takeHealth(1);
+        if (!attackBusy)
+        {
+            attackBusy = true;
+            animator.SetTrigger("Attack");
+            monsterInReach.takeHealth(1);
+        }
     }
 
     public void blockMovement(float time, Vector3 waitPosition, Vector3 waitRotation)
