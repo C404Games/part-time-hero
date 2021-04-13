@@ -173,6 +173,4 @@ public class PlayerMovement : MonoBehaviour
         blocked = false;
         animator.SetBool("Chop", false);
     }
-
-
 }
