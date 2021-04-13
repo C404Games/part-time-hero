@@ -8,6 +8,7 @@ public class ProductManager : MonoBehaviour
     public static Dictionary<int, Station> stationBlueprints;
 
     public static List<Product> rawProducts;
+    public static List<Product> finalProducts;
 
     #region MonoBehaviour
     private void Awake()
@@ -15,6 +16,7 @@ public class ProductManager : MonoBehaviour
         productBlueprints = new Dictionary<int, Product>();
         stationBlueprints = new Dictionary<int, Station>();
         rawProducts = new List<Product>();
+        finalProducts = new List<Product>();
         loadProducts("products");
     }
 
@@ -52,9 +54,14 @@ public class ProductManager : MonoBehaviour
             GameObject appearence = Resources.Load<GameObject>((string)entry["appearence"]);
             Product product = new Product((int)entry["id"], (string)entry["name"], (ProductType)((int)entry["type"]), appearence, transitions);
             productBlueprints.Add((int)entry["id"], product);
+
             if(product.type == ProductType.RAW)
             {
                 rawProducts.Add(product);
+            }
+            else if(product.type == ProductType.FINAL)
+            {
+                finalProducts.Add(product);
             }
 
         }

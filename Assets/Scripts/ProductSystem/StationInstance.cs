@@ -7,14 +7,24 @@ public class StationInstance : MonoBehaviour
 
     public int id;
 
-    public ProductInstance holding;
+    public Transform waitPosition;
 
-    Station blueprint;    
+    ProductInstance heldProduct;
+
+    Station blueprint;
+
+    int health;
+
+    RadialClockController clockController;
+
+    bool busy = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        clockController = FindObjectOfType<RadialClockController>();
         blueprint = ProductManager.stationBlueprints[id];
+        health = 5;
     }
 
     // Update is called once per frame
@@ -23,22 +33,102 @@ public class StationInstance : MonoBehaviour
         
     }
 
-    public bool putProduct(ProductInstance product)
+    public Vector3 getWaitPos()
     {
-        if (holding)
+        return waitPosition.position;
+    }
+
+    public Vector3 getWaitRot()
+    {
+        return transform.position - waitPosition.position;
+    }
+
+    // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto. Devuelve -1 si no se puede dejar
+    public float putProduct(ProductInstance product, Vector3 origin)
+    {
+        if (!busy)
         {
-            foreach(Transition t in blueprint.transitions)
+            if (heldProduct != null)
             {
-                if(t.src == product.id)
+                if (heldProduct.applyResource(product.id))
                 {
-                    StartCoroutine(holding.transformProduct(t.src, t.time));
-                    return true;
+                    Destroy(product.gameObject);
+                    return 0;
+                }
+                return -1;
+            }
+            else
+            {
+                heldProduct = product;
+                heldProduct.transform.parent = transform;
+                return activate(origin);
+            }
+        }
+        else
+        {
+            return -1;
+        }
+
+    }
+
+    // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto.
+    public float activate(Vector3 origin)
+    {
+        if(!busy && heldProduct != null && isReachable(origin))
+        {
+            foreach(Transition transition in blueprint.transitions)
+            {
+                if(heldProduct.id == transition.src)
+                {
+                    busy = true;
+                    StartCoroutine(heldProduct.transformProduct(transition.dst, transition.time));
+
+                    if(transition.time > 0)
+                        clockController.startClock(this, transition.time);
+                    
+                    StartCoroutine(reactivate(transition.time + 0.1f));
+
+                    return blueprint.auto ? 0 : transition.time;
                 }
             }
-            return false;
         }
-        holding = product;
-        return true;
+        return 0;
+    }
+
+    public ProductInstance takeProduct()
+    {
+        ProductInstance product = heldProduct;
+        heldProduct = null;
+        return product;
+    }
+
+    // Devuelve true si se puede utilizar desde la posición que se le pasa
+    public bool isReachable(Vector3 position)
+    {
+        Vector3 dir = (position - transform.position).normalized;
+        float cosAngle = Vector3.Dot(dir, waitPosition.localPosition);
+        return cosAngle > 0;
+    }
+
+    public void takeHealth(int h)
+    {
+        health -= h;
+        if(health <= 0)
+        {
+            // Cambiar apariencia
+        }
+    }
+
+    public int getHealth()
+    {
+        return health;
+    }
+
+    private IEnumerator reactivate(float time)
+    {
+        yield return new WaitForSeconds(time);
+        busy = false;
+        activate(waitPosition.position);
     }
 
 }
