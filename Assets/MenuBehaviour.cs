@@ -29,6 +29,7 @@ public class MenuBehaviour : MonoBehaviour
         UnityEngine.UI.RawImage[] rawImages = GetComponentsInChildren<UnityEngine.UI.RawImage>();
         rawImages[9].texture = decorativeElement1;
         rawImages[10].texture = decorativeElement2;
+
     }
 
     // Update is called once per frame
