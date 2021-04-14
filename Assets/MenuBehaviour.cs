@@ -47,9 +47,9 @@ public class MenuBehaviour : MonoBehaviour
             if (GetComponent<MatchManager>().team1Dishes.Count <= 4)
             {
                 currentPanelDishName = "Dish" + (GetComponent<MatchManager>().team1Dishes.Count) + "Panel";
-                teamDishPanel = GetComponent<Transform>().FindChild("TeamDish1Panel");
-                currentDishPanel = teamDishPanel.FindChild(currentPanelDishName);
-                dishMenuPrefab = Instantiate(GetComponent<Transform>().FindChild("Dish").gameObject) as GameObject;
+                teamDishPanel = GetComponent<Transform>().Find("TeamDish1Panel");
+                currentDishPanel = teamDishPanel.Find(currentPanelDishName);
+                dishMenuPrefab = Instantiate(GetComponent<Transform>().Find("Dish").gameObject) as GameObject;
                 dishMenuPrefab.transform.SetParent(currentDishPanel);
                 UnityEditor.GameObjectUtility.SetParentAndAlign(dishMenuPrefab, currentDishPanel.gameObject);
                 UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
@@ -59,9 +59,9 @@ public class MenuBehaviour : MonoBehaviour
             if (GetComponent<MatchManager>().team2Dishes.Count <= 4)
             {
                 currentPanelDishName = "Dish" + (GetComponent<MatchManager>().team2Dishes.Count) + "Panel";
-                teamDishPanel = GetComponent<Transform>().FindChild("TeamDish2Panel");
-                currentDishPanel = teamDishPanel.FindChild(currentPanelDishName);
-                dishMenuPrefab = Instantiate(GetComponent<Transform>().FindChild("Dish").gameObject) as GameObject;
+                teamDishPanel = GetComponent<Transform>().Find("TeamDish2Panel");
+                currentDishPanel = teamDishPanel.Find(currentPanelDishName);
+                dishMenuPrefab = Instantiate(GetComponent<Transform>().Find("Dish").gameObject) as GameObject;
                 dishMenuPrefab.transform.SetParent(currentDishPanel);
                 UnityEditor.GameObjectUtility.SetParentAndAlign(dishMenuPrefab, currentDishPanel.gameObject);
                 UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
@@ -71,7 +71,7 @@ public class MenuBehaviour : MonoBehaviour
         }
 
         //Timer countdown
-        Transform currentTimePanel = GetComponent<Transform>().FindChild("TimePanel");
+        Transform currentTimePanel = GetComponent<Transform>().Find("TimePanel");
         UnityEngine.UI.Text timeText = currentTimePanel.GetComponentInChildren<UnityEngine.UI.Text>();
         int minutes = (int)(GetComponent<MatchManager>().getInitialTime() - currentTime) / 60;
         int seconds = (int)(GetComponent<MatchManager>().getInitialTime() - currentTime) % 60;
@@ -89,11 +89,11 @@ public class MenuBehaviour : MonoBehaviour
 
         //Position of punctuation
 
-        Transform punctuationPanelTeam1 = GetComponent<Transform>().FindChild("PanelPunctuationTeam1");
+        Transform punctuationPanelTeam1 = GetComponent<Transform>().Find("PanelPunctuationTeam1");
         UnityEngine.UI.RawImage[] rawImageTeam1 = punctuationPanelTeam1.GetComponentsInChildren<UnityEngine.UI.RawImage>();
         UnityEngine.UI.Text[] textPunctuationTeam1= punctuationPanelTeam1.GetComponentsInChildren<UnityEngine.UI.Text>();
 
-        Transform punctuationPanelTeam2 = GetComponent<Transform>().FindChild("PanelPunctuationTeam2");
+        Transform punctuationPanelTeam2 = GetComponent<Transform>().Find("PanelPunctuationTeam2");
         UnityEngine.UI.RawImage[] rawImageTeam2 = punctuationPanelTeam2.GetComponentsInChildren<UnityEngine.UI.RawImage>();
         UnityEngine.UI.Text[] textPunctuationTeam2= punctuationPanelTeam2.GetComponentsInChildren<UnityEngine.UI.Text>();
 
