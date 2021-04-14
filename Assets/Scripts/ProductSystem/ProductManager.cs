@@ -10,6 +10,9 @@ public class ProductManager : MonoBehaviour
     public static List<Product> rawProducts;
     public static List<Product> finalProducts;
 
+    public List<Product> nonStaticRawProducts;
+    public List<Product> nonStaticFinalProducts;
+
     #region MonoBehaviour
     private void Awake()
     {
@@ -17,6 +20,8 @@ public class ProductManager : MonoBehaviour
         stationBlueprints = new Dictionary<int, Station>();
         rawProducts = new List<Product>();
         finalProducts = new List<Product>();
+        nonStaticFinalProducts = new List<Product>();
+        nonStaticRawProducts = new List<Product>();
         loadProducts("products");
     }
 
@@ -57,10 +62,12 @@ public class ProductManager : MonoBehaviour
 
             if(product.type == ProductType.RAW)
             {
+                nonStaticRawProducts.Add(product);
                 rawProducts.Add(product);
             }
             else if(product.type == ProductType.FINAL)
             {
+                nonStaticFinalProducts.Add(product);
                 finalProducts.Add(product);
             }
 

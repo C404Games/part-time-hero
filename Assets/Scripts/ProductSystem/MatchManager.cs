@@ -13,6 +13,8 @@ public class MatchManager : MonoBehaviour
     private float punctuationTeam1;
     private float punctuationTeam2;
     private float initialTime;
+    public List<Product> team1Dishes;
+    public List<Product> team2Dishes;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,8 @@ public class MatchManager : MonoBehaviour
         charactersLife = new List<float>();
         characters = new List<int>();
         charactersFrozen = new List<bool>();
+        team1Dishes = new List<Product>();
+        team2Dishes = new List<Product>();
 
         charactersLife.Add(100.0f);
         //Uncomment when we have more than one player playing at the same time (Photon multiplayer)
@@ -105,20 +109,22 @@ public class MatchManager : MonoBehaviour
         }
     }
 
-    public int generateOrder(int limit)
+    public int generateOrder()
     {
         Random.seed = (int)(100 + Time.deltaTime);
         int difficultyLevel = 1;
-        int randomLevel;
+        int randomProduct = 0;
+        int randomLevel = 0;
         for (int i = 0; i < this.level; i++)
         {
-            randomLevel = (int)Random.Range(1.0f, limit);
+            randomProduct = (int)Random.Range(0.0f, GetComponent<ProductManager>().nonStaticFinalProducts.Count);
+            randomLevel = (int)Random.Range(0.0f, GetComponent<ProductManager>().nonStaticFinalProducts.Count);
             if (difficultyLevel < randomLevel)
             {
                 difficultyLevel = randomLevel;
             }
         }
-        return difficultyLevel;
+        return randomProduct;
     }
 
     public void setLevel(int level)
