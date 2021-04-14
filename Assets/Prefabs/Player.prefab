@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 1904938712653406917}
   - component: {fileID: 1904938712653406923}
   - component: {fileID: 1904938712653406916}
+  - component: {fileID: 4403128702768255323}
   m_Layer: 11
   m_Name: Catcher
   m_TagString: Untagged
@@ -60,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 1904938714388850742}
   animator: {fileID: 5405768722779119169}
+  reachableTracker: {fileID: 4403128702768255323}
 --- !u!65 &1904938712653406916
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73,6 +75,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 1.5, z: 1.1222746}
   m_Center: {x: 0.120000005, y: 0.43, z: 0.91613734}
+--- !u!114 &4403128702768255323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904938712653406918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95903bb8d3d5f7147a1564e0f2eb85cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1904938714388850739
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,6 +381,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catcher: {fileID: 1904938712653406923}
+  reachableTracker: {fileID: 0}
+  targetStation: {fileID: 0}
+  targetSource: {fileID: 0}
+  targetMonster: {fileID: 0}
+  targetProduct: {fileID: 0}
+  targetType: 1
 --- !u!1001 &1904938712420810661
 PrefabInstance:
   m_ObjectHideFlags: 0

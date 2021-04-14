@@ -124,6 +124,11 @@ public class StationInstance : MonoBehaviour
         return health;
     }
 
+    public bool isOccupied()
+    {
+        return heldProduct != null;
+    }
+
     private IEnumerator reactivate(float time)
     {
         yield return new WaitForSeconds(time);

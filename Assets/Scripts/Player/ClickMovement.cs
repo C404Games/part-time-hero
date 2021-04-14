@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 
 
-enum clickTargetType
+public enum clickTargetType
 {
     STATION, 
     FLOOR,
@@ -22,16 +22,17 @@ enum clickTargetType
 public class ClickMovement : MonoBehaviour
 {
     public CatcherScript catcher;
+    public ReachableTracker reachableTracker;
 
     PlayerMovement playerMovement;
     NavMeshAgent nvAgent;
 
-    StationInstance targetStation;
-    ToolSource targetSource;
-    MonsterController targetMonster;
-    ProductInstance targetProduct;
+    [HideInInspector] public StationInstance targetStation;
+    [HideInInspector] public ToolSource targetSource;
+    [HideInInspector] public MonsterController targetMonster;
+    [HideInInspector] public ProductInstance targetProduct;
 
-    clickTargetType targetType = clickTargetType.FLOOR;
+    [HideInInspector] public clickTargetType targetType = clickTargetType.FLOOR;
 
     // Start is called before the first frame update
     void Start()
@@ -51,11 +52,11 @@ public class ClickMovement : MonoBehaviour
                 case clickTargetType.FLOOR:
                     break;
                 case clickTargetType.STATION:
-                    if (catcher.isStationOnReach(targetStation))
+                    if (reachableTracker.isStationOnReach(targetStation))
                         catcher.grabBehaviour(targetStation);
                     break;
                 case clickTargetType.BELT:
-                    if (targetProduct != null && catcher.isProductOnReach(targetProduct))
+                    if (targetProduct != null && reachableTracker.isProductOnReach(targetProduct))
                         catcher.holdProduct(targetProduct);
                     else
                         catcher.grabBehaviour(null);
@@ -98,7 +99,7 @@ public class ClickMovement : MonoBehaviour
                     {
                         nvAgent.SetDestination(targetProduct.transform.position);
                         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetProduct.transform.position - transform.position), Time.deltaTime * playerMovement.rotSpeed);
-                        if (catcher.isProductOnReach(targetProduct))
+                        if (reachableTracker.isProductOnReach(targetProduct))
                         {
                             nvAgent.isStopped = true;
                             nvAgent.ResetPath();
@@ -182,6 +183,5 @@ public class ClickMovement : MonoBehaviour
                 }
             }
         }
-
     }
 }
