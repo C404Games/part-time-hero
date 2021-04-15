@@ -56,31 +56,45 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!blocked)
         {
-            if (increasedSpeed )
+            if (!frozen)
             {
-                if (currentTimeOfMaxSpeed < this.limitTimeMaxSpeed)
+                if (increasedSpeed)
                 {
-                    currentSpeed *= 2;
-                    this.currentTimeOfMaxSpeed += Time.deltaTime;
-                } else
-                {
-                    currentSpeed = initialSpeed;
-                    increasedSpeed = false;
-                    currentTimeOfMaxSpeed = 0;
+                    if (currentTimeOfMaxSpeed < this.limitTimeMaxSpeed)
+                    {
+                        currentSpeed *= 2;
+                        this.currentTimeOfMaxSpeed += Time.deltaTime;
+                    }
+                    else
+                    {
+                        currentSpeed = initialSpeed;
+                        increasedSpeed = false;
+                        currentTimeOfMaxSpeed = 0;
+                    }
                 }
-            }
-            rb.velocity = velocity;
-            if (velocity.sqrMagnitude != 0 && (!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f))
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime * rotSpeed);
-            if ((!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f) && rb.velocity == new Vector3(0, 0, 0))
+                rb.velocity = velocity;
+                if (velocity.sqrMagnitude != 0 && (!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f))
+                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime * rotSpeed);
+                if ((!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f) && rb.velocity == new Vector3(0, 0, 0))
+                {
+                    animator.SetBool("isRunning", false);
+                }
+                else
+                {
+                    animator.SetBool("isRunning", true);
+                }
+            } else
             {
-                animator.SetBool("isRunning", false);
-            }
-            else
-            {
-                animator.SetBool("isRunning", true);
-            }
+                if (this.currentTimeOfFrozen < limitTimeFrozen)
+                {
+                    this.currentTimeOfFrozen += Time.deltaTime;
+                }
+                else{
+                    this.currentTimeOfFrozen = 0;
+                    this.frozen = false;
+                } 
 
+            }
         }
         // SI estamos bloqueados, vamos a la posición de "espera"
         else
