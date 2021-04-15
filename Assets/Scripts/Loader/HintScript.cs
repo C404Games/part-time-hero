@@ -23,7 +23,7 @@ public class HintScript : MonoBehaviour
         hints.Add("Soy un estegosaurio");
         hints.Add("I like trains");
 
-        hint = Random.Range(0, hints.Count - 1);
+        hint = Random.Range(0, hints.Count);
         GetComponent<Text>().text = hints[hint];
     }
 
