@@ -12,7 +12,7 @@ public class PowerUpBehaviour : MonoBehaviour
 	void Update()
 	{
 		if (this.reverse)
-			transform.Rotate(new Vector3(0f, 0f, 1f) * Time.deltaTime * this.rotationSpeed);
+			transform.Rotate(new Vector3(0f, 1f, 0f) * Time.deltaTime * this.rotationSpeed);
 		else
 			transform.Rotate(new Vector3(0f, 0f, 1f) * Time.deltaTime * this.rotationSpeed);
 	}

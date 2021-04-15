@@ -12,9 +12,16 @@ public class PlayerMovement : MonoBehaviour
     public float volume = 0.5f;
     public float powerUpIncreaseValueHealth = 5.0f;
     public float powerUpIncreaseValuePunctuation = 5.0f;
-    public float speed = 5.0f;
+    public float initialSpeed = 5.0f;
+    public float currentSpeed;
     public float rotSpeed = 10.0f;
     public bool blocked = false;
+    public bool increasedSpeed;
+    public float currentTimeOfMaxSpeed;
+    public float limitTimeMaxSpeed = 30;
+    public bool frozen;
+    public float currentTimeOfFrozen;
+    public float limitTimeFrozen = 5;
 
     public Animator animator;
 
@@ -36,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentSpeed = initialSpeed;
+        increasedSpeed = false;
         audioSource = GetComponent<AudioSource>();
         nvAgent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
@@ -47,6 +56,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!blocked)
         {
+            if (increasedSpeed )
+            {
+                if (currentTimeOfMaxSpeed < this.limitTimeMaxSpeed)
+                {
+                    currentSpeed *= 2;
+                    this.currentTimeOfMaxSpeed += Time.deltaTime;
+                } else
+                {
+                    currentSpeed = initialSpeed;
+                    increasedSpeed = false;
+                    currentTimeOfMaxSpeed = 0;
+                }
+            }
             rb.velocity = velocity;
             if (velocity.sqrMagnitude != 0 && (!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f))
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime * rotSpeed);
@@ -83,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         forward.Normalize();
         right.Normalize();
 
-        velocity = (forward * input.y + right * input.x) * speed;        
+        velocity = (forward * input.y + right * input.x) * currentSpeed;        
 
         nvAgent.isStopped = true;
     }
@@ -108,14 +130,23 @@ public class PlayerMovement : MonoBehaviour
             {
                 switch (collision.gameObject.GetComponent<PowerUpBehaviour>().type)
                 {
-                    case "health":
+                    case "paralysis":
                         {
-                            this.PowerUpHealth(powerUpIncreaseValueHealth);
                             break;
                         }
                     case "money":
                         {
                             this.PowerUpPunctuation(powerUpIncreaseValuePunctuation);
+                            break;
+                        }
+                    case "speed":
+                        {
+                            this.increasedSpeed = true;
+                            break;
+                        }
+                    case "health":
+                        {
+                            this.PowerUpHealth(powerUpIncreaseValueHealth);
                             break;
                         }
                 }

@@ -8,6 +8,7 @@ public class WalkingArea : MonoBehaviour
     public bool spawnAvailable = true;
     public GameObject powerUp1;
     public GameObject powerUp2;
+    public GameObject powerUp3;
 
     private BoxCollider myCollider;
     private float currentTimer;
@@ -28,7 +29,7 @@ public class WalkingArea : MonoBehaviour
         if (currentTimer <= 0.0f && spawnAvailable)
         {
             Vector3 pos = RandomPointInBounds(myCollider.bounds);
-            GeneratePowerUp(UnityEngine.Random.Range(0, 2), pos);
+            GeneratePowerUp(UnityEngine.Random.Range(0, 3), pos);
             currentTimer = respawnTimer;
         }
     }
@@ -45,6 +46,11 @@ public class WalkingArea : MonoBehaviour
             case 1:
                 {
                     Instantiate(powerUp2, pos, Quaternion.identity);
+                    break;
+                }
+            case 2:
+                {
+                    Instantiate(powerUp3, pos, Quaternion.identity);
                     break;
                 }
         }
