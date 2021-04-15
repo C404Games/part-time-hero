@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Floor
   - PowerUp
+  - Monster
+  - Item
+  - Target
+  - Delivery
+  - Belt
+  - ToolSource
   layers:
   - Default
   - TransparentFX
@@ -15,10 +21,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Item
+  - Forniture
+  - Catcher
   - 
   - 
   - 
