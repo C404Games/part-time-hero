@@ -1,10 +1,6 @@
 {
   "dependencies": {
-<<<<<<< HEAD
-    "com.unity.2d.sprite": "1.0.0",
-=======
     "com.unity.ads": "3.6.1",
->>>>>>> 20a08557db49ba0183d2145a58c84c1379353eef
     "com.unity.collab-proxy": "1.2.16",
     "com.unity.ide.rider": "1.1.4",
     "com.unity.ide.vscode": "1.2.3",
