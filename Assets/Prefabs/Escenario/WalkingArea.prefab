@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d135d6866df194c9ce58b106084e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTimer: 2
+  respawnTimer: 30
   spawnAvailable: 1
   powerUp1: {fileID: 100008, guid: 879451a5e2214f143a7edf5dd3e32020, type: 3}
   powerUp2: {fileID: 100012, guid: f832b09c86bd81e4f91beb978de1ae75, type: 3}
