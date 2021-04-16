@@ -12,11 +12,18 @@ public class AdsControllerCoins : MonoBehaviour
     private string appId = "4089943";
     private string coinAds = "Coins";
     private int coins = 0;
+    private Cronometer cronometer;
+    private GameObject readyIndicator;
+
     // Start is called before the first frame update
     void Start()
     {
         Monetization.Initialize(appId, true);
+        cronometer = GameObject.Find("Cronometer").GetComponent<Cronometer>();
+        cronometer.setTimer(0);
+        readyIndicator = GameObject.Find("Ready Indicator");
     }
+
     public void showAds()
     {
         if (Monetization.IsReady(coinAds))
@@ -27,11 +34,15 @@ public class AdsControllerCoins : MonoBehaviour
             {
                 ad.Show();
             }
-            setCoinAds();
+            setAction();
         }
     }
-    private void setCoinAds()
+    private void setAction()
     {
         coins += numberOfCoins;
+
+        cronometer.initializeTimer();
+
+        readyIndicator.SetActive(false);
     }
 }
