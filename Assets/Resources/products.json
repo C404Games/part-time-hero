@@ -41,14 +41,7 @@
       "id": 106,
       "name": "TOOL_POT",
       "type": 3,
-      "appearence": "Tools/Tabern/pot",
-      "transitions": [
-        {
-          "src": 16,
-          "dst": 17,
-          "time": 0
-        }
-      ]
+      "appearence": "Tools/Tabern/pot"      
     },
     {
       "id": 107,
@@ -77,14 +70,7 @@
       "id": 108,
       "name": "TOOL_BOTTLE",
       "type": 3,
-      "appearence": "Tools/Tabern/bottle",
-      "transitions": [
-        {
-          "src": 12,
-          "dst": 13,
-          "time": 0
-        }
-      ]
+      "appearence": "Tools/Tabern/bottle"
     },
     {
       "id": 109,
@@ -96,14 +82,7 @@
       "id": 110,
       "name": "TOOL_PAN",
       "type": 3,
-      "appearence": "Tools/Tabern/fryingPan",
-      "transitions": [
-        {
-          "src": 4,
-          "dst": 27,
-          "time": 0
-        }
-      ]
+      "appearence": "Tools/Tabern/fryingPan"
     },
 
     {

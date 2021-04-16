@@ -5,6 +5,92 @@ using UnityEngine;
 public class AIManager : MonoBehaviour
 {
 
+    BehaviourNode fetchTree = new BehaviourNode(NodeType.AND, (AIAgent a) => { return true; }, new List<BehaviourNode>() {
+        
+        // Saco nodo
+        new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+            return a.updateTarget();
+        }, null), 
+
+        // OR (?)
+        new BehaviourNode(NodeType.OR, (AIAgent a)=>{return true; }, new List<BehaviourNode>(){
+             
+            // AND (->)
+            new BehaviourNode(NodeType.AND, (AIAgent a)=>{ return true; }, new List<BehaviourNode>(){
+
+                // Está en mueble?
+                 new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+                     return a.isTargetHeld();
+                 }, null),
+                 // Ir a mueble
+                 new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+                     return a.goToTargetStation();
+                 }, null)
+            }),
+
+            // AND (->)
+            new BehaviourNode(NodeType.AND, (AIAgent a)=>{ return true; }, new List<BehaviourNode>(){
+
+                // Es herramienta?
+                 new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+                     return a.isTargetTool();
+                 }, null),
+                 // Ir a toolSource
+                 new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+                     return a.goToTargetToolSource();
+                 }, null)
+            }),
+
+             // Ir a cinta
+            new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+                return a.goToBelt();
+            }, null)
+        })
+    });
+
+    BehaviourNode carryTree = new BehaviourNode(NodeType.OR, (AIAgent a) => { return true; }, new List<BehaviourNode>()
+    {
+        // AND (->)
+        new BehaviourNode(NodeType.AND, (AIAgent a)=>{ return true; }, new List<BehaviourNode>(){
+
+            // Es parent 1?
+            new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+                return a.isParent1();
+            }, null),
+
+            // OR
+            new BehaviourNode(NodeType.OR, (AIAgent a)=>{return true; }, new List<BehaviourNode>(){
+
+                // AND (->)
+                new BehaviourNode(NodeType.AND, (AIAgent a)=>{ return true; }, new List<BehaviourNode>(){
+
+                    // Va con otro product?
+                    new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+                        return a.isJoinedWithProduct();
+                    }, null),
+
+                    // Llevar a mesa
+                    new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+                        return a.carryToTable();
+                    }, null)
+                }),
+
+                // AND (->) 
+                // Va con un station!
+                // Llevar con ese station si se puede
+                new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+                    return a.carryToPartnerStation();
+                }, null)
+                
+            })
+        }),
+        // Es parent 2 (Product)
+        // Llevar con su compañero
+        new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+            return a.carryToTracked();
+        }, null)
+    });
+
     List<RecipieNode> recipies;
 
     public RecipieNode currentRecipie;
@@ -22,7 +108,21 @@ public class AIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        foreach(AIAgent agent in agents)
+        {
+            if (!agent.isBusy())
+            {
+                switch (agent.state)
+                {                    
+                    case AIState.FETCH:
+                        fetchTree.doTree(agent);
+                        break;
+                    case AIState.CARRY:
+                        carryTree.doTree(agent);
+                        break;
+                }
+            }
+        }
     }
 
     private void genProductTrees()
@@ -50,10 +150,7 @@ public class AIManager : MonoBehaviour
                     if(node.parent1 == null)
                     {
                         node.parent1 = createProdNode(product.id, node);
-                    }
-                    else if (node.parent2 == null)
-                    {
-                        node.parent2 = createProdNode(product.id, node);
+                        node.parent2 = createProdNode(transition.src, node);
                     }
                 }
             }

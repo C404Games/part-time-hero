@@ -60,7 +60,8 @@ public class StationInstance : MonoBehaviour
             else
             {
                 heldProduct = product;
-                heldProduct.transform.parent = transform;
+                //heldProduct.transform.parent = transform;
+                heldProduct.holder = transform;
                 return activate(origin);
             }
         }

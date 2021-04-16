@@ -9,17 +9,12 @@ public class CatcherScript : MonoBehaviour
     public Animator animator;
     public ReachableTracker reachableTracker;
 
-    private HashSet<StationInstance> listaTargets;
-    private HashSet<ProductInstance> listaObjetos;
-
     private DeliverySpot deliverySpot;
 
     private ProductInstance heldObject;
 
     private void Start()
     {
-        listaObjetos = new HashSet<ProductInstance>();
-        listaTargets = new HashSet<StationInstance>();
     }
 
     public void OnGrab(InputAction.CallbackContext context)
@@ -82,7 +77,6 @@ public class CatcherScript : MonoBehaviour
                     return;
                 if (time > 0)
                     playerMovement.blockMovement(time, station.getWaitPos(), station.getWaitRot());
-                heldObject.held = false;
                 heldObject = null;
                 animator.SetBool("Hold", false);
             }
@@ -91,14 +85,14 @@ public class CatcherScript : MonoBehaviour
 
     public void holdProduct(ProductInstance product)
     {
-        if (heldObject == null && product != null && !product.held)
+        if (heldObject == null && product != null)// && !product.isHeld())
         {
             animator.SetBool("Hold", true);
             heldObject = product;
-            product.held = true;
-            product.transform.SetParent(transform);
-            product.GetComponent<Rigidbody>().isKinematic = true;
-            listaObjetos.Remove(product);
+            //product.transform.SetParent(transform);
+            product.holder = transform;
+            //product.GetComponent<Rigidbody>().isKinematic = true;
+            product.GetComponent<Rigidbody>().useGravity= false;
         }
     }
 

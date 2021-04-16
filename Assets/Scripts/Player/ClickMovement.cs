@@ -95,7 +95,7 @@ public class ClickMovement : MonoBehaviour
                     transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetStation.transform.position - transform.position), Time.deltaTime * playerMovement.rotSpeed);
                     break;
                 case clickTargetType.BELT:
-                    if (targetProduct != null && !targetProduct.held)
+                    if (targetProduct != null && !targetProduct.isHeld())
                     {
                         nvAgent.SetDestination(targetProduct.transform.position);
                         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetProduct.transform.position - transform.position), Time.deltaTime * playerMovement.rotSpeed);
@@ -160,7 +160,7 @@ public class ClickMovement : MonoBehaviour
                     if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
                     {
                         ProductInstance hitProduct = hit.collider.GetComponent<ProductInstance>();
-                        if (!hitProduct.held)
+                        if (!hitProduct.isHeld())
                             targetProduct = hitProduct;
                     }
 

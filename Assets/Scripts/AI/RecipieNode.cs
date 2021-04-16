@@ -34,7 +34,7 @@ public class RecipieNode
             return leaf2;
         if (leaf2 == null)
             return leaf1;
-        return level1 > level2 ? leaf1 : leaf2;
+        return level1 >= level2 ? leaf1 : leaf2;
 
     }    
 
@@ -73,7 +73,7 @@ public class RecipieNode
             level = level1;
             return leaf1;
         }
-        if(level1 > level2)
+        if(level1 >= level2)
         {
             level = level1;
             return leaf1;
