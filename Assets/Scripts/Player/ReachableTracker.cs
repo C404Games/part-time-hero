@@ -56,6 +56,7 @@ public class ReachableTracker : MonoBehaviour
 
     public ProductInstance getProductOnReach(int id)
     {
+
         float minDist = float.MaxValue;
         ProductInstance minDistProduct = null;
         foreach (ProductInstance product in reachableProducts)

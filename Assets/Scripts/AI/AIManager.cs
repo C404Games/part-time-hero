@@ -5,6 +5,7 @@ using UnityEngine;
 public class AIManager : MonoBehaviour
 {
 
+    // COmportamiento al buscar objeto
     BehaviourNode fetchTree = new BehaviourNode(NodeType.AND, (AIAgent a) => { return true; }, new List<BehaviourNode>() {
         
         // Saco nodo
@@ -37,7 +38,7 @@ public class AIManager : MonoBehaviour
                  }, null),
                  // Ir a toolSource
                  new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
-                     return a.goToTargetToolSource();
+                     return a.goToToolSource();
                  }, null)
             }),
 
@@ -48,8 +49,37 @@ public class AIManager : MonoBehaviour
         })
     });
 
+    // Comportamiento al llevar objeto a donde toque
     BehaviourNode carryTree = new BehaviourNode(NodeType.OR, (AIAgent a) => { return true; }, new List<BehaviourNode>()
     {
+        // AND (->)
+        new BehaviourNode(NodeType.AND, (AIAgent a)=>{ return true; }, new List<BehaviourNode>(){
+
+            // Es final?
+            new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+                return a.isFinalProduct();
+            }, null),
+
+            // OR (?)
+            new BehaviourNode(NodeType.OR, (AIAgent a)=>{return true;},  new List<BehaviourNode>(){
+
+                // SI tengo punto de entrego, lo llevo
+                new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+                    return a.deliverProduct();
+                }, null),
+
+                // SI no, lo llevo a una mesa común con el compi (pendiente)
+                new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+                    return a.carryToTable();
+                }, null),
+            }),
+
+            // Cojo nueva receta
+            new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
+                return a.nextRecipie();
+            }, null),
+        }),
+
         // AND (->)
         new BehaviourNode(NodeType.AND, (AIAgent a)=>{ return true; }, new List<BehaviourNode>(){
 
@@ -75,9 +105,8 @@ public class AIManager : MonoBehaviour
                     }, null)
                 }),
 
-                // AND (->) 
-                // Va con un station!
-                // Llevar con ese station si se puede
+                // Va con un mueble!
+                // Llevar con ese mueble si se puede
                 new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
                     return a.carryToPartnerStation();
                 }, null)
@@ -85,7 +114,7 @@ public class AIManager : MonoBehaviour
             })
         }),
         // Es parent 2 (Product)
-        // Llevar con su compañero
+        // Llevar con su pareja (Si está ya listo, que alomejor no)
         new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
             return a.carryToTracked();
         }, null)
@@ -102,7 +131,8 @@ public class AIManager : MonoBehaviour
     {
         recipies = new List<RecipieNode>();
         genProductTrees();
-        currentRecipie = recipies[0].copySelf(null);
+        // Cojemos una receta cualquiera
+        nextRecipie();
     }
 
     // Update is called once per frame
@@ -125,6 +155,13 @@ public class AIManager : MonoBehaviour
         }
     }
 
+    public void nextRecipie()
+    {
+        // Se coje la siguiente receta que toque
+        currentRecipie = recipies[3].copySelf(null);
+    }
+
+    // Se generan los ároles de recetas que usan los IAagents
     private void genProductTrees()
     {
         foreach(Product product in ProductManager.finalProducts)
@@ -133,6 +170,7 @@ public class AIManager : MonoBehaviour
         }
     }
 
+    // O(N^99999), pero nos vale de momento
     private RecipieNode createProdNode(int id, RecipieNode child)
     {
         RecipieNode node = new RecipieNode(id);

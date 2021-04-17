@@ -382,7 +382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catcher: {fileID: 1904938712653406923}
-  reachableTracker: {fileID: 0}
+  reachableTracker: {fileID: 4403128702768255323}
   targetStation: {fileID: 0}
   targetSource: {fileID: 0}
   targetMonster: {fileID: 0}

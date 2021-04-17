@@ -32,7 +32,7 @@ public class ProductInstance : MonoBehaviour
 
         if(holder != null)
         {
-            rigidbody.MovePosition(holder.position);
+            rigidbody.MovePosition(Vector3.Lerp(transform.position, holder.transform.position, 20 * Time.deltaTime));
         }
 
     }

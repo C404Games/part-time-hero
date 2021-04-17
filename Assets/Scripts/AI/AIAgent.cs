@@ -44,20 +44,6 @@ public class AIAgent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (movement.targetType == clickTargetType.NONE)
-        {
-            switch (state)
-            {
-                case AIState.FETCH:
-                    fetchProduct();
-                    break;
-                case AIState.CARRY:
-                    carryProduct();
-                    break;
-            }
-        }
-        */
     }
 
     public void setState(AIState state)
@@ -69,96 +55,12 @@ public class AIAgent : MonoBehaviour
     public bool isBusy()
     {
         return movement.targetType != clickTargetType.NONE;
-    }
+    }   
 
-    public bool isEnemyNearby()
-    {
-        return false;
-    }
+    // Para el Behaviour Tree necesitamos funciones de acción para los nodos hoja que hacen cosas 
+    // Otras funciones para los nodos hoja que "preguntan" cosas 
 
-    public List<StationInstance> getNearbyStations()
-    {
-        return new List<StationInstance>();
-    }
-
-    public void fetchProduct() {
-
-        // Siguiente producto de la receta
-        currentNode = manager.currentRecipie.getLeaf();
-        targetProduct = reachableTracker.getProductOnReach(currentNode.id);
-
-        // Si está al alcance
-        if(targetProduct != null)
-        {
-            // Si está en un mueble
-            if (targetProduct.isHeld())
-            {
-                StationInstance station = targetProduct.holder.GetComponent<StationInstance>();
-                if(station != null)
-                {
-                    goToStation(station);
-                }
-
-            }
-            // Si es una herramienta
-            else if (targetProduct.getProductType() == ProductType.TOOL)
-            {
-                ToolSource source = targetProduct.holder.GetComponent<ToolSource>();
-                movement.targetType = clickTargetType.TOOLSOURCE;
-                movement.targetSource = source;
-                nvAgent.SetDestination(source.transform.position);
-                nvAgent.isStopped = false;
-            }
-            // Si no, está en la cinta
-            else
-            {
-                // Vamos a coger el objeto
-                movement.targetType = clickTargetType.BELT;
-                movement.targetProduct = targetProduct;
-                nvAgent.SetDestination(targetProduct.transform.position);
-                nvAgent.isStopped = false;
-            }
-            currentNode.done = true;
-            state = AIState.CARRY;
-        }
-    }
-
-    public void carryProduct()
-    {
-        // Si es el parent1 (Siempre product)
-        if (currentNode == currentNode.child.parent1)
-        {
-            //Lo llevamos a una mesa
-            trackedStation = reachableTracker.getStationOnReach(4, false);
-            if (trackedStation != null)
-            {
-                goToStation(trackedStation);
-            }
-        }
-        // SI es el parent2 (product o station)
-        else
-        {
-            // Si es station
-            if (currentNode.isStation)
-            {
-                //Lo llevamos a la estación que corresponde
-                trackedStation = reachableTracker.getStationOnReach(currentNode.id, false);
-                if (trackedStation != null)
-                {
-                    goToStation(trackedStation);
-                    currentNode.done = true;
-                }
-            }
-            //Si es product
-            else
-            {
-                // Lo llevamos a donde estaba el parent1
-                goToStation(trackedStation);
-                currentNode.done = true;
-            }
-        }
-    }
-    
+    // Hay dos Berhaviour Trees, uno para cuando buscamos un objeto (fetch) y otro para cuando queremos dejar el objeto (carry)
 
     ////////////////////////
     ////// BT ACTIONS///////
@@ -187,7 +89,7 @@ public class AIAgent : MonoBehaviour
 
         return true;
     }
-    public bool goToTargetToolSource()
+    public bool goToToolSource()
     {
         ToolSource source = targetProduct.holder.GetComponent<ToolSource>();
         movement.targetType = clickTargetType.TOOLSOURCE;
@@ -250,7 +152,21 @@ public class AIAgent : MonoBehaviour
         }
         return true;
     }
+
+    public bool deliverProduct()
+    {
+        // No de eso aún jeje
+        return false;
+    }
+
+    public bool nextRecipie()
+    {
+        manager.nextRecipie();
+        return true;
+    }
     #endregion
+
+
     ////////////////////////
     ////// BT QUERIES///////
     ////////////////////////
@@ -284,6 +200,11 @@ public class AIAgent : MonoBehaviour
     public bool isNodeStation()
     {
         return currentNode.isStation;
+    }
+
+    public bool isFinalProduct()
+    {
+        return targetProduct.getProductType() == ProductType.FINAL;
     }
     #endregion
 
