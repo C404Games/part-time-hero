@@ -23,7 +23,7 @@ public class AIManager : MonoBehaviour
                  new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
                      return a.isTargetHeld();
                  }, null),
-                 // Ir a mueble
+                 // Ir a mueble si no está busy
                  new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
                      return a.goToTargetStation();
                  }, null)
@@ -109,8 +109,7 @@ public class AIManager : MonoBehaviour
                 // Llevar con ese mueble si se puede
                 new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
                     return a.carryToPartnerStation();
-                }, null)
-                
+                }, null)                
             })
         }),
         // Es parent 2 (Product)
@@ -208,6 +207,12 @@ public class AIManager : MonoBehaviour
                     }
                 }
             }
+        }
+
+        // Este nodo se colapsa para no confundir a la IA
+        if (ProductManager.productBlueprints[id].AIcollapse)
+        {
+            node = node.parent1;
         }
 
         return node;

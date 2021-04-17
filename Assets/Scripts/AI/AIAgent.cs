@@ -79,14 +79,13 @@ public class AIAgent : MonoBehaviour
     {
         //Lo llevamos a la estación que corresponde
         StationInstance station = targetProduct.holder.GetComponent<StationInstance>();
-        if (station != null)
+        if (station != null && !station.isBusy())
         {
             goToStation(station);
+            currentNode.done = true;
+            state = AIState.CARRY;
         }
-
-        currentNode.done = true;
-        state = AIState.CARRY;
-
+       
         return true;
     }
     public bool goToToolSource()
@@ -96,6 +95,9 @@ public class AIAgent : MonoBehaviour
         movement.targetSource = source;
         nvAgent.SetDestination(source.transform.position);
         nvAgent.isStopped = false;
+        NavMeshPath path = new NavMeshPath();
+        NavMesh.CalculatePath(transform.position, nvAgent.destination, NavMesh.AllAreas, path);
+        nvAgent.SetPath(path);
 
         currentNode.done = true;
         state = AIState.CARRY;
@@ -109,6 +111,9 @@ public class AIAgent : MonoBehaviour
         movement.targetProduct = targetProduct;
         nvAgent.SetDestination(targetProduct.transform.position);
         nvAgent.isStopped = false;
+        NavMeshPath path = new NavMeshPath();
+        NavMesh.CalculatePath(transform.position, nvAgent.destination, NavMesh.AllAreas, path);
+        nvAgent.SetPath(path);
 
         currentNode.done = true;
         state = AIState.CARRY;
@@ -225,6 +230,9 @@ public class AIAgent : MonoBehaviour
             dest = movement.targetStation.transform.position + dir;
         }
         nvAgent.SetDestination(dest);
+        NavMeshPath path = new NavMeshPath();
+        NavMesh.CalculatePath(transform.position, nvAgent.destination, NavMesh.AllAreas, path);
+        nvAgent.SetPath(path);
         nvAgent.isStopped = false;
 
         state = AIState.FETCH;

@@ -45,7 +45,7 @@ public class ProductInstance : MonoBehaviour
 
     public bool isHeld()
     {
-        return holder != null && holder.GetComponent<ToolSource>() == null;
+        return holder != null && holder.GetComponent<StationInstance>() != null;
     }
 
 

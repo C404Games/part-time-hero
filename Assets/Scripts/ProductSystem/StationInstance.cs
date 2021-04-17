@@ -130,6 +130,11 @@ public class StationInstance : MonoBehaviour
         return heldProduct != null;
     }
 
+    public bool isBusy()
+    {
+        return busy;
+    }
+
     private IEnumerator reactivate(float time)
     {
         yield return new WaitForSeconds(time);
