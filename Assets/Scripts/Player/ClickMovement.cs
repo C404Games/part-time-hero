@@ -137,16 +137,18 @@ public class ClickMovement : MonoBehaviour
                     targetType = clickTargetType.STATION;
                     targetStation = hit.collider.GetComponent<StationInstance>();
                     Vector3 dest;
-                    if (targetStation.isReachable(transform.position))
-                    {
-                        dest = targetStation.getWaitPos();
-                    }
+                    //if (targetStation.isReachable(transform.position))
+                    //{
+                    dest = targetStation.getWaitPos(transform.position);
+                    //}
+                    /*
                     else
                     {
                         // CUIDADO! Puede dar problemas si se colocan de forma rara los muebles
                         Vector3 dir = targetStation.transform.position - targetStation.getWaitPos();
                         dest = targetStation.transform.position + dir;
                     }
+                    */
                     nvAgent.SetDestination(dest);
                     nvAgent.isStopped = false;
                 }

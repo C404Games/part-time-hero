@@ -55,7 +55,7 @@ public class MonsterController : MonoBehaviour
                     break;
                 int randIdx = Random.Range(0, stations.Count() - 1);
                 target = stations.ElementAt(randIdx);
-                nvAgent.SetDestination(target.getWaitPos());
+                nvAgent.SetDestination(target.getWaitPos(transform.position));
                 nvAgent.isStopped = false;
                 state = MonsterState.WALKING;
                 animator.SetBool("Walking", true);

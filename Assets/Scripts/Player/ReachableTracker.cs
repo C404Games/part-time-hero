@@ -12,7 +12,7 @@ public class ReachableTracker : MonoBehaviour
     DeliverySpot deliverySpot;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         reachableProducts = new List<ProductInstance>();
         reachableStations = new List<StationInstance>();
@@ -56,7 +56,7 @@ public class ReachableTracker : MonoBehaviour
 
     public ProductInstance getProductOnReach(int id)
     {
-
+        reachableProducts.RemoveAll(item => item == null);
         float minDist = float.MaxValue;
         ProductInstance minDistProduct = null;
         foreach (ProductInstance product in reachableProducts)
@@ -81,6 +81,19 @@ public class ReachableTracker : MonoBehaviour
             }
         }
         return minDistStation;
+    }
+
+    public List<StationInstance> getStationListOnReach(int id, bool occupied)
+    {
+        List<StationInstance> stationList = new List<StationInstance>();
+        foreach (StationInstance station in reachableStations)
+        {
+            if (station.id == id && station.isOccupied() == occupied)
+            {
+                stationList.Add(station);
+            }
+        }
+        return stationList;
     }
 
     public StationInstance getStationOnReach(string name, bool occupied)
@@ -108,12 +121,13 @@ public class ReachableTracker : MonoBehaviour
 
     public ProductInstance getNearestProduct()
     {
+        reachableProducts.RemoveAll(item => item == null);
         double minDistance = Mathf.Infinity;
         ProductInstance minDistanceObject = null;
 
         foreach (ProductInstance product in reachableProducts)
         {
-            if (Vector3.Distance(product.transform.position, transform.position) < minDistance)
+            if (!product.isHeld() && Vector3.Distance(product.transform.position, transform.position) < minDistance)
             {
                 minDistance = Vector3.Distance(product.transform.position, transform.position);
                 minDistanceObject = product;

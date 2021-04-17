@@ -34,7 +34,7 @@ public class CatcherScript : MonoBehaviour
             {
                 float time = station.activate(transform.parent.position);
                 if(time > 0)
-                    playerMovement.blockMovement(time, station.getWaitPos(), station.getWaitRot());
+                    playerMovement.blockMovement(time, station.getWaitPos(playerMovement.transform.position), station.getWaitRot(playerMovement.transform.position));
             }
         }
     }
@@ -47,7 +47,7 @@ public class CatcherScript : MonoBehaviour
         {
 
             //Cogemos el objeto del target si hay
-            if (station != null)
+            if (station != null && !station.isBusy())
             {
                 ProductInstance p = station.takeProduct();
                 if (p != null)
@@ -76,7 +76,7 @@ public class CatcherScript : MonoBehaviour
                 if (time < 0)
                     return;
                 if (time > 0)
-                    playerMovement.blockMovement(time, station.getWaitPos(), station.getWaitRot());
+                    playerMovement.blockMovement(time, station.getWaitPos(playerMovement.transform.position), station.getWaitRot(playerMovement.transform.position));
                 heldObject = null;
                 animator.SetBool("Hold", false);
             }
@@ -91,8 +91,9 @@ public class CatcherScript : MonoBehaviour
             heldObject = product;
             //product.transform.SetParent(transform);
             product.holder = transform;
-            //product.GetComponent<Rigidbody>().isKinematic = true;
+            product.GetComponent<Rigidbody>().isKinematic = true;
             product.GetComponent<Rigidbody>().useGravity= false;
+            //product.GetComponent<BoxCollider>().isTrigger = true;
         }
     }
 

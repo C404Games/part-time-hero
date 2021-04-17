@@ -12,7 +12,7 @@ public enum AIState
 public class AIAgent : MonoBehaviour
 {
 
-    bool busy = false;
+    public int id;
 
     public AIState state = AIState.FETCH;
 
@@ -32,11 +32,14 @@ public class AIAgent : MonoBehaviour
 
     ToolSource targetToolSource;
 
-    StationInstance trackedStation;    
+    static Dictionary<int, StationInstance> trackedStations;
+
+    bool busy = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        trackedStations = new Dictionary<int, StationInstance>();
         nvAgent = GetComponent<NavMeshAgent>();
         movement = GetComponent<ClickMovement>();
     }
@@ -69,23 +72,30 @@ public class AIAgent : MonoBehaviour
     public bool updateTarget()
     {
         // Siguiente producto de la receta
-        currentNode = manager.currentRecipie.getLeaf();
-        targetProduct = reachableTracker.getProductOnReach(currentNode.id);
-        if(targetProduct != null)
-            return true;
+        currentNode = manager.currentRecipie.getLeaf(id);
+        if (!currentNode.isStation)
+        {
+            targetProduct = reachableTracker.getProductOnReach(currentNode.id);
+            if (targetProduct != null)
+            {
+                currentNode.done = true;
+                return true;
+            }
+        }
         return false;
     }
     public bool goToTargetStation()
     {
-        //Lo llevamos a la estación que corresponde
+        //Vamos a por el objeto al mueble
         StationInstance station = targetProduct.holder.GetComponent<StationInstance>();
         if (station != null && !station.isBusy())
         {
             goToStation(station);
-            currentNode.done = true;
             state = AIState.CARRY;
         }
-       
+        else
+            currentNode.done = false;
+
         return true;
     }
     public bool goToToolSource()
@@ -99,7 +109,7 @@ public class AIAgent : MonoBehaviour
         NavMesh.CalculatePath(transform.position, nvAgent.destination, NavMesh.AllAreas, path);
         nvAgent.SetPath(path);
 
-        currentNode.done = true;
+        //currentNode.done = true;
         state = AIState.CARRY;
 
         return true;
@@ -115,7 +125,7 @@ public class AIAgent : MonoBehaviour
         NavMesh.CalculatePath(transform.position, nvAgent.destination, NavMesh.AllAreas, path);
         nvAgent.SetPath(path);
 
-        currentNode.done = true;
+        //currentNode.done = true;
         state = AIState.CARRY;
 
         return true;
@@ -126,10 +136,27 @@ public class AIAgent : MonoBehaviour
     public bool carryToTable()
     {
         //Lo llevamos a una mesa
-        trackedStation = reachableTracker.getStationOnReach(4, false);
-        if (trackedStation != null)
+        StationInstance station = reachableTracker.getStationOnReach(4, false);
+        if (station != null)
         {
-            goToStation(trackedStation);
+            trackedStations.Add(currentNode.id, station);
+            goToStation(station);
+        }
+        state = AIState.FETCH;
+        return true;
+    }
+
+    public bool carryToCommonTable()
+    {
+        //Lo llevamos a una mesa común
+        StationInstance station = manager.getCommonStation(4);
+        if (station != null)
+        {
+            if(!trackedStations.ContainsKey(currentNode.id))
+                trackedStations.Add(currentNode.id, station);
+            goToStation(station);
+            currentNode.done = false;
+            currentNode.exceptAgents.Add(id);
         }
         state = AIState.FETCH;
         return true;
@@ -138,8 +165,16 @@ public class AIAgent : MonoBehaviour
     public bool carryToTracked()
     {
         // Lo llevamos a donde estaba el parent1
-        goToStation(trackedStation);
-        currentNode.done = true;
+        int trackedId = currentNode.child.parent1.id;
+        if (trackedStations.ContainsKey(currentNode.child.parent1.id) && reachableTracker.isStationOnReach(trackedStations[trackedId]))
+        {
+            goToStation(trackedStations[currentNode.child.parent1.id]);
+            currentNode.done = true;
+        }
+        else
+        {
+            carryToCommonTable();
+        }
         state = AIState.FETCH;
         return true;
     }
@@ -147,13 +182,18 @@ public class AIAgent : MonoBehaviour
     public bool carryToPartnerStation()
     {
         //Lo llevamos a la estación que corresponde
-        trackedStation = reachableTracker.getStationOnReach(currentNode.child.parent2.id, false);
-        if (trackedStation != null)
+        StationInstance station = reachableTracker.getStationOnReach(currentNode.child.parent2.id, false);
+        if (station != null)
         {
-            goToStation(trackedStation);
+            goToStation(station);
             currentNode.done = true;
             currentNode.child.parent2.done = true;
             state = AIState.FETCH;
+        }
+        // SI no se puede, a mesa común
+        else
+        {
+            carryToCommonTable();
         }
         return true;
     }
@@ -167,6 +207,7 @@ public class AIAgent : MonoBehaviour
     public bool nextRecipie()
     {
         manager.nextRecipie();
+        trackedStations.Clear();
         return true;
     }
     #endregion
@@ -215,20 +256,22 @@ public class AIAgent : MonoBehaviour
 
     private void goToStation(StationInstance station)
     {
-        currentNode.parent2 = null;
+        //currentNode.parent2 = null;
         movement.targetType = clickTargetType.STATION;
         movement.targetStation = station;
         Vector3 dest;
-        if (movement.targetStation.isReachable(transform.position))
-        {
-            dest = movement.targetStation.getWaitPos();
-        }
+        //if (movement.targetStation.isReachable(transform.position))
+        //{
+        dest = movement.targetStation.getWaitPos(transform.position);
+        //}
+        /*
         else
         {
             // CUIDADO! Puede dar problemas si se colocan de forma rara los muebles
             Vector3 dir = movement.targetStation.transform.position - movement.targetStation.getWaitPos();
             dest = movement.targetStation.transform.position + dir;
         }
+        */
         nvAgent.SetDestination(dest);
         NavMeshPath path = new NavMeshPath();
         NavMesh.CalculatePath(transform.position, nvAgent.destination, NavMesh.AllAreas, path);

@@ -156,7 +156,8 @@
       "id": 17,
       "name": "PROD_TOMATO_POT",
       "type": 1,
-      "appearence": "Products/Tabern/potStew"
+      "appearence": "Products/Tabern/potStew",
+      "AIcollapse": true
     },
     {
       "id": 18,

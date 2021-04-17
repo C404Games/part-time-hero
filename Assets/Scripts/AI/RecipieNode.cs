@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class RecipieNode
 {
-    public RecipieNode(int id)
-    {
-        this.id = id;
-    }
+
 
     public int id;
 
@@ -15,18 +12,27 @@ public class RecipieNode
 
     public bool done = false;
 
+    public List<int> exceptAgents;
+
     public RecipieNode parent1, parent2;
 
     public RecipieNode child;
 
-    public RecipieNode getLeaf()
+    public RecipieNode(int id)
+    {
+        this.id = id;
+        exceptAgents = new List<int>();
+    }
+
+
+    public RecipieNode getLeaf(int agentId)
     {
         int level1 = 0, level2 = 0;
         RecipieNode leaf1 = null, leaf2 = null;
-        if (parent1 != null && !parent1.done)
-            leaf1 = parent1.getLeaf(ref level1);
-        if (parent2 != null && !parent2.done)
-            leaf2 = parent2.getLeaf(ref level2);
+        if (parent1 != null && !parent1.done && !parent1.exceptAgents.Contains(agentId))
+            leaf1 = parent1.getLeaf(ref level1, agentId);
+        if (parent2 != null && !parent2.done && !parent2.exceptAgents.Contains(agentId))
+            leaf2 = parent2.getLeaf(ref level2, agentId);
 
         if (leaf1 == null && leaf2 == null)
             return this;
@@ -50,16 +56,16 @@ public class RecipieNode
         return node;
     }
 
-    private RecipieNode getLeaf(ref int level)
+    private RecipieNode getLeaf(ref int level, int agentId)
     {
         level++;
         int level1 = level, level2 = level;
         RecipieNode leaf1 = null, leaf2 = null;
 
-        if (parent1 != null && !parent1.done)
-            leaf1 = parent1.getLeaf(ref level1);
-        if (parent2 != null && !parent2.done)
-            leaf2 = parent2.getLeaf(ref level2);
+        if (parent1 != null && !parent1.done && !parent1.exceptAgents.Contains(agentId))
+            leaf1 = parent1.getLeaf(ref level1, agentId);
+        if (parent2 != null && !parent2.done && !parent2.exceptAgents.Contains(agentId))
+            leaf2 = parent2.getLeaf(ref level2, agentId);
 
         if (leaf1 == null && leaf2 == null)
             return this;

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -68,9 +69,9 @@ public class AIManager : MonoBehaviour
                     return a.deliverProduct();
                 }, null),
 
-                // SI no, lo llevo a una mesa común con el compi (pendiente)
+                // SI no, lo llevo a una mesa común con el compi
                 new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
-                    return a.carryToTable();
+                    return a.carryToCommonTable();
                 }, null),
             }),
 
@@ -101,7 +102,7 @@ public class AIManager : MonoBehaviour
 
                     // Llevar a mesa
                     new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
-                        return a.carryToTable();
+                        return a.carryToCommonTable();
                     }, null)
                 }),
 
@@ -113,7 +114,7 @@ public class AIManager : MonoBehaviour
             })
         }),
         // Es parent 2 (Product)
-        // Llevar con su pareja (Si está ya listo, que alomejor no)
+        // Llevar con su pareja
         new BehaviourNode(NodeType.LEAF, (AIAgent a)=>{
             return a.carryToTracked();
         }, null)
@@ -121,9 +122,16 @@ public class AIManager : MonoBehaviour
 
     List<RecipieNode> recipies;
 
+    // Mesas comunes siendo utilizadas (Para no mandar a dos agents a la misma)
+    List<StationInstance> commonReservedTables;
+
+    // Todos los AIAgent hacen la misma receta
     public RecipieNode currentRecipie;
 
     public AIAgent[] agents;
+
+    public ReachableTracker[] areas;
+
 
     // Start is called before the first frame update
     void Start()
@@ -132,6 +140,14 @@ public class AIManager : MonoBehaviour
         genProductTrees();
         // Cojemos una receta cualquiera
         nextRecipie();
+
+        int id = 0;
+        foreach(AIAgent agent in agents)
+        {
+            agent.id = id++;
+        }
+
+        commonReservedTables = new List<StationInstance>();
     }
 
     // Update is called once per frame
@@ -152,12 +168,40 @@ public class AIManager : MonoBehaviour
                 }
             }
         }
+
+        // Hay que acualizar las mesas comunes que ya no están reservadas
+        commonReservedTables.RemoveAll(item => item.isOccupied());
     }
 
     public void nextRecipie()
     {
         // Se coje la siguiente receta que toque
-        currentRecipie = recipies[3].copySelf(null);
+        // De momento aleatorio
+        int idx = Mathf.FloorToInt(Random.Range(0, 3.99f));
+        currentRecipie = recipies[idx].copySelf(null);
+    }
+
+    public StationInstance getCommonStation(int id)
+    {
+        List<StationInstance> common = null;
+        foreach (ReachableTracker area in areas)
+        {
+            if (common == null)
+                common = area.getStationListOnReach(id, false);
+            else
+                common = common.Intersect(area.getStationListOnReach(id, false)).ToList();
+        }
+
+        foreach (StationInstance station in common)
+        {
+            if (!commonReservedTables.Contains(station))
+            {
+                commonReservedTables.Add(station);
+                return station;
+            }
+        }
+
+        return null;
     }
 
     // Se generan los ároles de recetas que usan los IAagents
