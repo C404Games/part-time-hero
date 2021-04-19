@@ -136,6 +136,7 @@ public class AIManager : MonoBehaviour
                         // Si es situación producto-producto
                         if (productJoin)
                         {
+                            productJoin = false;
                             activeAgent = null;
                             for (int i = 0; i < agents.Length; i++)
                             {
@@ -179,6 +180,8 @@ public class AIManager : MonoBehaviour
                         currentNode.parent2.done = true;
 
                         activeAgent.startBehaviour();
+
+                        agents = agents.ToList().OrderBy(x => Random.value).ToArray();
 
                         step = AIStep.STEP1;
                     }
@@ -234,7 +237,8 @@ public class AIManager : MonoBehaviour
     {
         // Se coje la siguiente receta que toque
         // De momento aleatorio
-        int idx = Mathf.FloorToInt(Random.Range(0, 3.99f));
+        //int idx = Mathf.Clamp(Random.Range(0, recipies.Count), 0, recipies.Count-1);
+        int idx = 0;
         currentRecipie = recipies[idx].copySelf(null);
     }
 
