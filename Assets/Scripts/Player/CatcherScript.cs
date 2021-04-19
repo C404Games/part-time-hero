@@ -65,7 +65,7 @@ public class CatcherScript : MonoBehaviour
         else
         {
             // SI lo podemos dejar en un punto de entrega, lo dejamos
-            if (deliverySpot != null && deliverySpot.deliverProduct(heldObject))
+            if (reachableTracker.getDeliverySpotOnReach() != null && reachableTracker.getDeliverySpotOnReach().deliverProduct(heldObject))
             {
                 animator.SetBool("Hold", false);
             }

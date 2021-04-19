@@ -105,6 +105,7 @@ public class StationInstance : MonoBehaviour
                         clockController.startClock(this, transition.time);
                     
                     StartCoroutine(reactivate(transition.time + 0.1f));
+                    StartCoroutine(freeStation(transition.time - 0.1f));
 
                     return blueprint.auto ? 0 : transition.time;
                 }
@@ -155,8 +156,13 @@ public class StationInstance : MonoBehaviour
     private IEnumerator reactivate(float time)
     {
         yield return new WaitForSeconds(time);
-        busy = false;
         activate(waitPosition.position);
+    }
+
+    private IEnumerator freeStation(float time)
+    {
+        yield return new WaitForSeconds(time);
+        busy = false;
     }
 
 }

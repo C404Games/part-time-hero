@@ -109,6 +109,11 @@ public class ReachableTracker : MonoBehaviour
         return minDistStation;
     }
 
+    public DeliverySpot getDeliverySpotOnReach()
+    {
+        return deliverySpot;
+    }
+
     public bool isProductOnReach(ProductInstance product)
     {
         return reachableProducts.Contains(product);

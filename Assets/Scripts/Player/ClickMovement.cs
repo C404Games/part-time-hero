@@ -12,6 +12,7 @@ public enum clickTargetType
     FLOOR,
     BELT,
     TOOLSOURCE,
+    DELIVERY,
     MONSTER,
     NONE
 }
@@ -28,6 +29,7 @@ public class ClickMovement : MonoBehaviour
     NavMeshAgent nvAgent;
 
     [HideInInspector] public StationInstance targetStation;
+    [HideInInspector] public DeliverySpot targetDeliverySpot;
     [HideInInspector] public ToolSource targetSource;
     [HideInInspector] public MonsterController targetMonster;
     [HideInInspector] public ProductInstance targetProduct;
@@ -64,6 +66,9 @@ public class ClickMovement : MonoBehaviour
                 case clickTargetType.TOOLSOURCE:
                     catcher.holdProduct(targetSource.heldTool.GetComponent<ProductInstance>());
                     break;
+                case clickTargetType.DELIVERY:
+                    catcher.grabBehaviour(null);
+                    break;
                 case clickTargetType.MONSTER:
                     transform.LookAt(targetMonster.transform);
                     playerMovement.attack();
@@ -94,6 +99,14 @@ public class ClickMovement : MonoBehaviour
                 case clickTargetType.STATION:
                     transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetStation.transform.position - transform.position), Time.deltaTime * playerMovement.rotSpeed);
                     break;
+                case clickTargetType.DELIVERY:
+                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetDeliverySpot.transform.position - transform.position), Time.deltaTime * playerMovement.rotSpeed);
+                    if(reachableTracker.getDeliverySpotOnReach() != null)
+                    {
+                        nvAgent.isStopped = true;
+                        nvAgent.ResetPath();
+                    }
+                    break;
                 case clickTargetType.BELT:
                     if (targetProduct != null && !targetProduct.isHeld())
                     {
@@ -112,6 +125,11 @@ public class ClickMovement : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public bool isBlocked()
+    {
+        return playerMovement.blocked;
     }
 
     public void onMouseClick(InputAction.CallbackContext context)
@@ -137,18 +155,7 @@ public class ClickMovement : MonoBehaviour
                     targetType = clickTargetType.STATION;
                     targetStation = hit.collider.GetComponent<StationInstance>();
                     Vector3 dest;
-                    //if (targetStation.isReachable(transform.position))
-                    //{
                     dest = targetStation.getWaitPos(transform.position);
-                    //}
-                    /*
-                    else
-                    {
-                        // CUIDADO! Puede dar problemas si se colocan de forma rara los muebles
-                        Vector3 dir = targetStation.transform.position - targetStation.getWaitPos();
-                        dest = targetStation.transform.position + dir;
-                    }
-                    */
                     nvAgent.SetDestination(dest);
                     nvAgent.isStopped = false;
                 }
