@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   waitPosition: {fileID: 0}
+  heldProduct: {fileID: 0}
 --- !u!135 &2947360533387817346
 SphereCollider:
   m_ObjectHideFlags: 0

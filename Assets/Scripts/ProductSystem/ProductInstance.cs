@@ -6,7 +6,7 @@ public class ProductInstance : MonoBehaviour
 {
     public int id;
 
-    public bool held;
+    public Transform holder;
 
     private Product blueprint;
 
@@ -14,11 +14,13 @@ public class ProductInstance : MonoBehaviour
 
     private float clampSpeed = 10;
 
+    private Rigidbody rigidbody;
+
     #region MonoBehavior
     // Start is called before the first frame update
     void Start()
     {
-        held = false;
+        rigidbody = GetComponent<Rigidbody>();
         blueprint = ProductManager.productBlueprints[id];
         updateAppearence();
     }
@@ -26,14 +28,24 @@ public class ProductInstance : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.parent != null)
-            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * clampSpeed);
+        //if(transform.parent != null)
+
+        if(holder != null)
+        {
+            rigidbody.MovePosition(Vector3.Lerp(transform.position, holder.transform.position, 20 * Time.deltaTime));
+        }
+
     }
     #endregion
 
     public ProductType getProductType()
     {
         return blueprint.type;
+    }
+
+    public bool isHeld()
+    {
+        return holder != null && holder.GetComponent<StationInstance>() != null;
     }
 
 

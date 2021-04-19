@@ -9,7 +9,7 @@ public class StationInstance : MonoBehaviour
 
     public Transform waitPosition;
 
-    ProductInstance heldProduct;
+    public ProductInstance heldProduct;
 
     Station blueprint;
 
@@ -33,14 +33,31 @@ public class StationInstance : MonoBehaviour
         
     }
 
-    public Vector3 getWaitPos()
+    public Vector3 getWaitPos(Vector3 currentPos)
     {
-        return waitPosition.position;
+        if (isInFront(currentPos))
+        {
+            return waitPosition.position;
+        }
+        else
+        {
+            Vector3 dir = transform.position - waitPosition.position;
+            return transform.position + dir;
+        }
     }
 
-    public Vector3 getWaitRot()
+    public Vector3 getWaitRot(Vector3 currentPos)
     {
-        return transform.position - waitPosition.position;
+        if (isInFront(currentPos))
+        {
+            return transform.position - waitPosition.position;
+        }
+        else
+        {
+            Vector3 dir = transform.position - waitPosition.position;
+            Vector3 pos = transform.position + dir;
+            return transform.position - pos;
+        }
     }
 
     // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto. Devuelve -1 si no se puede dejar
@@ -60,7 +77,8 @@ public class StationInstance : MonoBehaviour
             else
             {
                 heldProduct = product;
-                heldProduct.transform.parent = transform;
+                //heldProduct.transform.parent = transform;
+                heldProduct.holder = transform;
                 return activate(origin);
             }
         }
@@ -74,7 +92,7 @@ public class StationInstance : MonoBehaviour
     // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto.
     public float activate(Vector3 origin)
     {
-        if(!busy && heldProduct != null && isReachable(origin))
+        if(!busy && heldProduct != null)// && isReachable(origin))
         {
             foreach(Transition transition in blueprint.transitions)
             {
@@ -87,6 +105,7 @@ public class StationInstance : MonoBehaviour
                         clockController.startClock(this, transition.time);
                     
                     StartCoroutine(reactivate(transition.time + 0.1f));
+                    StartCoroutine(freeStation(transition.time - 0.1f));
 
                     return blueprint.auto ? 0 : transition.time;
                 }
@@ -102,14 +121,14 @@ public class StationInstance : MonoBehaviour
         return product;
     }
 
-    // Devuelve true si se puede utilizar desde la posición que se le pasa
-    public bool isReachable(Vector3 position)
+    // Devuelve true si pos está en frente
+    public bool isInFront(Vector3 position)
     {
         Vector3 dir = (position - transform.position).normalized;
         float cosAngle = Vector3.Dot(dir, waitPosition.localPosition);
         return cosAngle > 0;
     }
-
+    
     public void takeHealth(int h)
     {
         health -= h;
@@ -124,11 +143,26 @@ public class StationInstance : MonoBehaviour
         return health;
     }
 
+    public bool isOccupied()
+    {
+        return heldProduct != null;
+    }
+
+    public bool isBusy()
+    {
+        return busy;
+    }
+
     private IEnumerator reactivate(float time)
     {
         yield return new WaitForSeconds(time);
-        busy = false;
         activate(waitPosition.position);
+    }
+
+    private IEnumerator freeStation(float time)
+    {
+        yield return new WaitForSeconds(time);
+        busy = false;
     }
 
 }

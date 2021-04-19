@@ -57,7 +57,8 @@ public class ProductManager : MonoBehaviour
                 }
             }
             GameObject appearence = Resources.Load<GameObject>((string)entry["appearence"]);
-            Product product = new Product((int)entry["id"], (string)entry["name"], (ProductType)((int)entry["type"]), appearence, transitions);
+            bool collapse = entry["AIcollapse"] != null;
+            Product product = new Product((int)entry["id"], (string)entry["name"], (ProductType)((int)entry["type"]), appearence, transitions, collapse);
             productBlueprints.Add((int)entry["id"], product);
 
             if(product.type == ProductType.RAW)

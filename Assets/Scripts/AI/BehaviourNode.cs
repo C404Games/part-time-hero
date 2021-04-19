@@ -28,13 +28,16 @@ public class BehaviourNode
 
     public bool doTree(AIAgent agent)
     {
-        foreach(BehaviourNode node in children)
+        if (children != null)
         {
-            bool success = node.doTree(agent);
-            if (type == NodeType.AND && !success)
-                return false;
-            else if (type == NodeType.OR && success)
-                return true;
+            foreach (BehaviourNode node in children)
+            {
+                bool success = node.doTree(agent);
+                if (type == NodeType.AND && !success)
+                    return false;
+                else if (type == NodeType.OR && success)
+                    return true;
+            }
         }
         return action(agent);
     }
