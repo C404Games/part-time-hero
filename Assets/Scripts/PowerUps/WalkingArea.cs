@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class WalkingArea : MonoBehaviour
 {
-    public float respawnTimer = 15;
+    public float respawnTimer;
+    public float initialBlockTimer;
     public bool spawnAvailable = true;
     public GameObject powerUp1;
     public GameObject powerUp2;
@@ -25,12 +26,12 @@ public class WalkingArea : MonoBehaviour
 
     void Update()
     {
-        currentTimer -= Time.deltaTime;
+        respawnTimer += Time.deltaTime;
         if (currentTimer <= 0.0f && spawnAvailable)
         {
             Vector3 pos = RandomPointInBounds(myCollider.bounds);
             GeneratePowerUp(UnityEngine.Random.Range(0, 3), pos);
-            currentTimer = respawnTimer;
+            respawnTimer = 0;
         }
     }
 
