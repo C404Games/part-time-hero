@@ -15,6 +15,8 @@ public class GodScript : MonoBehaviour
 
     private Vector3 point;
 
+    private int playerCoins;
+
     private void Start()
     {
         point = mainCamera.transform.position;
@@ -41,5 +43,29 @@ public class GodScript : MonoBehaviour
     public void volverButton()
     {
         point = point1.position;
+    }
+
+    public void addCoins(int coins)
+    {
+        playerCoins += coins;
+    }
+
+    public bool removeCoins(int coins)
+    {
+        if (coins < playerCoins)
+            return false;
+
+        playerCoins -= coins;
+        return true;
+    }
+
+    public int getCoins()
+    {
+        return playerCoins;
+    }
+
+    public void setCoins(int coins)
+    {
+        playerCoins = coins;
     }
 }
