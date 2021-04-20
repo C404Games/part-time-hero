@@ -13,6 +13,8 @@ public class GodScript : MonoBehaviour
     [SerializeField] 
     private GameObject[] subMenus;
 
+    private GameObject[] meshModels;
+
     private Vector3 point;
 
     private int playerCoins;
@@ -20,6 +22,7 @@ public class GodScript : MonoBehaviour
     private void Start()
     {
         point = mainCamera.transform.position;
+        meshModels = GameObject.FindGameObjectsWithTag("Models");
     }
 
     private void Update()
@@ -67,5 +70,13 @@ public class GodScript : MonoBehaviour
     public void setCoins(int coins)
     {
         playerCoins = coins;
+    }
+
+    public void changeModels(Mesh mesh)
+    {
+        foreach (GameObject model in meshModels)
+        {
+            model.GetComponent<MeshFilter>().mesh = Instantiate(mesh);
+        }
     }
 }
