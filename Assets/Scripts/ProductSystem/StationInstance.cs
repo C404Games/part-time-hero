@@ -78,7 +78,7 @@ public class StationInstance : MonoBehaviour
             {
                 heldProduct = product;
                 //heldProduct.transform.parent = transform;
-                heldProduct.holder = transform;
+                heldProduct.setHolder(transform);
                 return activate(origin);
             }
         }

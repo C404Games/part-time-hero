@@ -70,8 +70,6 @@ public class MatchManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        charactersLife[0] = GameObject.Find("Player").GetComponent<PlayerMovement>().health;
         //Uncomment when we have more than one player playing at the same time (Photon multiplayer)
         /*
         charactersLife[1] = GameObject.Find("Player2").GetComponent<PlayerMovement>().health;
