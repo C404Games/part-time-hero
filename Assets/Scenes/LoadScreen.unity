@@ -703,8 +703,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 622462472}
-        m_MethodName: newHint
+      - m_Target: {fileID: 1631771404}
+        m_MethodName: changeToScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1251,6 +1251,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1631771402}
   - component: {fileID: 1631771401}
+  - component: {fileID: 1631771403}
+  - component: {fileID: 1631771404}
   m_Layer: 0
   m_Name: GodObject
   m_TagString: Untagged
@@ -1289,6 +1291,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1631771403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631771400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ed74a1d094683347b721ccfe1dc7f30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1631771404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631771400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6316144cf0e5e114fbdf904f28bd6445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: 
 --- !u!1 &1634833232
 GameObject:
   m_ObjectHideFlags: 0
