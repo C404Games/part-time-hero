@@ -85,13 +85,13 @@ public class AIAgent : MonoBehaviour
         if (targetProduct.isHeld())
         {
             
-            StationInstance station = targetProduct.holder.GetComponent<StationInstance>();
+            StationInstance station = targetProduct.getHolder().GetComponent<StationInstance>();
             goToStation(station);
         }
         // Si es herramienta
         else if(targetProduct.getProductType() == ProductType.TOOL)
         {
-            ToolSource source = targetProduct.holder.GetComponent<ToolSource>();
+            ToolSource source = targetProduct.getHolder().GetComponent<ToolSource>();
             movement.targetType = clickTargetType.TOOLSOURCE;
             movement.targetSource = source;
             nvAgent.SetDestination(source.transform.position);

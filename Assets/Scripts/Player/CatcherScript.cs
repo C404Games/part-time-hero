@@ -90,7 +90,7 @@ public class CatcherScript : MonoBehaviour
             animator.SetBool("Hold", true);
             heldObject = product;
             //product.transform.SetParent(transform);
-            product.holder = transform;
+            product.setHolder(transform);
             product.GetComponent<Rigidbody>().isKinematic = true;
             product.GetComponent<Rigidbody>().useGravity= false;
             //product.GetComponent<BoxCollider>().isTrigger = true;

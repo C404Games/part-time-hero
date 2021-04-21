@@ -133,10 +133,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 3.62
       objectReference: {fileID: 0}
+    - target: {fileID: 8306849865848551668, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306849865848551669, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306849865848551674, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 4873922717282415277}
     - target: {fileID: 8306849867602768386, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_Name
       value: Player1 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306849867602768387, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8306849867602768388, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
@@ -151,17 +171,17 @@ PrefabInstance:
     - target: {fileID: 8306849867602768390, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.01
+      value: -3.8998039
       objectReference: {fileID: 0}
     - target: {fileID: 8306849867602768390, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7811574
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8306849867602768390, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.69
+      value: 1.93
       objectReference: {fileID: 0}
     - target: {fileID: 8306849867602768390, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
@@ -203,6 +223,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 4873922717282415277}
+    - target: {fileID: 8306849867602768394, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a2acbea691c434468cd9dc428254868, type: 3}
 --- !u!114 &6966981279011721804 stripped

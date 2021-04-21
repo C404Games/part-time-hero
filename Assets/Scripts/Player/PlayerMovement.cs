@@ -101,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, waitPosition, Time.deltaTime * 10);
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(waitRotation), Time.deltaTime * rotSpeed);
+            animator.SetBool("isRunning", false);
         }
     }    
 

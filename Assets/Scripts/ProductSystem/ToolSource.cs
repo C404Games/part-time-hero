@@ -19,13 +19,13 @@ public class ToolSource : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (heldTool == null || heldTool.GetComponent<ProductInstance>().holder != transform)
+        if (heldTool == null || heldTool.GetComponent<ProductInstance>().getHolder() != transform)
         {
             heldTool = Instantiate(prefab, transform.position, Quaternion.identity);
-            heldTool.GetComponent<ProductInstance>().id = toolId;
             heldTool.GetComponent<Rigidbody>().isKinematic = true;
-            //heldTool.transform.SetParent(transform);ç
-            heldTool.GetComponent<ProductInstance>().holder = transform;
+            ProductInstance product = heldTool.GetComponent<ProductInstance>();
+            product.id = toolId;
+            product.setHolder(transform);
 
         }
     }
