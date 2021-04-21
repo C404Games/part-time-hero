@@ -12,6 +12,7 @@ TagManager:
   - Delivery
   - Belt
   - ToolSource
+  - Models
   layers:
   - Default
   - TransparentFX

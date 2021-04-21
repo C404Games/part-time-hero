@@ -13,11 +13,16 @@ public class GodScript : MonoBehaviour
     [SerializeField] 
     private GameObject[] subMenus;
 
+    private GameObject[] meshModels;
+
     private Vector3 point;
+
+    private int playerCoins;
 
     private void Start()
     {
         point = mainCamera.transform.position;
+        meshModels = GameObject.FindGameObjectsWithTag("Models");
     }
 
     private void Update()
@@ -41,5 +46,37 @@ public class GodScript : MonoBehaviour
     public void volverButton()
     {
         point = point1.position;
+    }
+
+    public void addCoins(int coins)
+    {
+        playerCoins += coins;
+    }
+
+    public bool removeCoins(int coins)
+    {
+        if (coins < playerCoins)
+            return false;
+
+        playerCoins -= coins;
+        return true;
+    }
+
+    public int getCoins()
+    {
+        return playerCoins;
+    }
+
+    public void setCoins(int coins)
+    {
+        playerCoins = coins;
+    }
+
+    public void changeModels(Mesh mesh)
+    {
+        foreach (GameObject model in meshModels)
+        {
+            model.GetComponent<MeshFilter>().mesh = Instantiate(mesh);
+        }
     }
 }

@@ -11,6 +11,7 @@ public class MenuBehaviour : MonoBehaviour
     private List<int> characters;
     private int currentCharacter = 0;
     private float currentTime = 0.0f;
+    private float totalTime = 0.0f;
     private int dish1;
     private int dish2;
     private string currentPanelDishName;
@@ -37,7 +38,7 @@ public class MenuBehaviour : MonoBehaviour
     {
         this.gameObject.SetActive(visible);
         currentTime += Time.deltaTime;
-
+        totalTime += Time.deltaTime;
         //Generation of dishes 0s - 30s - 1m 00s...
         if ((currentTime > frequency|| GetComponent<MatchManager>().team1Dishes.Count == 0) && dishGenerationActive)
         {
@@ -73,8 +74,8 @@ public class MenuBehaviour : MonoBehaviour
         //Timer countdown
         Transform currentTimePanel = GetComponent<Transform>().Find("TimePanel");
         UnityEngine.UI.Text timeText = currentTimePanel.GetComponentInChildren<UnityEngine.UI.Text>();
-        int minutes = (int)(GetComponent<MatchManager>().getInitialTime() - currentTime) / 60;
-        int seconds = (int)(GetComponent<MatchManager>().getInitialTime() - currentTime) % 60;
+        int minutes = (int)(GetComponent<MatchManager>().getInitialTime() - totalTime) / 60;
+        int seconds = (int)(GetComponent<MatchManager>().getInitialTime() - totalTime) % 60;
         string minutesStr = (minutes < 10) ? "0" + minutes : "" + minutes;
         string secondsStr = (seconds < 10) ? "0" + seconds : "" + seconds;
         if (seconds > 0)
