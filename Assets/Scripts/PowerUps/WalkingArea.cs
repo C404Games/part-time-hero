@@ -54,7 +54,6 @@ public class WalkingArea : MonoBehaviour
             }
             if (frequency <= (secondRandomNumber + 2)*ratio* handicapFactor)
             {
-                Debug.Log("Power up generator");
                 Random.seed = 15 + (int)currentTime;
                 Vector3 pos = RandomPointInBounds(myCollider.bounds);
                 GeneratePowerUp(UnityEngine.Random.Range(0, 3), pos);
