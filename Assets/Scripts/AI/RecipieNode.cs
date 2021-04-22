@@ -47,7 +47,7 @@ public class RecipieNode
 
         return chosen.child;
 
-    }    
+    }
 
     public RecipieNode copySelf(RecipieNode child)
     {
@@ -94,5 +94,6 @@ public class RecipieNode
             level = level2;
             return leaf2;
         }
-    }
+    }    
+
 }

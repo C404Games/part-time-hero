@@ -29,7 +29,7 @@ public class ProductInstance : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //if(transform.parent != null)
 
@@ -79,16 +79,24 @@ public class ProductInstance : MonoBehaviour
         {
             if (t.src == resourceId)
             {
-                StartCoroutine(transformProduct(t.dst, t.time));
+                if (t.time > 0)
+                    StartCoroutine(transformProductDelay(t.dst, t.time));
+                else
+                    transformProduct(t.dst);
                 return true;
             }
         }
         return false;
     }
 
-    public IEnumerator transformProduct(int dst, float time)
+    public IEnumerator transformProductDelay(int dst, float time)
     {
         yield return new WaitForSeconds(time);
+        transformProduct(dst);
+    }
+
+    public void transformProduct(int dst)
+    {
         id = dst;
         blueprint = ProductManager.productBlueprints[id];
         updateAppearence();

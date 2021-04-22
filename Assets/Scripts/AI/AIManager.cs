@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-enum AIStep
+public enum AIStep
 {
     STEP1,
     STEP2,
@@ -24,10 +24,11 @@ public class AIManager : MonoBehaviour
 
     StationInstance commonTable;
     ProductInstance commonProduct;
+    ProductInstance secondaryProduct;
 
-    AIStep step;
+    public AIStep step;
 
-    bool productJoin = false;
+    public bool productJoin = false;
 
 
     // Start is called before the first frame update
@@ -56,26 +57,70 @@ public class AIManager : MonoBehaviour
         if (activeAgent == null || !activeAgent.busy)
         {
 
+            // COmprobamos si nos han gitaneado el producto primario
+            if (currentNode != null && commonProduct != null)
+            {
+                bool stolen = true;
+                foreach (AIAgent agent in agents)
+                {
+                    if (agent.reachableTracker.isProductOnReach(commonProduct))
+                    {
+                        stolen = false;
+                        break;
+                    }                    
+                }
+                // En ese caso, reiniciamos el paso
+                if (stolen)
+                {
+                    commonProduct = null;
+                    resetStep();
+                    currentNode.parent1.parent1.done = false;
+                    currentNode.parent1.parent2.done = false;
+                }
+            }
+            // COmprobamos si nos han gitaneado el producto secundario
+            if (currentNode != null && secondaryProduct != null)
+            {
+                bool stolen = true;
+                foreach (AIAgent agent in agents)
+                {
+                    if (agent.reachableTracker.isProductOnReach(secondaryProduct))
+                    {
+                        stolen = false;
+                        break;
+                    }
+                }
+                // En ese caso, reiniciamos el paso
+                if (stolen)
+                {
+                    secondaryProduct = null;
+                    resetStep();
+                    currentNode.parent2.parent1.done = false;
+                    currentNode.parent2.parent2.done = false;
+                }
+            }
+
             switch (step)
             {
                 case AIStep.STEP1:
                     {
-                        // Sacamos siguiente nodo
+
                         currentNode = currentRecipie.getLeaf();
 
-                        // SI es null, hemos terminado la receta
+                        // Hemos terminado a receta
                         if(currentNode == null)
                         {
-                            nextRecipie();
                             step = AIStep.STEP3;
+                            nextRecipie();
                             break;
                         }
 
                         // El parent 1 del nodo está garantizado que sea Producto
+                        agents = agents.ToList().OrderBy(x => Random.value).ToArray();
                         activeAgent = null;
-                        int i;
-                        for (i = 0; i < agents.Length; i++)
+                        for (int i = 0; i < agents.Length; i++)
                         {
+
                             // Si el agente 'i' tene el producto al alcance, pasa a ser el activeAgent
                             ProductInstance product = agents[i].reachableTracker.getProductOnReach(currentNode.parent1.id);
                             if (product != null)
@@ -88,12 +133,14 @@ public class AIManager : MonoBehaviour
                         if (activeAgent == null)
                             break;
 
+                        secondaryProduct = commonProduct;
+
                         commonProduct = activeAgent.targetProduct;
 
                         // Situación producto-mueble
                         if (currentNode.parent2.isStation)
                         {
-                            StationInstance station = agents[i].reachableTracker.getStationOnReach(currentNode.parent2.id, false);
+                            StationInstance station = activeAgent.reachableTracker.getStationOnReach(currentNode.parent2.id, false);
                             // SI está mueble al alcance, lo ponemos como target
                             if (station != null)
                             {
@@ -136,7 +183,6 @@ public class AIManager : MonoBehaviour
                         // Si es situación producto-producto
                         if (productJoin)
                         {
-                            productJoin = false;
                             activeAgent = null;
                             for (int i = 0; i < agents.Length; i++)
                             {
@@ -146,6 +192,7 @@ public class AIManager : MonoBehaviour
                                 {
                                     activeAgent = agents[i];
                                     activeAgent.targetProduct = product;
+                                    productJoin = false;
                                     break;
                                 }
                             }
@@ -181,64 +228,55 @@ public class AIManager : MonoBehaviour
 
                         activeAgent.startBehaviour();
 
-                        agents = agents.ToList().OrderBy(x => Random.value).ToArray();
-
                         step = AIStep.STEP1;
                     }
                     break;
                 
                 // EN step 3 entregamos los productos finales
                 case AIStep.STEP3:
-                    //Miramos qué agente tiene acceso al punto de entrega
-                    activeAgent = null;
-                    for (int i = 0; i < agents.Length; i++)
                     {
-                        // Si el agente 'i' tene el producto al alcance, pasa a ser el activeAgent
-                        DeliverySpot deliverySpot = agents[i].reachableTracker.getDeliverySpotOnReach();
-                            if (deliverySpot != null)
+                        //Miramos qué agente tiene acceso al punto de entrega
+                        activeAgent = null;
+                        for (int i = 0; i < agents.Length; i++)
                         {
-                            activeAgent = agents[i];
-                            activeAgent.targetDeliverySpot = deliverySpot;
-                            break;
+                            // Si el agente 'i' tene el producto al alcance, pasa a ser el activeAgent
+                            DeliverySpot deliverySpot = agents[i].reachableTracker.getDeliverySpotOnReach();
+                            if (deliverySpot != null)
+                            {
+                                activeAgent = agents[i];
+                                activeAgent.targetDeliverySpot = deliverySpot;
+                                break;
+                            }
                         }
+                        // SI no hay... tenemos un problema houston
+                        if (activeAgent == null)
+                            break;
+
+                        activeAgent.targetProduct = commonProduct;
+                        activeAgent.delivering = true;
+                        activeAgent.startBehaviour();
+
+                        step = AIStep.STEP1;
                     }
-                    // SI no hay... tenemos un problema houston
-                    if (activeAgent == null)
-                        break;
-
-                    activeAgent.targetProduct = commonProduct;
-                    activeAgent.delivering = true;
-                    activeAgent.startBehaviour();
-
-                    step = AIStep.STEP1;
-
                     break;
             }
 
         }
     }
 
-    AIAgent getReachableAgent(int productId)
+    public void resetStep()
     {
-
-        foreach(AIAgent agent in agents)
-        {
-            // Si el agente 'i' tene el producto al alcance, pasa a ser el activeAgent
-            ProductInstance product = agent.reachableTracker.getProductOnReach(currentNode.parent1.id);
-            if (product != null)
-            {
-                return agent;
-            }
-        }
-        return null;
+        step = AIStep.STEP1;
+        currentNode.parent1.done = false;
+        currentNode.parent2.done = false;
     }
 
     public void nextRecipie()
     {
         // Se coje la siguiente receta que toque
         // De momento aleatorio
-        //int idx = Mathf.Clamp(Random.Range(0, recipies.Count), 0, recipies.Count-1);
-        int idx = 0;
+        int idx = Mathf.Clamp(Random.Range(0, recipies.Count), 0, recipies.Count-1);
+        //int idx = 3;
         currentRecipie = recipies[idx].copySelf(null);
     }
 
@@ -252,7 +290,8 @@ public class AIManager : MonoBehaviour
             else
                 common = common.Intersect(agent.reachableTracker.getStationListOnReach(id, false)).ToList();
         }
-
+        if(common == null)
+            return null;
         return common[0];
     }
 

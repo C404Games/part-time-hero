@@ -17,12 +17,11 @@ public class GodScript : MonoBehaviour
 
     private Vector3 point;
 
-    private int playerCoins;
+    private int playerCoins = 0;
 
     private void Start()
     {
         point = mainCamera.transform.position;
-        meshModels = GameObject.FindGameObjectsWithTag("Models");
     }
 
     private void Update()
@@ -74,6 +73,8 @@ public class GodScript : MonoBehaviour
 
     public void changeModels(Mesh mesh)
     {
+        meshModels = GameObject.FindGameObjectsWithTag("Models");
+        
         foreach (GameObject model in meshModels)
         {
             model.GetComponent<MeshFilter>().mesh = Instantiate(mesh);

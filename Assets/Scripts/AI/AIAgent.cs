@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public enum agentState
@@ -18,6 +16,8 @@ public class AIAgent : MonoBehaviour
     public AIManager manager;
 
     public ReachableTracker reachableTracker;
+
+    public CatcherScript catcher;
 
     NavMeshAgent nvAgent;
 
@@ -42,6 +42,7 @@ public class AIAgent : MonoBehaviour
     {
         nvAgent = GetComponent<NavMeshAgent>();
         movement = GetComponent<ClickMovement>();
+        movement.guaranteeTargetProduct = true;
     }
 
     // Update is called once per frame
@@ -49,28 +50,58 @@ public class AIAgent : MonoBehaviour
     {
         if (movement.targetType == clickTargetType.NONE && !movement.isBlocked())
         {
+            // SI no, seguimos con la receta
             switch (state)
             {
                 case agentState.FETCH:
                     // SI llegamos al producto
+
                     if (delivering)
                     {
                         goToTargetDeliverySpot();
-                        delivering = false;
                     }
                     else
                     {
-                        goToStation(targetStation);
+                        // Comprobamos que efectivamente lo hemos cogido (O se nos ha escapado en la cinta)
+                        // SI no, reiniciamos el AIManager
+                        if (catcher.getHeldProduct() == null)
+                        {
+                            manager.resetStep();
+                            state = agentState.WAIT;
+                        }
+                        else
+                            goToStation(targetStation);
                     }
                     state = agentState.CARRY;
                     break;
                 case agentState.CARRY:
                     // Si llegamos al mueble
-                    state = agentState.WAIT;
-                    busy = false;
+
+                    // Si no hemos podido dejar el objeto, lo dejamos en otro lado
+                    if (!delivering && catcher.getHeldProduct() != null)
+                    {
+                        targetStation = manager.getCommonStation(4);
+                        if(targetStation == null)
+                            reachableTracker.getStationOnReach(4, false);
+                        manager.resetStep();
+                        goToStation(targetStation);
+                    }
+                    else
+                        state = agentState.WAIT;
                     break;
                 case agentState.WAIT:
-                    // Espero
+                    delivering = false;
+                    busy = false;
+                    // Si hay monstruo, atacar
+                    MonsterController monster = reachableTracker.getNearestMonster();
+                    if (state != agentState.FETCH && monster != null)
+                    {
+                        movement.targetType = clickTargetType.MONSTER;
+                        movement.targetMonster = monster;
+                        nvAgent.SetDestination(monster.transform.position);
+                        nvAgent.isStopped = false;
+                        busy = true;
+                    }
                     break;
             }
         }
@@ -84,12 +115,12 @@ public class AIAgent : MonoBehaviour
         // SI está en mesa
         if (targetProduct.isHeld())
         {
-            
+
             StationInstance station = targetProduct.getHolder().GetComponent<StationInstance>();
             goToStation(station);
         }
         // Si es herramienta
-        else if(targetProduct.getProductType() == ProductType.TOOL)
+        else if (targetProduct.getProductType() == ProductType.TOOL)
         {
             ToolSource source = targetProduct.getHolder().GetComponent<ToolSource>();
             movement.targetType = clickTargetType.TOOLSOURCE;
@@ -111,7 +142,7 @@ public class AIAgent : MonoBehaviour
             nvAgent.SetPath(path);
             nvAgent.isStopped = false;
         }
-    } 
+    }
 
     private void goToStation(StationInstance station)
     {
