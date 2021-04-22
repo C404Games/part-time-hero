@@ -25,6 +25,8 @@ public class ClickMovement : MonoBehaviour
     public CatcherScript catcher;
     public ReachableTracker reachableTracker;
 
+    public bool guaranteeTargetProduct = false;
+
     PlayerMovement playerMovement;
     NavMeshAgent nvAgent;
 
@@ -60,7 +62,7 @@ public class ClickMovement : MonoBehaviour
                 case clickTargetType.BELT:
                     if (targetProduct != null && reachableTracker.isProductOnReach(targetProduct))
                         catcher.holdProduct(targetProduct);
-                    else
+                    else if(!guaranteeTargetProduct)
                         catcher.grabBehaviour(null);
                     break;
                 case clickTargetType.TOOLSOURCE:

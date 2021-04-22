@@ -252,7 +252,7 @@
     {
       "id": 27,
       "name": "PROD_MEAT_PAN",
-      "type": 2,
+      "type": 1,
       "appearence": "Products/Tabern/meatPan",
       "AIcollapse": true
     }

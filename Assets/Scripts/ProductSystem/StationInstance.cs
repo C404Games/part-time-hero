@@ -99,10 +99,15 @@ public class StationInstance : MonoBehaviour
                 if(heldProduct.id == transition.src)
                 {
                     busy = true;
-                    StartCoroutine(heldProduct.transformProduct(transition.dst, transition.time));
-
-                    if(transition.time > 0)
+                    if (transition.time > 0)
+                    {
+                        StartCoroutine(heldProduct.transformProductDelay(transition.dst, transition.time));
                         clockController.startClock(this, transition.time);
+                    }
+                    else
+                    {
+                        heldProduct.transformProduct(transition.dst);
+                    }
                     
                     StartCoroutine(reactivate(transition.time + 0.1f));
                     StartCoroutine(freeStation(transition.time - 0.1f));
