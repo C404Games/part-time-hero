@@ -193,9 +193,16 @@ MonoBehaviour:
   volume: 0.5
   powerUpIncreaseValueHealth: 5
   powerUpIncreaseValuePunctuation: 5
-  speed: 5
+  initialSpeed: 5
+  currentSpeed: 0
   rotSpeed: 10
   blocked: 0
+  increasedSpeed: 0
+  currentTimeOfMaxSpeed: 0
+  limitTimeMaxSpeed: 30
+  frozen: 0
+  currentTimeOfFrozen: 0
+  limitTimeFrozen: 5
   animator: {fileID: 1214734874478945270}
   attackBusy: 0
 --- !u!195 &4733581482650195330
@@ -264,6 +271,7 @@ MonoBehaviour:
   catcher: {fileID: 4733581481164316540}
   reachableTracker: {fileID: 7405521787735649516}
   targetStation: {fileID: 0}
+  targetDeliverySpot: {fileID: 0}
   targetSource: {fileID: 0}
   targetMonster: {fileID: 0}
   targetProduct: {fileID: 0}
@@ -280,9 +288,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b5988aafb038c4eb2f67ddbdb5e66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
+  id: 0
   manager: {fileID: 0}
   reachableTracker: {fileID: 0}
+  catcher: {fileID: 4733581481164316540}
+  targetProduct: {fileID: 0}
+  targetStation: {fileID: 0}
+  targetDeliverySpot: {fileID: 0}
+  state: 0
+  busy: 0
+  delivering: 0
 --- !u!114 &4733581481134209673
 MonoBehaviour:
   m_ObjectHideFlags: 0

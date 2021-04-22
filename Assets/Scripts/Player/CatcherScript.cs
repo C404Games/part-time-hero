@@ -17,6 +17,11 @@ public class CatcherScript : MonoBehaviour
     {
     }
 
+    public ProductInstance getHeldProduct()
+    {
+        return heldObject;
+    }
+
     public void OnGrab(InputAction.CallbackContext context)
     {
 

@@ -8,6 +8,7 @@ public class ReachableTracker : MonoBehaviour
 
     List<ProductInstance> reachableProducts;
     List<StationInstance> reachableStations;
+    List<MonsterController> reachableMonsters;
     //List<ToolSource> reachableToolSources;
     DeliverySpot deliverySpot;
 
@@ -16,6 +17,7 @@ public class ReachableTracker : MonoBehaviour
     {
         reachableProducts = new List<ProductInstance>();
         reachableStations = new List<StationInstance>();
+        reachableMonsters = new List<MonsterController>();
         //reachableToolSources = new List<ToolSource>();
     }
 
@@ -32,13 +34,15 @@ public class ReachableTracker : MonoBehaviour
         else if (other.tag == "Item")
         {
             ProductInstance product = other.GetComponent<ProductInstance>();
-            if (!product.isHeld())
-                reachableProducts.Add(product);
+            //if (!product.isHeld())
+            reachableProducts.Add(product);
         }
         //else if(other.tag == "ToolSource")
         //    reachableToolSources.Add(other.GetComponent<ToolSource>());
         else if (other.tag == "Delivery")
             deliverySpot = other.GetComponent<DeliverySpot>();
+        else if (other.tag == "Monster")
+            reachableMonsters.Add(other.GetComponent<MonsterController>());
     }
 
     private void OnTriggerExit(Collider other)
@@ -46,12 +50,17 @@ public class ReachableTracker : MonoBehaviour
         if (other.tag == "Target")
             reachableStations.Remove(other.GetComponent<StationInstance>());
         else if (other.tag == "Item")
-            reachableProducts.Remove(other.GetComponent<ProductInstance>());
+        {
+            ProductInstance product = other.GetComponent<ProductInstance>();
+            reachableProducts.Remove(product);
+            Debug.Log("Exit product: " + product.id + " from " + name);
+        }
         //else if (other.tag == "ToolSource")
         //    reachableToolSources.Remove(other.GetComponent<ToolSource>());
         else if (other.tag == "Delivery")
             deliverySpot = null;
-
+        else if (other.tag == "Monster")
+            reachableMonsters.Remove(other.GetComponent<MonsterController>());
     }
 
     public ProductInstance getProductOnReach(int id)
@@ -157,5 +166,23 @@ public class ReachableTracker : MonoBehaviour
         }
 
         return minDistanceTarget;
+    }
+
+    public MonsterController getNearestMonster()
+    {
+        reachableMonsters.RemoveAll(item => item == null);
+        double minDistance = Mathf.Infinity;
+        MonsterController minDistanceMonster = null;
+
+        foreach (MonsterController monster in reachableMonsters)
+        {
+            if (Vector3.Distance(monster.transform.position, transform.position) < minDistance)
+            {
+                minDistance = Vector3.Distance(monster.transform.position, transform.position);
+                minDistanceMonster = monster;
+            }
+        }
+
+        return minDistanceMonster;
     }
 }
