@@ -14,6 +14,7 @@ public class AdsControllerCoins : MonoBehaviour
     private int coins = 0;
     private Cronometer cronometer;
     private GameObject readyIndicator;
+    private Button button;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,13 @@ public class AdsControllerCoins : MonoBehaviour
         cronometer = GameObject.Find("Cronometer").GetComponent<Cronometer>();
         cronometer.setTimer(0);
         readyIndicator = GameObject.Find("Ready Indicator");
+        button = GetComponent<Button>();
+    }
+
+    private void Update()
+    {
+        button.enabled = (cronometer.getTime() <= 0) ? true : false;
+        readyIndicator.SetActive((cronometer.getTime() <= 0) ? false : true);
     }
 
     public void showAds()
@@ -42,7 +50,25 @@ public class AdsControllerCoins : MonoBehaviour
         coins += numberOfCoins;
 
         cronometer.initializeTimer();
+    }
 
-        readyIndicator.SetActive(false);
+    public int getCoins()
+    {
+        return coins;
+    }
+
+    public void setCoins(int coins)
+    {
+        this.coins = coins;
+    }
+
+    public void addCoins(int coins)
+    {
+        coins += coins;
+    }
+
+    public void restCoins(int coins)
+    {
+        coins -= coins;
     }
 }

@@ -48,4 +48,9 @@ public class Cronometer : MonoBehaviour
 		_seconds = seconds;
 
 	}
+
+	public float getTime()
+    {
+		return _seconds;
+    }
 }
