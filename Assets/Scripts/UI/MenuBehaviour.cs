@@ -38,6 +38,7 @@ public class MenuBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckForChanges();
         this.gameObject.SetActive(visible);
         currentTime += Time.deltaTime;
         totalTime += Time.deltaTime;
@@ -55,7 +56,8 @@ public class MenuBehaviour : MonoBehaviour
                 currentDishPanel = teamDishPanel.Find(currentPanelDishName);
                 dishMenuPrefab = Instantiate(transform.Find("Dish").gameObject) as GameObject;
                 dishMenuPrefab.transform.SetParent(currentDishPanel);
-                UnityEditor.GameObjectUtility.SetParentAndAlign(dishMenuPrefab, currentDishPanel.gameObject);
+                dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
+                dishMenuPrefab.transform.SetParent(currentDishPanel);
                 UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
                 dishNameText.text = ProductManager.finalProducts[dish1].name;
             }
@@ -70,7 +72,8 @@ public class MenuBehaviour : MonoBehaviour
                 currentDishPanel = teamDishPanel.Find(currentPanelDishName);
                 dishMenuPrefab = Instantiate(transform.Find("Dish").gameObject) as GameObject;
                 dishMenuPrefab.transform.SetParent(currentDishPanel);
-                UnityEditor.GameObjectUtility.SetParentAndAlign(dishMenuPrefab, currentDishPanel.gameObject);
+                dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
+                dishMenuPrefab.transform.SetParent(currentDishPanel);
                 UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
                 dishNameText.text = ProductManager.finalProducts[dish2].name;
             }
@@ -87,10 +90,27 @@ public class MenuBehaviour : MonoBehaviour
         string secondsStr = (seconds < 10) ? "0" + seconds : "" + seconds;
         if (seconds > 0)
         {
+            if (minutes == 0 && seconds >= 15)
+            {
+                if (totalTime % 1 < 0.5)
+                {
+                    timeText.color = Color.red;
+                } else
+                {
+                    timeText.color = Color.black;
+                }
+            } else if (seconds == 0 || seconds == 30)
+            {
+                timeText.color = Color.red;
+            } else
+            {
+                timeText.color = Color.black;
+            }
             timeText.text = minutesStr + ":" + secondsStr;
         }
         else
         {
+            timeText.color = Color.red;
             timeText.text = "00:00";
         }
 
@@ -195,6 +215,38 @@ public class MenuBehaviour : MonoBehaviour
     public int getNumberOfPlayers()
     {
         return this.numberOfPlayers;
+    }
+
+    public void CheckForChanges()
+    {
+        RectTransform children = transform.GetComponentInChildren<RectTransform>();
+
+        float min_x, max_x, min_y, max_y;
+        min_x = max_x = transform.localPosition.x;
+        min_y = max_y = transform.localPosition.y;
+
+        foreach (RectTransform child in children)
+        {
+            Vector2 scale = child.sizeDelta;
+            float temp_min_x, temp_max_x, temp_min_y, temp_max_y;
+
+            temp_min_x = child.localPosition.x - (scale.x / 2);
+            temp_max_x = child.localPosition.x + (scale.x / 2);
+            temp_min_y = child.localPosition.y - (scale.y / 2);
+            temp_max_y = child.localPosition.y + (scale.y / 2);
+
+            if (temp_min_x < min_x)
+                min_x = temp_min_x;
+            if (temp_max_x > max_x)
+                max_x = temp_max_x;
+
+            if (temp_min_y < min_y)
+                min_y = temp_min_y;
+            if (temp_max_y > max_y)
+                max_y = temp_max_y;
+        }
+
+        GetComponent<RectTransform>().sizeDelta = new Vector2(max_x - min_x, max_y - min_y);
     }
 
 }
