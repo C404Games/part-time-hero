@@ -13,6 +13,7 @@ public enum clickTargetType
     BELT,
     TOOLSOURCE,
     DELIVERY,
+    BOOK,
     MONSTER,
     NONE
 }
@@ -35,6 +36,7 @@ public class ClickMovement : MonoBehaviour
     [HideInInspector] public ToolSource targetSource;
     [HideInInspector] public MonsterController targetMonster;
     [HideInInspector] public ProductInstance targetProduct;
+    [HideInInspector] public RecipieBook targetBook;
 
     [HideInInspector] public clickTargetType targetType = clickTargetType.FLOOR;
 
@@ -70,6 +72,9 @@ public class ClickMovement : MonoBehaviour
                     break;
                 case clickTargetType.DELIVERY:
                     catcher.grabBehaviour(null);
+                    break;
+                case clickTargetType.BOOK:
+                    playerMovement.openCloseBook();
                     break;
                 case clickTargetType.MONSTER:
                     transform.LookAt(targetMonster.transform);
@@ -109,6 +114,14 @@ public class ClickMovement : MonoBehaviour
                         nvAgent.ResetPath();
                     }
                     break;
+                case clickTargetType.BOOK:
+                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetBook.transform.position - transform.position), Time.deltaTime * playerMovement.rotSpeed);
+                    if (reachableTracker.getReachableBook() != null)
+                    {
+                        nvAgent.isStopped = true;
+                        nvAgent.ResetPath();
+                    }
+                    break;
                 case clickTargetType.BELT:
                     if (targetProduct != null && !targetProduct.isHeld())
                     {
@@ -136,62 +149,77 @@ public class ClickMovement : MonoBehaviour
 
     public void onMouseClick(InputAction.CallbackContext context)
     {
-        if (context.performed && !playerMovement.blocked)
+        if (context.performed)
         {
-            // Ignorar Layer de Items
-            int layerMask = LayerMask.GetMask("Item", "Player", "Catcher");
-
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~layerMask))
+            if (!playerMovement.blocked)
             {
 
-                if (hit.collider.tag.Equals("Floor"))
-                {
-                    targetType = clickTargetType.FLOOR;
-                    nvAgent.SetDestination(hit.point);
-                    nvAgent.isStopped = false;
-                }
-                else if (hit.collider.tag.Equals("Target"))
-                {
-                    targetType = clickTargetType.STATION;
-                    targetStation = hit.collider.GetComponent<StationInstance>();
-                    Vector3 dest;
-                    dest = targetStation.getWaitPos(transform.position);
-                    nvAgent.SetDestination(dest);
-                    nvAgent.isStopped = false;
-                }
-                else if (hit.collider.tag.Equals("Belt"))
-                {
-                    targetType = clickTargetType.BELT;
+                // Ignorar Layer de Items
+                int layerMask = LayerMask.GetMask("Item", "Player", "Catcher");
 
-                    // Volvemos a hacer raycast pero para buscar objeto
-                    layerMask = LayerMask.GetMask("Item");
-                    targetProduct = null;
-                    if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+                Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~layerMask))
+                {
+
+                    if (hit.collider.tag.Equals("Floor"))
                     {
-                        ProductInstance hitProduct = hit.collider.GetComponent<ProductInstance>();
-                        if (!hitProduct.isHeld())
-                            targetProduct = hitProduct;
+                        targetType = clickTargetType.FLOOR;
+                        nvAgent.SetDestination(hit.point);
+                        nvAgent.isStopped = false;
                     }
+                    else if (hit.collider.tag.Equals("Target"))
+                    {
+                        targetType = clickTargetType.STATION;
+                        targetStation = hit.collider.GetComponent<StationInstance>();
+                        Vector3 dest;
+                        dest = targetStation.getWaitPos(transform.position);
+                        nvAgent.SetDestination(dest);
+                        nvAgent.isStopped = false;
+                    }
+                    else if (hit.collider.tag.Equals("Belt"))
+                    {
+                        targetType = clickTargetType.BELT;
 
-                    nvAgent.SetDestination(hit.point);
-                    nvAgent.isStopped = false;
+                        // Volvemos a hacer raycast pero para buscar objeto
+                        layerMask = LayerMask.GetMask("Item");
+                        targetProduct = null;
+                        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+                        {
+                            ProductInstance hitProduct = hit.collider.GetComponent<ProductInstance>();
+                            if (!hitProduct.isHeld())
+                                targetProduct = hitProduct;
+                        }
+
+                        nvAgent.SetDestination(hit.point);
+                        nvAgent.isStopped = false;
+                    }
+                    else if (hit.collider.tag.Equals("ToolSource"))
+                    {
+                        targetType = clickTargetType.TOOLSOURCE;
+                        targetSource = hit.collider.GetComponent<ToolSource>();
+                        nvAgent.SetDestination(hit.point);
+                        nvAgent.isStopped = false;
+                    }
+                    else if (hit.collider.tag.Equals("RecipieBook"))
+                    {
+                        targetType = clickTargetType.BOOK;
+                        targetBook = hit.collider.GetComponent<RecipieBook>();
+                        nvAgent.SetDestination(hit.point);
+                        nvAgent.isStopped = false;
+                    }
+                    else if (hit.collider.tag.Equals("Monster"))
+                    {
+                        targetType = clickTargetType.MONSTER;
+                        targetMonster = hit.collider.GetComponent<MonsterController>();
+                        nvAgent.SetDestination(targetMonster.transform.position);
+                        nvAgent.isStopped = false;
+                    }
                 }
-                else if (hit.collider.tag.Equals("ToolSource"))
-                {
-                    targetType = clickTargetType.TOOLSOURCE;
-                    targetSource = hit.collider.GetComponent<ToolSource>();
-                    nvAgent.SetDestination(hit.point);
-                    nvAgent.isStopped = false;
-                }
-                else if (hit.collider.tag.Equals("Monster"))
-                {
-                    targetType = clickTargetType.MONSTER;
-                    targetMonster = hit.collider.GetComponent<MonsterController>();
-                    nvAgent.SetDestination(targetMonster.transform.position);
-                    nvAgent.isStopped = false;
-                }
+            }
+            else if (playerMovement.isBookOpen())
+            {
+                playerMovement.openCloseBook();
             }
         }
     }

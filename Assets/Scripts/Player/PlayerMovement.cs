@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
     MonsterController monsterInReach;
     public bool attackBusy = false;
 
+    RecipieBook recipieBookInReach;
+
 
     // Start is called before the first frame update
     void Start()
@@ -131,6 +133,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (monsterInReach != null)
                 attack();
+            else if (recipieBookInReach != null)
+                openCloseBook();                
             // Otras acciones dependiento del contexto
         }
     }
@@ -173,6 +177,10 @@ public class PlayerMovement : MonoBehaviour
         {
             monsterInReach = collision.GetComponent<MonsterController>();
         }
+        if (monsterInReach == null && collision.gameObject.tag.Equals("RecipieBook"))
+        {
+            recipieBookInReach = collision.GetComponent<RecipieBook>();
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -180,6 +188,10 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag.Equals("Monster") && other.GetComponent<MonsterController>() == monsterInReach)
         {
             monsterInReach = null;
+        }
+        if (other.gameObject.tag.Equals("RecipieBook") && other.GetComponent<RecipieBook>() == recipieBookInReach)
+        {
+            recipieBookInReach = null;
         }
     }
 
@@ -202,6 +214,27 @@ public class PlayerMovement : MonoBehaviour
             animator.SetTrigger("Attack");
             monsterInReach.takeHealth(1);
         }
+    }
+
+    public void openCloseBook()
+    {
+        if (recipieBookInReach.isOpen())
+        {
+            recipieBookInReach.closeBook();
+            blocked = false;
+        }
+        else
+        {
+            recipieBookInReach.openBook();
+            waitPosition = transform.position;
+            waitRotation = transform.forward;
+            blocked = true;
+        }
+    }
+
+    public bool isBookOpen()
+    {
+        return recipieBookInReach != null && recipieBookInReach.isOpen() && blocked;
     }
 
     public void blockMovement(float time, Vector3 waitPosition, Vector3 waitRotation)

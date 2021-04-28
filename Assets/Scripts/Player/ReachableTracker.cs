@@ -10,6 +10,7 @@ public class ReachableTracker : MonoBehaviour
     List<StationInstance> reachableStations;
     List<MonsterController> reachableMonsters;
     //List<ToolSource> reachableToolSources;
+    RecipieBook reachableBook;
     DeliverySpot deliverySpot;
 
     // Start is called before the first frame update
@@ -19,12 +20,6 @@ public class ReachableTracker : MonoBehaviour
         reachableStations = new List<StationInstance>();
         reachableMonsters = new List<MonsterController>();
         //reachableToolSources = new List<ToolSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,6 +36,8 @@ public class ReachableTracker : MonoBehaviour
         //    reachableToolSources.Add(other.GetComponent<ToolSource>());
         else if (other.tag == "Delivery")
             deliverySpot = other.GetComponent<DeliverySpot>();
+        else if (other.tag == "RecipieBook")
+            reachableBook = other.GetComponent<RecipieBook>();
         else if (other.tag == "Monster")
             reachableMonsters.Add(other.GetComponent<MonsterController>());
     }
@@ -53,10 +50,9 @@ public class ReachableTracker : MonoBehaviour
         {
             ProductInstance product = other.GetComponent<ProductInstance>();
             reachableProducts.Remove(product);
-            Debug.Log("Exit product: " + product.id + " from " + name);
         }
-        //else if (other.tag == "ToolSource")
-        //    reachableToolSources.Remove(other.GetComponent<ToolSource>());
+        else if (other.tag == "RecipieBook")
+            reachableBook = null;
         else if (other.tag == "Delivery")
             deliverySpot = null;
         else if (other.tag == "Monster")
@@ -121,6 +117,11 @@ public class ReachableTracker : MonoBehaviour
     public DeliverySpot getDeliverySpotOnReach()
     {
         return deliverySpot;
+    }
+
+    public RecipieBook getReachableBook()
+    {
+        return reachableBook;
     }
 
     public bool isProductOnReach(ProductInstance product)
