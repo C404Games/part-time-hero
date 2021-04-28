@@ -52,7 +52,8 @@ public class MenuBehaviour : MonoBehaviour
                 currentDishPanel = teamDishPanel.Find(currentPanelDishName);
                 dishMenuPrefab = Instantiate(GetComponent<Transform>().Find("Dish").gameObject) as GameObject;
                 dishMenuPrefab.transform.SetParent(currentDishPanel);
-                UnityEditor.GameObjectUtility.SetParentAndAlign(dishMenuPrefab, currentDishPanel.gameObject);
+                //UnityEditor.GameObjectUtility.SetParentAndAlign(dishMenuPrefab, currentDishPanel.gameObject);
+                dishMenuPrefab.transform.parent = currentDishPanel.gameObject.transform;
                 UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
                 dishNameText.text = GetComponent<ProductManager>().nonStaticFinalProducts[dish1].name;
             }
@@ -64,7 +65,8 @@ public class MenuBehaviour : MonoBehaviour
                 currentDishPanel = teamDishPanel.Find(currentPanelDishName);
                 dishMenuPrefab = Instantiate(GetComponent<Transform>().Find("Dish").gameObject) as GameObject;
                 dishMenuPrefab.transform.SetParent(currentDishPanel);
-                UnityEditor.GameObjectUtility.SetParentAndAlign(dishMenuPrefab, currentDishPanel.gameObject);
+                //UnityEditor.GameObjectUtility.SetParentAndAlign(dishMenuPrefab, currentDishPanel.gameObject);
+                dishMenuPrefab.transform.parent = currentDishPanel.gameObject.transform;
                 UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
                 dishNameText.text = GetComponent<ProductManager>().nonStaticFinalProducts[dish2].name;
             }
