@@ -24,13 +24,15 @@ public class MenuBehaviour : MonoBehaviour
     public Texture decorativeElement1;
     public Texture decorativeElement2;
 
+    MatchManager matchManager;
+
     // Start is called before the first frame update
     void Start()
     {
         UnityEngine.UI.RawImage[] rawImages = GetComponentsInChildren<UnityEngine.UI.RawImage>();
         rawImages[9].texture = decorativeElement1;
         rawImages[10].texture = decorativeElement2;
-
+        matchManager = GetComponent<MatchManager>();
     }
 
     // Update is called once per frame
@@ -40,42 +42,47 @@ public class MenuBehaviour : MonoBehaviour
         currentTime += Time.deltaTime;
         totalTime += Time.deltaTime;
         //Generation of dishes 0s - 30s - 1m 00s...
-        if ((currentTime > frequency|| GetComponent<MatchManager>().team1Dishes.Count == 0) && dishGenerationActive)
+        if ((currentTime > frequency|| matchManager.team1Dishes.Count == 0) && dishGenerationActive)
         {
-            dish1 = GetComponent<MatchManager>().generateOrder();
-            dish2 = GetComponent<MatchManager>().generateOrder();
-            GetComponent<MatchManager>().team1Dishes.Add(GetComponent<ProductManager>().nonStaticFinalProducts[dish1]);
-            if (GetComponent<MatchManager>().team1Dishes.Count <= 4)
+            if (matchManager.team1Dishes.Count <= 4)
             {
-                currentPanelDishName = "Dish" + (GetComponent<MatchManager>().team1Dishes.Count) + "Panel";
-                teamDishPanel = GetComponent<Transform>().Find("TeamDish1Panel");
+                dish1 = matchManager.generateOrder();
+
+                matchManager.team1Dishes.Add(GetComponent<ProductManager>().nonStaticFinalProducts[dish1].id);
+
+                currentPanelDishName = "Dish" + (matchManager.team1Dishes.Count) + "Panel";
+                teamDishPanel = transform.Find("TeamDish1Panel");
                 currentDishPanel = teamDishPanel.Find(currentPanelDishName);
-                dishMenuPrefab = Instantiate(GetComponent<Transform>().Find("Dish").gameObject) as GameObject;
+                dishMenuPrefab = Instantiate(transform.Find("Dish").gameObject) as GameObject;
                 dishMenuPrefab.transform.SetParent(currentDishPanel);
                 UnityEditor.GameObjectUtility.SetParentAndAlign(dishMenuPrefab, currentDishPanel.gameObject);
                 UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
-                dishNameText.text = GetComponent<ProductManager>().nonStaticFinalProducts[dish1].name;
+                dishNameText.text = ProductManager.finalProducts[dish1].name;
             }
-            GetComponent<MatchManager>().team2Dishes.Add(GetComponent<ProductManager>().nonStaticFinalProducts[dish2]);
-            if (GetComponent<MatchManager>().team2Dishes.Count <= 4)
+            if (matchManager.team2Dishes.Count <= 4)
             {
-                currentPanelDishName = "Dish" + (GetComponent<MatchManager>().team2Dishes.Count) + "Panel";
-                teamDishPanel = GetComponent<Transform>().Find("TeamDish2Panel");
+                dish2 = matchManager.generateOrder();
+
+                matchManager.team2Dishes.Add(GetComponent<ProductManager>().nonStaticFinalProducts[dish2].id);
+
+                currentPanelDishName = "Dish" + (matchManager.team2Dishes.Count) + "Panel";
+                teamDishPanel = transform.Find("TeamDish2Panel");
                 currentDishPanel = teamDishPanel.Find(currentPanelDishName);
-                dishMenuPrefab = Instantiate(GetComponent<Transform>().Find("Dish").gameObject) as GameObject;
+                dishMenuPrefab = Instantiate(transform.Find("Dish").gameObject) as GameObject;
                 dishMenuPrefab.transform.SetParent(currentDishPanel);
                 UnityEditor.GameObjectUtility.SetParentAndAlign(dishMenuPrefab, currentDishPanel.gameObject);
                 UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
-                dishNameText.text = GetComponent<ProductManager>().nonStaticFinalProducts[dish2].name;
+                dishNameText.text = ProductManager.finalProducts[dish2].name;
             }
             currentTime = 0;
+
         }
 
         //Timer countdown
-        Transform currentTimePanel = GetComponent<Transform>().Find("TimePanel");
+        Transform currentTimePanel = transform.Find("TimePanel");
         UnityEngine.UI.Text timeText = currentTimePanel.GetComponentInChildren<UnityEngine.UI.Text>();
-        int minutes = (int)(GetComponent<MatchManager>().getInitialTime() - totalTime) / 60;
-        int seconds = (int)(GetComponent<MatchManager>().getInitialTime() - totalTime) % 60;
+        int minutes = (int)(matchManager.getInitialTime() - totalTime) / 60;
+        int seconds = (int)(matchManager.getInitialTime() - totalTime) % 60;
         string minutesStr = (minutes < 10) ? "0" + minutes : "" + minutes;
         string secondsStr = (seconds < 10) ? "0" + seconds : "" + seconds;
         if (seconds > 0)
@@ -87,84 +94,87 @@ public class MenuBehaviour : MonoBehaviour
             timeText.text = "00:00";
         }
 
+        //PowerUps
+        /*
+        Transform powerUpPanel = transform.FindChild("PanelPowerUps");
+        UnityEngine.UI.RawImage rawImagePowerUp = powerUpPanel.GetComponentInChildren<UnityEngine.UI.RawImage>();
+        rawImagePowerUp.enabled = matchManager.getCharactersFrozen()[currentCharacter];
+        */
+    }
+
+    public void updatePoints()
+    {
 
         //Position of punctuation
 
-        Transform punctuationPanelTeam1 = GetComponent<Transform>().Find("PanelPunctuationTeam1");
+        Transform punctuationPanelTeam1 = transform.Find("PanelPunctuationTeam1");
         UnityEngine.UI.RawImage[] rawImageTeam1 = punctuationPanelTeam1.GetComponentsInChildren<UnityEngine.UI.RawImage>();
-        UnityEngine.UI.Text[] textPunctuationTeam1= punctuationPanelTeam1.GetComponentsInChildren<UnityEngine.UI.Text>();
+        UnityEngine.UI.Text[] textPunctuationTeam1 = punctuationPanelTeam1.GetComponentsInChildren<UnityEngine.UI.Text>();
 
-        Transform punctuationPanelTeam2 = GetComponent<Transform>().Find("PanelPunctuationTeam2");
+        Transform punctuationPanelTeam2 = transform.Find("PanelPunctuationTeam2");
         UnityEngine.UI.RawImage[] rawImageTeam2 = punctuationPanelTeam2.GetComponentsInChildren<UnityEngine.UI.RawImage>();
-        UnityEngine.UI.Text[] textPunctuationTeam2= punctuationPanelTeam2.GetComponentsInChildren<UnityEngine.UI.Text>();
+        UnityEngine.UI.Text[] textPunctuationTeam2 = punctuationPanelTeam2.GetComponentsInChildren<UnityEngine.UI.Text>();
 
         if (numberOfPlayers == 1 || (numberOfPlayers == 2 && currentCharacter == 0) || (numberOfPlayers == 4 && (currentCharacter == 0 || currentCharacter == 1)))
         {
-            if (GetComponent<MatchManager>().getPunctuationTeam1() > GetComponent<MatchManager>().getPunctuationTeam2())
+            if (matchManager.getPunctuationTeam1() > matchManager.getPunctuationTeam2())
             {
-                textPunctuationTeam1[0].text = "" + GetComponent<MatchManager>().getPunctuationTeam1();
+                textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
                 textPunctuationTeam1[1].text = "1";
                 rawImageTeam1[1].texture = firstPunctuationTexture;
-                textPunctuationTeam2[0].text = "" + GetComponent<MatchManager>().getPunctuationTeam2();
+                textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
                 textPunctuationTeam2[1].text = "2";
                 rawImageTeam2[1].texture = secondPunctuationTexture;
             }
-            else if (GetComponent<MatchManager>().getPunctuationTeam1() == GetComponent<MatchManager>().getPunctuationTeam2())
+            else if (matchManager.getPunctuationTeam1() == matchManager.getPunctuationTeam2())
             {
-                textPunctuationTeam1[0].text = "" + GetComponent<MatchManager>().getPunctuationTeam1();
+                textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
                 textPunctuationTeam1[1].text = "1";
                 rawImageTeam1[1].texture = firstPunctuationTexture;
-                textPunctuationTeam2[0].text = "" + GetComponent<MatchManager>().getPunctuationTeam2();
+                textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
                 textPunctuationTeam2[1].text = "1";
                 rawImageTeam2[1].texture = firstPunctuationTexture;
             }
             else
             {
-                textPunctuationTeam1[0].text = "" + GetComponent<MatchManager>().getPunctuationTeam1();
+                textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
                 textPunctuationTeam1[1].text = "2";
                 rawImageTeam1[1].texture = secondPunctuationTexture;
-                textPunctuationTeam2[0].text = "" + GetComponent<MatchManager>().getPunctuationTeam2();
+                textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
                 textPunctuationTeam2[1].text = "1";
                 rawImageTeam2[1].texture = firstPunctuationTexture;
             }
         }
         else
         {
-            if (GetComponent<MatchManager>().getPunctuationTeam1() < GetComponent<MatchManager>().getPunctuationTeam2())
+            if (matchManager.getPunctuationTeam1() < matchManager.getPunctuationTeam2())
             {
-                textPunctuationTeam2[0].text = "" + GetComponent<MatchManager>().getPunctuationTeam2();
+                textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
                 textPunctuationTeam2[1].text = "1";
                 rawImageTeam1[1].texture = firstPunctuationTexture;
-                textPunctuationTeam1[0].text = "" + GetComponent<MatchManager>().getPunctuationTeam1();
+                textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
                 textPunctuationTeam1[1].text = "2";
                 rawImageTeam2[1].texture = secondPunctuationTexture;
             }
-            else if (GetComponent<MatchManager>().getPunctuationTeam1() == GetComponent<MatchManager>().getPunctuationTeam2())
+            else if (matchManager.getPunctuationTeam1() == matchManager.getPunctuationTeam2())
             {
-                textPunctuationTeam2[0].text = "" + GetComponent<MatchManager>().getPunctuationTeam2();
+                textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
                 textPunctuationTeam2[1].text = "1";
                 rawImageTeam1[1].texture = firstPunctuationTexture;
-                textPunctuationTeam1[0].text = "" + GetComponent<MatchManager>().getPunctuationTeam1();
+                textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
                 textPunctuationTeam1[1].text = "1";
                 rawImageTeam2[1].texture = firstPunctuationTexture;
             }
             else
             {
-                textPunctuationTeam2[0].text = "" + GetComponent<MatchManager>().getPunctuationTeam2();
+                textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
                 textPunctuationTeam2[1].text = "2";
                 rawImageTeam1[1].texture = secondPunctuationTexture;
-                textPunctuationTeam1[0].text = "" + GetComponent<MatchManager>().getPunctuationTeam1();
+                textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
                 textPunctuationTeam1[1].text = "1";
                 rawImageTeam2[1].texture = firstPunctuationTexture;
             }
         }
-
-        //PowerUps
-        /*
-        Transform powerUpPanel = GetComponent<Transform>().FindChild("PanelPowerUps");
-        UnityEngine.UI.RawImage rawImagePowerUp = powerUpPanel.GetComponentInChildren<UnityEngine.UI.RawImage>();
-        rawImagePowerUp.enabled = GetComponent<MatchManager>().getCharactersFrozen()[currentCharacter];
-        */
     }
 
     public bool getVisible()

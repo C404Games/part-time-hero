@@ -26,6 +26,8 @@ public class AIManager : MonoBehaviour
     ProductInstance commonProduct;
     ProductInstance secondaryProduct;
 
+    MatchManager matchManager;
+
     public AIStep step;
 
     public bool productJoin = false;
@@ -35,6 +37,8 @@ public class AIManager : MonoBehaviour
     void Start()
     {
         recipies = new List<RecipieNode>();
+
+        matchManager = FindObjectOfType<MatchManager>();
         genProductTrees();
         // Cojemos una receta cualquiera
         nextRecipie();
@@ -54,7 +58,7 @@ public class AIManager : MonoBehaviour
     void Update()
     {
         // Si el activeAgent ha terminado
-        if (activeAgent == null || !activeAgent.busy)
+        if (currentRecipie != null && activeAgent == null || !activeAgent.busy)
         {
 
             // COmprobamos si nos han gitaneado el producto primario
@@ -274,10 +278,15 @@ public class AIManager : MonoBehaviour
     public void nextRecipie()
     {
         // Se coje la siguiente receta que toque
-        // De momento aleatorio
-        int idx = Mathf.Clamp(Random.Range(0, recipies.Count), 0, recipies.Count-1);
+        //int idx = Mathf.Clamp(Random.Range(0, recipies.Count), 0, recipies.Count-1);
         //int idx = 3;
-        currentRecipie = recipies[idx].copySelf(null);
+        if (matchManager.team2Dishes.Count > 0)
+        {
+            int idx = matchManager.team2Dishes[0];
+            currentRecipie = recipies[idx].copySelf(null);
+        }
+        else
+            currentRecipie = null;
     }
 
     public StationInstance getCommonStation(int id)

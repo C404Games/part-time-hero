@@ -7,11 +7,7 @@ using UnityEngine.InputSystem.Controls;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float health = 0;
-    public float punctuation = 0;
     public float volume = 0.5f;
-    public float powerUpIncreaseValueHealth = 5.0f;
-    public float powerUpIncreaseValuePunctuation = 5.0f;
     public float initialSpeed = 5.0f;
     public float currentSpeed;
     public float rotSpeed = 10.0f;
@@ -155,17 +151,17 @@ public class PlayerMovement : MonoBehaviour
                         }
                     case "money":
                         {
-                            this.PowerUpPunctuation(powerUpIncreaseValuePunctuation);
+                           // this.PowerUpPunctuation(powerUpIncreaseValuePunctuation);
                             break;
                         }
                     case "speed":
                         {
-                            this.increasedSpeed = true;
+                            //this.increasedSpeed = true;
                             break;
                         }
                     case "health":
                         {
-                            this.PowerUpHealth(powerUpIncreaseValueHealth);
+                            //this.PowerUpHealth(powerUpIncreaseValueHealth);
                             break;
                         }
                 }
@@ -197,12 +193,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void PowerUpHealth(float value)
     {
-        health += value;
+        //health += value;
     }
 
     public void PowerUpPunctuation(float value)
     {
-        punctuation += value;
+        //punctuation += value;
     }    
 
 

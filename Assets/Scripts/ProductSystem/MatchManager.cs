@@ -13,8 +13,11 @@ public class MatchManager : MonoBehaviour
     private float punctuationTeam1;
     private float punctuationTeam2;
     private float initialTime;
-    public List<Product> team1Dishes;
-    public List<Product> team2Dishes;
+    public List<int> team1Dishes;
+    public List<int> team2Dishes;
+
+    MenuBehaviour menuBehaviour;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,8 +42,8 @@ public class MatchManager : MonoBehaviour
         charactersLife = new List<float>();
         characters = new List<int>();
         charactersFrozen = new List<bool>();
-        team1Dishes = new List<Product>();
-        team2Dishes = new List<Product>();
+        team1Dishes = new List<int>();
+        team2Dishes = new List<int>();
 
         charactersLife.Add(100.0f);
         //Uncomment when we have more than one player playing at the same time (Photon multiplayer)
@@ -65,6 +68,8 @@ public class MatchManager : MonoBehaviour
         */
 
         initialTime = 300.0f;
+
+        menuBehaviour = GetComponent<MenuBehaviour>();
     }
 
     // Update is called once per frame
@@ -91,6 +96,7 @@ public class MatchManager : MonoBehaviour
         }
         */
 
+        /*
         if (numberOfPlayers == 1)
         {
             this.punctuationTeam1 = GameObject.Find("Player").GetComponent<PlayerMovement>().punctuation;
@@ -105,6 +111,7 @@ public class MatchManager : MonoBehaviour
             this.punctuationTeam1 = GameObject.Find("Player").GetComponent<PlayerMovement>().punctuation;
             this.punctuationTeam2 = GameObject.Find("Player3").GetComponent<PlayerMovement>().punctuation;
         }
+        */
     }
 
     public int generateOrder()
@@ -214,6 +221,26 @@ public class MatchManager : MonoBehaviour
     {
         return this.charactersFrozen;
 
+    }
+
+    public bool deliverProduct(int team, int id)
+    {
+        if (team == 1 && team1Dishes.Contains(id))
+        {
+            team1Dishes.Remove(id);
+            // De momento puntos hardcoeados
+            punctuationTeam1 += 10;
+            
+            return true;
+        }
+        else if(team == 2 && team2Dishes.Contains(id))
+        {
+            team2Dishes.Remove(id);
+            punctuationTeam2 += 10;
+            return true;
+        }
+
+        return false;
     }
 
 }
