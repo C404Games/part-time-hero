@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class ProductManager : MonoBehaviour
 {
-    public static Dictionary<int, Product> productBlueprints;
-    public static Dictionary<int, Station> stationBlueprints;
+    public static Dictionary<int, Product> productBlueprints = new Dictionary<int, Product>();
+    public static Dictionary<int, Station> stationBlueprints = new Dictionary<int, Station>();
 
-    public static List<Product> rawProducts;
-    public static List<Product> finalProducts;
+    public static Dictionary<int, Product> rawProducts = new Dictionary<int, Product>();
+    public static Dictionary<int, Product> finalProducts = new Dictionary<int, Product>();
 
     public List<Product> nonStaticRawProducts;
     public List<Product> nonStaticFinalProducts;
 
     #region MonoBehaviour
     private void Awake()
-    {
-        productBlueprints = new Dictionary<int, Product>();
-        stationBlueprints = new Dictionary<int, Station>();
-        rawProducts = new List<Product>();
-        finalProducts = new List<Product>();
+    {      
         nonStaticFinalProducts = new List<Product>();
         nonStaticRawProducts = new List<Product>();
         loadProducts("products");
@@ -56,20 +52,21 @@ public class ProductManager : MonoBehaviour
                     transitions.Add(new Transition((int)t["src"], (int)t["dst"], (int)t["time"]));
                 }
             }
+            int difficulty = entry["difficulty"] != null ? entry["difficulty"] : 0;
             GameObject appearence = Resources.Load<GameObject>((string)entry["appearence"]);
             bool collapse = entry["AIcollapse"] != null;
-            Product product = new Product((int)entry["id"], (string)entry["name"], (ProductType)((int)entry["type"]), appearence, transitions, collapse);
+            Product product = new Product((int)entry["id"], (string)entry["name"], (ProductType)((int)entry["type"]), difficulty, appearence, transitions, collapse);
             productBlueprints.Add((int)entry["id"], product);
 
             if(product.type == ProductType.RAW)
             {
                 nonStaticRawProducts.Add(product);
-                rawProducts.Add(product);
+                rawProducts.Add(product.id, product);
             }
             else if(product.type == ProductType.FINAL)
             {
                 nonStaticFinalProducts.Add(product);
-                finalProducts.Add(product);
+                finalProducts.Add(product.id, product);
             }
 
         }

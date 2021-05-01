@@ -48,7 +48,7 @@ public class AIAgent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (movement.targetType == clickTargetType.NONE && !movement.isBlocked())
+        if (movement.targetType == clickTargetType.NONE && !movement.isBlocked() && !movement.isFrozen())
         {
             // SI no, seguimos con la receta
             switch (state)
@@ -94,7 +94,7 @@ public class AIAgent : MonoBehaviour
                     busy = false;
                     // Si hay monstruo, atacar
                     MonsterController monster = reachableTracker.getNearestMonster();
-                    if (state != agentState.FETCH && monster != null)
+                    if (monster != null && movement.targetType == clickTargetType.NONE)
                     {
                         movement.targetType = clickTargetType.MONSTER;
                         movement.targetMonster = monster;

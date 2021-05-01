@@ -115,6 +115,7 @@
       "id": 13,
       "name": "PROD_CARBONATED_HONEY",
       "type": 2,
+      "difficulty": 0,
       "appearence": "Tools/Tabern/bottle"
 
     },
@@ -136,6 +137,7 @@
       "id": 15,
       "name": "PROD_CHERRY_BEER",
       "type": 2,
+      "difficulty": 0,
       "appearence": "Products/Tabern/burger"
     },
 
@@ -176,6 +178,7 @@
       "id": 19,
       "name": "PROD_TOMATO_SOUP",
       "type": 2,
+      "difficulty": 0,
       "appearence": "Products/Tabern/plateDinner"
     },
 
@@ -247,6 +250,7 @@
       "id": 26,
       "name": "PROD_BURGER",
       "type": 2,
+      "difficulty": 2,
       "appearence": "Products/Tabern/tarioBurger"
     },
     {

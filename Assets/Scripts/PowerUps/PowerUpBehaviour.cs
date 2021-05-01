@@ -2,12 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum PowerupType
+{
+    FREEZE, 
+    SLOW_TIME,
+    FAST_TIME,
+    MONSTER,
+    FAST_WALK
+}
+
 public class PowerUpBehaviour : MonoBehaviour
 {
 
 	public float rotationSpeed = 99.0f;
 	public bool reverse = false;
-	public string type;
+	public PowerupType type;
 
 	void Update()
 	{

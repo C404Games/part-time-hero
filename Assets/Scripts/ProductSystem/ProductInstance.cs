@@ -106,9 +106,11 @@ public class ProductInstance : MonoBehaviour
     {
         if(appearence != null)
             Destroy(appearence);
-        appearence = Instantiate(blueprint.appearence);
-        appearence.transform.parent = transform;
-
+        if (blueprint.appearence != null)
+        {
+            appearence = Instantiate(blueprint.appearence);
+            appearence.transform.parent = transform;
+        }
         appearence.transform.localPosition = new Vector3(0, 0, 0);
     }
 }

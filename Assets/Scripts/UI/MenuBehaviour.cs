@@ -32,7 +32,7 @@ public class MenuBehaviour : MonoBehaviour
         UnityEngine.UI.RawImage[] rawImages = GetComponentsInChildren<UnityEngine.UI.RawImage>();
         rawImages[9].texture = decorativeElement1;
         rawImages[10].texture = decorativeElement2;
-        matchManager = GetComponent<MatchManager>();
+        matchManager = FindObjectOfType<MatchManager>();
     }
 
     // Update is called once per frame
@@ -49,7 +49,7 @@ public class MenuBehaviour : MonoBehaviour
             {
                 dish1 = matchManager.generateOrder();
 
-                matchManager.team1Dishes.Add(GetComponent<ProductManager>().nonStaticFinalProducts[dish1].id);
+                matchManager.team1Dishes.Add(ProductManager.finalProducts[dish1].id);
 
                 currentPanelDishName = "Dish" + (matchManager.team1Dishes.Count) + "Panel";
                 teamDishPanel = transform.Find("TeamDish1Panel");
@@ -65,7 +65,7 @@ public class MenuBehaviour : MonoBehaviour
             {
                 dish2 = matchManager.generateOrder();
 
-                matchManager.team2Dishes.Add(GetComponent<ProductManager>().nonStaticFinalProducts[dish2].id);
+                matchManager.team2Dishes.Add(ProductManager.finalProducts[dish2].id);
 
                 currentPanelDishName = "Dish" + (matchManager.team2Dishes.Count) + "Panel";
                 teamDishPanel = transform.Find("TeamDish2Panel");

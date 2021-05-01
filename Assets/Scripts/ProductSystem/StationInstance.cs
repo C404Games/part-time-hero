@@ -18,6 +18,14 @@ public class StationInstance : MonoBehaviour
     RadialClockController clockController;
 
     bool busy = false;
+    public float transitionTime;
+    public float currentTransitionTime;
+    int transitionDst;
+
+    bool changeSpeed = false;
+     float speedFactor = 1;
+     float currentChangeSpeedTime;
+     float maxChangeSpeedTime;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +38,31 @@ public class StationInstance : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (changeSpeed)
+        {
+            if(currentChangeSpeedTime < maxChangeSpeedTime)
+            {
+                currentChangeSpeedTime += Time.deltaTime;
+            }
+            else
+            {
+                changeSpeed = false;
+                speedFactor = 1;
+            }
+        }
+        if (busy)
+        {
+            if (currentTransitionTime < transitionTime)
+            {
+                currentTransitionTime += Time.deltaTime * speedFactor;
+            }
+            else
+            {
+                heldProduct.transformProduct(transitionDst);
+                busy = false;
+                activate(waitPosition.position);
+            }
+        }
     }
 
     public Vector3 getWaitPos(Vector3 currentPos)
@@ -77,7 +109,6 @@ public class StationInstance : MonoBehaviour
             else
             {
                 heldProduct = product;
-                //heldProduct.transform.parent = transform;
                 heldProduct.setHolder(transform);
                 return activate(origin);
             }
@@ -99,20 +130,15 @@ public class StationInstance : MonoBehaviour
                 if(heldProduct.id == transition.src)
                 {
                     busy = true;
-                    if (transition.time > 0)
-                    {
-                        StartCoroutine(heldProduct.transformProductDelay(transition.dst, transition.time));
-                        clockController.startClock(this, transition.time);
-                    }
-                    else
-                    {
-                        heldProduct.transformProduct(transition.dst);
-                    }
-                    
-                    StartCoroutine(reactivate(transition.time + 0.1f));
-                    StartCoroutine(freeStation(transition.time - 0.1f));
 
-                    return blueprint.auto ? 0 : transition.time;
+                    float time = transition.time;
+                    
+                    busy = true;
+                    transitionTime = time;
+                    currentTransitionTime = 0;
+                    transitionDst = transition.dst;
+
+                    return blueprint.auto ? 0 : time;
                 }
             }
         }
@@ -158,16 +184,13 @@ public class StationInstance : MonoBehaviour
         return busy;
     }
 
-    private IEnumerator reactivate(float time)
+    public void startSpeedChange(float factor, float time)
     {
-        yield return new WaitForSeconds(time);
-        activate(waitPosition.position);
+        changeSpeed = true;
+        speedFactor = factor;
+        maxChangeSpeedTime = time;
+        currentChangeSpeedTime = 0;
     }
-
-    private IEnumerator freeStation(float time)
-    {
-        yield return new WaitForSeconds(time);
-        busy = false;
-    }
+    
 
 }

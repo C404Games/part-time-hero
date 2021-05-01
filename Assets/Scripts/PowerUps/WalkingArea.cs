@@ -16,12 +16,12 @@ public class WalkingArea : MonoBehaviour
     public GameObject powerUp2;
     public GameObject powerUp3;
     public int teamArea;
-    private float punctuationTeam1;
-    private float punctuationTeam2;
     private float handicapFactor;
 
     private BoxCollider myCollider;
     private float currentTimer;
+
+    private MatchManager matchManager;
 
     void Awake()
     {
@@ -36,6 +36,7 @@ public class WalkingArea : MonoBehaviour
         currentTimer = 0;
         handicapFactor = 1.0f;
         initialBlockTimer = 30;
+        matchManager = FindObjectOfType<MatchManager>();
     }
 
     void Update()
@@ -45,7 +46,7 @@ public class WalkingArea : MonoBehaviour
         {
             currentGenerationTime += Time.deltaTime;
             secondRandomNumber = (int)UnityEngine.Random.Range((int)currentGenerationTime, frequency);
-            if (teamArea == 1 && punctuationTeam1 < punctuationTeam2 || teamArea == 2 && punctuationTeam2 < punctuationTeam1)
+            if (teamArea == 1 && matchManager.getPunctuationTeam1() < matchManager.getPunctuationTeam2() || teamArea == 2 && matchManager.getPunctuationTeam2() < matchManager.getPunctuationTeam1())
             {
                 handicapFactor = 1.05f;
             } else
@@ -58,6 +59,7 @@ public class WalkingArea : MonoBehaviour
                 Vector3 pos = RandomPointInBounds(myCollider.bounds);
                 GeneratePowerUp(UnityEngine.Random.Range(0, 3), pos);
                 currentGenerationTime = 0;
+                currentTime = 0;
             }
         }        
     }

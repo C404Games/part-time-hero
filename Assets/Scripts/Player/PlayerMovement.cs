@@ -7,6 +7,9 @@ using UnityEngine.InputSystem.Controls;
 
 public class PlayerMovement : MonoBehaviour
 {
+
+    public int team = 1;
+
     public float volume = 0.5f;
     public float initialSpeed = 5.0f;
     public float currentSpeed;
@@ -14,14 +17,14 @@ public class PlayerMovement : MonoBehaviour
     public bool blocked = false;
     public bool increasedSpeed;
     public float currentTimeOfMaxSpeed;
-    public float limitTimeMaxSpeed = 30;
+    public float limitTimeMaxSpeed = 10;
     public bool frozen;
     public float currentTimeOfFrozen;
     public float limitTimeFrozen = 5;
 
     public Animator animator;
 
-    private AudioSource audioSource;
+    public GameObject iceCube;
 
     private Vector3 waitPosition;
     private Vector3 waitRotation;
@@ -31,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
     NavMeshAgent nvAgent;
+    ClickMovement clickMovement;
 
     MonsterController monsterInReach;
     public bool attackBusy = false;
@@ -43,9 +47,9 @@ public class PlayerMovement : MonoBehaviour
     {
         currentSpeed = initialSpeed;
         increasedSpeed = false;
-        audioSource = GetComponent<AudioSource>();
         nvAgent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        clickMovement = GetComponent<ClickMovement>();
         velocity = new Vector2(0, 0);
     }
 
@@ -60,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (currentTimeOfMaxSpeed < this.limitTimeMaxSpeed)
                     {
-                        currentSpeed *= 2;
+                        currentSpeed *= 1.5f;
                         this.currentTimeOfMaxSpeed += Time.deltaTime;
                     }
                     else
@@ -90,6 +94,8 @@ public class PlayerMovement : MonoBehaviour
                 else{
                     this.currentTimeOfFrozen = 0;
                     this.frozen = false;
+                    iceCube.SetActive(false);
+                    clickMovement.resume();
                 } 
 
             }
@@ -138,37 +144,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.transform.parent != null && collision.transform.parent.gameObject.tag == "PowerUp")
-        {
-            audioSource.Play();
-            if (collision.gameObject.GetComponent<PowerUpBehaviour>() != null)
-            {
-                switch (collision.gameObject.GetComponent<PowerUpBehaviour>().type)
-                {
-                    case "paralysis":
-                        {
-                            break;
-                        }
-                    case "money":
-                        {
-                           // this.PowerUpPunctuation(powerUpIncreaseValuePunctuation);
-                            break;
-                        }
-                    case "speed":
-                        {
-                            //this.increasedSpeed = true;
-                            break;
-                        }
-                    case "health":
-                        {
-                            //this.PowerUpHealth(powerUpIncreaseValueHealth);
-                            break;
-                        }
-                }
-            }
-            Destroy(collision.transform.parent.gameObject);
-        }
-
+       
         if (monsterInReach == null && collision.gameObject.tag.Equals("Monster"))
         {
             monsterInReach = collision.GetComponent<MonsterController>();
@@ -190,17 +166,6 @@ public class PlayerMovement : MonoBehaviour
             recipieBookInReach = null;
         }
     }
-
-    public void PowerUpHealth(float value)
-    {
-        //health += value;
-    }
-
-    public void PowerUpPunctuation(float value)
-    {
-        //punctuation += value;
-    }    
-
 
     public void attack()
     {
@@ -240,6 +205,21 @@ public class PlayerMovement : MonoBehaviour
         this.waitRotation = waitRotation;
         StartCoroutine(unlockMovement(time));
         animator.SetBool("Chop", true);
+    }
+
+    public void freeze(float time)
+    {
+        frozen = true;
+        currentTimeOfFrozen = time;
+        currentTimeOfFrozen = 0;
+        iceCube.SetActive(true);
+        clickMovement.stop();
+    }
+
+    public void increaseSpeed()
+    {
+        increasedSpeed = true;
+        currentTimeOfMaxSpeed = 0;
     }
 
     private IEnumerator unlockMovement(float time)

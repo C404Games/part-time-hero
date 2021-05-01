@@ -147,11 +147,26 @@ public class ClickMovement : MonoBehaviour
         return playerMovement.blocked;
     }
 
+    public bool isFrozen()
+    {
+        return playerMovement.frozen;
+    }
+
+    public void stop()
+    {
+        nvAgent.isStopped = true;
+    }
+
+    public void resume()
+    {
+        nvAgent.isStopped = false;
+    }
+
     public void onMouseClick(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if (!playerMovement.blocked)
+            if (!playerMovement.blocked && !playerMovement.frozen)
             {
 
                 // Ignorar Layer de Items

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class RadialClockController : MonoBehaviour
 {
     public GameObject radialClockPrefab;
-    List<StationInstance> stations;
-    List<Image> clocks;
+    //List<StationInstance> stations;
+    Dictionary<StationInstance, Image> clocks;
 
     Vector3 offset;
 
@@ -15,37 +15,38 @@ public class RadialClockController : MonoBehaviour
     void Start()
     {
         offset = new Vector3(0.0f, 30.0f, 0.0f);
-        clocks = new List<Image>();
-        stations = new List<StationInstance>(FindObjectsOfType<StationInstance>());
+        clocks = new Dictionary<StationInstance, Image>();
+        List<StationInstance> stations = new List<StationInstance>(FindObjectsOfType<StationInstance>());
         foreach(StationInstance station in stations)
         {
             GameObject clock = Instantiate(radialClockPrefab);
             clock.transform.SetParent(transform);
             Image clockImage = clock.GetComponent<Image>();
             clockImage.fillAmount = 0;
+            clockImage.enabled = false;
             clock.transform.position = Camera.main.WorldToScreenPoint(station.transform.position) + offset;
-            clocks.Add(clockImage);
+            clocks.Add(station, clockImage);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-    }
-
-    public void startClock(StationInstance station, float time)
-    {
-        StartCoroutine(LerpClock(clocks[stations.IndexOf(station)], time));
-    }
-
-    private IEnumerator LerpClock(Image clock, float time)
-    {
-        for (float f = 0; f <= time; f += Time.deltaTime)
+        foreach(KeyValuePair<StationInstance, Image> entry in clocks)
         {
-            clock.fillAmount = Mathf.Lerp(0, 1, f / time);
-            yield return null;
+            StationInstance station = entry.Key;
+            Image clock = entry.Value;
+            if (station.isBusy() && station.transitionTime > 0)
+            {
+                clock.enabled = true;
+                float currTime = station.currentTransitionTime;
+                float time = station.transitionTime;
+                clock.fillAmount = Mathf.Lerp(0, 1, currTime / time);
+            }
+            else
+            {
+                clock.enabled = false;
+            }
         }
-
-        clock.fillAmount = 0;
     }
 }
