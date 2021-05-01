@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6591245991168768401}
   - component: {fileID: 7157594789568943875}
   - component: {fileID: -2699657327690283958}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WalkingArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
