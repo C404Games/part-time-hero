@@ -9,14 +9,18 @@ public class MatchManager : MonoBehaviour
     public GameObject team1Part;
     public GameObject team2Part;
 
+    public GameObject[] monsterPrefabs;
+
     private int level;
-    private int numberOfPlayers;
 
     private List<PlayerMovement> charactersTeam1;
     private List<PlayerMovement> charactersTeam2;
 
     private List<StationInstance> stationsTeam1;
     private List<StationInstance> stationsTeam2;
+
+    private List<WalkingArea> areasTeam1;
+    private List<WalkingArea> areasTeam2;
 
     private float punctuationTeam1;
     private float punctuationTeam2;
@@ -36,31 +40,18 @@ public class MatchManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        level = 1;
-        if (GameObject.Find("Player") != null)
-        {
-            numberOfPlayers++;
-        }
-        if (GameObject.Find("Player2") != null)
-        {
-            numberOfPlayers++;
-        }
-        if (GameObject.Find("Player3") != null)
-        {
-            numberOfPlayers++;
-        }
-        if (GameObject.Find("Player4") != null)
-        {
-            numberOfPlayers++;
-        }
-        numberOfPlayers = 1;
+        level = 1;        
 
-        List<PlayerMovement> allCharacters = new List<PlayerMovement>(FindObjectsOfType<PlayerMovement>());
+        PlayerMovement[] allCharacters = FindObjectsOfType<PlayerMovement>();
         charactersTeam1 = allCharacters.Where(p => p.team == 1).ToList();
         charactersTeam2 = allCharacters.Where(p => p.team == 2).ToList();
 
         stationsTeam1 = team1Part.transform.GetComponentsInChildren<StationInstance>().ToList();
         stationsTeam2 = team2Part.transform.GetComponentsInChildren<StationInstance>().ToList();
+
+        WalkingArea[] allAreas = FindObjectsOfType<WalkingArea>();
+        areasTeam1 = allAreas.Where(a => a.teamArea == 1).ToList();
+        areasTeam2 = allAreas.Where(a => a.teamArea == 2).ToList();
 
         team1Dishes = new List<int>();
         team2Dishes = new List<int>();
@@ -147,19 +138,6 @@ public class MatchManager : MonoBehaviour
 
     }
 
-
-    public void setNumberOfPlayers(int numberOfPlayers)
-    {
-        this.numberOfPlayers = numberOfPlayers;
-    }
-
-
-    public int getNumberOfPlayers()
-    {
-        return this.numberOfPlayers;
-
-    }
-
     public float getPunctuationTeam1()
     {
         return this.punctuationTeam1;
@@ -228,9 +206,9 @@ public class MatchManager : MonoBehaviour
                 {
                     // Acelerar movimiento
                     if(playerMovement.team == 1)
-                        charactersTeam1.ForEach(p => p.increaseSpeed());
+                        charactersTeam1.ForEach(p => p.increaseSpeed(1.5f, fastMovementTime));
                     else
-                        charactersTeam2.ForEach(p => p.increaseSpeed());
+                        charactersTeam2.ForEach(p => p.increaseSpeed(1.5f, fastMovementTime));
                 }
                 break;
 
@@ -260,7 +238,14 @@ public class MatchManager : MonoBehaviour
             case PowerupType.MONSTER:
                 {
                     // Mandar monstruo
-                    int team = playerMovement.team == 1 ? 2 : 1;
+                    int team = playerMovement.team;
+                    WalkingArea area = null;
+                    if (team == 2)
+                        area = areasTeam1[(int)Random.Range(0, areasTeam1.Count)];
+                    else
+                        area = areasTeam2[(int)Random.Range(0, areasTeam2.Count)];
+                    GameObject monster = monsterPrefabs[(int)Random.Range(0, monsterPrefabs.Length)];
+                    Instantiate(monster, area.RandomPointInBounds(), Quaternion.identity);
                 }
                 break;
         }

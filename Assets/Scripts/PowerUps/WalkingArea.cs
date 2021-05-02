@@ -12,9 +12,9 @@ public class WalkingArea : MonoBehaviour
     public bool spawnAvailable = true;
     private int firstRandomNumber;
     private int secondRandomNumber;
-    public GameObject powerUp1;
-    public GameObject powerUp2;
-    public GameObject powerUp3;
+
+    public List<GameObject> powerUps;
+
     public int teamArea;
     private float handicapFactor;
 
@@ -56,7 +56,7 @@ public class WalkingArea : MonoBehaviour
             if (frequency <= (secondRandomNumber + 2)*ratio* handicapFactor)
             {
                 Random.seed = 15 + (int)currentTime;
-                Vector3 pos = RandomPointInBounds(myCollider.bounds);
+                Vector3 pos = RandomPointInBounds();
                 GeneratePowerUp(UnityEngine.Random.Range(0, 3), pos);
                 currentGenerationTime = 0;
                 currentTime = 0;
@@ -64,30 +64,14 @@ public class WalkingArea : MonoBehaviour
         }        
     }
 
-    private void GeneratePowerUp(float powerUp, Vector3 pos)
+    private void GeneratePowerUp(int powerUp, Vector3 pos)
     {
-        switch (powerUp)
-        {
-            case 0:
-                {
-                    Instantiate(powerUp1, pos, Quaternion.identity);
-                    break;
-                }
-            case 1:
-                {
-                    Instantiate(powerUp2, pos, Quaternion.identity);
-                    break;
-                }
-            case 2:
-                {
-                    Instantiate(powerUp3, pos, Quaternion.identity);
-                    break;
-                }
-        }
+        Instantiate(powerUps[powerUp], pos, Quaternion.identity);
     }
 
-    private Vector3 RandomPointInBounds(Bounds bounds)
+    public Vector3 RandomPointInBounds()
     {
+        Bounds bounds = myCollider.bounds;
         return new Vector3(
             Random.Range(bounds.min.x, bounds.max.x),
             bounds.min.y,
