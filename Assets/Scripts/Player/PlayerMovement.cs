@@ -7,20 +7,21 @@ using UnityEngine.InputSystem.Controls;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     public int team = 1;
 
     public float volume = 0.5f;
-    public float initialSpeed = 5.0f;
-    public float currentSpeed;
+    public float speed = 5.0f;
     public float rotSpeed = 10.0f;
     public bool blocked = false;
+
     public bool increasedSpeed;
+    public float speedFactor = 1.0f;
     public float currentTimeOfMaxSpeed;
-    public float limitTimeMaxSpeed = 10;
+    public float timeMaxSpeed;
+
     public bool frozen;
     public float currentTimeOfFrozen;
-    public float limitTimeFrozen = 5;
+    public float timeFrozen;
 
     public Animator animator;
 
@@ -29,8 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 waitPosition;
     private Vector3 waitRotation;
 
-    Vector3 velocity;
-    
+    Vector3 velocity;    
 
     Rigidbody rb;
     NavMeshAgent nvAgent;
@@ -41,11 +41,9 @@ public class PlayerMovement : MonoBehaviour
 
     RecipieBook recipieBookInReach;
 
-
     // Start is called before the first frame update
     void Start()
     {
-        currentSpeed = initialSpeed;
         increasedSpeed = false;
         nvAgent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
@@ -62,21 +60,21 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (increasedSpeed)
                 {
-                    if (currentTimeOfMaxSpeed < this.limitTimeMaxSpeed)
+                    if (currentTimeOfMaxSpeed < timeMaxSpeed)
                     {
-                        currentSpeed *= 1.5f;
                         this.currentTimeOfMaxSpeed += Time.deltaTime;
                     }
                     else
                     {
-                        currentSpeed = initialSpeed;
                         increasedSpeed = false;
+                        speedFactor = 1.0f;
                         currentTimeOfMaxSpeed = 0;
                     }
                 }
-                rb.velocity = velocity;
+                rb.velocity = velocity * speed * speedFactor;
+                nvAgent.speed = speed * speedFactor;
                 if (velocity.sqrMagnitude != 0 && (!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f))
-                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime * rotSpeed);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime * rotSpeed * speedFactor);
                 if ((!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f) && rb.velocity == new Vector3(0, 0, 0))
                 {
                     animator.SetBool("isRunning", false);
@@ -87,13 +85,13 @@ public class PlayerMovement : MonoBehaviour
                 }
             } else
             {
-                if (this.currentTimeOfFrozen < limitTimeFrozen)
+                if (currentTimeOfFrozen < timeFrozen)
                 {
-                    this.currentTimeOfFrozen += Time.deltaTime;
+                    currentTimeOfFrozen += Time.deltaTime;
                 }
                 else{
-                    this.currentTimeOfFrozen = 0;
-                    this.frozen = false;
+                    currentTimeOfFrozen = 0;
+                    frozen = false;
                     iceCube.SetActive(false);
                     clickMovement.resume();
                 } 
@@ -124,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
         forward.Normalize();
         right.Normalize();
 
-        velocity = (forward * input.y + right * input.x) * currentSpeed;        
+        velocity = (forward * input.y + right * input.x);        
 
         nvAgent.isStopped = true;
     }
@@ -171,7 +169,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!attackBusy)
         {
-            attackBusy = true;
             animator.SetTrigger("Attack");
             monsterInReach.takeHealth(1);
         }
@@ -210,16 +207,18 @@ public class PlayerMovement : MonoBehaviour
     public void freeze(float time)
     {
         frozen = true;
-        currentTimeOfFrozen = time;
+        timeFrozen = time;
         currentTimeOfFrozen = 0;
         iceCube.SetActive(true);
         clickMovement.stop();
     }
 
-    public void increaseSpeed()
+    public void increaseSpeed(float factor, float time)
     {
         increasedSpeed = true;
         currentTimeOfMaxSpeed = 0;
+        timeMaxSpeed = time;
+        speedFactor = factor;
     }
 
     private IEnumerator unlockMovement(float time)

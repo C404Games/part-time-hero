@@ -6,15 +6,16 @@ using UnityEngine.InputSystem;
 public class CatcherScript : MonoBehaviour
 {
     public PlayerMovement playerMovement;
-    public Animator animator;
     public ReachableTracker reachableTracker;
 
+    private Animator animator;
     private DeliverySpot deliverySpot;
 
     private ProductInstance heldObject;
 
     private void Start()
     {
+        animator = transform.parent.GetComponentInChildren<Animator>();
     }
 
     public ProductInstance getHeldProduct()
