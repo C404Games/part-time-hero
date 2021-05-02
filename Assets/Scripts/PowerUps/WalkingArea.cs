@@ -57,16 +57,16 @@ public class WalkingArea : MonoBehaviour
             {
                 Random.seed = 15 + (int)currentTime;
                 Vector3 pos = RandomPointInBounds();
-                GeneratePowerUp(UnityEngine.Random.Range(0, 3), pos);
+                GeneratePowerUp();
                 currentGenerationTime = 0;
                 currentTime = 0;
             }
         }        
     }
 
-    private void GeneratePowerUp(int powerUp, Vector3 pos)
+    private void GeneratePowerUp()
     {
-        Instantiate(powerUps[powerUp], pos, Quaternion.identity);
+        Instantiate(powerUps[(int)Random.Range(0, powerUps.Count)], RandomPointInBounds(), Quaternion.identity);
     }
 
     public Vector3 RandomPointInBounds()

@@ -169,7 +169,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!attackBusy)
         {
-            attackBusy = true;
             animator.SetTrigger("Attack");
             monsterInReach.takeHealth(1);
         }

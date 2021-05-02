@@ -94,28 +94,14 @@ public class MatchManager : MonoBehaviour
 
     public int generateOrder()
     {
-        /*
-        Random.seed = (int)(100 + Time.deltaTime);
-        int difficultyLevel = 1;
-        int randomProduct = 0;
-        for (int i = 0; i < this.level; i++)
-        {
-            randomProduct = (int)Random.Range(0.0f,ProductManager.finalProducts.Count);
-            int randomLevel = (int)Random.Range(0.0f, ProductManager.finalProducts.Count);
-            if (difficultyLevel < randomLevel)
-            {
-                difficultyLevel = randomLevel;
-            }
-        }
-        return randomProduct;
-        */
-
-        Random.seed = (int)(100 + Time.deltaTime);
+        Random.seed = System.DateTime.Now.Millisecond;
         int difficultyLevel = level;
         Product randomProduct = null;
         for (int i = 0; i < level; i++)
         {
-            Product product = ProductManager.finalProducts.Values.ToList()[(int)Random.Range(0.0f, ProductManager.finalProducts.Count)];
+            float idx = Random.Range(0.0f, ProductManager.finalProducts.Count);
+            List<Product> products = ProductManager.finalProducts.Values.ToList();
+            Product product = products[(int)idx];
             if ( i == 0 || difficultyLevel < product.difficulty)
             {
                 difficultyLevel = product.difficulty;
@@ -125,12 +111,6 @@ public class MatchManager : MonoBehaviour
         return randomProduct.id;
 
     }
-
-    public void setLevel(int level)
-    {
-        this.level = level;
-    }
-
 
     public int getLevel()
     {
@@ -161,11 +141,6 @@ public class MatchManager : MonoBehaviour
     public float getInitialTime()
     {
         return this.initialTime;
-    }
-
-    public void setInitialTime(float initialTime)
-    {
-        this.initialTime = initialTime;
     }
 
     public bool deliverProduct(int team, int id)
@@ -206,9 +181,9 @@ public class MatchManager : MonoBehaviour
                 {
                     // Acelerar movimiento
                     if(playerMovement.team == 1)
-                        charactersTeam1.ForEach(p => p.increaseSpeed(1.5f, fastMovementTime));
+                        charactersTeam1.ForEach(p => p.increaseSpeed(2.0f, fastMovementTime));
                     else
-                        charactersTeam2.ForEach(p => p.increaseSpeed(1.5f, fastMovementTime));
+                        charactersTeam2.ForEach(p => p.increaseSpeed(2.0f, fastMovementTime));
                 }
                 break;
 
