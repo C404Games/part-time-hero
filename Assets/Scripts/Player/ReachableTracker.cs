@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ReachableTracker : MonoBehaviour
@@ -109,6 +110,24 @@ public class ReachableTracker : MonoBehaviour
         {
             if (station.name == name && station.isOccupied() == occupied &&
                 Vector3.Distance(station.transform.position, player.transform.position) < minDist)
+                minDistStation = station;
+        }
+        return minDistStation;
+    }
+
+    public StationInstance getRandomAliveStation()
+    {
+        return reachableStations.Where(s => s.getHealth() > 0).ToList()[Random.Range(0, reachableStations.Count)];
+    }
+
+    public StationInstance getNearbyBrokenStation()
+    {
+        List<StationInstance> stations = reachableStations.Where(s => s.getHealth() <= 0).ToList();
+        float minDist = float.MaxValue;
+        StationInstance minDistStation = null;
+        foreach (StationInstance station in stations)
+        {
+            if (station.name == name && Vector3.Distance(station.transform.position, player.transform.position) < minDist)
                 minDistStation = station;
         }
         return minDistStation;

@@ -9,6 +9,9 @@ public class StationInstance : MonoBehaviour
 
     public Transform waitPosition;
 
+    public GameObject mainModel;
+    public GameObject brokenModel;
+
     public ProductInstance heldProduct;
 
     Station blueprint;
@@ -23,16 +26,18 @@ public class StationInstance : MonoBehaviour
     int transitionDst;
 
     bool changeSpeed = false;
-     float speedFactor = 1;
-     float currentChangeSpeedTime;
-     float maxChangeSpeedTime;
+    float speedFactor = 1;
+    float currentChangeSpeedTime;
+    float maxChangeSpeedTime;
+
+    float repairTime = 5.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         clockController = FindObjectOfType<RadialClockController>();
         blueprint = ProductManager.stationBlueprints[id];
-        health = 5;
+        health = 1;
     }
 
     // Update is called once per frame
@@ -58,9 +63,20 @@ public class StationInstance : MonoBehaviour
             }
             else
             {
-                heldProduct.transformProduct(transitionDst);
+                // Si tiene vida, termina cocinado
+                if (health > 0)
+                {
+                    heldProduct.transformProduct(transitionDst);
+                    activate();
+                }
+                // Si no, se repara
+                else
+                {
+                    repair();
+                }
+
                 busy = false;
-                activate(waitPosition.position);
+                
             }
         }
     }
@@ -93,9 +109,9 @@ public class StationInstance : MonoBehaviour
     }
 
     // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto. Devuelve -1 si no se puede dejar
-    public float putProduct(ProductInstance product, Vector3 origin)
+    public float putProduct(ProductInstance product)
     {
-        if (!busy)
+        if (health > 0 && !busy)
         {
             if (heldProduct != null)
             {
@@ -110,7 +126,7 @@ public class StationInstance : MonoBehaviour
             {
                 heldProduct = product;
                 heldProduct.setHolder(transform);
-                return activate(origin);
+                return activate();
             }
         }
         else
@@ -121,9 +137,9 @@ public class StationInstance : MonoBehaviour
     }
 
     // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto.
-    public float activate(Vector3 origin)
+    public float activate()
     {
-        if(!busy && heldProduct != null)// && isReachable(origin))
+        if(health > 0 && !busy && heldProduct != null)// && isReachable(origin))
         {
             foreach(Transition transition in blueprint.transitions)
             {
@@ -152,6 +168,30 @@ public class StationInstance : MonoBehaviour
         return product;
     }
 
+    public float interact(CatcherScript catcher)
+    {
+        if (health > 0)
+        {
+            if (catcher.getHeldProduct() == null)
+            {
+                catcher.holdProduct(heldProduct);
+                heldProduct = null;
+            }
+            else if (heldProduct == null)
+            {
+                return putProduct(catcher.getHeldProduct());
+            }
+            return 0;
+        }
+        else
+        {
+            transitionTime = repairTime;
+            currentTransitionTime = 0;
+            busy = true;
+            return repairTime;
+        }
+    }
+
     // Devuelve true si pos está en frente
     public bool isInFront(Vector3 position)
     {
@@ -162,11 +202,25 @@ public class StationInstance : MonoBehaviour
     
     public void takeHealth(int h)
     {
-        health -= h;
-        if(health <= 0)
+        if (health > 0)
         {
-            // Cambiar apariencia
+            health -= h;
+            if (health <= 0)
+            {
+                mainModel.SetActive(false);
+                brokenModel.SetActive(true);
+                if(heldProduct != null)
+                    Destroy(heldProduct.gameObject);
+                busy = false;
+            }
         }
+    }
+
+    public void repair()
+    {
+        health = 5;
+        mainModel.SetActive(true);
+        brokenModel.SetActive(false);
     }
 
     public int getHealth()
@@ -190,7 +244,6 @@ public class StationInstance : MonoBehaviour
         speedFactor = factor;
         maxChangeSpeedTime = time;
         currentChangeSpeedTime = 0;
-    }
-    
+    }    
 
 }

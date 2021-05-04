@@ -14,6 +14,7 @@ enum MonsterState
 
 public class MonsterController : MonoBehaviour
 {
+    public ReachableTracker reachableTracker;
 
     public GameObject healthBar;
 
@@ -27,9 +28,10 @@ public class MonsterController : MonoBehaviour
     double lastTime = 0.0;
 
     int health;
-    int initHealth = 5;
+    int initHealth = 10;
 
     Animator animator;
+
 
     //ProductManager productManager;
 
@@ -50,11 +52,7 @@ public class MonsterController : MonoBehaviour
         switch (state)
         {
             case MonsterState.WAITING:
-                IEnumerable<StationInstance> stations = FindObjectsOfType<StationInstance>().Where(s => s.getHealth() > 0);
-                if(stations.Count() <= 0)
-                    break;
-                int randIdx = Random.Range(0, stations.Count() - 1);
-                target = stations.ElementAt(randIdx);
+                target = reachableTracker.getRandomAliveStation();
                 nvAgent.SetDestination(target.getWaitPos(transform.position));
                 nvAgent.isStopped = false;
                 state = MonsterState.WALKING;

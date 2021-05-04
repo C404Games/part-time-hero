@@ -38,7 +38,7 @@ public class CatcherScript : MonoBehaviour
             StationInstance station = reachableTracker.getNearestStation();
             if (station != null)
             {
-                float time = station.activate(transform.parent.position);
+                float time = station.activate();
                 if(time > 0)
                     playerMovement.blockMovement(time, station.getWaitPos(playerMovement.transform.position), station.getWaitRot(playerMovement.transform.position));
             }
@@ -51,20 +51,19 @@ public class CatcherScript : MonoBehaviour
         // SI no llevamos nada
         if (heldObject == null)
         {
-
             //Cogemos el objeto del target si hay
-            if (station != null && !station.isBusy())
+            if (station != null)
             {
-                ProductInstance p = station.takeProduct();
-                if (p != null)
-                {
-                    holdProduct(p);
-                    return;
-                }
+                float time = station.interact(this);
+                if(time > 0)
+                    playerMovement.blockMovement(time, station.getWaitPos(playerMovement.transform.position), station.getWaitRot(playerMovement.transform.position));
             }
             //Cogemos el objeto libre cercano si hay
-            ProductInstance product = reachableTracker.getNearestProduct();
-            holdProduct(product);
+            else
+            {
+                ProductInstance product = reachableTracker.getNearestProduct();
+                holdProduct(product);
+            }
         }
 
         // SI llevamos algo
@@ -78,7 +77,7 @@ public class CatcherScript : MonoBehaviour
             // SI no... Si lo podemos dejar en un mueble, lo dejamos
             else if (station != null)
             {
-                float time = station.putProduct(heldObject, transform.parent.position);
+                float time = station.putProduct(heldObject);
                 if (time < 0)
                     return;
                 if (time > 0)

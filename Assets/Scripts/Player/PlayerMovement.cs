@@ -203,6 +203,13 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(unlockMovement(time));
         animator.SetBool("Chop", true);
     }
+    /*
+    public void repairStation(float time, StationInstance station)
+    {
+        blockMovement(time, station.getWaitPos(transform.position), station.getWaitRot(transform.position));
+        StartCoroutine(repairStationTime(station, time));
+    }
+    */
 
     public void freeze(float time)
     {
@@ -227,4 +234,11 @@ public class PlayerMovement : MonoBehaviour
         blocked = false;
         animator.SetBool("Chop", false);
     }
+    /*
+    private IEnumerator repairStationTime(StationInstance station, float time)
+    {
+        yield return new WaitForSeconds(time);
+        station.repair();
+    }
+    */
 }
