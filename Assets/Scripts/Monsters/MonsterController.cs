@@ -52,7 +52,7 @@ public class MonsterController : MonoBehaviour
         switch (state)
         {
             case MonsterState.WAITING:
-                target = reachableTracker.getRandomAliveStation();
+                target = reachableTracker.getRandomStation();
                 nvAgent.SetDestination(target.getWaitPos(transform.position));
                 nvAgent.isStopped = false;
                 state = MonsterState.WALKING;

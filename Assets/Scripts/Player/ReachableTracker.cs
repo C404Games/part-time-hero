@@ -67,7 +67,7 @@ public class ReachableTracker : MonoBehaviour
         ProductInstance minDistProduct = null;
         foreach (ProductInstance product in reachableProducts)
         {
-            if (product.id == id &&
+            if (product.id == id && 
                 Vector3.Distance(product.transform.position, player.transform.position) < minDist)
                 minDistProduct = product;
         }
@@ -80,7 +80,7 @@ public class ReachableTracker : MonoBehaviour
         StationInstance minDistStation = null;
         foreach (StationInstance station in reachableStations)
         {
-            if (station.id == id && station.isOccupied() == occupied &&
+            if (station.id == id && station.getHealth() > 0 && station.isOccupied() == occupied &&
                 Vector3.Distance(station.transform.position, player.transform.position) < minDist)
             {
                 minDistStation = station;
@@ -94,7 +94,7 @@ public class ReachableTracker : MonoBehaviour
         List<StationInstance> stationList = new List<StationInstance>();
         foreach (StationInstance station in reachableStations)
         {
-            if (station.id == id && station.isOccupied() == occupied)
+            if (station.id == id && station.getHealth() > 0 && station.isOccupied() == occupied)
             {
                 stationList.Add(station);
             }
@@ -108,14 +108,14 @@ public class ReachableTracker : MonoBehaviour
         StationInstance minDistStation = null;
         foreach (StationInstance station in reachableStations)
         {
-            if (station.name == name && station.isOccupied() == occupied &&
+            if (station.name == name && station.isOccupied() == occupied && station.getHealth() > 0 &&
                 Vector3.Distance(station.transform.position, player.transform.position) < minDist)
                 minDistStation = station;
         }
         return minDistStation;
     }
 
-    public StationInstance getRandomAliveStation()
+    public StationInstance getRandomStation()
     {
         return reachableStations.Where(s => s.getHealth() > 0).ToList()[Random.Range(0, reachableStations.Count)];
     }

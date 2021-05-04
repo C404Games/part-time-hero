@@ -63,6 +63,7 @@ public class StationInstance : MonoBehaviour
             }
             else
             {
+                busy = false;
                 // Si tiene vida, termina cocinado
                 if (health > 0)
                 {
@@ -73,10 +74,7 @@ public class StationInstance : MonoBehaviour
                 else
                 {
                     repair();
-                }
-
-                busy = false;
-                
+                }                
             }
         }
     }
@@ -118,7 +116,7 @@ public class StationInstance : MonoBehaviour
                 if (heldProduct.applyResource(product.id))
                 {
                     Destroy(product.gameObject);
-                    return 0;
+                    return activate();
                 }
                 return -1;
             }
