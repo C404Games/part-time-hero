@@ -30,7 +30,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 waitPosition;
     private Vector3 waitRotation;
 
-    Vector3 velocity;    
+    Vector3 velocity;
+    float acceleration = 15.0f;
 
     Rigidbody rb;
     NavMeshAgent nvAgent;
@@ -73,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 rb.velocity = velocity * speed * speedFactor;
                 nvAgent.speed = speed * speedFactor;
+                nvAgent.acceleration = acceleration * speedFactor;
                 if (velocity.sqrMagnitude != 0 && (!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f))
                     transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime * rotSpeed * speedFactor);
                 if ((!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f) && rb.velocity == new Vector3(0, 0, 0))
