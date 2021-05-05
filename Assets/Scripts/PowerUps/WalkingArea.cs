@@ -45,7 +45,7 @@ public class WalkingArea : MonoBehaviour
         if (initialBlockTimer < currentTime)
         {
             currentGenerationTime += Time.deltaTime;
-            secondRandomNumber = (int)UnityEngine.Random.Range((int)currentGenerationTime, frequency);
+            secondRandomNumber = (int)Random.Range((int)currentGenerationTime, frequency);
             if (teamArea == 1 && matchManager.getPunctuationTeam1() < matchManager.getPunctuationTeam2() || teamArea == 2 && matchManager.getPunctuationTeam2() < matchManager.getPunctuationTeam1())
             {
                 handicapFactor = 1.05f;
