@@ -9,8 +9,15 @@ public class MatchManager : MonoBehaviour
     public GameObject team1Part;
     public GameObject team2Part;
 
+    public List<ReachableTracker> trackersTeam1;
+    public List<ReachableTracker> trackersTeam2;
+
+    public List<WalkingArea> areasTeam1;
+    public List<WalkingArea> areasTeam2;
+
+    public GameObject[] monsterPrefabs;
+
     private int level;
-    private int numberOfPlayers;
 
     private List<PlayerMovement> charactersTeam1;
     private List<PlayerMovement> charactersTeam2;
@@ -36,31 +43,20 @@ public class MatchManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        level = 1;
-        if (GameObject.Find("Player") != null)
-        {
-            numberOfPlayers++;
-        }
-        if (GameObject.Find("Player2") != null)
-        {
-            numberOfPlayers++;
-        }
-        if (GameObject.Find("Player3") != null)
-        {
-            numberOfPlayers++;
-        }
-        if (GameObject.Find("Player4") != null)
-        {
-            numberOfPlayers++;
-        }
-        numberOfPlayers = 1;
+        level = 1;        
 
-        List<PlayerMovement> allCharacters = new List<PlayerMovement>(FindObjectsOfType<PlayerMovement>());
+        PlayerMovement[] allCharacters = FindObjectsOfType<PlayerMovement>();
         charactersTeam1 = allCharacters.Where(p => p.team == 1).ToList();
         charactersTeam2 = allCharacters.Where(p => p.team == 2).ToList();
 
         stationsTeam1 = team1Part.transform.GetComponentsInChildren<StationInstance>().ToList();
         stationsTeam2 = team2Part.transform.GetComponentsInChildren<StationInstance>().ToList();
+
+        /*
+        WalkingArea[] allAreas = FindObjectsOfType<WalkingArea>();
+        areasTeam1 = allAreas.Where(a => a.teamArea == 1).ToList();
+        areasTeam2 = allAreas.Where(a => a.teamArea == 2).ToList();
+        */
 
         team1Dishes = new List<int>();
         team2Dishes = new List<int>();
@@ -103,28 +99,14 @@ public class MatchManager : MonoBehaviour
 
     public int generateOrder()
     {
-        /*
-        Random.seed = (int)(100 + Time.deltaTime);
-        int difficultyLevel = 1;
-        int randomProduct = 0;
-        for (int i = 0; i < this.level; i++)
-        {
-            randomProduct = (int)Random.Range(0.0f,ProductManager.finalProducts.Count);
-            int randomLevel = (int)Random.Range(0.0f, ProductManager.finalProducts.Count);
-            if (difficultyLevel < randomLevel)
-            {
-                difficultyLevel = randomLevel;
-            }
-        }
-        return randomProduct;
-        */
-
-        Random.seed = (int)(100 + Time.deltaTime);
+        Random.seed = System.DateTime.Now.Millisecond;
         int difficultyLevel = level;
         Product randomProduct = null;
         for (int i = 0; i < level; i++)
         {
-            Product product = ProductManager.finalProducts.Values.ToList()[(int)Random.Range(0.0f, ProductManager.finalProducts.Count)];
+            float idx = Random.Range(0.0f, ProductManager.finalProducts.Count);
+            List<Product> products = ProductManager.finalProducts.Values.ToList();
+            Product product = products[(int)idx];
             if ( i == 0 || difficultyLevel < product.difficulty)
             {
                 difficultyLevel = product.difficulty;
@@ -135,28 +117,9 @@ public class MatchManager : MonoBehaviour
 
     }
 
-    public void setLevel(int level)
-    {
-        this.level = level;
-    }
-
-
     public int getLevel()
     {
         return this.level;
-
-    }
-
-
-    public void setNumberOfPlayers(int numberOfPlayers)
-    {
-        this.numberOfPlayers = numberOfPlayers;
-    }
-
-
-    public int getNumberOfPlayers()
-    {
-        return this.numberOfPlayers;
 
     }
 
@@ -183,11 +146,6 @@ public class MatchManager : MonoBehaviour
     public float getInitialTime()
     {
         return this.initialTime;
-    }
-
-    public void setInitialTime(float initialTime)
-    {
-        this.initialTime = initialTime;
     }
 
     public bool deliverProduct(int team, int id)
@@ -228,9 +186,9 @@ public class MatchManager : MonoBehaviour
                 {
                     // Acelerar movimiento
                     if(playerMovement.team == 1)
-                        charactersTeam1.ForEach(p => p.increaseSpeed());
+                        charactersTeam1.ForEach(p => p.increaseSpeed(2.0f, fastMovementTime));
                     else
-                        charactersTeam2.ForEach(p => p.increaseSpeed());
+                        charactersTeam2.ForEach(p => p.increaseSpeed(2.0f, fastMovementTime));
                 }
                 break;
 
@@ -260,7 +218,24 @@ public class MatchManager : MonoBehaviour
             case PowerupType.MONSTER:
                 {
                     // Mandar monstruo
-                    int team = playerMovement.team == 1 ? 2 : 1;
+                    int team = playerMovement.team;
+                    WalkingArea area = null;
+                    ReachableTracker tracker = null;
+                    if (team == 2)
+                    {
+                        int idx = Random.Range(0, areasTeam1.Count);
+                        area = areasTeam1[idx];
+                        tracker = trackersTeam1[idx];
+                    }
+                    else
+                    {
+                        int idx = Random.Range(0, areasTeam2.Count);
+                        area = areasTeam2[idx];
+                        tracker = trackersTeam2[idx];
+                    }
+                    GameObject monster = monsterPrefabs[(int)Random.Range(0, monsterPrefabs.Length)];
+                    monster.GetComponent<MonsterController>().reachableTracker = tracker;
+                    Instantiate(monster, area.RandomPointInBounds(), Quaternion.identity);
                 }
                 break;
         }

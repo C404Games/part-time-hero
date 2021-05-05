@@ -13,7 +13,10 @@ public class AIAgent : MonoBehaviour
 
     public int id;
 
-    public AIManager manager;
+    public GameObject[] characterPrefabs;
+    public GameObject modelWrapper;
+
+    AIManager manager;
 
     public ReachableTracker reachableTracker;
 
@@ -37,12 +40,23 @@ public class AIAgent : MonoBehaviour
 
     public bool delivering = false;
 
+    private void Awake()
+    {
+        // Carga personaje aleatorio
+        GameObject model = Instantiate(characterPrefabs[(int)Random.Range(0, characterPrefabs.Length)], modelWrapper.transform);
+        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+        model.GetComponent<SwordVisibility>().playerMovement = playerMovement;
+        playerMovement.animator = model.GetComponent<Animator>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         nvAgent = GetComponent<NavMeshAgent>();
         movement = GetComponent<ClickMovement>();
         movement.guaranteeTargetProduct = true;
+
+        manager = FindObjectOfType<AIManager>();                
     }
 
     // Update is called once per frame
@@ -101,6 +115,13 @@ public class AIAgent : MonoBehaviour
                         nvAgent.SetDestination(monster.transform.position);
                         nvAgent.isStopped = false;
                         busy = true;
+                    }
+                    // Si hay mueble roto, reparar
+                    else
+                    {
+                        StationInstance brokenStation = reachableTracker.getNearbyBrokenStation();
+                        if (brokenStation != null)
+                            goToStation(brokenStation);
                     }
                     break;
             }
