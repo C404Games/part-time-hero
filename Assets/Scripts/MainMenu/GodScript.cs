@@ -34,17 +34,25 @@ public class GodScript : MonoBehaviour
 
     public void accionButton(int position)
     {
-        lastPosition = position;
+        bool isCorrect = true;
+        
+        if (position == 1 || position == 3)
+            if (!GetComponent<PhotonController>().OnLoginButtonClicked())
+                isCorrect = false;
 
-        foreach (GameObject subMenu in subMenus)
+        if (isCorrect)
         {
-            subMenu.SetActive(false);
+            lastPosition = position;
+
+            foreach (GameObject subMenu in subMenus)
+            {
+                subMenu.SetActive(false);
+            }
+
+            subMenus[position].SetActive(true);
+
+            point = point2.position;
         }
-
-        subMenus[position].SetActive(true);
-
-        point = point2.position;
-
     }
 
     public void accionButtonToList()

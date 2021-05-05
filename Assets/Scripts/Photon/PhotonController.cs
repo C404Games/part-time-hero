@@ -7,9 +7,8 @@ using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using UnityEngine.UI;
 
-public class PhotonController : MonoBehaviourPunCallbacks
+public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
 {
-    public string playerName = "Chibitor";
 
     public GameObject RoomListContent;
     public GameObject RoomListEntryPrefab;
@@ -18,27 +17,50 @@ public class PhotonController : MonoBehaviourPunCallbacks
     public GameObject InsideRoomPanel;
     public GameObject PlayerListEntryPrefab;
 
+    [Header("Textos visibles")]
+    public Text playerName;
+    public GameObject idSala;
+
+    public enum Map
+    {
+        Taberna = 1,
+        Herrería = 2
+    }
+    [Header("Seleccion de mapa multijugador")]
+    public Map opcion = Map.Taberna;
+
     private Dictionary<string, RoomInfo> cachedRoomList;
     private Dictionary<string, GameObject> roomListEntries;
     private Dictionary<int, GameObject> playerListEntries;
 
     //Definicion de nombre de usuario
-    public void OnLoginButtonClicked()
+    public void forcedLogin()
+    {
+        if (OnLoginButtonClicked())
+            Debug.Log("Login forcoso correcto");
+        else
+            Debug.LogError("Error durante el login forzoso");
+    }
+    public bool OnLoginButtonClicked()
     {
 
-        if (!playerName.Equals(""))
+        if (!"".Equals(playerName.text))
         {
-            Debug.Log("Uniendose a la red con el nombre " + playerName);
-            PhotonNetwork.LocalPlayer.NickName = playerName;
-            if(PhotonNetwork.ConnectUsingSettings())
-                Debug.Log("Usuario " + playerName + " unido correctamente a la red");
+            Debug.Log("Uniendose a la red con el nombre " + playerName.text);
+            PhotonNetwork.LocalPlayer.NickName = playerName.text;
+            if (PhotonNetwork.ConnectUsingSettings())
+            {
+                Debug.Log("Usuario " + playerName.text + " unido correctamente a la red");
+                return true;
+            }
             else
-                Debug.Log("Error al conectar al usuario " + playerName + " a la red");
+                Debug.Log("Error al conectar al usuario " + playerName.text + " a la red");
         }
         else
         {
             Debug.LogError("Player Name is invalid.");
         }
+        return false;
     }
 
     //Creación de sala
@@ -52,10 +74,16 @@ public class PhotonController : MonoBehaviourPunCallbacks
         RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers, PlayerTtl = 10000 };
         options.IsVisible = false;
         Debug.Log("Creando sala: " + roomName);
-        if(PhotonNetwork.CreateRoom(roomName, options, null))
+        if (PhotonNetwork.CreateRoom(roomName, options, null))
+        {
             Debug.Log("Sala " + roomName + " creada con exito");
+            idSala.GetComponent<Text>().text = roomName;
+        }
         else
+        {
             Debug.Log("Sala no crada");
+            idSala.GetComponent<Text>().text = "Error 404";
+        }
 
     }
 
@@ -70,19 +98,26 @@ public class PhotonController : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRandomRoom();
     }
 
+    public void OnPhotonRandomJoinFailed()
+    {
+        OnCreateRoomButtonClicked();
+    }
+
     /**
      * Union a sala especifica
      * */
-    public void JoinInPrivateRoom(string nameEveryFriendKnows)
+    public void JoinInPrivateRoom()
     {
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.IsVisible = false;
-        EnterRoomParams enterRoomParams = new EnterRoomParams();
-        enterRoomParams.RoomName = nameEveryFriendKnows;
-        enterRoomParams.RoomOptions = roomOptions;
-        loadBalancingClient.OpJoinRoom(enterRoomParams);
+        Debug.Log("Voy a entrar a la sala " + idSala.GetComponent<Text>().text);
+        if (PhotonNetwork.JoinRoom(idSala.GetComponent<Text>().text))
+            Debug.Log("He entrado correctamente");
+        else
+            Debug.LogError("Error entrado en la sala");
     }
 
+    /**
+     * Union a lobby
+     */
     public void OnRoomListButtonClicked()
     {
         if (!PhotonNetwork.InLobby)
@@ -91,11 +126,17 @@ public class PhotonController : MonoBehaviourPunCallbacks
         }
     }
 
+    /**
+     * Metodo que se ejecuta cuado no se puede ingresar a una mesa
+     */
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         Debug.LogErrorFormat("Room creation failed with error code {0} and error message {1}", returnCode, message);
     }
 
+    /**
+     * Metodo que se ejecuta cuado se consigue ingresar a una mesa
+     */
     public override void OnJoinedRoom()
     {
         if (playerListEntries == null)
@@ -113,16 +154,22 @@ public class PhotonController : MonoBehaviourPunCallbacks
 
             entry.transform.localRotation = Quaternion.Euler(Vector3.zero);
 
-            entry.GetComponent<PlayerInList>().Initialize(p.NickName, p.ActorNumber);
+            entry.GetComponent<PlayerInList>().Initialize(p.NickName.ToUpper(), p.ActorNumber);
 
             playerListEntries.Add(p.ActorNumber, entry);
+
+            GetComponent<GodScript>().accionButtonToList();
         }
     }
 
     //Salida de sala
     public void OnLeaveGameButtonClicked()
     {
-        PhotonNetwork.LeaveRoom();
+        Debug.Log("Voy a entrar a la sala " + idSala.GetComponent<Text>().text);
+        if (PhotonNetwork.LeaveRoom())
+            Debug.Log("El usuario "+ playerName +" ha abandonado la sala");
+        else
+            Debug.LogError("Error inesperado cuando " + playerName + " ha intentado abandonar la sala");
     }
 
     //Busqueda de salas
