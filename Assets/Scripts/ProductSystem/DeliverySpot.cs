@@ -13,14 +13,12 @@ public class DeliverySpot : MonoBehaviour
         matchManager = FindObjectOfType<MatchManager>();
     }
 
-    public bool deliverProduct(int team, ProductInstance product)
+    public void deliverProduct(int team, ProductInstance product)
     {
-        if(product.getProductType() == ProductType.FINAL && matchManager.deliverProduct(team, product.id))
+        if (product.getProductType() == ProductType.FINAL)
         {
-            // Avisar al manager que lleve eso
-            Destroy(product.gameObject);
-            return true;
+            matchManager.deliverProduct(team, product.id);
         }
-        return false;
+        Destroy(product.gameObject);
     }
 }

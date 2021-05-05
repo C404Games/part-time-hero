@@ -40,6 +40,8 @@ public class ClickMovement : MonoBehaviour
 
     [HideInInspector] public clickTargetType targetType = clickTargetType.FLOOR;
 
+    public bool active = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,7 +70,13 @@ public class ClickMovement : MonoBehaviour
                         catcher.grabBehaviour(null);
                     break;
                 case clickTargetType.TOOLSOURCE:
-                    catcher.holdProduct(targetSource.heldTool.GetComponent<ProductInstance>());
+                    if (catcher.getHeldProduct() == null)
+                        catcher.holdProduct(targetSource.heldTool.GetComponent<ProductInstance>());
+                    else if (catcher.getHeldProduct().id == targetSource.toolId)
+                    {
+                        targetSource.returnTool(catcher.getHeldProduct());
+                        catcher.releaseHeldProduct();
+                    }
                     break;
                 case clickTargetType.DELIVERY:
                     catcher.grabBehaviour(null);
@@ -164,7 +172,7 @@ public class ClickMovement : MonoBehaviour
 
     public void onMouseClick(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (active && context.performed)
         {
             if (!playerMovement.blocked && !playerMovement.frozen)
             {

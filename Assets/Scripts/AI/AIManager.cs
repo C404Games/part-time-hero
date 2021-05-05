@@ -62,7 +62,6 @@ public class AIManager : MonoBehaviour
             // Si el activeAgent ha terminado
             if (activeAgent == null || !activeAgent.busy)
             {
-
                 // COmprobamos si nos han gitaneado el producto primario
                 if (currentNode != null && commonProduct != null)
                 {
@@ -79,9 +78,9 @@ public class AIManager : MonoBehaviour
                     if (stolen)
                     {
                         commonProduct = null;
-                        resetStep();
-                        currentNode.parent1.parent1.done = false;
-                        currentNode.parent1.parent2.done = false;
+                        resetNodeRecursive(currentNode.parent1);
+                        //currentNode.parent1.parent1.done = false;
+                        //currentNode.parent1.parent2.done = false;
                     }
                 }
                 // COmprobamos si nos han gitaneado el producto secundario
@@ -100,9 +99,9 @@ public class AIManager : MonoBehaviour
                     if (stolen)
                     {
                         secondaryProduct = null;
-                        resetStep();
-                        currentNode.parent2.parent1.done = false;
-                        currentNode.parent2.parent2.done = false;
+                        resetNodeRecursive(currentNode.parent2);
+                        //currentNode.parent2.parent1.done = false;
+                        //currentNode.parent2.parent2.done = false;
                     }
                 }
 
@@ -278,8 +277,34 @@ public class AIManager : MonoBehaviour
     public void resetStep()
     {
         step = AIStep.STEP1;
-        currentNode.parent1.done = false;
-        currentNode.parent2.done = false;
+        resetNodeRecursive(currentNode);
+    }
+
+    public void resetNodeRecursive(RecipieNode node)
+    {
+        bool found = true;
+        if (!node.isStation)
+        {
+            found = false;
+            foreach (AIAgent agent in agents)
+            {
+                if (agent.reachableTracker.getProductOnReach(node.id) != null)
+                {
+                    found = true;
+                    break;
+                }
+            }
+        }
+        if (node.parent1 != null)
+        {
+            node.parent1.done = found;
+            resetNodeRecursive(node.parent1);
+        }
+        if (node.parent2 != null)
+        {
+            node.parent2.done = found;
+            resetNodeRecursive(node.parent2);
+        }
     }
 
     public void nextRecipie()

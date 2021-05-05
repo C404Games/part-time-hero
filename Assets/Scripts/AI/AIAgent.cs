@@ -92,7 +92,7 @@ public class AIAgent : MonoBehaviour
                     // Si llegamos al mueble
 
                     // Si no hemos podido dejar el objeto, lo dejamos en otro lado
-                    if (!delivering && catcher.getHeldProduct() != null)
+                    if (!delivering && catcher.getHeldProduct() != null && targetStation.heldProduct != catcher.getHeldProduct())
                     {
                         targetStation = manager.getCommonStation(4);
                         if(targetStation == null)

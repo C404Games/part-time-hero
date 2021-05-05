@@ -17,6 +17,7 @@ public class StationInstance : MonoBehaviour
     Station blueprint;
 
     int health;
+    int maxHealth = 5;
 
     RadialClockController clockController;
 
@@ -31,6 +32,7 @@ public class StationInstance : MonoBehaviour
     float maxChangeSpeedTime;
 
     float repairTime = 5.0f;
+    bool repairing = false;
 
     // Start is called before the first frame update
     void Start()
@@ -107,7 +109,7 @@ public class StationInstance : MonoBehaviour
     }
 
     // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto. Devuelve -1 si no se puede dejar
-    public float putProduct(ProductInstance product)
+    public float putProduct(ProductInstance product, CatcherScript catcher)
     {
         if (health > 0 && !busy)
         {
@@ -115,21 +117,31 @@ public class StationInstance : MonoBehaviour
             {
                 if (heldProduct.applyResource(product.id))
                 {
+                    catcher.releaseHeldProduct();
+                    if (blueprint.noHold.Contains(heldProduct.id))
+                    {
+                        catcher.holdProduct(heldProduct);
+                        heldProduct = null;
+                    }
                     Destroy(product.gameObject);
                     return activate();
                 }
-                return -1;
+                return 0;
             }
             else
             {
                 heldProduct = product;
-                heldProduct.setHolder(transform);
+                if (!blueprint.noHold.Contains(product.id))
+                {
+                    heldProduct.setHolder(transform);
+                    catcher.releaseHeldProduct();
+                }
                 return activate();
             }
         }
         else
         {
-            return -1;
+            return 0;
         }
 
     }
@@ -152,7 +164,7 @@ public class StationInstance : MonoBehaviour
                     currentTransitionTime = 0;
                     transitionDst = transition.dst;
 
-                    return blueprint.auto ? 0 : time;
+                    return transition.auto ? 0 : time;
                 }
             }
         }
@@ -161,6 +173,8 @@ public class StationInstance : MonoBehaviour
 
     public ProductInstance takeProduct()
     {
+        if (busy)
+            return null;
         ProductInstance product = heldProduct;
         heldProduct = null;
         return product;
@@ -172,22 +186,26 @@ public class StationInstance : MonoBehaviour
         {
             if (catcher.getHeldProduct() == null)
             {
-                catcher.holdProduct(heldProduct);
-                heldProduct = null;
+                if (!busy && heldProduct != null)
+                {
+                    catcher.holdProduct(heldProduct);
+                    heldProduct = null;
+                }
             }
             else if (heldProduct == null)
             {
-                return putProduct(catcher.getHeldProduct());
+                return putProduct(catcher.getHeldProduct(), catcher);
             }
             return 0;
         }
-        else
+        else if(!busy)
         {
             transitionTime = repairTime;
             currentTransitionTime = 0;
             busy = true;
             return repairTime;
         }
+        return 0;
     }
 
     // Devuelve true si pos está en frente
@@ -216,7 +234,7 @@ public class StationInstance : MonoBehaviour
 
     public void repair()
     {
-        health = 5;
+        health = maxHealth;
         mainModel.SetActive(true);
         brokenModel.SetActive(false);
     }

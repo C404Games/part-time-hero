@@ -49,7 +49,7 @@ public class ProductManager : MonoBehaviour
             {
                 foreach (dynamic t in entry["transitions"])
                 {
-                    transitions.Add(new Transition((int)t["src"], (int)t["dst"], (int)t["time"]));
+                    transitions.Add(new Transition((int)t["src"], (int)t["dst"], (int)t["time"], true));
                 }
             }
             int difficulty = entry["difficulty"] != null ? entry["difficulty"] : 0;
@@ -78,10 +78,21 @@ public class ProductManager : MonoBehaviour
             {
                 foreach (dynamic t in entry["transitions"])
                 {
-                    transitions.Add(new Transition((int)t["src"], (int)t["dst"], (int)t["time"]));
+                    transitions.Add(new Transition((int)t["src"], (int)t["dst"], (int)t["time"], (bool)t["auto"]));
                 }
             }
-            stationBlueprints.Add((int)entry["id"], new Station((int)entry["id"], (string)entry["name"], (bool)entry["auto"], transitions));
+
+            List<int> noHold = new List<int>();
+
+            if(entry["no_hold"] != null)
+            {
+                foreach(dynamic p in entry["no_hold"])
+                {
+                    noHold.Add((int)p);
+                }
+            }
+
+            stationBlueprints.Add((int)entry["id"], new Station((int)entry["id"], (string)entry["name"], transitions, noHold));
         }
     }
 }
