@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGame.unity
     guid: 0ecded158b46ef447a34ea0944a69e7a
+  - enabled: 1
+    path: Assets/Scenes/HistoryFirstLevel.unity
+    guid: 577c2708253bed34d93817f22f2f3ca1
+  - enabled: 1
+    path: Assets/Scenes/Tabern - Level 1.unity
+    guid: 497dc9d175351424d8e253b48b0b4048
   m_configObjects: {}
