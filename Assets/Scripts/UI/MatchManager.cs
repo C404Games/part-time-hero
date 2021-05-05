@@ -9,6 +9,12 @@ public class MatchManager : MonoBehaviour
     public GameObject team1Part;
     public GameObject team2Part;
 
+    public List<ReachableTracker> trackersTeam1;
+    public List<ReachableTracker> trackersTeam2;
+
+    public List<WalkingArea> areasTeam1;
+    public List<WalkingArea> areasTeam2;
+
     public GameObject[] monsterPrefabs;
 
     private int level;
@@ -18,9 +24,6 @@ public class MatchManager : MonoBehaviour
 
     private List<StationInstance> stationsTeam1;
     private List<StationInstance> stationsTeam2;
-
-    private List<WalkingArea> areasTeam1;
-    private List<WalkingArea> areasTeam2;
 
     private float punctuationTeam1;
     private float punctuationTeam2;
@@ -49,9 +52,11 @@ public class MatchManager : MonoBehaviour
         stationsTeam1 = team1Part.transform.GetComponentsInChildren<StationInstance>().ToList();
         stationsTeam2 = team2Part.transform.GetComponentsInChildren<StationInstance>().ToList();
 
+        /*
         WalkingArea[] allAreas = FindObjectsOfType<WalkingArea>();
         areasTeam1 = allAreas.Where(a => a.teamArea == 1).ToList();
         areasTeam2 = allAreas.Where(a => a.teamArea == 2).ToList();
+        */
 
         team1Dishes = new List<int>();
         team2Dishes = new List<int>();
@@ -215,11 +220,21 @@ public class MatchManager : MonoBehaviour
                     // Mandar monstruo
                     int team = playerMovement.team;
                     WalkingArea area = null;
+                    ReachableTracker tracker = null;
                     if (team == 2)
-                        area = areasTeam1[(int)Random.Range(0, areasTeam1.Count)];
+                    {
+                        int idx = Random.Range(0, areasTeam1.Count);
+                        area = areasTeam1[idx];
+                        tracker = trackersTeam1[idx];
+                    }
                     else
-                        area = areasTeam2[(int)Random.Range(0, areasTeam2.Count)];
+                    {
+                        int idx = Random.Range(0, areasTeam2.Count);
+                        area = areasTeam2[idx];
+                        tracker = trackersTeam2[idx];
+                    }
                     GameObject monster = monsterPrefabs[(int)Random.Range(0, monsterPrefabs.Length)];
+                    monster.GetComponent<MonsterController>().reachableTracker = tracker;
                     Instantiate(monster, area.RandomPointInBounds(), Quaternion.identity);
                 }
                 break;

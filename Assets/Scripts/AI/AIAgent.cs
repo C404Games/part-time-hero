@@ -116,6 +116,13 @@ public class AIAgent : MonoBehaviour
                         nvAgent.isStopped = false;
                         busy = true;
                     }
+                    // Si hay mueble roto, reparar
+                    else
+                    {
+                        StationInstance brokenStation = reachableTracker.getNearbyBrokenStation();
+                        if (brokenStation != null)
+                            goToStation(brokenStation);
+                    }
                     break;
             }
         }
