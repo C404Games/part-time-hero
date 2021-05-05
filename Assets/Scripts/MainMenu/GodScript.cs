@@ -9,6 +9,7 @@ public class GodScript : MonoBehaviour
     public GameObject mainCamera;
     public Transform point1;
     public Transform point2;
+    public Transform point3;
 
     [SerializeField] 
     private GameObject[] subMenus;
@@ -18,6 +19,8 @@ public class GodScript : MonoBehaviour
     private Vector3 point;
 
     private int playerCoins = 0;
+
+    private int lastPosition = 0;
 
     private void Start()
     {
@@ -31,6 +34,8 @@ public class GodScript : MonoBehaviour
 
     public void accionButton(int position)
     {
+        lastPosition = position;
+
         foreach (GameObject subMenu in subMenus)
         {
             subMenu.SetActive(false);
@@ -40,6 +45,16 @@ public class GodScript : MonoBehaviour
 
         point = point2.position;
 
+    }
+
+    public void accionButtonToList()
+    {
+        point = point3.position;
+    }
+
+    public void volverButtonFromList()
+    {
+        point = lastPosition == 1 ? point2.position : point1.position;
     }
 
     public void volverButton()
