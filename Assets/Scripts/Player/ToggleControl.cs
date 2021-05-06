@@ -10,6 +10,8 @@ public class ToggleControl : MonoBehaviour
 {
     public bool on;
 
+    public GameObject arrow;
+
     PlayerMovement playerMovement;
     ClickMovement clickMovement;
     CatcherScript catcher;
@@ -25,7 +27,13 @@ public class ToggleControl : MonoBehaviour
         playerMovement.active = on;
         clickMovement.active = on;
         catcher.active = on;
+        arrow.SetActive(on);
         partner = FindObjectOfType<ToggleControl>();
+    }
+
+    private void Update()
+    {
+        arrow.transform.LookAt(Camera.main.transform, Camera.main.transform.up);
     }
 
     public void toggle()
@@ -34,6 +42,7 @@ public class ToggleControl : MonoBehaviour
         playerMovement.active = on;
         clickMovement.active = on;
         catcher.active = on;
+        arrow.SetActive(on);
     }
 
     public void togglePartner()
@@ -42,6 +51,7 @@ public class ToggleControl : MonoBehaviour
         playerMovement.active = on;
         clickMovement.active = on;
         catcher.active = on;
+        arrow.SetActive(on);
         partner.toggle();
     }
 

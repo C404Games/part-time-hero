@@ -14,7 +14,7 @@ public class RadialClockController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        offset = new Vector3(0.0f, 30.0f, 0.0f);
+        offset = new Vector3(0, 0.15f * Screen.height, 0);
         clocks = new Dictionary<StationInstance, Image>();
         List<StationInstance> stations = new List<StationInstance>(FindObjectsOfType<StationInstance>());
         foreach(StationInstance station in stations)

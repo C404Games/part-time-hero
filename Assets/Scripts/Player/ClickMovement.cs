@@ -238,6 +238,14 @@ public class ClickMovement : MonoBehaviour
                         nvAgent.SetDestination(targetMonster.transform.position);
                         nvAgent.isStopped = false;
                     }
+                    else if (hit.collider.tag.Equals("Delivery"))
+                    {
+                        targetType = clickTargetType.DELIVERY;
+                        targetDeliverySpot = hit.collider.GetComponent<DeliverySpot>();
+                        Vector3 dest = targetDeliverySpot.transform.position;
+                        nvAgent.SetDestination(dest);
+                        nvAgent.isStopped = false;
+                    }
                 }
             }
             else if (playerMovement.isBookOpen())
