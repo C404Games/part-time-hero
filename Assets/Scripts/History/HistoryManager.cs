@@ -53,7 +53,9 @@ public class HistoryManager : MonoBehaviour
     private bool prologueActive;
     private bool nextStepIsTaken;
     public Texture backgroundTexture;
-    public Texture magicianTexture;
+    public Texture barkeeperTexture;
+    public Texture blacksmithTexture;
+    public Texture magicTexture;
     public Texture town1;
     public Texture town2;
 
@@ -163,7 +165,6 @@ public class HistoryManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(actions.Count);
         if (prologueActive)
         {
             if (historyAnimator.GetCurrentAnimatorStateInfo(0).IsName("textShowIdle"))
@@ -216,7 +217,19 @@ public class HistoryManager : MonoBehaviour
                     case "Mago":
                         {
                             characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
-                            characterSpeaker.texture = magicianTexture;
+                            characterSpeaker.texture = magicTexture;
+                            break;
+                        }
+                    case "Tabernero":
+                        {
+                            characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
+                            characterSpeaker.texture = barkeeperTexture;
+                            break;
+                        }
+                    case "Herrero":
+                        {
+                            characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
+                            characterSpeaker.texture = blacksmithTexture;
                             break;
                         }
 
@@ -268,7 +281,7 @@ public class HistoryManager : MonoBehaviour
                 globalText.text = "";
                 textOption1.text = "";
                 textOption2.text = "";
-                nextButton.interactable = true;
+                nextButton.interactable = false;
                 nextInputField.transform.localScale = new Vector3(1, 1, 1);
                 option1Button.transform.localScale = new Vector3(0, 0, 0);
                 option2Button.transform.localScale = new Vector3(0, 0, 0);

@@ -3,8 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
 public class MatchManager : MonoBehaviour
 {
+    public class Tuple<T, U>
+    {
+        public T Item1;
+        public U Item2;
+
+        public Tuple(T item1, U item2)
+        {
+            Item1 = item1;
+            Item2 = item2;
+        }
+    }
 
     public GameObject team1Part;
     public GameObject team2Part;
@@ -30,8 +42,8 @@ public class MatchManager : MonoBehaviour
 
     private float initialTime;
 
-    public List<int> team1Dishes;
-    public List<int> team2Dishes;
+    public List<Tuple<bool, int>> team1Dishes;
+    public List<Tuple<bool, int>> team2Dishes;
 
     MenuBehaviour menuBehaviour;
 
@@ -39,6 +51,13 @@ public class MatchManager : MonoBehaviour
     float fastStationTime = 10.0f;
     float slowStationTime = 10.0f;
     float fastMovementTime = 10.0f;
+
+    void Awake()
+    {
+
+        team1Dishes = new List<Tuple<bool, int>>();
+        team2Dishes = new List<Tuple<bool, int>>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -58,8 +77,6 @@ public class MatchManager : MonoBehaviour
         areasTeam2 = allAreas.Where(a => a.teamArea == 2).ToList();
         */
 
-        team1Dishes = new List<int>();
-        team2Dishes = new List<int>();
 
         initialTime = 300.0f;
 
@@ -148,24 +165,53 @@ public class MatchManager : MonoBehaviour
         return this.initialTime;
     }
 
-    public bool deliverProduct(int team, int id)
+    public int deliverProduct(int team, int id)
     {
-        if (team == 1 && team1Dishes.Contains(id))
+        Tuple<bool, int> deliveryTuple = new Tuple<bool, int>(true,id);
+        if (team == 1)
         {
-            team1Dishes.Remove(id);
-            punctuationTeam1 += (ProductManager.finalProducts[id].difficulty+1) * 10;
-            menuBehaviour.updatePoints();
-            return true;
+            int value = -1;
+            for (int  i = 0; i < team1Dishes.Count; i++)
+            {
+                if (team1Dishes[i].Item1 && team1Dishes[i].Item2 == id)
+                {
+                    value = i;
+                    break;
+                }
+            }
+            if (value != -1)
+            {
+                deliveryTuple.Item1 = false;
+                team1Dishes[value] = deliveryTuple;
+                punctuationTeam1 += (ProductManager.finalProducts[id].difficulty + 1) * 10;
+                menuBehaviour.updatePoints();
+            }
+            return value;
         }
-        else if(team == 2 && team2Dishes.Contains(id))
+        else if(team == 2)
         {
-            team2Dishes.Remove(id);
-            punctuationTeam2 += (ProductManager.finalProducts[id].difficulty + 1) * 10;
-            menuBehaviour.updatePoints();
-            return true;
+            int value = -1;
+            for (int i = 0; i < team2Dishes.Count; i++)
+            {
+                if (team2Dishes[i].Item1 && team2Dishes[i].Item2 == id)
+                {
+                    value = i;
+                    break;
+                } 
+            }
+            if (value !=  -1)
+            {
+                deliveryTuple.Item1 = false;
+                team2Dishes[value] = deliveryTuple;
+                punctuationTeam2 += (ProductManager.finalProducts[id].difficulty + 1) * 10;
+                menuBehaviour.updatePoints();
+            }
+            return value;
+        } else
+        {
+            Debug.Log("no hay coincidencia "+ id);
         }
-
-        return false;
+        return -1;
     }
 
     public void castPowerup(PlayerMovement playerMovement, PowerupType type)

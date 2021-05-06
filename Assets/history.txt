@@ -12,14 +12,18 @@ PRE:Tras semanas andando y comiendo de lo que cazaba llegué a mi destino... o e
 :¿Cuál es esta zona?
 :¿Dónde puedo encontrar trabajo y acción?
 -Mago(P1):Te encuentras ante la región más poderosa del reino formada por los pueblos de Tomatelandia y Patatalandia.
-:¡Uy! Supongo que quieres saber algo más, porque veo tu expresión por ese gesto. Tanto Patatalandia como Tomatelandia estaban muy unidos hasta hace muy poco, su única preocupación era matar a unos asquerosos monstruos que nos querían invadir.
-:Sin embargo, esto se descontroló desde que Troyano, nuestro rey, decidió dar más poder y dinero a quiénes más colaborasen con el pueblo y repelieran a los monstruos que nos invadían.
-:¿Qué tiene de mala esa norma? Muy simple, cada persona y tienda compite por su el dinero y el poder suyo y de su pueblo, nos ha separado, pero a la vez, unió más a los que te ayudan.
+:¡Uy! Supongo que quieres saber algo más, porque veo tu expresión por ese gesto. 
+:Tanto Patatalandia como Tomatelandia estaban muy unidos hasta hace muy poco, su única preocupación era matar a unos asquerosos monstruos que nos querían invadir.
+:Sin embargo, esto se descontroló desde que Troyano, nuestro rey, decidió dar más poder y dinero a quiénes más colaborasen con el pueblo y repelieran a los monstruos.
+:¿Qué tiene de mala esa norma? Muy simple, cada persona y tienda compite por su dinero y el poder suyo y de su pueblo.
+:Esta ambición nos ha separado, pero a la vez, unió más a los que te ayudan.
 :Ve al ayuntamiento, ahí te indicarán el rango que tienes y las misiones disponibles.
 :Elige tu pueblo de residencia y ¡Cuidado con los monstruos!
 -Mago(P2):Antes de explicarte como encontrar tu primer trabajo debes saber un poco de nosotros.
-:En este valle que ves, viven los habitantes de los pueblos de Patatalandia y Tomatelandia. Hasta hace muy poco, su única preocupación era matar a unos asquerosos monstruos que nos querían invadir.
-:Sin embargo, esto se descontroló desde que Troyano, nuestro rey, decidió dar más poder y dinero a quiénes más colaboren con el pueblo y con los monstruos que nos invadían.
-:¿Qué tiene de mala esa norma? Muy simple, cada persona y tienda compite por su el dinero y el poder suyo y de su pueblo, nos ha separado, pero a la vez unió más a los que te ayudan.
+:En este valle que ves, viven los habitantes de los pueblos de Patatalandia y Tomatelandia. 
+:Hasta hace muy poco, su única preocupación era matar a unos asquerosos monstruos que nos querían invadir.
+:Sin embargo, esto se descontroló desde que Troyano, nuestro rey, decidió dar más poder y dinero a quiénes más colaboren con el pueblo y con los monstruos.
+:¿Qué tiene de mala esa norma? Muy simple, cada persona y tienda compite por su dinero y el poder suyo y de su pueblo.
+:Esta ambición nos ha separado, pero a la vez unió más a los que te ayudan.
 :Ve al ayuntamiento, ahí te indicarán el rango que tienes y las misiones disponibles.
 :Elige tu pueblo de residencia y cuidado con los monstruos.

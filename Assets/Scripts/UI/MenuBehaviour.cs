@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 
 public class MenuBehaviour : MonoBehaviour
 {
@@ -20,7 +22,7 @@ public class MenuBehaviour : MonoBehaviour
     public GameObject dishMenuPrefab;
     private Transform teamDishPanel;
     private Transform currentDishPanel;
-    public int frequency = 30;
+    public int frequency = 5;
     public Texture decorativeElement1;
     public Texture decorativeElement2;
 
@@ -43,15 +45,35 @@ public class MenuBehaviour : MonoBehaviour
         currentTime += Time.deltaTime;
         totalTime += Time.deltaTime;
         //Generation of dishes 0s - 30s - 1m 00s...
-        if ((currentTime > frequency|| matchManager.team1Dishes.Count == 0) && dishGenerationActive)
+        if ((currentTime > frequency || matchManager.team1Dishes.Count == 0) && dishGenerationActive)
         {
-            if (matchManager.team1Dishes.Count <= 4)
+            int position = -1;
+            if (matchManager.team1Dishes.Count < 4)
+            {
+                position = matchManager.team1Dishes.Count;
+            } else
+            {
+                for (int i = 0; i < matchManager.team1Dishes.Count; i++)
+                {
+                    if (!matchManager.team1Dishes[i].Item1)
+                    {
+                        position = i;
+                        break;
+                    }
+                }
+            }
+            position++;
+            if (position >= 1)
             {
                 dish1 = matchManager.generateOrder();
-
-                matchManager.team1Dishes.Add(ProductManager.finalProducts[dish1].id);
-
-                currentPanelDishName = "Dish" + (matchManager.team1Dishes.Count) + "Panel";
+                if (position == (matchManager.team1Dishes.Count + 1))
+                {
+                    matchManager.team1Dishes.Add(new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish1].id));
+                }else
+                {
+                    matchManager.team1Dishes[position-1] = new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish1].id);
+                }
+                currentPanelDishName = "Dish" + (position) + "Panel";
                 teamDishPanel = transform.Find("TeamDish1Panel");
                 currentDishPanel = teamDishPanel.Find(currentPanelDishName);
                 dishMenuPrefab = Instantiate(transform.Find("Dish").gameObject) as GameObject;
@@ -61,13 +83,35 @@ public class MenuBehaviour : MonoBehaviour
                 UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
                 dishNameText.text = ProductManager.finalProducts[dish1].name;
             }
-            if (matchManager.team2Dishes.Count <= 4)
+            position = -1;
+            if (matchManager.team2Dishes.Count < 4)
+            {
+                position = matchManager.team2Dishes.Count;
+            }
+            else
+            {
+                for (int i = 0; i < matchManager.team2Dishes.Count; i++)
+                {
+                    if (!matchManager.team2Dishes[i].Item1)
+                    {
+                        position = i;
+                        break;
+                    }
+                }
+            }
+            position++;
+            if (position >= 1)
             {
                 dish2 = matchManager.generateOrder();
-
-                matchManager.team2Dishes.Add(ProductManager.finalProducts[dish2].id);
-
-                currentPanelDishName = "Dish" + (matchManager.team2Dishes.Count) + "Panel";
+                if (position == (matchManager.team2Dishes.Count + 1))
+                {
+                    matchManager.team2Dishes.Add(new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish2].id));
+                }
+                else
+                {
+                    matchManager.team2Dishes[position-1] = new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish2].id);
+                }
+                currentPanelDishName = "Dish" + (position) + "Panel";
                 teamDishPanel = transform.Find("TeamDish2Panel");
                 currentDishPanel = teamDishPanel.Find(currentPanelDishName);
                 dishMenuPrefab = Instantiate(transform.Find("Dish").gameObject) as GameObject;
@@ -88,21 +132,24 @@ public class MenuBehaviour : MonoBehaviour
         int seconds = (int)(matchManager.getInitialTime() - totalTime) % 60;
         string minutesStr = (minutes < 10) ? "0" + minutes : "" + minutes;
         string secondsStr = (seconds < 10) ? "0" + seconds : "" + seconds;
-        if (seconds > 0)
+        if ((matchManager.getInitialTime() - totalTime) > 0 )
         {
             if (minutes == 0 && seconds >= 15)
             {
                 if (totalTime % 1 < 0.5)
                 {
                     timeText.color = Color.red;
-                } else
+                }
+                else
                 {
                     timeText.color = Color.black;
                 }
-            } else if (seconds == 0 || seconds == 30)
+            }
+            else if (seconds == 0 || seconds == 30)
             {
                 timeText.color = Color.red;
-            } else
+            }
+            else
             {
                 timeText.color = Color.black;
             }
@@ -248,5 +295,4 @@ public class MenuBehaviour : MonoBehaviour
 
         GetComponent<RectTransform>().sizeDelta = new Vector2(max_x - min_x, max_y - min_y);
     }
-
 }
