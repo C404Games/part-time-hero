@@ -300,6 +300,14 @@ public class HistoryManager : MonoBehaviour
 
     public void townSelection(int town)
     {
+        if (town == 0)
+        {
+            PlayerPrefs.SetString("town","Tomatelandia");
+        } else if (town == 1)
+        {
+            PlayerPrefs.SetString("town", "Patatalandia");
+        }
+        PlayerPrefs.SetInt("storyLevelAvailable", 1);
         SceneManager.LoadScene("Tabern - Level 1");
     }
 }
