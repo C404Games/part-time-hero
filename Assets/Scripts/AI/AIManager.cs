@@ -39,6 +39,14 @@ public class AIManager : MonoBehaviour
         recipies = new List<RecipieNode>();
 
         matchManager = FindObjectOfType<MatchManager>();
+        if (!matchManager == null)
+        {
+            if (matchManager.team2Dishes == null)
+            {
+                matchManager.team1Dishes = new List<MatchManager.Tuple<bool, int>>();
+                matchManager.team2Dishes = new List<MatchManager.Tuple<bool, int>>();
+            }
+        }
         genProductTrees();
         // Cojemos una receta cualquiera
         nextRecipie();
@@ -289,7 +297,7 @@ public class AIManager : MonoBehaviour
         //int idx = 3;
         if (matchManager.team2Dishes.Count > 0)
         {
-            int id = matchManager.team2Dishes[0];
+            int id = matchManager.team2Dishes[0].Item2;
             currentRecipie = recipies.Find(n => n.id == id).copySelf(null);
         }
         else
