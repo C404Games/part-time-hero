@@ -86,7 +86,7 @@ public class AIManager : MonoBehaviour
                     if (stolen)
                     {
                         commonProduct = null;
-                        resetNodeRecursive(currentNode.parent1);
+                        resetNodeRecursive(currentNode);
                         //currentNode.parent1.parent1.done = false;
                         //currentNode.parent1.parent2.done = false;
                     }
@@ -107,7 +107,7 @@ public class AIManager : MonoBehaviour
                     if (stolen)
                     {
                         secondaryProduct = null;
-                        resetNodeRecursive(currentNode.parent2);
+                        resetNodeRecursive(currentNode);
                         //currentNode.parent2.parent1.done = false;
                         //currentNode.parent2.parent2.done = false;
                     }
