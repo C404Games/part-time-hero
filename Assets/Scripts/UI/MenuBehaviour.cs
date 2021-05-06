@@ -132,7 +132,7 @@ public class MenuBehaviour : MonoBehaviour
         int seconds = (int)(matchManager.getInitialTime() - totalTime) % 60;
         string minutesStr = (minutes < 10) ? "0" + minutes : "" + minutes;
         string secondsStr = (seconds < 10) ? "0" + seconds : "" + seconds;
-        if (seconds > 0)
+        if ((matchManager.getInitialTime() - totalTime) > 0 )
         {
             if (minutes == 0 && seconds >= 15)
             {
