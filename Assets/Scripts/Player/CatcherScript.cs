@@ -13,6 +13,8 @@ public class CatcherScript : MonoBehaviour
 
     private ProductInstance heldObject;
 
+    public bool active = true;
+
     private void Start()
     {
         animator = transform.parent.GetComponentInChildren<Animator>();
@@ -25,15 +27,14 @@ public class CatcherScript : MonoBehaviour
 
     public void OnGrab(InputAction.CallbackContext context)
     {
-
-        if (context.performed) { 
+        if (active && context.performed) { 
             grabBehaviour(reachableTracker.getNearestStation());
         }
     }
 
     public void OnAction(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (active && context.performed)
         {
             StationInstance station = reachableTracker.getNearestStation();
             if (station != null)
@@ -70,20 +71,17 @@ public class CatcherScript : MonoBehaviour
         else
         {
             // SI lo podemos dejar en un punto de entrega, lo dejamos
-            if (reachableTracker.getDeliverySpotOnReach() != null && reachableTracker.getDeliverySpotOnReach().deliverProduct(playerMovement.team, heldObject))
+            if (reachableTracker.getDeliverySpotOnReach() != null)
             {
+                reachableTracker.getDeliverySpotOnReach().deliverProduct(playerMovement.team, heldObject);
                 animator.SetBool("Hold", false);
             }
             // SI no... Si lo podemos dejar en un mueble, lo dejamos
             else if (station != null)
             {
-                float time = station.putProduct(heldObject);
-                if (time < 0)
-                    return;
+                float time = station.putProduct(heldObject, this);
                 if (time > 0)
                     playerMovement.blockMovement(time, station.getWaitPos(playerMovement.transform.position), station.getWaitRot(playerMovement.transform.position));
-                heldObject = null;
-                animator.SetBool("Hold", false);
             }
         }
     }
@@ -100,6 +98,14 @@ public class CatcherScript : MonoBehaviour
             product.GetComponent<Rigidbody>().useGravity= false;
             //product.GetComponent<BoxCollider>().isTrigger = true;
         }
+    }
+
+    public void releaseHeldProduct()
+    {
+        if (heldObject.getHolder() == transform)
+            heldObject.setHolder(null);
+        heldObject = null;
+        animator.SetBool("Hold", false);
     }
 
 }

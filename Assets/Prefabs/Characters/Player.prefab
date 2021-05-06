@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 8306849867602768391}
-  animator: {fileID: 0}
   reachableTracker: {fileID: 6067305695738055530}
+  active: 1
 --- !u!65 &8306849865848551669
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -193,19 +193,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 1
   volume: 0.5
-  initialSpeed: 5
-  currentSpeed: 0
+  speed: 5
   rotSpeed: 10
   blocked: 0
   increasedSpeed: 0
+  speedFactor: 1
   currentTimeOfMaxSpeed: 0
-  limitTimeMaxSpeed: 30
+  timeMaxSpeed: 0
   frozen: 0
   currentTimeOfFrozen: 0
-  limitTimeFrozen: 5
+  timeFrozen: 0
   animator: {fileID: 0}
   iceCube: {fileID: 3691564834138999428}
   attackBusy: 0
+  active: 1
 --- !u!195 &8306849867602768388
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -358,6 +359,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fe514a2d-c494-4116-857e-b785ca94b4ef
     m_ActionName: Gameplay/Grab[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d8b6a6e6-bcf5-499c-8bf6-80fa8a76b4c6
+    m_ActionName: Gameplay/ToggleControl[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -385,6 +390,7 @@ MonoBehaviour:
   targetProduct: {fileID: 0}
   targetBook: {fileID: 0}
   targetType: 1
+  active: 1
 --- !u!82 &2939870101141733639
 AudioSource:
   m_ObjectHideFlags: 0

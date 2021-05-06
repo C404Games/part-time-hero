@@ -53,10 +53,13 @@ public class MonsterController : MonoBehaviour
         {
             case MonsterState.WAITING:
                 target = reachableTracker.getRandomStation();
-                nvAgent.SetDestination(target.getWaitPos(transform.position));
-                nvAgent.isStopped = false;
-                state = MonsterState.WALKING;
-                animator.SetBool("Walking", true);
+                if (target != null)
+                {
+                    nvAgent.SetDestination(target.getWaitPos(transform.position));
+                    nvAgent.isStopped = false;
+                    state = MonsterState.WALKING;
+                    animator.SetBool("Walking", true);
+                }
                 break;
             case MonsterState.WALKING:
                 if(target == null)

@@ -117,17 +117,19 @@ public class ReachableTracker : MonoBehaviour
 
     public StationInstance getRandomStation()
     {
-        return reachableStations.Where(s => s.getHealth() > 0).ToList()[Random.Range(0, reachableStations.Count)];
+        List<StationInstance> stations = reachableStations.Where(s => s.getHealth() > 0).ToList();
+        if (stations.Count == 0)
+            return null;
+        return stations[Random.Range(0, reachableStations.Count)];
     }
 
     public StationInstance getNearbyBrokenStation()
     {
-        List<StationInstance> stations = reachableStations.Where(s => s.getHealth() <= 0).ToList();
         float minDist = float.MaxValue;
         StationInstance minDistStation = null;
-        foreach (StationInstance station in stations)
+        foreach (StationInstance station in reachableStations)
         {
-            if (station.name == name && Vector3.Distance(station.transform.position, player.transform.position) < minDist)
+            if (station.getHealth() <= 0 && Vector3.Distance(station.transform.position, player.transform.position) < minDist)
                 minDistStation = station;
         }
         return minDistStation;

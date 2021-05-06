@@ -57,6 +57,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ToggleControl"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8b6a6e6-bcf5-499c-8bf6-80fa8a76b4c6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -158,6 +166,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Grab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0e88f68-5a9f-4c26-a49f-119f37296a1e"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleControl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -171,6 +190,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Gameplay_MousePosition = m_Gameplay.FindAction("MousePosition", throwIfNotFound: true);
         m_Gameplay_Action = m_Gameplay.FindAction("Action", throwIfNotFound: true);
         m_Gameplay_Grab = m_Gameplay.FindAction("Grab", throwIfNotFound: true);
+        m_Gameplay_ToggleControl = m_Gameplay.FindAction("ToggleControl", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -225,6 +245,7 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_MousePosition;
     private readonly InputAction m_Gameplay_Action;
     private readonly InputAction m_Gameplay_Grab;
+    private readonly InputAction m_Gameplay_ToggleControl;
     public struct GameplayActions
     {
         private @Controls m_Wrapper;
@@ -234,6 +255,7 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @MousePosition => m_Wrapper.m_Gameplay_MousePosition;
         public InputAction @Action => m_Wrapper.m_Gameplay_Action;
         public InputAction @Grab => m_Wrapper.m_Gameplay_Grab;
+        public InputAction @ToggleControl => m_Wrapper.m_Gameplay_ToggleControl;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +280,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Grab.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGrab;
                 @Grab.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGrab;
                 @Grab.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGrab;
+                @ToggleControl.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggleControl;
+                @ToggleControl.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggleControl;
+                @ToggleControl.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggleControl;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -277,6 +302,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Grab.started += instance.OnGrab;
                 @Grab.performed += instance.OnGrab;
                 @Grab.canceled += instance.OnGrab;
+                @ToggleControl.started += instance.OnToggleControl;
+                @ToggleControl.performed += instance.OnToggleControl;
+                @ToggleControl.canceled += instance.OnToggleControl;
             }
         }
     }
@@ -288,5 +316,6 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
         void OnGrab(InputAction.CallbackContext context);
+        void OnToggleControl(InputAction.CallbackContext context);
     }
 }
