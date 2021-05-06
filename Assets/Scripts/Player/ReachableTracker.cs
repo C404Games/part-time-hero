@@ -120,7 +120,7 @@ public class ReachableTracker : MonoBehaviour
         List<StationInstance> stations = reachableStations.Where(s => s.getHealth() > 0).ToList();
         if (stations.Count == 0)
             return null;
-        return stations[Random.Range(0, reachableStations.Count)];
+        return stations[Random.Range(0, stations.Count)];
     }
 
     public StationInstance getNearbyBrokenStation()
