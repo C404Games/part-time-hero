@@ -305,7 +305,7 @@ public class HistoryManager : MonoBehaviour
         if (town == 0)
         {
             PlayerPrefs.SetString("town", "Tomatelandia");
-            PlayerPrefs.SetString("characterName", this.characterName);
+            PlayerPrefs.SetString("characterPlayerName", this.characterName);
             PlayerPrefs.SetInt("storyLevelAvailable", 1);
             PlayerPrefs.SetInt("tutorialActive", 0);
             this.historyAnimator.SetTrigger("town1Selected");
@@ -313,7 +313,7 @@ public class HistoryManager : MonoBehaviour
         } else if (town == 1)
         {
             PlayerPrefs.SetString("town", "Patatalandia");
-            PlayerPrefs.SetString("characterName", this.characterName);
+            PlayerPrefs.SetString("characterPlayerName", this.characterName);
             PlayerPrefs.SetInt("storyLevelAvailable", 1);
             PlayerPrefs.SetInt("tutorialActive", 0);
             this.historyAnimator.SetTrigger("town2Selected");
@@ -323,7 +323,6 @@ public class HistoryManager : MonoBehaviour
 
     public IEnumerator fadeOutScene(float time)
     {
-        Debug.Log("huhuhu");
         yield return new WaitForSeconds(time);
         SceneManager.LoadScene("MainMenu");
     }
