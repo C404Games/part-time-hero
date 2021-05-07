@@ -9,7 +9,7 @@ public class MenuBehaviour : MonoBehaviour
     public bool visible = true;
     public bool dishGenerationActive;
     private int level;
-    private int numberOfPlayers = 1;
+    private int numberOfPlayers;
     private List<int> characters;
     private int currentCharacter = 0;
     private float currentTime = 0.0f;
@@ -25,7 +25,6 @@ public class MenuBehaviour : MonoBehaviour
     public int frequency = 5;
     public Texture decorativeElement1;
     public Texture decorativeElement2;
-
     MatchManager matchManager;
 
     // Start is called before the first frame update
@@ -35,6 +34,7 @@ public class MenuBehaviour : MonoBehaviour
         rawImages[9].texture = decorativeElement1;
         rawImages[10].texture = decorativeElement2;
         matchManager = FindObjectOfType<MatchManager>();
+        numberOfPlayers = matchManager.numberOfPlayers;
     }
 
     // Update is called once per frame

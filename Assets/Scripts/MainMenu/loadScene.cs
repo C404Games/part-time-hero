@@ -15,6 +15,26 @@ public class loadScene : MonoBehaviour
 
     public void changeToScene()
     {
+        switch (_scene)
+        {
+            case ("Tabern - Level 1"):
+                {
+                    int level = PlayerPrefs.GetInt("storyLevelAvailable", -1);
+                    if (level <= 1)
+                    {
+                        PlayerPrefs.SetInt("tutorialActive", 1);
+                    } else
+                    {
+                        PlayerPrefs.SetInt("tutorialActive", 0);
+                    }
+                    break;
+                }
+            case ("HistoryFirstLevel"):
+                {
+                    PlayerPrefs.SetInt("tutorialActive", 1);
+                    break;
+                }
+        }
         SceneManager.LoadScene(_scene);
     }
 

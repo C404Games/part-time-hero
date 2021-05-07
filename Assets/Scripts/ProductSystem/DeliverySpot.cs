@@ -25,7 +25,6 @@ public class DeliverySpot : MonoBehaviour
     public void deliverProduct(int team, ProductInstance product)
     {
         int deliveryResult = matchManager.deliverProduct(team, product.id);
-        Debug.Log("entrega-" + team + "-"+deliveryResult);
         if (product.getProductType() == ProductType.FINAL && deliveryResult >= 0)
         {
             // Avisar al manager que lleve eso
