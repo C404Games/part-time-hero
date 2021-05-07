@@ -302,12 +302,16 @@ public class HistoryManager : MonoBehaviour
     {
         if (town == 0)
         {
+            this.historyAnimator.SetTrigger("town1Selected");
             PlayerPrefs.SetString("town","Tomatelandia");
         } else if (town == 1)
         {
+            this.historyAnimator.SetTrigger("town2Selected");
             PlayerPrefs.SetString("town", "Patatalandia");
         }
+        PlayerPrefs.SetString("characterName",this.characterName);
         PlayerPrefs.SetInt("storyLevelAvailable", 1);
-        SceneManager.LoadScene("Tabern - Level 1");
+        PlayerPrefs.SetInt("tutorialActive", 0);
+        SceneManager.LoadScene("MainMenu");
     }
 }
