@@ -6,6 +6,14 @@ using UnityEngine.SceneManagement;
 public class loadScene : MonoBehaviour
 {
     public string _scene;
+    public Animator menuAnimator;
+    private IEnumerator fadeCorroutine;
+
+    private void Awake()
+    {
+        fadeCorroutine = fadeOutScene(1.0f);
+    }
+
 
     private void Start()
     {
@@ -35,11 +43,18 @@ public class loadScene : MonoBehaviour
                     break;
                 }
         }
-        SceneManager.LoadScene(_scene);
+        menuAnimator.SetTrigger("fadeIn");
+        StartCoroutine(fadeCorroutine);
     }
 
     public void changeToSpecificScene(string scene)
     {
         SceneManager.LoadScene(scene);
+    }
+
+    public IEnumerator fadeOutScene(float time)
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(_scene);
     }
 }
