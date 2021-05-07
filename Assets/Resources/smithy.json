@@ -1,0 +1,184 @@
+{
+    "Products": [
+      {
+        "id": 0,
+        "name": "PROD_WOOD",
+        "type": 0,
+        "appearence": "Products/Smithy/wood",
+        "transitions": [
+            {
+              "src": 0,
+              "dst": 26,
+              "time": 0
+            }
+          ]
+      },
+      {
+        "id": 1,
+        "name": "PROD_IRON",
+        "type": 0,
+        "appearence": "Products/Smithy/iron"
+      },
+      {
+        "id": 2,
+        "name": "PROD_COPPER",
+        "type": 0,
+        "appearence": "Products/Smithy/iron"
+      },
+      {
+        "id": 3,
+        "name": "PROD_HOT_IRON",
+        "type": 1,
+        "appearence": "Products/Smithy/hotIron"
+      },
+      {
+        "id": 4,
+        "name": "PROD_IRON_BLADE",
+        "type": 1,
+        "appearence": "Products/Smithy/iron_blade"
+      },
+      {
+        "id": 5,
+        "name": "PROD_KNIFE",
+        "type": 2,
+        "appearence": "Products/Smithy/knife",
+        "difficulty": 0
+      },
+      {
+        "id": 6,
+        "name": "PROD_WOOD2",
+        "type": 1,
+        "appearence": "Products/Smithy/wood2",
+        "transitions": [
+            {
+              "src": 0,
+              "dst": 27,
+              "time": 0
+            }
+          ]
+      },
+      {
+        "id": 7,
+        "name": "PROD_WOOD3",
+        "type": 1,
+        "appearence": "Products/Smithy/wood3"
+      },
+      {
+        "id": 8,
+        "name": "PROD_SPEAR",
+        "type": 1,
+        "appearence": "Products/Smithy/spear"
+      },
+      {
+        "id": 9,
+        "name": "PROD_IRON_BLADE_LONG",
+        "type": 1,
+        "appearence": "Products/Smithy/ironBladeLong"
+      },
+      {
+        "id": 10,
+        "name": "PROD_IRON_SWORD",
+        "type": 2,
+        "appearence": "Products/Smithy/ironSword",
+        "difficulty":1
+      },
+      {
+        "id": 11,
+        "name": "PROD_HOT_COPPER",
+        "type": 1,
+        "appearence": "Products/Smithy/hotCopper"
+      },
+      {
+        "id": 12,
+        "name": "PROD_COPPER_BLADE_LONG",
+        "type": 1,
+        "appearence": "Products/Smithy/copperBladeLong"
+      },
+      {
+        "id": 13,
+        "name": "PROD_COPPER_SWORD",
+        "type": 2,
+        "appearence": "Products/Smithy/copperSword",
+        "difficulty":1
+      }
+    ],
+    "Stations":[
+        {
+            "id": 0,
+            "name": "STAT_SMELTER",
+            "transitions": [
+                {
+                "auto": true,
+                "src": 1,
+                "dst": 3,
+                "time": 10
+                },
+                {
+                "auto": true,
+                "src": 2,
+                "dst": 11,
+                "time": 10
+                }
+            ],
+            "no_hold":[4,5,6,7,8,9,10,12]
+        },
+        {
+            "id": 1,
+            "name": "STAT_ANVIL",
+            "transitions": [
+                {
+                "auto": false,
+                "src": 3,
+                "dst": 4,
+                "time": 5
+                },
+                {
+                "auto": false,
+                "src": 11,
+                "dst": 12,
+                "time": 5
+                }
+            ],
+            "no_hold":[4,5,6,7,8,9,10,12,13]
+        },
+        {
+            "id": 2,
+            "name": "STAT_CRAFT",
+            "transitions": [
+                {
+                "pre":0,
+                "auto": false,
+                "src": 4,
+                "dst": 5,
+                "time": 2
+                },
+                {
+                "pre":7,
+                "auto": false,
+                "src": 4,
+                "dst": 8,
+                "time": 2
+                },
+                {
+                "pre":0,
+                "auto": false,
+                "src": 9,
+                "dst": 10,
+                "time": 2
+                },
+                {
+                "pre":0,
+                "auto": false,
+                "src": 12,
+                "dst": 13,
+                "time": 2
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "STAT_TABLE",
+            "transitions": []
+        }
+    ]
+}

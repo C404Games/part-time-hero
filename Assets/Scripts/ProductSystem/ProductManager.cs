@@ -49,7 +49,7 @@ public class ProductManager : MonoBehaviour
             {
                 foreach (dynamic t in entry["transitions"])
                 {
-                    transitions.Add(new Transition((int)t["src"], (int)t["dst"], (int)t["time"], true));
+                    transitions.Add(new Transition(-1, (int)t["src"], (int)t["dst"], (int)t["time"], true));
                 }
             }
             int difficulty = entry["difficulty"] != null ? entry["difficulty"] : 0;
@@ -78,7 +78,8 @@ public class ProductManager : MonoBehaviour
             {
                 foreach (dynamic t in entry["transitions"])
                 {
-                    transitions.Add(new Transition((int)t["src"], (int)t["dst"], (int)t["time"], (bool)t["auto"]));
+                    int pre = t["pre"] != null ? (int)t["pre"] : -1;
+                    transitions.Add(new Transition(pre, (int)t["src"], (int)t["dst"], (int)t["time"], (bool)t["auto"]));
                 }
             }
 

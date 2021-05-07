@@ -129,7 +129,7 @@ public class ReachableTracker : MonoBehaviour
         StationInstance minDistStation = null;
         foreach (StationInstance station in reachableStations)
         {
-            if (station.getHealth() <= 0 && Vector3.Distance(station.transform.position, player.transform.position) < minDist)
+            if (station.getHealth() <= 0 && !station.isBusy() && Vector3.Distance(station.transform.position, player.transform.position) < minDist)
                 minDistStation = station;
         }
         return minDistStation;

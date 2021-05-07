@@ -153,7 +153,7 @@ public class StationInstance : MonoBehaviour
         {
             foreach(Transition transition in blueprint.transitions)
             {
-                if(heldProduct.id == transition.src)
+                if(heldProduct.id == transition.src && (heldProduct.id == transition.pre || transition.pre < 0))
                 {
                     busy = true;
 
