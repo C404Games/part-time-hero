@@ -27,6 +27,11 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8306849865848551671, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8306849865848551674, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: animator
@@ -55,7 +60,7 @@ PrefabInstance:
     - target: {fileID: 8306849867602768390, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3.12767
       objectReference: {fileID: 0}
     - target: {fileID: 8306849867602768390, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
@@ -65,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 8306849867602768390, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8306849867602768390, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}

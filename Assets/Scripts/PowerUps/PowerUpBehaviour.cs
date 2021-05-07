@@ -8,7 +8,8 @@ public enum PowerupType
     SLOW_TIME,
     FAST_TIME,
     MONSTER,
-    FAST_WALK
+    FAST_WALK,
+    STAR
 }
 
 public class PowerUpBehaviour : MonoBehaviour

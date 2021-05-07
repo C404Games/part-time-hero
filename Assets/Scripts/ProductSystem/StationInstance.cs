@@ -14,6 +14,8 @@ public class StationInstance : MonoBehaviour
 
     public ProductInstance heldProduct;
 
+    public bool doubleSided;
+
     Station blueprint;
 
     int health;
@@ -83,7 +85,7 @@ public class StationInstance : MonoBehaviour
 
     public Vector3 getWaitPos(Vector3 currentPos)
     {
-        if (isInFront(currentPos))
+        if (!doubleSided || isInFront(currentPos))
         {
             return waitPosition.position;
         }
