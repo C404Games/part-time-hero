@@ -304,14 +304,18 @@ public class HistoryManager : MonoBehaviour
         {
             this.historyAnimator.SetTrigger("town1Selected");
             PlayerPrefs.SetString("town","Tomatelandia");
+            PlayerPrefs.SetString("characterName", this.characterName);
+            PlayerPrefs.SetInt("storyLevelAvailable", 1);
+            PlayerPrefs.SetInt("tutorialActive", 0);
+            SceneManager.LoadScene("MainMenu");
         } else if (town == 1)
         {
             this.historyAnimator.SetTrigger("town2Selected");
             PlayerPrefs.SetString("town", "Patatalandia");
+            PlayerPrefs.SetString("characterName", this.characterName);
+            PlayerPrefs.SetInt("storyLevelAvailable", 1);
+            PlayerPrefs.SetInt("tutorialActive", 0);
+            SceneManager.LoadScene("MainMenu");
         }
-        PlayerPrefs.SetString("characterName",this.characterName);
-        PlayerPrefs.SetInt("storyLevelAvailable", 1);
-        PlayerPrefs.SetInt("tutorialActive", 0);
-        SceneManager.LoadScene("MainMenu");
     }
 }
