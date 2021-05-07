@@ -52,6 +52,7 @@ public class HistoryManager : MonoBehaviour
     private string town2Name;
     private bool prologueActive;
     private bool nextStepIsTaken;
+    private IEnumerator fadeCorroutine;
     public Texture backgroundTexture;
     public Texture barkeeperTexture;
     public Texture blacksmithTexture;
@@ -150,6 +151,7 @@ public class HistoryManager : MonoBehaviour
 
     void Start()
     {
+        fadeCorroutine = fadeOutScene(2.5f);
         prologueActive = true;
         prologueText.text = actions[currentStep].data[0];
         nextInputField.transform.localScale = new Vector3(0, 0, 0);
@@ -302,20 +304,27 @@ public class HistoryManager : MonoBehaviour
     {
         if (town == 0)
         {
-            this.historyAnimator.SetTrigger("town1Selected");
-            PlayerPrefs.SetString("town","Tomatelandia");
+            PlayerPrefs.SetString("town", "Tomatelandia");
             PlayerPrefs.SetString("characterName", this.characterName);
             PlayerPrefs.SetInt("storyLevelAvailable", 1);
             PlayerPrefs.SetInt("tutorialActive", 0);
-            SceneManager.LoadScene("MainMenu");
+            this.historyAnimator.SetTrigger("town1Selected");
+            StartCoroutine(fadeCorroutine);
         } else if (town == 1)
         {
-            this.historyAnimator.SetTrigger("town2Selected");
             PlayerPrefs.SetString("town", "Patatalandia");
             PlayerPrefs.SetString("characterName", this.characterName);
             PlayerPrefs.SetInt("storyLevelAvailable", 1);
             PlayerPrefs.SetInt("tutorialActive", 0);
-            SceneManager.LoadScene("MainMenu");
+            this.historyAnimator.SetTrigger("town2Selected");
+            StartCoroutine(fadeCorroutine);
         }
+    }
+
+    public IEnumerator fadeOutScene(float time)
+    {
+        Debug.Log("huhuhu");
+        yield return new WaitForSeconds(time);
+        SceneManager.LoadScene("MainMenu");
     }
 }
