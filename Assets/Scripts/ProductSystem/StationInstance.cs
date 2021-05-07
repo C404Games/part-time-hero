@@ -85,28 +85,28 @@ public class StationInstance : MonoBehaviour
 
     public Vector3 getWaitPos(Vector3 currentPos)
     {
-        if (!doubleSided || isInFront(currentPos))
+        if (doubleSided && !isInFront(currentPos))
         {
-            return waitPosition.position;
+            Vector3 dir = transform.position - waitPosition.position;
+            return transform.position + dir;            
         }
         else
         {
-            Vector3 dir = transform.position - waitPosition.position;
-            return transform.position + dir;
+            return waitPosition.position;
         }
     }
 
     public Vector3 getWaitRot(Vector3 currentPos)
     {
-        if (isInFront(currentPos))
-        {
-            return transform.position - waitPosition.position;
-        }
-        else
+        if (doubleSided && !isInFront(currentPos))
         {
             Vector3 dir = transform.position - waitPosition.position;
             Vector3 pos = transform.position + dir;
             return transform.position - pos;
+        }
+        else
+        {
+            return transform.position - waitPosition.position;
         }
     }
 
@@ -244,6 +244,11 @@ public class StationInstance : MonoBehaviour
     public int getHealth()
     {
         return health;
+    }
+
+    public bool isBreakable()
+    {
+        return blueprint.breakable;
     }
 
     public bool isOccupied()

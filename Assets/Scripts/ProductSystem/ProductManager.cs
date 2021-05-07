@@ -93,7 +93,9 @@ public class ProductManager : MonoBehaviour
                 }
             }
 
-            stationBlueprints.Add((int)entry["id"], new Station((int)entry["id"], (string)entry["name"], transitions, noHold));
+            bool breakable = entry["breakable"] != null ? (bool)entry["breakable"] : false;
+
+            stationBlueprints.Add((int)entry["id"], new Station((int)entry["id"], (string)entry["name"], transitions, noHold, breakable));
         }
     }
 }

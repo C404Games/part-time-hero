@@ -123,6 +123,14 @@ public class ReachableTracker : MonoBehaviour
         return stations[Random.Range(0, stations.Count)];
     }
 
+    public StationInstance getRandomBreakableStation()
+    {
+        List<StationInstance> stations = reachableStations.Where(s => s.getHealth() > 0 && s.isBreakable()).ToList();
+        if (stations.Count == 0)
+            return null;
+        return stations[Random.Range(0, stations.Count)];
+    }
+
     public StationInstance getNearbyBrokenStation()
     {
         float minDist = float.MaxValue;

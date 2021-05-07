@@ -122,25 +122,26 @@
             ],
             "no_hold":[4,5,6,7,8,9,10,12]
         },
-        {
-            "id": 1,
-            "name": "STAT_ANVIL",
-            "transitions": [
-                {
-                "auto": false,
-                "src": 3,
-                "dst": 4,
-                "time": 5
-                },
-                {
-                "auto": false,
-                "src": 11,
-                "dst": 12,
-                "time": 5
-                }
-            ],
-            "no_hold":[4,5,6,7,8,9,10,12,13]
-        },
+      {
+        "id": 1,
+        "name": "STAT_ANVIL",
+        "transitions": [
+          {
+            "auto": false,
+            "src": 3,
+            "dst": 4,
+            "time": 5
+          },
+          {
+            "auto": false,
+            "src": 11,
+            "dst": 12,
+            "time": 5
+          }
+        ],
+        "no_hold": [ 4, 5, 6, 7, 8, 9, 10, 12, 13 ],
+        "breakable": true
+      },
         {
             "id": 2,
             "name": "STAT_CRAFT",
