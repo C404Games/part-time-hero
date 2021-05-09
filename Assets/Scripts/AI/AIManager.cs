@@ -86,7 +86,7 @@ public class AIManager : MonoBehaviour
                     if (stolen)
                     {
                         commonProduct = null;
-                        resetNodeRecursive(currentNode.parent1);
+                        resetNodeRecursive(currentNode);
                         //currentNode.parent1.parent1.done = false;
                         //currentNode.parent1.parent2.done = false;
                     }
@@ -107,7 +107,7 @@ public class AIManager : MonoBehaviour
                     if (stolen)
                     {
                         secondaryProduct = null;
-                        resetNodeRecursive(currentNode.parent2);
+                        resetNodeRecursive(currentNode);
                         //currentNode.parent2.parent1.done = false;
                         //currentNode.parent2.parent2.done = false;
                     }
@@ -388,6 +388,11 @@ public class AIManager : MonoBehaviour
                     {
                         node.parent1 = createProdNode(transition.src, node);
                         node.parent2 = createStatNode(station.id, node);
+                        if(transition.pre >= 0)
+                        {
+                            node.parent2.parent1 = createProdNode(transition.pre, node.parent2);
+                            node.parent2.parent2 = createStatNode(station.id, node.parent2);
+                        }
                     }
                 }
             }

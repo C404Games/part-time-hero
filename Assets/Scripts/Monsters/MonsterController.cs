@@ -85,7 +85,7 @@ public class MonsterController : MonoBehaviour
                 }
                 break;
             case MonsterState.ATTACKING:
-                if(target == null || target.getHealth() <= 0)
+                if(target == null || target.getHealth() <= 0 || target.isBusy())
                 {
                     state = MonsterState.WAITING;
                     target = null;

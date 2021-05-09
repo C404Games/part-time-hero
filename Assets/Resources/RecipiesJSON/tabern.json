@@ -89,19 +89,19 @@
       "id": 10,
       "name": "PROD_HONEY_POT",
       "type": 1,
-      "appearence": "Products/Tabern/potStew"
+      "appearence": "Products/Tabern/potHoney"
     },
     {
       "id": 11,
       "name": "PROD_WATER_HONEY_POT",
       "type": 1,
-      "appearence": "Products/Tabern/potStew"
+      "appearence": "Products/Tabern/potHoney"
     },
     {
       "id": 12,
       "name": "PROD_WATER_HONEY_POT_COOKED",
       "type": 1,
-      "appearence": "Products/Tabern/potStew",
+      "appearence": "Products/Tabern/potHoney",
       "transitions": [
         {
           "src": 108,
@@ -116,7 +116,7 @@
       "name": "PROD_CARBONATED_HONEY",
       "type": 2,
       "difficulty": 0,
-      "appearence": "Tools/Tabern/bottle"
+      "appearence": "Products/Tabern/carbonatedHoney"
 
     },
 
@@ -124,7 +124,7 @@
       "id": 14,
       "name": "PROD_BARREL_CHERRY",
       "type": 1,
-      "appearence": "",
+      "appearence": "Products/Tabern/cherries",
       "transitions": [
         {
           "src": 109,
@@ -138,7 +138,7 @@
       "name": "PROD_CHERRY_BEER",
       "type": 2,
       "difficulty": 0,
-      "appearence": "Products/Tabern/burger"
+      "appearence": "Products/Tabern/cherryBeer"
     },
 
     {
@@ -158,14 +158,14 @@
       "id": 17,
       "name": "PROD_TOMATO_POT",
       "type": 1,
-      "appearence": "Products/Tabern/potStew",
+      "appearence": "Products/Tabern/potTomato",
       "AIcollapse": true
     },
     {
       "id": 18,
       "name": "PROD_COOKED_TOMATO_POT",
       "type": 1,
-      "appearence": "Products/Tabern/potStew",
+      "appearence": "Products/Tabern/potTomato",
       "transitions": [
         {
           "src": 107,
@@ -179,7 +179,7 @@
       "name": "PROD_TOMATO_SOUP",
       "type": 2,
       "difficulty": 0,
-      "appearence": "Products/Tabern/plateDinner"
+      "appearence": "Products/Tabern/tomatoSoup"
     },
 
     {

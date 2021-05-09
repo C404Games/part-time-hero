@@ -16,6 +16,7 @@ TagManager:
   - God
   - Bullet
   - RecipieBook
+  - Catcher
   layers:
   - Default
   - TransparentFX

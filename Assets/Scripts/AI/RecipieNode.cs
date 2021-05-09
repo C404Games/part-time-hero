@@ -33,7 +33,7 @@ public class RecipieNode
 
 
         RecipieNode chosen;
-        if (leaf1 == null && leaf2 == null)
+        if (leaf1 == null || leaf2 == null)
             chosen = this;
         if (leaf1 == null)
             chosen = leaf2;
@@ -72,7 +72,7 @@ public class RecipieNode
         if (parent2 != null && !parent2.done)
             leaf2 = parent2.getLeaf(ref level2);
 
-        if (leaf1 == null && leaf2 == null)
+        if (leaf1 == null || leaf2 == null)
             return this;
         if (leaf1 == null)
         {

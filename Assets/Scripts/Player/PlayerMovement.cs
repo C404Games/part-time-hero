@@ -162,7 +162,6 @@ public class PlayerMovement : MonoBehaviour
                 attack();
             else if (recipieBookInReach != null)
                 openCloseBook();                
-            // Otras acciones dependiento del contexto
         }
     }
 

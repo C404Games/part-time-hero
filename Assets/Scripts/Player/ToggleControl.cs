@@ -14,8 +14,6 @@ public class ToggleControl : MonoBehaviour
     ClickMovement clickMovement;
     CatcherScript catcher;
 
-    ToggleControl partner;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +23,6 @@ public class ToggleControl : MonoBehaviour
         playerMovement.active = on;
         clickMovement.active = on;
         catcher.active = on;
-        partner = FindObjectOfType<ToggleControl>();
     }
 
     public void toggle()
@@ -34,15 +31,6 @@ public class ToggleControl : MonoBehaviour
         playerMovement.active = on;
         clickMovement.active = on;
         catcher.active = on;
-    }
-
-    public void togglePartner()
-    {
-        on = !on;
-        playerMovement.active = on;
-        clickMovement.active = on;
-        catcher.active = on;
-        partner.toggle();
     }
 
 }

@@ -8,15 +8,19 @@ public class DeliverySpot : MonoBehaviour
 
     MatchManager matchManager;
     MenuBehaviour menuBehaviour;
+
     public GameObject dish1;
     public GameObject dish2;
     public GameObject dish3;
     public GameObject dish4;
 
+    ParticleSystem particles;
+
     // Start is called before the first frame update
     void Start()
     {
         matchManager = FindObjectOfType<MatchManager>();
+        particles = transform.GetComponentInChildren<ParticleSystem>();
     }
 
     public void deliverProduct(int team, ProductInstance product)
@@ -51,6 +55,8 @@ public class DeliverySpot : MonoBehaviour
                         break;
                     }
             }
+            particles.Stop();
+            particles.Play();
             Transform currentDishPanel = teamDishPanel.Find(currentPanelDishName);
             PhotonNetwork.Destroy(currentDishPanel.gameObject);
         }

@@ -15,6 +15,8 @@ public class StationInstance : MonoBehaviour
 
     public ProductInstance heldProduct;
 
+    public bool doubleSided;
+
     Station blueprint;
 
     int health;
@@ -33,7 +35,6 @@ public class StationInstance : MonoBehaviour
     float maxChangeSpeedTime;
 
     float repairTime = 5.0f;
-    bool repairing = false;
 
     // Start is called before the first frame update
     void Start()
@@ -84,28 +85,28 @@ public class StationInstance : MonoBehaviour
 
     public Vector3 getWaitPos(Vector3 currentPos)
     {
-        if (isInFront(currentPos))
+        if (doubleSided && !isInFront(currentPos))
         {
-            return waitPosition.position;
+            Vector3 dir = transform.position - waitPosition.position;
+            return transform.position + dir;            
         }
         else
         {
-            Vector3 dir = transform.position - waitPosition.position;
-            return transform.position + dir;
+            return waitPosition.position;
         }
     }
 
     public Vector3 getWaitRot(Vector3 currentPos)
     {
-        if (isInFront(currentPos))
-        {
-            return transform.position - waitPosition.position;
-        }
-        else
+        if (doubleSided && !isInFront(currentPos))
         {
             Vector3 dir = transform.position - waitPosition.position;
             Vector3 pos = transform.position + dir;
             return transform.position - pos;
+        }
+        else
+        {
+            return transform.position - waitPosition.position;
         }
     }
 
@@ -114,8 +115,10 @@ public class StationInstance : MonoBehaviour
     {
         if (health > 0 && !busy)
         {
+            // SI ya hay algo encima
             if (heldProduct != null)
             {
+                // Intento juntarlos
                 if (heldProduct.applyResource(product.id))
                 {
                     catcher.releaseHeldProduct();
@@ -127,8 +130,21 @@ public class StationInstance : MonoBehaviour
                     PhotonNetwork.Destroy(product.gameObject);
                     return activate();
                 }
+                float time = activateSpecial(product.id);
+                if(time > 0)
+                {
+                    catcher.releaseHeldProduct();
+                    if (blueprint.noHold.Contains(heldProduct.id))
+                    {
+                        catcher.holdProduct(heldProduct);
+                        heldProduct = null;
+                    }
+                    PhotonNetwork.Destroy(product.gameObject);
+                    return time;
+                }
                 return 0;
             }
+            // Si no hay nada, lo ponemos encima
             else
             {
                 heldProduct = product;
@@ -147,6 +163,30 @@ public class StationInstance : MonoBehaviour
 
     }
 
+    private float activateSpecial(int id)
+    {
+        if (health > 0 && !busy && heldProduct != null)// && isReachable(origin))
+        {
+            foreach (Transition transition in blueprint.transitions)
+            {
+                if (id == transition.src && heldProduct.id == transition.pre)
+                {
+                    busy = true;
+
+                    float time = transition.time;
+
+                    busy = true;
+                    transitionTime = time;
+                    currentTransitionTime = 0;
+                    transitionDst = transition.dst;
+
+                    return transition.auto ? 0 : time;
+                }
+            }
+        }
+        return 0;
+    }
+
     // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto.
     public float activate()
     {
@@ -154,7 +194,7 @@ public class StationInstance : MonoBehaviour
         {
             foreach(Transition transition in blueprint.transitions)
             {
-                if(heldProduct.id == transition.src)
+                if(heldProduct.id == transition.src && transition.pre < 0)
                 {
                     busy = true;
 
@@ -169,7 +209,7 @@ public class StationInstance : MonoBehaviour
                 }
             }
         }
-        return 0;
+        return -1;
     }
 
     public ProductInstance takeProduct()
@@ -243,6 +283,11 @@ public class StationInstance : MonoBehaviour
     public int getHealth()
     {
         return health;
+    }
+
+    public bool isBreakable()
+    {
+        return blueprint.breakable;
     }
 
     public bool isOccupied()
