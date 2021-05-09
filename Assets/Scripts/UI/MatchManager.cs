@@ -198,9 +198,6 @@ public class MatchManager : MonoBehaviour
                 menuBehaviour.updatePoints();
             }
             return value;
-        } else
-        {
-            Debug.Log("no hay coincidencia "+ id);
         }
         return -1;
     }
