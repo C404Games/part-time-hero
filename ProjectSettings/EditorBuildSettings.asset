@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoadScreen.unity
     guid: 111b30c378bdf3048a48ca92773ee249
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainGame.unity
     guid: 0ecded158b46ef447a34ea0944a69e7a
   - enabled: 1
@@ -23,4 +23,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Plugins/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scenes/DemoAsteroids-LobbyScene.unity
     guid: c8a9d1312a49dc8488a9b32d83d659c7
+  - enabled: 0
+    path: Assets/Plugins/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scenes/DemoAsteroids-GameScene.unity
+    guid: 98efc37d6307844488eb3e4247dde7e9
+  - enabled: 1
+    path: Assets/Scenes/InitialCinematics.unity
+    guid: 98d4975075b07b54ca2bb003eff74b1d
+  - enabled: 1
+    path: Assets/Scenes/OGM sceneTest.unity
+    guid: bc24ca35394c25743bc68e6c26baa926
   m_configObjects: {}
