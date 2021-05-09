@@ -69,6 +69,20 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
         return false;
     }
 
+    public void onDisconnectButtonclicked()
+    {
+        Debug.Log("Jugador " + playerName.text + " desconectandose");
+        PhotonNetwork.Disconnect();
+        Debug.Log("Desconectado");
+
+    }
+
+    public bool reconnectPlayer()
+    {
+        Debug.Log("Jugador " + playerName.text + " reconectandose a la sala");
+        return PhotonNetwork.Reconnect();
+    }
+
     //Creación de sala
     public void OnCreateRoomButtonClicked()
     {
