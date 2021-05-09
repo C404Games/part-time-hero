@@ -79,7 +79,7 @@ public class MenuBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!(PhotonNetwork.OfflineMode || PhotonNetwork.LocalPlayer.ActorNumber == 1))
+        if (!PhotonNetwork.OfflineMode && PhotonNetwork.LocalPlayer.ActorNumber != 1)
         {
             return;
         }
