@@ -44,7 +44,7 @@ public class loadScene : MonoBehaviour
                     break;
                 }
         }
-        menuAnimator.SetTrigger("fadeIn");
+        //menuAnimator.SetTrigger("fadeIn");
         StartCoroutine(fadeCorroutine);
     }
 

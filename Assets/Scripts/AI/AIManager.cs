@@ -388,6 +388,11 @@ public class AIManager : MonoBehaviour
                     {
                         node.parent1 = createProdNode(transition.src, node);
                         node.parent2 = createStatNode(station.id, node);
+                        if(transition.pre >= 0)
+                        {
+                            node.parent2.parent1 = createProdNode(transition.pre, node.parent2);
+                            node.parent2.parent2 = createStatNode(station.id, node.parent2);
+                        }
                     }
                 }
             }

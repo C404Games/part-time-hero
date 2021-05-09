@@ -115,8 +115,10 @@ public class StationInstance : MonoBehaviour
     {
         if (health > 0 && !busy)
         {
+            // SI ya hay algo encima
             if (heldProduct != null)
             {
+                // Intento juntarlos
                 if (heldProduct.applyResource(product.id))
                 {
                     catcher.releaseHeldProduct();
@@ -128,8 +130,21 @@ public class StationInstance : MonoBehaviour
                     PhotonNetwork.Destroy(product.gameObject);
                     return activate();
                 }
+                float time = activateSpecial(product.id);
+                if(time > 0)
+                {
+                    catcher.releaseHeldProduct();
+                    if (blueprint.noHold.Contains(heldProduct.id))
+                    {
+                        catcher.holdProduct(heldProduct);
+                        heldProduct = null;
+                    }
+                    PhotonNetwork.Destroy(product.gameObject);
+                    return time;
+                }
                 return 0;
             }
+            // Si no hay nada, lo ponemos encima
             else
             {
                 heldProduct = product;
@@ -148,6 +163,30 @@ public class StationInstance : MonoBehaviour
 
     }
 
+    private float activateSpecial(int id)
+    {
+        if (health > 0 && !busy && heldProduct != null)// && isReachable(origin))
+        {
+            foreach (Transition transition in blueprint.transitions)
+            {
+                if (id == transition.src && heldProduct.id == transition.pre)
+                {
+                    busy = true;
+
+                    float time = transition.time;
+
+                    busy = true;
+                    transitionTime = time;
+                    currentTransitionTime = 0;
+                    transitionDst = transition.dst;
+
+                    return transition.auto ? 0 : time;
+                }
+            }
+        }
+        return 0;
+    }
+
     // Devuelve el tiempo en segundos si NO es auto. Devuelve 0 si es auto.
     public float activate()
     {
@@ -155,7 +194,7 @@ public class StationInstance : MonoBehaviour
         {
             foreach(Transition transition in blueprint.transitions)
             {
-                if(heldProduct.id == transition.src && (heldProduct.id == transition.pre || transition.pre < 0))
+                if(heldProduct.id == transition.src && transition.pre < 0)
                 {
                     busy = true;
 
@@ -170,7 +209,7 @@ public class StationInstance : MonoBehaviour
                 }
             }
         }
-        return 0;
+        return -1;
     }
 
     public ProductInstance takeProduct()

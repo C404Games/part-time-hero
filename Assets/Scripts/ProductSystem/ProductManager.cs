@@ -13,7 +13,7 @@ public class ProductManager : MonoBehaviour
     #region MonoBehaviour
     private void Awake()
     {      
-        loadProducts("products");
+        loadProducts("RecipiesJSON/smithy");
     }
 
     void Start()
