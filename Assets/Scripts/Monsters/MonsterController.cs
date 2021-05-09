@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 using System.Linq;
+using Photon.Pun;
 
 enum MonsterState
 {
@@ -32,11 +33,14 @@ public class MonsterController : MonoBehaviour
 
     Animator animator;
 
+    private PhotonView photonView;
 
-    //ProductManager productManager;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
+        // Start is called before the first frame update
+        void Start()
     {
         state = MonsterState.WAITING;
         nvAgent = GetComponent<NavMeshAgent>();
@@ -49,6 +53,10 @@ public class MonsterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         switch (state)
         {
             case MonsterState.WAITING:

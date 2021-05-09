@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -124,7 +125,7 @@ public class StationInstance : MonoBehaviour
                         catcher.holdProduct(heldProduct);
                         heldProduct = null;
                     }
-                    Destroy(product.gameObject);
+                    PhotonNetwork.Destroy(product.gameObject);
                     return activate();
                 }
                 return 0;
@@ -227,7 +228,7 @@ public class StationInstance : MonoBehaviour
                 mainModel.SetActive(false);
                 brokenModel.SetActive(true);
                 if(heldProduct != null)
-                    Destroy(heldProduct.gameObject);
+                    PhotonNetwork.Destroy(heldProduct.gameObject);
                 busy = false;
             }
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -50,6 +51,11 @@ public class loadScene : MonoBehaviour
     public void changeToSpecificScene(string scene)
     {
         SceneManager.LoadScene(scene);
+    }
+
+    public void changeToScenePhoton()
+    {
+        PhotonNetwork.LoadLevel(_scene);
     }
 
     public IEnumerator fadeOutScene(float time)

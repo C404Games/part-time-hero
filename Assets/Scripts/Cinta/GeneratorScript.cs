@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GeneratorScript : MonoBehaviour
@@ -24,6 +26,11 @@ public class GeneratorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!PhotonNetwork.OfflineMode || PhotonNetwork.LocalPlayer.ActorNumber != 1)
+        {
+            return;
+        }
+
         tiempo += Time.deltaTime;
         if(tiempo >= tiempoAparicion)
         {
@@ -53,7 +60,11 @@ public class GeneratorScript : MonoBehaviour
 
     private void generateProduct(int idx)
     {
-        GameObject newProduct = Instantiate(prefab, transform.position, Quaternion.identity);
+        GameObject newProduct = PhotonNetwork.Instantiate(
+            Path.Combine("Escenario", "Common", "Product"),
+            transform.position, 
+            Quaternion.identity
+            );
         ProductInstance instance = newProduct.GetComponent<ProductInstance>();
         instance.id = ProductManager.rawProducts[idx].id;
         

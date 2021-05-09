@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,9 +19,15 @@ public class ProductInstance : MonoBehaviour
 
     private float clampTime = 0.5f;
     private float currentClampTime = 0;
+    private PhotonView photonView;
 
+    private void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
+    
     #region MonoBehavior
-    // Start is called before the first frame update
+        // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -31,9 +38,7 @@ public class ProductInstance : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //if(transform.parent != null)
-
-        if(holder != null)
+        if (holder != null)
         {
             Vector3 newPos = new Vector3();
             if (currentClampTime < clampTime) {
@@ -99,18 +104,42 @@ public class ProductInstance : MonoBehaviour
     {
         id = dst;
         blueprint = ProductManager.productBlueprints[id];
-        updateAppearence();
+        nextStep();
     }
 
     private void updateAppearence()
     {
-        if(appearence != null)
-            Destroy(appearence);
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+        if (appearence != null)
+            PhotonNetwork.Destroy(appearence);
         if (blueprint.appearence != null)
         {
-            appearence = Instantiate(blueprint.appearence);
+            appearence = PhotonNetwork.Instantiate(
+                blueprint.appearence,
+                Vector3.zero,
+                Quaternion.Euler(Vector3.zero)
+                );
             appearence.transform.parent = transform;
+            appearence.transform.localPosition = new Vector3(0, 0, 0);
         }
-        appearence.transform.localPosition = new Vector3(0, 0, 0);
+    }
+
+    private void nextStep()
+    {
+        if (appearence != null)
+            PhotonNetwork.Destroy(appearence);
+        if (blueprint.appearence != null)
+        {
+            appearence = PhotonNetwork.Instantiate(
+                blueprint.appearence,
+                Vector3.zero,
+                Quaternion.Euler(Vector3.zero)
+                );
+            appearence.transform.parent = transform;
+            appearence.transform.localPosition = new Vector3(0, 0, 0);
+        }
     }
 }

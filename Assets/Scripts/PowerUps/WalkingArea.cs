@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class WalkingArea : MonoBehaviour
@@ -13,7 +15,7 @@ public class WalkingArea : MonoBehaviour
     private int firstRandomNumber;
     private int secondRandomNumber;
 
-    public List<GameObject> powerUps;
+    public List<string> powerUps;
 
     public int teamArea;
     private float handicapFactor;
@@ -66,7 +68,10 @@ public class WalkingArea : MonoBehaviour
 
     private void GeneratePowerUp()
     {
-        Instantiate(powerUps[(int)Random.Range(0, powerUps.Count)], RandomPointInBounds(), Quaternion.identity);
+        if (PhotonNetwork.OfflineMode || PhotonNetwork.LocalPlayer.ActorNumber == 1)
+        {
+            PhotonNetwork.Instantiate(Path.Combine("PowerUps", powerUps[(int)Random.Range(0, powerUps.Count)]), RandomPointInBounds(), Quaternion.identity);
+        }
     }
 
     public Vector3 RandomPointInBounds()

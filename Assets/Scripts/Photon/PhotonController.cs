@@ -20,6 +20,12 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
     [Header("Textos visibles")]
     public Text playerName;
     public GameObject idSala;
+    public GameObject infoIdSala;
+
+    public void Awake()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
 
     public enum Map
     {
@@ -47,7 +53,7 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
         if (!"".Equals(playerName.text))
         {
             Debug.Log("Uniendose a la red con el nombre " + playerName.text);
-            PhotonNetwork.LocalPlayer.NickName = playerName.text;
+            PhotonNetwork.LocalPlayer.NickName = playerName.text.ToUpper();
             if (PhotonNetwork.ConnectUsingSettings())
             {
                 Debug.Log("Usuario " + playerName.text + " unido correctamente a la red");
@@ -72,23 +78,23 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
         maxPlayers = (byte)Mathf.Clamp(maxPlayers, 2, 8);
 
         RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers, PlayerTtl = 10000 };
-        options.IsVisible = false;
+        options.IsVisible = true;
+        options.IsOpen = true;
         Debug.Log("Creando sala: " + roomName);
         if (PhotonNetwork.CreateRoom(roomName, options, null))
         {
             Debug.Log("Sala " + roomName + " creada con exito");
-            idSala.GetComponent<Text>().text = roomName;
+            infoIdSala.GetComponent<Text>().text = roomName;
         }
         else
         {
             Debug.Log("Sala no crada");
-            idSala.GetComponent<Text>().text = "Error 404";
+            infoIdSala.GetComponent<Text>().text = "Error 404";
         }
 
     }
 
     //Unión a sala
-    private LoadBalancingClient loadBalancingClient;
 
     /**
      * Union a sala aleatoria
@@ -108,11 +114,14 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
      * */
     public void JoinInPrivateRoom()
     {
-        Debug.Log("Voy a entrar a la sala " + idSala.GetComponent<Text>().text);
-        if (PhotonNetwork.JoinRoom(idSala.GetComponent<Text>().text))
-            Debug.Log("He entrado correctamente");
-        else
-            Debug.LogError("Error entrado en la sala");
+        //Unirse sala
+        Debug.Log("Entrando a la sala con id " + idSala.GetComponent<Text>().text);
+        PhotonNetwork.JoinRoom(idSala.GetComponent<Text>().text);
+
+        //Unirse a sala o crearla si no existe
+        //RoomOptions roomOptions = new RoomOptions();
+        //roomOptions.IsVisible = false;
+        //PhotonNetwork.JoinOrCreateRoom(idSala.GetComponent<Text>().text, roomOptions, null);
     }
 
     /**
@@ -131,7 +140,7 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
      */
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.LogErrorFormat("Room creation failed with error code {0} and error message {1}", returnCode, message);
+        Debug.LogErrorFormat("Error al entrar en la sala. {0} - {1}", returnCode, message);
     }
 
     /**
@@ -139,10 +148,14 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
      */
     public override void OnJoinedRoom()
     {
+        Debug.Log("Exito al entrar en la sala");
         if (playerListEntries == null)
         {
             playerListEntries = new Dictionary<int, GameObject>();
         }
+
+        //Guardamos nombre de sala
+        infoIdSala.GetComponent<Text>().text = PhotonNetwork.CurrentRoom.Name;
 
         foreach (Player p in PhotonNetwork.PlayerList)
         {
@@ -154,18 +167,19 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
 
             entry.transform.localRotation = Quaternion.Euler(Vector3.zero);
 
-            entry.GetComponent<PlayerInList>().Initialize(p.NickName.ToUpper(), p.ActorNumber);
+            entry.GetComponent<PlayerInList>().Initialize(p.NickName, p.ActorNumber);
 
             playerListEntries.Add(p.ActorNumber, entry);
 
-            GetComponent<GodScript>().accionButtonToList();
+            if(!PhotonNetwork.OfflineMode)
+                GetComponent<GodScript>().accionButtonToList();
         }
     }
 
     //Salida de sala
     public void OnLeaveGameButtonClicked()
     {
-        Debug.Log("Voy a entrar a la sala " + idSala.GetComponent<Text>().text);
+        Debug.Log("Saliendo de la sala" + idSala.GetComponent<Text>().text);
         if (PhotonNetwork.LeaveRoom())
             Debug.Log("El usuario "+ playerName +" ha abandonado la sala");
         else
@@ -176,12 +190,13 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
 
 
     //Administración de sala
+
+    /**
+     * Iniciar partida*/
     public void OnStartGameButtonClicked()
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
-
-        PhotonNetwork.LoadLevel("DemoAsteroids-GameScene");
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -258,6 +273,7 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
         playerListEntries = null;
     }
 
+
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         GameObject entry = Instantiate(PlayerListEntryPrefab);
@@ -276,5 +292,10 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
     {
         Destroy(playerListEntries[otherPlayer.ActorNumber].gameObject);
         playerListEntries.Remove(otherPlayer.ActorNumber);
+    }
+
+    public void offlineMode(bool isOffline)
+    {
+        PhotonNetwork.OfflineMode = isOffline;
     }
 }

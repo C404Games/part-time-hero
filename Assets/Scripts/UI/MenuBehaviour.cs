@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
-
+using Photon.Pun;
+using System.IO;
 
 public class MenuBehaviour : MonoBehaviour
 {
@@ -78,7 +79,11 @@ public class MenuBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckForChanges();
+        if (!(PhotonNetwork.OfflineMode || PhotonNetwork.LocalPlayer.ActorNumber == 1))
+        {
+            return;
+        }
+            CheckForChanges();
         this.gameObject.SetActive(visible);
         currentTime += Time.deltaTime;
         totalTime += Time.deltaTime;
@@ -114,7 +119,7 @@ public class MenuBehaviour : MonoBehaviour
                 currentPanelDishName = "Dish" + (position) + "Panel";
                 teamDishPanel = transform.Find("TeamDish1Panel");
                 currentDishPanel = teamDishPanel.Find(currentPanelDishName);
-                dishMenuPrefab = Instantiate(transform.Find("Dish").gameObject) as GameObject;
+                dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
                 dishMenuPrefab.transform.SetParent(currentDishPanel);
                 dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
                 dishMenuPrefab.transform.SetParent(currentDishPanel);
@@ -152,7 +157,7 @@ public class MenuBehaviour : MonoBehaviour
                 currentPanelDishName = "Dish" + (position) + "Panel";
                 teamDishPanel = transform.Find("TeamDish2Panel");
                 currentDishPanel = teamDishPanel.Find(currentPanelDishName);
-                dishMenuPrefab = Instantiate(transform.Find("Dish").gameObject) as GameObject;
+                dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
                 dishMenuPrefab.transform.SetParent(currentDishPanel);
                 dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
                 dishMenuPrefab.transform.SetParent(currentDishPanel);

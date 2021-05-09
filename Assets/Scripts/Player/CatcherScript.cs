@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,13 @@ public class CatcherScript : MonoBehaviour
 
     public bool active = true;
 
+    private PhotonView photonView;
+
+    private void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
+
     private void Start()
     {
         animator = transform.parent.GetComponentInChildren<Animator>();
@@ -27,6 +35,10 @@ public class CatcherScript : MonoBehaviour
 
     public void OnGrab(InputAction.CallbackContext context)
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         if (active && context.performed) { 
             grabBehaviour(reachableTracker.getNearestStation());
         }
@@ -34,6 +46,10 @@ public class CatcherScript : MonoBehaviour
 
     public void OnAction(InputAction.CallbackContext context)
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         if (active && context.performed)
         {
             StationInstance station = reachableTracker.getNearestStation();

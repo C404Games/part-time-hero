@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -103,4 +104,5 @@ public class GodScript : MonoBehaviour
             model.GetComponent<MeshFilter>().mesh = Instantiate(mesh);
         }
     }
+
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -43,6 +44,13 @@ public class PlayerMovement : MonoBehaviour
     RecipieBook recipieBookInReach;
 
     public bool active = true;
+
+    private PhotonView photonView;
+
+    private void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -122,6 +130,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMovement(InputAction.CallbackContext context)
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         if (active)
         {
             Vector3 input = context.ReadValue<Vector2>();
@@ -140,6 +152,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void onAction(InputAction.CallbackContext context)
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         if (active && context.performed)
         {
             if (monsterInReach != null)

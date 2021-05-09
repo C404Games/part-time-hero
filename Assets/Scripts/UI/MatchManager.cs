@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -24,7 +26,9 @@ public class MatchManager : MonoBehaviour
     public List<ReachableTracker> trackersTeam2;
     public List<WalkingArea> areasTeam1;
     public List<WalkingArea> areasTeam2;
-    public GameObject[] monsterPrefabs;
+
+    public string[] monsterPrefabs;
+
     private int level;
     private List<PlayerMovement> charactersTeam1;
     private List<PlayerMovement> charactersTeam2;
@@ -251,6 +255,10 @@ public class MatchManager : MonoBehaviour
                 break;
             case PowerupType.MONSTER:
                 {
+                    if (!PhotonNetwork.OfflineMode || PhotonNetwork.LocalPlayer.ActorNumber != 1)
+                    {
+                        return;
+                    }
                     // Mandar monstruo
                     int team = playerMovement.team;
                     WalkingArea area = null;
@@ -267,9 +275,13 @@ public class MatchManager : MonoBehaviour
                         area = areasTeam2[idx];
                         tracker = trackersTeam2[idx];
                     }
-                    GameObject monster = monsterPrefabs[(int)Random.Range(0, monsterPrefabs.Length)];
-                    monster.GetComponent<MonsterController>().reachableTracker = tracker;
-                    Instantiate(monster, area.RandomPointInBounds(), Quaternion.identity);
+                    string monster = monsterPrefabs[(int)Random.Range(0, monsterPrefabs.Length)];
+                    GameObject m = PhotonNetwork.Instantiate(
+                        Path.Combine("Mostruos", monster) ,
+                        area.RandomPointInBounds(), 
+                        Quaternion.identity
+                        );
+                    m.GetComponent<MonsterController>().reachableTracker = tracker;
                 }
                 break;
             case PowerupType.STAR:

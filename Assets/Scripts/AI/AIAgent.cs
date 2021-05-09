@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using System.IO;
+using UnityEngine;
 using UnityEngine.AI;
 
 public enum agentState
@@ -39,29 +41,47 @@ public class AIAgent : MonoBehaviour
     public bool busy = false;
 
     public bool delivering = false;
+    private PhotonView photonView;
 
     private void Awake()
     {
-        // Carga personaje aleatorio
-        GameObject model = Instantiate(characterPrefabs[(int)Random.Range(0, characterPrefabs.Length)], modelWrapper.transform);
-        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
-        model.GetComponent<SwordVisibility>().playerMovement = playerMovement;
-        playerMovement.animator = model.GetComponent<Animator>();
+        photonView = GetComponent<PhotonView>();
+        if (PhotonNetwork.OfflineMode || PhotonNetwork.LocalPlayer.ActorNumber == 1)
+        {
+            // Carga personaje aleatorio
+            GameObject model = PhotonNetwork.Instantiate(
+                Path.Combine("Characters", "AnimatedModels", "p" + (int)Random.Range(1, 4)),
+                modelWrapper.transform.position,
+                modelWrapper.transform.rotation
+                );
+            model.transform.parent = transform;
+            PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+            model.GetComponent<SwordVisibility>().playerMovement = playerMovement;
+            playerMovement.animator = model.GetComponent<Animator>();
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         nvAgent = GetComponent<NavMeshAgent>();
         movement = GetComponent<ClickMovement>();
         movement.guaranteeTargetProduct = true;
 
-        manager = FindObjectOfType<AIManager>();                
+        manager = FindObjectOfType<AIManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         if (movement.targetType == clickTargetType.NONE && !movement.isBlocked() && !movement.isFrozen())
         {
 
