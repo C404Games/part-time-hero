@@ -83,7 +83,7 @@ public class MenuBehaviour : MonoBehaviour
         {
             return;
         }
-            CheckForChanges();
+        CheckForChanges();
         this.gameObject.SetActive(visible);
         currentTime += Time.deltaTime;
         totalTime += Time.deltaTime;
