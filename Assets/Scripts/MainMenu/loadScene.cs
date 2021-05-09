@@ -26,6 +26,12 @@ public class loadScene : MonoBehaviour
     {
         switch (_scene)
         {
+
+            case ("HistoryFirstLevel"):
+                {
+                    PlayerPrefs.SetInt("tutorialActive", 1);
+                    break;
+                }
             case ("Tabern - Level 1"):
                 {
                     int level = PlayerPrefs.GetInt("storyLevelAvailable", -1);
@@ -41,12 +47,17 @@ public class loadScene : MonoBehaviour
                 }
             case ("Smithy - Level 1"):
                 {
+                    int level = PlayerPrefs.GetInt("storyLevelAvailable", -1);
+                    if (level <= 2)
+                    {
+                        PlayerPrefs.SetInt("tutorialActive", 1);
+                    }
+                    else
+                    {
+                        PlayerPrefs.SetInt("tutorialActive", 0);
+                    }
+                    PlayerPrefs.SetString("map", "herreria");
                     PlayerPrefs.SetInt("Scenary", 2);
-                    break;
-                }
-            case ("HistoryFirstLevel"):
-                {
-                    PlayerPrefs.SetInt("tutorialActive", 1);
                     break;
                 }
         }
