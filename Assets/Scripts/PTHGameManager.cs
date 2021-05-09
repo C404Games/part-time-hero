@@ -15,8 +15,6 @@ public class PTHGameManager : MonoBehaviourPunCallbacks
     private void Awake()
     {
         Debug.Log("El modo offline esta: " + PhotonNetwork.OfflineMode);
-        PhotonNetwork.OfflineMode = true;
-        Debug.Log("Ahora está: " + PhotonNetwork.OfflineMode);
     }
     void Start()
     {

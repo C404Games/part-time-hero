@@ -53,7 +53,6 @@ public class DeliverySpot : MonoBehaviour
             }
             Transform currentDishPanel = teamDishPanel.Find(currentPanelDishName);
             PhotonNetwork.Destroy(currentDishPanel.gameObject);
-            return true;
         }
         Destroy(product.gameObject);
     }
