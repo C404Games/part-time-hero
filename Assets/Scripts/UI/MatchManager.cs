@@ -255,7 +255,7 @@ public class MatchManager : MonoBehaviour
                 break;
             case PowerupType.MONSTER:
                 {
-                    if (!PhotonNetwork.OfflineMode || PhotonNetwork.LocalPlayer.ActorNumber != 1)
+                    if (!PhotonNetwork.OfflineMode && PhotonNetwork.LocalPlayer.ActorNumber != 1)
                     {
                         return;
                     }
