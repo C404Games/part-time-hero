@@ -34,8 +34,10 @@ public class MenuBehaviour : MonoBehaviour
     public GameObject dishMenuPrefab;
     private Transform teamDishPanel;
     private Transform currentDishPanel;
+    private GameObject searchedDish;
+    private bool isPaused;
     private int typeOfGame;
-    public int frequency = 5;
+    private int frequency = 5;
     public Texture decorativeElement1;
     public Texture decorativeElement2;
     MatchManager matchManager;
@@ -43,6 +45,7 @@ public class MenuBehaviour : MonoBehaviour
     // < is called before the first frame update
     void Start()
     {
+        searchedDish = Instantiate(transform.Find("Dish").gameObject);
         UnityEngine.UI.Button[] buttons = GetComponentsInChildren<UnityEngine.UI.Button>();
         UnityEngine.UI.RawImage[] rawImages = GetComponentsInChildren<UnityEngine.UI.RawImage>();
         returnGameButton = buttons[0];
@@ -59,8 +62,6 @@ public class MenuBehaviour : MonoBehaviour
         exitSceneImage = rawImages[20];
         returnSceneImage = rawImages[21];
         closeMenu();
-        Debug.Log("Buttons: " + buttons.Length);
-        Debug.Log("rawImages: " + rawImages.Length);
         rawImages[9].texture = decorativeElement1;
         rawImages[10].texture = decorativeElement2;
         matchManager = FindObjectOfType<MatchManager>();
@@ -74,142 +75,154 @@ public class MenuBehaviour : MonoBehaviour
         {
             pauseButton.gameObject.SetActive(true);
         }
+        isPaused = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!(PhotonNetwork.OfflineMode || PhotonNetwork.LocalPlayer.ActorNumber == 1))
+        if (!PhotonNetwork.OfflineMode && PhotonNetwork.LocalPlayer.ActorNumber != 1)
         {
             return;
         }
-        CheckForChanges();
-        this.gameObject.SetActive(visible);
-        currentTime += Time.deltaTime;
-        totalTime += Time.deltaTime;
-        //Generation of dishes 0s - 30s - 1m 00s...
-        if ((currentTime > frequency || matchManager.team1Dishes.Count == 0) && dishGenerationActive)
-        {
-            int position = -1;
-            if (matchManager.team1Dishes.Count < 4)
-            {
-                position = matchManager.team1Dishes.Count;
-            } else
-            {
-                for (int i = 0; i < matchManager.team1Dishes.Count; i++)
-                {
-                    if (!matchManager.team1Dishes[i].Item1)
-                    {
-                        position = i;
-                        break;
-                    }
-                }
-            }
-            position++;
-            if (position >= 1)
-            {
-                dish1 = matchManager.generateOrder();
-                if (position == (matchManager.team1Dishes.Count + 1))
-                {
-                    matchManager.team1Dishes.Add(new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish1].id));
-                }else
-                {
-                    matchManager.team1Dishes[position-1] = new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish1].id);
-                }
-                currentPanelDishName = "Dish" + (position) + "Panel";
-                teamDishPanel = transform.Find("TeamDish1Panel");
-                currentDishPanel = teamDishPanel.Find(currentPanelDishName);
-                dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
-                dishMenuPrefab.transform.SetParent(currentDishPanel);
-                dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
-                dishMenuPrefab.transform.SetParent(currentDishPanel);
-                UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
-                dishNameText.text = ProductManager.finalProducts[dish1].name;
-            }
-            position = -1;
-            if (matchManager.team2Dishes.Count < 4)
-            {
-                position = matchManager.team2Dishes.Count;
-            }
-            else
-            {
-                for (int i = 0; i < matchManager.team2Dishes.Count; i++)
-                {
-                    if (!matchManager.team2Dishes[i].Item1)
-                    {
-                        position = i;
-                        break;
-                    }
-                }
-            }
-            position++;
-            if (position >= 1)
-            {
-                dish2 = matchManager.generateOrder();
-                if (position == (matchManager.team2Dishes.Count + 1))
-                {
-                    matchManager.team2Dishes.Add(new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish2].id));
-                }
-                else
-                {
-                    matchManager.team2Dishes[position-1] = new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish2].id);
-                }
-                currentPanelDishName = "Dish" + (position) + "Panel";
-                teamDishPanel = transform.Find("TeamDish2Panel");
-                currentDishPanel = teamDishPanel.Find(currentPanelDishName);
-                dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
-                dishMenuPrefab.transform.SetParent(currentDishPanel);
-                dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
-                dishMenuPrefab.transform.SetParent(currentDishPanel);
-                UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
-                dishNameText.text = ProductManager.finalProducts[dish2].name;
-            }
-            currentTime = 0;
-
-        }
-
-        //Timer countdown
-        Transform currentTimePanel = transform.Find("TimePanel");
-        UnityEngine.UI.Text timeText = currentTimePanel.GetComponentInChildren<UnityEngine.UI.Text>();
-        int minutes = (int)(matchManager.getInitialTime() - totalTime) / 60;
-        int seconds = (int)(matchManager.getInitialTime() - totalTime) % 60;
-        string minutesStr = (minutes < 10) ? "0" + minutes : "" + minutes;
-        string secondsStr = (seconds < 10) ? "0" + seconds : "" + seconds;
-        if ((matchManager.getInitialTime() - totalTime) > 0 )
-        {
-            if (minutes == 0 && seconds >= 15)
-            {
-                if (totalTime % 1 < 0.5)
-                {
-                    timeText.color = Color.red;
-                }
-                else
-                {
-                    timeText.color = Color.black;
-                }
-            }
-            else if (seconds == 0 || seconds == 30)
-            {
-                timeText.color = Color.red;
-            }
-            else
-            {
-                timeText.color = Color.black;
-            }
-            timeText.text = minutesStr + ":" + secondsStr;
-        }
         else
         {
-            timeText.color = Color.red;
-            timeText.text = "00:00";
-        }
+            if (!isPaused)
+            {
+                CheckForChanges();
+                this.gameObject.SetActive(visible);
+                currentTime += Time.deltaTime;
+                totalTime += Time.deltaTime;
+                //Generation of dishes 0s - 30s - 1m 00s...
+                if ((currentTime > frequency || matchManager.team1Dishes.Count == 0) && dishGenerationActive)
+                {
+                    int position = -1;
+                    if (matchManager.team1Dishes.Count < 4)
+                    {
+                        position = matchManager.team1Dishes.Count;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < matchManager.team1Dishes.Count; i++)
+                        {
+                            if (!matchManager.team1Dishes[i].Item1)
+                            {
+                                position = i;
+                                break;
+                            }
+                        }
+                    }
+                    position++;
+                    Debug.Log("Positions1: " + position);
+                    if (position >= 1)
+                    {
+                        dish1 = matchManager.generateOrder();
+                        if (position == (matchManager.team1Dishes.Count + 1))
+                        {
+                            matchManager.team1Dishes.Add(new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish1].id));
+                        }
+                        else
+                        {
+                            matchManager.team1Dishes[position - 1] = new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish1].id);
+                        }
+                        currentPanelDishName = "Dish" + (position) + "Panel";
+                        teamDishPanel = transform.Find("TeamDish1Panel");
+                        currentDishPanel = teamDishPanel.Find(currentPanelDishName);
+                        dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
+                        //dishMenuPrefab = Instantiate(searchedDish);
+                        dishMenuPrefab.transform.SetParent(currentDishPanel);
+                        dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
+                        dishMenuPrefab.transform.SetParent(currentDishPanel);
+                        UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
+                        dishNameText.text = ProductManager.finalProducts[dish1].name;
+                    }
+                    position = -1;
+                    if (matchManager.team2Dishes.Count < 4)
+                    {
+                        position = matchManager.team2Dishes.Count;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < matchManager.team2Dishes.Count; i++)
+                        {
+                            if (!matchManager.team2Dishes[i].Item1)
+                            {
+                                position = i;
+                                break;
+                            }
+                        }
+                    }
+                    position++;
+                    Debug.Log("Positions2: " + position);
+                    if (position >= 1)
+                    {
+                        dish2 = matchManager.generateOrder();
+                        if (position == (matchManager.team2Dishes.Count + 1))
+                        {
+                            matchManager.team2Dishes.Add(new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish2].id));
+                        }
+                        else
+                        {
+                            matchManager.team2Dishes[position - 1] = new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish2].id);
+                        }
+                        currentPanelDishName = "Dish" + (position) + "Panel";
+                        teamDishPanel = transform.Find("TeamDish2Panel");
+                        currentDishPanel = teamDishPanel.Find(currentPanelDishName);
+                        dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
+                        //dishMenuPrefab = Instantiate(searchedDish);
+                        dishMenuPrefab.transform.SetParent(currentDishPanel);
+                        dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
+                        dishMenuPrefab.transform.SetParent(currentDishPanel);
+                        UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
+                        dishNameText.text = ProductManager.finalProducts[dish2].name;
+                    }
+                    currentTime = 0;
+                }
 
-        //PowerUps
-        /*
-        Transform powerUpPanel = transform.FindChild("PanelPowerUps");
-        UnityEngine.UI.RawImage rawImagePowerUp = powerUpPanel.GetComponentInChildren<UnityEngine.UI.RawImage>();
-        rawImagePowerUp.enabled = matchManager.getCharactersFrozen()[currentCharacter];
-        */
+                //Timer countdown
+                Transform currentTimePanel = transform.Find("TimePanel");
+                UnityEngine.UI.Text timeText = currentTimePanel.GetComponentInChildren<UnityEngine.UI.Text>();
+                int minutes = (int)(matchManager.getInitialTime() - totalTime) / 60;
+                int seconds = (int)(matchManager.getInitialTime() - totalTime) % 60;
+                string minutesStr = (minutes < 10) ? "0" + minutes : "" + minutes;
+                string secondsStr = (seconds < 10) ? "0" + seconds : "" + seconds;
+                if ((matchManager.getInitialTime() - totalTime) > 0)
+                {
+                    if (minutes == 0 && seconds >= 15)
+                    {
+                        if (totalTime % 1 < 0.5)
+                        {
+                            timeText.color = Color.red;
+                        }
+                        else
+                        {
+                            timeText.color = Color.black;
+                        }
+                    }
+                    else if (seconds == 0 || seconds == 30)
+                    {
+                        timeText.color = Color.red;
+                    }
+                    else
+                    {
+                        timeText.color = Color.black;
+                    }
+                    timeText.text = minutesStr + ":" + secondsStr;
+                }
+                else
+                {
+                    timeText.color = Color.red;
+                    timeText.text = "00:00";
+                }
+
+                //PowerUps
+                /*
+                Transform powerUpPanel = transform.FindChild("PanelPowerUps");
+                UnityEngine.UI.RawImage rawImagePowerUp = powerUpPanel.GetComponentInChildren<UnityEngine.UI.RawImage>();
+                rawImagePowerUp.enabled = matchManager.getCharactersFrozen()[currentCharacter];
+                */
+            }
+        }
     }
 
     public void updatePoints()
@@ -408,6 +421,7 @@ public class MenuBehaviour : MonoBehaviour
 
     public void pauseMatch()
     {
+        isPaused = !isPaused;
 
     }
 }
