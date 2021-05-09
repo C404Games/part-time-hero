@@ -53,7 +53,7 @@ public class ProductManager : MonoBehaviour
                 }
             }
             int difficulty = entry["difficulty"] != null ? entry["difficulty"] : 0;
-            GameObject appearence = Resources.Load<GameObject>((string)entry["appearence"]);
+            string appearence = (string)entry["appearence"];
             bool collapse = entry["AIcollapse"] != null;
             Product product = new Product((int)entry["id"], (string)entry["name"], (ProductType)((int)entry["type"]), difficulty, appearence, transitions, collapse);
             productBlueprints.Add((int)entry["id"], product);

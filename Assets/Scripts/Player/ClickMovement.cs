@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.AI;
-
-
+using Photon.Pun;
 
 public enum clickTargetType
 {
@@ -39,6 +38,13 @@ public class ClickMovement : MonoBehaviour
     [HideInInspector] public RecipieBook targetBook;
 
     [HideInInspector] public clickTargetType targetType = clickTargetType.FLOOR;
+
+    private PhotonView photonView;
+
+    private void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -164,6 +170,10 @@ public class ClickMovement : MonoBehaviour
 
     public void onMouseClick(InputAction.CallbackContext context)
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         if (context.performed)
         {
             if (!playerMovement.blocked && !playerMovement.frozen)

@@ -20,13 +20,13 @@ public class Product
 
     public int difficulty;
 
-    public GameObject appearence;
+    public string appearence;
 
     public List<Transition> transitions;
 
     public bool AIcollapse;
 
-    public Product(int id, string name, ProductType type, int difficulty, GameObject appearence, List<Transition> transitions, bool AIcollapse)
+    public Product(int id, string name, ProductType type, int difficulty, string appearence, List<Transition> transitions, bool AIcollapse)
     {
         this.id = id;
         this.name = name;

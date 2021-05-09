@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ public class DeliverySpot : MonoBehaviour
         if (product.getProductType() == ProductType.FINAL && deliveryResult >= 0)
         {
             // Avisar al manager que lleve eso
-            Destroy(product.gameObject);
+            PhotonNetwork.Destroy(product.gameObject);
             string currentPanelDishName = "Dish(Clone)";
             Transform teamDishPanel = dish1.transform;
             switch (deliveryResult)
@@ -51,8 +52,8 @@ public class DeliverySpot : MonoBehaviour
                         break;
                     }
             }
-            Transform currentDishPanel = teamDishPanel.Find(currentPanelDishName);            
-            Destroy(currentDishPanel.gameObject);
+            Transform currentDishPanel = teamDishPanel.Find(currentPanelDishName);
+            PhotonNetwork.Destroy(currentDishPanel.gameObject);
             return true;
         }
         return false;
