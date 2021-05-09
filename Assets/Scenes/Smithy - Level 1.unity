@@ -3686,6 +3686,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d747f6234642afd4ca4877ab77909fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radialClockPrefab: {fileID: 9045452901863395689, guid: b398cc25a19180f4a88f9c36a3d8988f,
+    type: 3}
 --- !u!114 &1238107918
 MonoBehaviour:
   m_ObjectHideFlags: 0

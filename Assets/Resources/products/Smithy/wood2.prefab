@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7686596652826940634}
   - component: {fileID: 2766555389987978867}
+  - component: {fileID: -2319595149999219837}
   m_Layer: 0
   m_Name: wood2
   m_TagString: Untagged
@@ -55,6 +56,22 @@ MonoBehaviour:
   sceneViewId: 7
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-2319595149999219837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2863426244398627071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1001 &953496966533109551
 PrefabInstance:
   m_ObjectHideFlags: 0

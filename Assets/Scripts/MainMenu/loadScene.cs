@@ -36,6 +36,12 @@ public class loadScene : MonoBehaviour
                     {
                         PlayerPrefs.SetInt("tutorialActive", 0);
                     }
+                    PlayerPrefs.SetInt("Scenary", 1);
+                    break;
+                }
+            case ("Smithy - Level 1"):
+                {
+                    PlayerPrefs.SetInt("Scenary", 2);
                     break;
                 }
             case ("HistoryFirstLevel"):
@@ -55,6 +61,15 @@ public class loadScene : MonoBehaviour
 
     public void changeToScenePhoton()
     {
+        switch (_scene)
+        {
+            case "Tabern - Level 1":
+                    PlayerPrefs.SetInt("Scenary", 1);
+                    break;
+            case "Smithy - Level 1":
+                PlayerPrefs.SetInt("Scenary", 2);
+                break;
+        }
         PhotonNetwork.LoadLevel(_scene);
     }
 

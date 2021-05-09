@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1160446268792049732}
   - component: {fileID: 2393657789251966886}
+  - component: {fileID: 3937386541718972749}
   m_Layer: 0
   m_Name: copperSword
   m_TagString: Untagged
@@ -54,6 +55,22 @@ MonoBehaviour:
   sceneViewId: 7
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &3937386541718972749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703410655749413210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1001 &3793147078458999864
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6769148929823251274}
   - component: {fileID: 7706748444533436768}
+  - component: {fileID: -5855000832825275139}
   m_Layer: 0
   m_Name: hotCopper
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992704257163757521}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.2995834, y: 2.2717533, z: 2.708537}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6836124216037285480}
@@ -50,10 +51,27 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -5855000832825275139}
   sceneViewId: 7
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-5855000832825275139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992704257163757521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1001 &6436897019513829763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69,7 +87,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d854b73cbc7cde347962ae932f8b3faa,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.623
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d854b73cbc7cde347962ae932f8b3faa,
         type: 3}

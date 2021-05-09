@@ -12,8 +12,21 @@ public class ProductManager : MonoBehaviour
 
     #region MonoBehaviour
     private void Awake()
-    {      
-        loadProducts("RecipiesJSON/smithy");
+    {
+        string filename = "";
+        switch(PlayerPrefs.GetInt("Scenary", 1))
+        {
+            case 1:
+                filename = "RecipiesJSON/tabern";
+                break;
+            case 2:
+                filename = "RecipiesJSON/smithy";
+                break;
+            case 3:
+                filename = "RecipiesJSON/potions";
+                break;
+        }
+        loadProducts(filename);
     }
 
     void Start()

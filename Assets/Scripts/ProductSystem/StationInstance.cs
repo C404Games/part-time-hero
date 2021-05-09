@@ -41,7 +41,7 @@ public class StationInstance : MonoBehaviour
     {
         clockController = FindObjectOfType<RadialClockController>();
         blueprint = ProductManager.stationBlueprints[id];
-        health = 1;
+        health = 2;
     }
 
     // Update is called once per frame
