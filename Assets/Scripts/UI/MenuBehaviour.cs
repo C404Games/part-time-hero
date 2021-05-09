@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 using Photon.Pun;
 using System.IO;
 
@@ -10,7 +11,7 @@ public class MenuBehaviour : MonoBehaviour
     public bool visible = true;
     public bool dishGenerationActive;
     private int level;
-    private int numberOfPlayers = 1;
+    private int numberOfPlayers;
     private List<int> characters;
     private int currentCharacter = 0;
     private float currentTime = 0.0f;
@@ -18,24 +19,61 @@ public class MenuBehaviour : MonoBehaviour
     private int dish1;
     private int dish2;
     private string currentPanelDishName;
+    private UnityEngine.UI.Button optionsButton;
+    private UnityEngine.UI.Button returnGameButton;
+    private UnityEngine.UI.Button exitButton;
+    private UnityEngine.UI.Button exitMenuButton;
+    private UnityEngine.UI.Button pauseButton;
+    private UnityEngine.UI.RawImage menuBackground;
+    private UnityEngine.UI.RawImage exitSceneImage;
+    private UnityEngine.UI.RawImage returnSceneImage;
+    private UnityEngine.UI.Text exitSceneText;
+    private UnityEngine.UI.Text returnSceneText;
     public Texture firstPunctuationTexture;
     public Texture secondPunctuationTexture;
     public GameObject dishMenuPrefab;
     private Transform teamDishPanel;
     private Transform currentDishPanel;
+    private int typeOfGame;
     public int frequency = 5;
     public Texture decorativeElement1;
     public Texture decorativeElement2;
-
     MatchManager matchManager;
 
-    // Start is called before the first frame update
+    // < is called before the first frame update
     void Start()
     {
+        UnityEngine.UI.Button[] buttons = GetComponentsInChildren<UnityEngine.UI.Button>();
         UnityEngine.UI.RawImage[] rawImages = GetComponentsInChildren<UnityEngine.UI.RawImage>();
+        returnGameButton = buttons[0];
+        exitButton = buttons[1];
+        exitMenuButton = buttons[2];
+        optionsButton = buttons[3];
+        pauseButton = buttons[4];
+        optionsButton.onClick.AddListener(openMenu);
+        exitMenuButton.onClick.AddListener(closeMenu);
+        returnGameButton.onClick.AddListener(closeMenu);
+        exitButton.onClick.AddListener(closeMatch);
+        pauseButton.onClick.AddListener(pauseMatch);
+        menuBackground = rawImages[18];
+        exitSceneImage = rawImages[20];
+        returnSceneImage = rawImages[21];
+        closeMenu();
+        Debug.Log("Buttons: " + buttons.Length);
+        Debug.Log("rawImages: " + rawImages.Length);
         rawImages[9].texture = decorativeElement1;
         rawImages[10].texture = decorativeElement2;
         matchManager = FindObjectOfType<MatchManager>();
+        numberOfPlayers = matchManager.numberOfPlayers;
+        typeOfGame = PlayerPrefs.GetInt("tutorialActive", 2);
+        if (typeOfGame == 2)
+        {
+            pauseButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            pauseButton.gameObject.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -299,5 +337,77 @@ public class MenuBehaviour : MonoBehaviour
         }
 
         GetComponent<RectTransform>().sizeDelta = new Vector2(max_x - min_x, max_y - min_y);
+    }
+
+    public void openMenu()
+    {
+        Color temp = exitMenuButton.GetComponent<UnityEngine.UI.RawImage>().color;
+        temp.a = 1.0f;
+        exitMenuButton.GetComponent<UnityEngine.UI.RawImage>().color = temp;
+        exitMenuButton.interactable = true;
+        temp = exitButton.GetComponent<UnityEngine.UI.RawImage>().color;
+        temp.a = 1.0f;
+        exitButton.GetComponent<UnityEngine.UI.RawImage>().color = temp;
+        exitButton.interactable = true;
+        temp = returnGameButton.GetComponent<UnityEngine.UI.RawImage>().color;
+        temp.a = 1.0f;
+        returnGameButton.GetComponent<UnityEngine.UI.RawImage>().color = temp;
+        returnGameButton.interactable = true;
+        temp = menuBackground.color;
+        temp.a = 1.0f;
+        exitMenuButton.gameObject.SetActive(true);
+        exitButton.gameObject.SetActive(true);
+        returnGameButton.gameObject.SetActive(true);
+        menuBackground.color = temp;
+        menuBackground.gameObject.SetActive(true);
+        exitSceneImage.color = temp;
+        exitSceneImage.gameObject.SetActive(true);
+        returnSceneImage.color = temp;
+        returnSceneImage.gameObject.SetActive(true);
+    }
+
+    public void closeMenu()
+    {
+        Color temp = exitMenuButton.GetComponent<UnityEngine.UI.RawImage>().color;
+        temp.a = 0f;
+        exitMenuButton.GetComponent<UnityEngine.UI.RawImage>().color = temp;
+        exitMenuButton.interactable = false;
+        temp = exitButton.GetComponent<UnityEngine.UI.RawImage>().color;
+        temp.a = 0f;
+        exitButton.GetComponent<UnityEngine.UI.RawImage>().color = temp;
+        exitButton.interactable = false;
+        temp = returnGameButton.GetComponent<UnityEngine.UI.RawImage>().color;
+        temp.a = 0f;
+        returnGameButton.GetComponent<UnityEngine.UI.RawImage>().color = temp;
+        returnGameButton.interactable = false;
+        temp = menuBackground.color;
+        temp.a = 0f;
+        exitMenuButton.gameObject.SetActive(false);
+        exitButton.gameObject.SetActive(false);
+        returnGameButton.gameObject.SetActive(false);
+        menuBackground.color = temp;
+        menuBackground.gameObject.SetActive(false);
+        exitSceneImage.color = temp;
+        exitSceneImage.gameObject.SetActive(false);
+        returnSceneImage.color = temp;
+        returnSceneImage.gameObject.SetActive(false);
+        /*         
+        exitMenuButton.GetComponent<UnityEngine.UI.RawImage>().alpha = 0f;
+        exitMenuButton.blocksRaycasts = false;
+        exitButton.GetComponent<UnityEngine.UI.RawImage>().alpha = 0f;
+        exitButton.blocksRaycasts = false;
+        returnGameButton.GetComponent<UnityEngine.UI.RawImage>().alpha = 0f;
+        returnGameButton.blocksRaycasts = false;
+         */
+    }
+
+    public void closeMatch()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void pauseMatch()
+    {
+
     }
 }

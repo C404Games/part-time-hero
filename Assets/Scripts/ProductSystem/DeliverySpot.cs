@@ -19,10 +19,9 @@ public class DeliverySpot : MonoBehaviour
         matchManager = FindObjectOfType<MatchManager>();
     }
 
-    public bool deliverProduct(int team, ProductInstance product)
+    public void deliverProduct(int team, ProductInstance product)
     {
         int deliveryResult = matchManager.deliverProduct(team, product.id);
-        Debug.Log("entrega-" + team + "-"+deliveryResult);
         if (product.getProductType() == ProductType.FINAL && deliveryResult >= 0)
         {
             // Avisar al manager que lleve eso
@@ -56,6 +55,6 @@ public class DeliverySpot : MonoBehaviour
             PhotonNetwork.Destroy(currentDishPanel.gameObject);
             return true;
         }
-        return false;
+        Destroy(product.gameObject);
     }
 }

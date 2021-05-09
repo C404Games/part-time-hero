@@ -31,8 +31,17 @@ public class ToolSource : MonoBehaviour
             ProductInstance product = heldTool.GetComponent<ProductInstance>();
             product.id = toolId;
             product.setHolder(transform);
-
         }
+
+    }
+
+    public void returnTool(ProductInstance tool)
+    {
+        if (heldTool != null)
+            Destroy(heldTool);
+        heldTool = tool.gameObject;
+        heldTool.GetComponent<Rigidbody>().isKinematic = true;
+        tool.setHolder(transform);
     }
 
 }

@@ -43,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
 
     RecipieBook recipieBookInReach;
 
+    public bool active = true;
+
     private PhotonView photonView;
 
     private void Awake()
@@ -80,7 +82,11 @@ public class PlayerMovement : MonoBehaviour
                         currentTimeOfMaxSpeed = 0;
                     }
                 }
-                rb.velocity = velocity * speed * speedFactor;
+                if (active)
+                    rb.velocity = velocity * speed * speedFactor;
+                else
+                    rb.velocity = new Vector3(0, 0, 0);
+
                 nvAgent.speed = speed * speedFactor;
                 nvAgent.acceleration = acceleration * speedFactor;
                 if (velocity.sqrMagnitude != 0 && (!nvAgent.hasPath || nvAgent.velocity.sqrMagnitude == 0f))
@@ -128,18 +134,20 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
+        if (active)
+        {
+            Vector3 input = context.ReadValue<Vector2>();
+            var forward = Camera.main.transform.forward;
+            var right = Camera.main.transform.right;
+            forward.y = 0f;
+            right.y = 0f;
+            forward.Normalize();
+            right.Normalize();
 
-        Vector3 input = context.ReadValue<Vector2>();
-        var forward = Camera.main.transform.forward;
-        var right = Camera.main.transform.right;
-        forward.y = 0f;
-        right.y = 0f;
-        forward.Normalize();
-        right.Normalize();
+            velocity = (forward * input.y + right * input.x);
 
-        velocity = (forward * input.y + right * input.x);        
-
-        nvAgent.isStopped = true;
+            nvAgent.isStopped = true;
+        }
     }
 
     public void onAction(InputAction.CallbackContext context)
@@ -148,8 +156,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-
-        if (context.performed)
+        if (active && context.performed)
         {
             if (monsterInReach != null)
                 attack();
@@ -187,8 +194,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void attack()
     {
-        if (!attackBusy)
+        if (!attackBusy && monsterInReach != null)
         {
+            attackBusy = true;
             animator.SetTrigger("Attack");
             monsterInReach.takeHealth(1);
         }
@@ -218,18 +226,20 @@ public class PlayerMovement : MonoBehaviour
     public void blockMovement(float time, Vector3 waitPosition, Vector3 waitRotation)
     {
         blocked = true;
-        this.waitPosition = waitPosition;
-        this.waitRotation = waitRotation;
+        NavMeshPath navMeshPath = new NavMeshPath();
+        if (nvAgent.CalculatePath(waitPosition, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
+        {
+            this.waitPosition = waitPosition;
+            this.waitRotation = waitRotation;
+        }
+        else
+        {
+            this.waitPosition = transform.position;
+            this.waitRotation = transform.forward;
+        }
         StartCoroutine(unlockMovement(time));
         animator.SetBool("Chop", true);
     }
-    /*
-    public void repairStation(float time, StationInstance station)
-    {
-        blockMovement(time, station.getWaitPos(transform.position), station.getWaitRot(transform.position));
-        StartCoroutine(repairStationTime(station, time));
-    }
-    */
 
     public void freeze(float time)
     {

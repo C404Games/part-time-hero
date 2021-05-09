@@ -22,37 +22,29 @@ public class MatchManager : MonoBehaviour
 
     public GameObject team1Part;
     public GameObject team2Part;
-
     public List<ReachableTracker> trackersTeam1;
     public List<ReachableTracker> trackersTeam2;
-
     public List<WalkingArea> areasTeam1;
     public List<WalkingArea> areasTeam2;
 
     public string[] monsterPrefabs;
 
     private int level;
-
     private List<PlayerMovement> charactersTeam1;
     private List<PlayerMovement> charactersTeam2;
-
     private List<StationInstance> stationsTeam1;
     private List<StationInstance> stationsTeam2;
-
     private float punctuationTeam1;
     private float punctuationTeam2;
-
     private float initialTime;
-
     public List<Tuple<bool, int>> team1Dishes;
     public List<Tuple<bool, int>> team2Dishes;
-
     MenuBehaviour menuBehaviour;
-
     float freezeTime = 10.0f;
     float fastStationTime = 10.0f;
     float slowStationTime = 10.0f;
     float fastMovementTime = 10.0f;
+    public int numberOfPlayers;
 
     void Awake()
     {
@@ -64,6 +56,7 @@ public class MatchManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        numberOfPlayers = PlayerPrefs.GetInt("numberOfPlayers", 1);
         level = 1;        
 
         PlayerMovement[] allCharacters = FindObjectsOfType<PlayerMovement>();
@@ -209,9 +202,6 @@ public class MatchManager : MonoBehaviour
                 menuBehaviour.updatePoints();
             }
             return value;
-        } else
-        {
-            Debug.Log("no hay coincidencia "+ id);
         }
         return -1;
     }
