@@ -38,11 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-<<<<<<< HEAD
   m_IndirectSpecularColor: {r: 0.0040010894, g: 0.00021826132, b: 0.00000005190644,
-=======
-  m_IndirectSpecularColor: {r: 0.0040010842, g: 0.00021826083, b: 0.00000005190644,
->>>>>>> 4d9dcf26865b5222856f3ef254a8dd05c38d67b2
     a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -18983,53 +18979,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< HEAD
-=======
     - target: {fileID: 804535326008443858, guid: e542469c5280a1749bd032fc43b8bd9c,
         type: 3}
       propertyPath: sceneViewId
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 937832568287360111, guid: e542469c5280a1749bd032fc43b8bd9c,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.99999565
-      objectReference: {fileID: 0}
-    - target: {fileID: 937832568287360111, guid: e542469c5280a1749bd032fc43b8bd9c,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.00054139766
-      objectReference: {fileID: 0}
-    - target: {fileID: 937832568287360111, guid: e542469c5280a1749bd032fc43b8bd9c,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.0011051499
-      objectReference: {fileID: 0}
-    - target: {fileID: 937832568287360111, guid: e542469c5280a1749bd032fc43b8bd9c,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.0026810367
-      objectReference: {fileID: 0}
-    - target: {fileID: 937832568287360111, guid: e542469c5280a1749bd032fc43b8bd9c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -0.062000003
-      objectReference: {fileID: 0}
-    - target: {fileID: 937832568287360111, guid: e542469c5280a1749bd032fc43b8bd9c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0.126
-      objectReference: {fileID: 0}
-    - target: {fileID: 937832568287360111, guid: e542469c5280a1749bd032fc43b8bd9c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0.307
-      objectReference: {fileID: 0}
->>>>>>> 4d9dcf26865b5222856f3ef254a8dd05c38d67b2
     - target: {fileID: 1833080442598519929, guid: e542469c5280a1749bd032fc43b8bd9c,
         type: 3}
       propertyPath: m_Name
       value: IAManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1833080442598519929, guid: e542469c5280a1749bd032fc43b8bd9c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1833080442598519931, guid: e542469c5280a1749bd032fc43b8bd9c,
         type: 3}
@@ -20767,7 +20730,7 @@ MonoBehaviour:
   - {fileID: 1085767409}
   - {fileID: 1973062377}
   monsterPrefabs:
-  - {fileID: 1898609953145535182, guid: 2f7d98729552fc54a9fe049e59353672, type: 3}
+  - 
   numberOfPlayers: 0
 --- !u!4 &2094993364
 Transform:

@@ -15,7 +15,6 @@ public class AIAgent : MonoBehaviour
 
     public int id;
 
-    public GameObject[] characterPrefabs;
     public GameObject modelWrapper;
 
     AIManager manager;
