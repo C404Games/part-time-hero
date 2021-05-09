@@ -10,14 +10,9 @@ public class ProductManager : MonoBehaviour
     public static Dictionary<int, Product> rawProducts = new Dictionary<int, Product>();
     public static Dictionary<int, Product> finalProducts = new Dictionary<int, Product>();
 
-    public List<Product> nonStaticRawProducts;
-    public List<Product> nonStaticFinalProducts;
-
     #region MonoBehaviour
     private void Awake()
     {      
-        nonStaticFinalProducts = new List<Product>();
-        nonStaticRawProducts = new List<Product>();
         loadProducts("products");
     }
 
@@ -60,12 +55,10 @@ public class ProductManager : MonoBehaviour
 
             if(product.type == ProductType.RAW)
             {
-                nonStaticRawProducts.Add(product);
                 rawProducts.Add(product.id, product);
             }
             else if(product.type == ProductType.FINAL)
             {
-                nonStaticFinalProducts.Add(product);
                 finalProducts.Add(product.id, product);
             }
 

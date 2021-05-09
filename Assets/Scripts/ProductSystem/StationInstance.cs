@@ -34,7 +34,6 @@ public class StationInstance : MonoBehaviour
     float maxChangeSpeedTime;
 
     float repairTime = 5.0f;
-    bool repairing = false;
 
     // Start is called before the first frame update
     void Start()
