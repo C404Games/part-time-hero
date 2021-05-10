@@ -2419,15 +2419,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visible: 1
   dishGenerationActive: 1
+  pauseButton: {fileID: 1834672986}
+  panel: {fileID: 0}
+  team1PointsPanel: {fileID: 869798221}
+  team2PointsPanel: {fileID: 620258754}
+  timeText: {fileID: 1118915300}
   firstPunctuationTexture: {fileID: 2800000, guid: ac56185a11e28544aacae9b4eb67af28,
     type: 3}
   secondPunctuationTexture: {fileID: 2800000, guid: bfaf12e9f3476024c8ea8863f7b51167,
     type: 3}
   dishMenuPrefab: {fileID: 6590090751565906922, guid: 76468521e356e934a892582c1e0bac3e,
     type: 3}
-  frequency: 30
-  decorativeElement1: {fileID: 2800000, guid: c9cd9885843f426459dba83833c9ccd7, type: 3}
-  decorativeElement2: {fileID: 2800000, guid: a6a734a3b027c18469e49f74fa79fb60, type: 3}
 --- !u!114 &277371528
 MonoBehaviour:
   m_ObjectHideFlags: 0

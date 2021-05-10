@@ -20,7 +20,7 @@ public class MenuBehaviour : MonoBehaviour
     private int dish1;
     private int dish2;
     private string currentPanelDishName;
-    //public UnityEngine.UI.Button optionsButton;
+    public UnityEngine.UI.Button optionsButton;
     //public UnityEngine.UI.Button returnGameButton;
     //public UnityEngine.UI.Button exitButton;
     //public UnityEngine.UI.Button exitMenuButton;
@@ -32,6 +32,8 @@ public class MenuBehaviour : MonoBehaviour
 
     public Transform team1PointsPanel;
     public Transform team2PointsPanel;
+    public Transform team1dishPanel;
+    public Transform team2dishPanel;
     public Text timeText;
 
     private UnityEngine.UI.Text exitSceneText;
@@ -42,7 +44,6 @@ public class MenuBehaviour : MonoBehaviour
     private Transform teamDishPanel;
     private Transform currentDishPanel;
     //private GameObject searchedDish;
-    private bool isPaused;
     private int typeOfGame;
     private int frequency = 5;
     //public Texture decorativeElement1;
@@ -84,7 +85,7 @@ public class MenuBehaviour : MonoBehaviour
         {
             pauseButton.gameObject.SetActive(true);
         }
-        isPaused = false;
+        optionsButton.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -96,7 +97,7 @@ public class MenuBehaviour : MonoBehaviour
         }
         else
         {
-            if (!isPaused)
+            if (!matchManager.isPaused)
             {
                 CheckForChanges();
                 this.gameObject.SetActive(visible);
@@ -135,9 +136,9 @@ public class MenuBehaviour : MonoBehaviour
                             matchManager.team1Dishes[position - 1] = new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish1].id);
                         }
                         currentPanelDishName = "Dish" + (position) + "Panel";
-                        teamDishPanel = transform.Find("TeamDish1Panel");
-                        currentDishPanel = teamDishPanel.Find(currentPanelDishName);
+                        currentDishPanel = team1dishPanel.Find(currentPanelDishName);
                         dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
+                        dishMenuPrefab.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1000);
                         //dishMenuPrefab = Instantiate(searchedDish);
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
                         dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
@@ -175,9 +176,9 @@ public class MenuBehaviour : MonoBehaviour
                             matchManager.team2Dishes[position - 1] = new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish2].id);
                         }
                         currentPanelDishName = "Dish" + (position) + "Panel";
-                        teamDishPanel = transform.Find("TeamDish2Panel");
-                        currentDishPanel = teamDishPanel.Find(currentPanelDishName);
+                        currentDishPanel = team2dishPanel.Find(currentPanelDishName);
                         dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
+                        dishMenuPrefab.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1000);
                         //dishMenuPrefab = Instantiate(searchedDish);
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
                         dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
@@ -220,6 +221,9 @@ public class MenuBehaviour : MonoBehaviour
                 {
                     timeText.color = Color.red;
                     timeText.text = "00:00";
+                    matchManager.updatePlayerMoneyAndExperience();
+                    pauseButton.SetActive(false);
+                    pauseMatch();
                 }
 
                 //PowerUps
@@ -431,7 +435,6 @@ public class MenuBehaviour : MonoBehaviour
 
     public void pauseMatch()
     {
-        isPaused = !isPaused;
-
+        matchManager.isPaused = !matchManager.isPaused;
     }
 }

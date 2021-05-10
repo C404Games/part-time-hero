@@ -45,6 +45,7 @@ public class MatchManager : MonoBehaviour
     float slowStationTime = 10.0f;
     float fastMovementTime = 10.0f;
     public int numberOfPlayers;
+    public bool isPaused;
 
     void Awake()
     {
@@ -81,6 +82,13 @@ public class MatchManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isPaused)
+        {
+            pauseMatch();
+        } else
+        {            
+            unpauseMatch();
+        }
         //Uncomment when we have more than one player playing at the same time (Photon multiplayer)
         /*
         charactersLife[1] = GameObject.Find("Player2").GetComponent<PlayerMovement>().health;
@@ -295,6 +303,35 @@ public class MatchManager : MonoBehaviour
                 break;
         }
 
+    }
+
+    public void pauseMatch()
+    {
+        GameObject[] players;
+        players = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerMovement>().clickMovement.stop();
+            players[i].GetComponent<PlayerMovement>().paused = true;
+            players[i].GetComponent<PlayerMovement>().iceCube.SetActive(true);
+        }
+    }
+
+    public void unpauseMatch()
+    {
+        GameObject[] players;
+        players = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerMovement>().paused = false;
+            players[i].GetComponent<PlayerMovement>().iceCube.SetActive(false);
+        }
+    }
+
+    public void updatePlayerMoneyAndExperience()
+    {
+        PlayerPrefs.SetInt("characterExperiencesName", PlayerPrefs.GetInt("characterExperiencesName", 0) + (int)punctuationTeam1 + 100);
+        PlayerPrefs.SetInt("characterMoneyName", PlayerPrefs.GetInt("characterMoneyName", 0) + (int)(punctuationTeam1/10) + 10);
     }
 
 }

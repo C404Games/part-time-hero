@@ -8,21 +8,57 @@ public class loadScene : MonoBehaviour
 {
     public string _scene;
     public Animator menuAnimator;
-    private IEnumerator fadeCorroutine;
-
-    private void Awake()
-    {
-        fadeCorroutine = fadeOutScene(1.0f);
-    }
+    private IEnumerator fadePhotonCorroutine;
+    private IEnumerator fadeNonPhotonCorroutine;
 
 
     private void Start()
     {
+        fadePhotonCorroutine = fadeOutPhotonScene(2.0f);
+        fadeNonPhotonCorroutine = fadeOutScene(2.0f);
         if (string.IsNullOrEmpty(_scene))
             _scene = GetComponent<universalParameters>().getSceneToLoad();
     }
 
     public void changeToScene()
+    {
+        loadNextScene();
+    }
+
+    public void changeToSpecificScene(string scene)
+    {
+        _scene = scene;
+        loadNextScene();
+    }
+
+    public void changeToScenePhoton()
+    {
+        switch (_scene)
+        {
+            case "Tabern - Level 1":
+                    PlayerPrefs.SetInt("Scenary", 1);
+                    break;
+            case "Smithy - Level 1":
+                PlayerPrefs.SetInt("Scenary", 2);
+                break;
+        }
+        menuAnimator.SetTrigger("fadeIn");
+        StartCoroutine(fadePhotonCorroutine);
+    }
+
+    public IEnumerator fadeOutScene(float time)
+    {
+        yield return new WaitForSeconds(time);
+        SceneManager.LoadScene(_scene);
+    }
+
+    public IEnumerator fadeOutPhotonScene(float time)
+    {
+        yield return new WaitForSeconds(time);
+        PhotonNetwork.LoadLevel(_scene);
+    }
+
+    private void loadNextScene()
     {
         switch (_scene)
         {
@@ -38,7 +74,8 @@ public class loadScene : MonoBehaviour
                     if (level <= 1)
                     {
                         PlayerPrefs.SetInt("tutorialActive", 1);
-                    } else
+                    }
+                    else
                     {
                         PlayerPrefs.SetInt("tutorialActive", 0);
                     }
@@ -61,32 +98,7 @@ public class loadScene : MonoBehaviour
                     break;
                 }
         }
-        //menuAnimator.SetTrigger("fadeIn");
-        StartCoroutine(fadeCorroutine);
-    }
-
-    public void changeToSpecificScene(string scene)
-    {
-        SceneManager.LoadScene(scene);
-    }
-
-    public void changeToScenePhoton()
-    {
-        switch (_scene)
-        {
-            case "Tabern - Level 1":
-                    PlayerPrefs.SetInt("Scenary", 1);
-                    break;
-            case "Smithy - Level 1":
-                PlayerPrefs.SetInt("Scenary", 2);
-                break;
-        }
-        PhotonNetwork.LoadLevel(_scene);
-    }
-
-    public IEnumerator fadeOutScene(float time)
-    {
-        yield return new WaitForSeconds(3);
-        SceneManager.LoadScene(_scene);
+        menuAnimator.SetTrigger("fadeIn");
+        StartCoroutine(fadeNonPhotonCorroutine);
     }
 }
