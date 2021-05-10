@@ -35,12 +35,40 @@ public class loadScene : MonoBehaviour
     {
         switch (_scene)
         {
-            case "Tabern - Level 1":
+            case ("HistoryFirstLevel"):
+                {
+                    PlayerPrefs.SetInt("tutorialActive", 1);
+                    break;
+                }
+            case ("Tabern - Level 1"):
+                {
+                    int level = PlayerPrefs.GetInt("storyLevelAvailable", -1);
+                    if (level <= 1)
+                    {
+                        PlayerPrefs.SetInt("tutorialActive", 1);
+                    }
+                    else
+                    {
+                        PlayerPrefs.SetInt("tutorialActive", 0);
+                    }
                     PlayerPrefs.SetInt("Scenary", 1);
                     break;
-            case "Smithy - Level 1":
-                PlayerPrefs.SetInt("Scenary", 2);
-                break;
+                }
+            case ("Smithy - Level 1"):
+                {
+                    int level = PlayerPrefs.GetInt("storyLevelAvailable", -1);
+                    if (level <= 2)
+                    {
+                        PlayerPrefs.SetInt("tutorialActive", 1);
+                    }
+                    else
+                    {
+                        PlayerPrefs.SetInt("tutorialActive", 0);
+                    }
+                    PlayerPrefs.SetString("map", "herreria");
+                    PlayerPrefs.SetInt("Scenary", 2);
+                    break;
+                }
         }
         menuAnimator.SetTrigger("fadeIn");
         StartCoroutine(fadePhotonCorroutine);
@@ -48,12 +76,14 @@ public class loadScene : MonoBehaviour
 
     public IEnumerator fadeOutScene(float time)
     {
+        Debug.Log("non photon");
         yield return new WaitForSeconds(time);
         SceneManager.LoadScene(_scene);
     }
 
     public IEnumerator fadeOutPhotonScene(float time)
     {
+        Debug.Log("photon");
         yield return new WaitForSeconds(time);
         PhotonNetwork.LoadLevel(_scene);
     }
