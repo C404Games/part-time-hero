@@ -45,7 +45,7 @@ public class MenuBehaviour : MonoBehaviour
     private Transform currentDishPanel;
     //private GameObject searchedDish;
     private int typeOfGame;
-    private int frequency = 5;
+    private int frequency = 30;
     //public Texture decorativeElement1;
     //public Texture decorativeElement2;
     MatchManager matchManager;
