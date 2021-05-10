@@ -76,14 +76,12 @@ public class loadScene : MonoBehaviour
 
     public IEnumerator fadeOutScene(float time)
     {
-        Debug.Log("non photon");
         yield return new WaitForSeconds(time);
         SceneManager.LoadScene(_scene);
     }
 
     public IEnumerator fadeOutPhotonScene(float time)
     {
-        Debug.Log("photon");
         yield return new WaitForSeconds(time);
         PhotonNetwork.LoadLevel(_scene);
     }
