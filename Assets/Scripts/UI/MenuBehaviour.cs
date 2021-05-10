@@ -404,6 +404,7 @@ public class MenuBehaviour : MonoBehaviour
 
     public void readActionsFromFile(string file)
     {
+        /*
         string[] readText = File.ReadAllLines(file);
         foreach (string s in readText)
         {
@@ -452,6 +453,7 @@ public class MenuBehaviour : MonoBehaviour
                 action.data.Add(s.Split(':')[1]);
             }
         }
+        */
     }
 
     public void openMenu()
