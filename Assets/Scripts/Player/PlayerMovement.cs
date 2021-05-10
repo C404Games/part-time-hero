@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public float currentTimeOfMaxSpeed;
     public float timeMaxSpeed;
 
+    public bool paused;
     public bool frozen;
     public float currentTimeOfFrozen;
     public float timeFrozen;
@@ -36,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
     NavMeshAgent nvAgent;
-    ClickMovement clickMovement;
+    public ClickMovement clickMovement;
 
     MonsterController monsterInReach;
     public bool attackBusy = false;
@@ -67,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!blocked)
         {
-            if (!frozen)
+            if (!frozen && !paused)
             {
                 if (increasedSpeed)
                 {
@@ -162,7 +163,6 @@ public class PlayerMovement : MonoBehaviour
                 attack();
             else if (recipieBookInReach != null)
                 openCloseBook();                
-            // Otras acciones dependiento del contexto
         }
     }
 
@@ -264,6 +264,16 @@ public class PlayerMovement : MonoBehaviour
         blocked = false;
         animator.SetBool("Chop", false);
     }
+
+    public void pause(float time)
+    {
+        frozen = true;
+        timeFrozen = time;
+        currentTimeOfFrozen = 0;
+        iceCube.SetActive(false);
+        clickMovement.stop();
+    }
+
     /*
     private IEnumerator repairStationTime(StationInstance station, float time)
     {

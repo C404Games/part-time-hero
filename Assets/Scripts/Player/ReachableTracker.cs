@@ -120,7 +120,15 @@ public class ReachableTracker : MonoBehaviour
         List<StationInstance> stations = reachableStations.Where(s => s.getHealth() > 0).ToList();
         if (stations.Count == 0)
             return null;
-        return stations[Random.Range(0, reachableStations.Count)];
+        return stations[Random.Range(0, stations.Count)];
+    }
+
+    public StationInstance getRandomBreakableStation()
+    {
+        List<StationInstance> stations = reachableStations.Where(s => s.getHealth() > 0 && s.isBreakable()).ToList();
+        if (stations.Count == 0)
+            return null;
+        return stations[Random.Range(0, stations.Count)];
     }
 
     public StationInstance getNearbyBrokenStation()
@@ -129,7 +137,7 @@ public class ReachableTracker : MonoBehaviour
         StationInstance minDistStation = null;
         foreach (StationInstance station in reachableStations)
         {
-            if (station.getHealth() <= 0 && Vector3.Distance(station.transform.position, player.transform.position) < minDist)
+            if (station.getHealth() <= 0 && !station.isBusy() && Vector3.Distance(station.transform.position, player.transform.position) < minDist)
                 minDistStation = station;
         }
         return minDistStation;

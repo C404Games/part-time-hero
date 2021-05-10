@@ -50,17 +50,17 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
     public bool OnLoginButtonClicked()
     {
 
-        if (!"".Equals(playerName.text))
+        if (!"".Equals(PlayerPrefs.GetString("characterPlayerName", "")))
         {
-            Debug.Log("Uniendose a la red con el nombre " + playerName.text);
-            PhotonNetwork.LocalPlayer.NickName = playerName.text.ToUpper();
+            Debug.Log("Uniendose a la red con el nombre " + PlayerPrefs.GetString("characterPlayerName", ""));
+            PhotonNetwork.LocalPlayer.NickName = PlayerPrefs.GetString("characterPlayerName", "").ToUpper();
             if (PhotonNetwork.ConnectUsingSettings())
             {
-                Debug.Log("Usuario " + playerName.text + " unido correctamente a la red");
+                Debug.Log("Usuario " + PlayerPrefs.GetString("characterPlayerName", "") + " unido correctamente a la red");
                 return true;
             }
             else
-                Debug.Log("Error al conectar al usuario " + playerName.text + " a la red");
+                Debug.Log("Error al conectar al usuario " + PlayerPrefs.GetString("characterPlayerName", "") + " a la red");
         }
         else
         {
@@ -71,7 +71,7 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
 
     public void onDisconnectButtonclicked()
     {
-        Debug.Log("Jugador " + playerName.text + " desconectandose");
+        Debug.Log("Jugador " + PlayerPrefs.GetString("characterPlayerName", "") + " desconectandose");
         PhotonNetwork.Disconnect();
         Debug.Log("Desconectado");
 
@@ -79,7 +79,7 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
 
     public bool reconnectPlayer()
     {
-        Debug.Log("Jugador " + playerName.text + " reconectandose a la sala");
+        Debug.Log("Jugador " + PlayerPrefs.GetString("characterPlayerName", "") + " reconectandose a la sala");
         return PhotonNetwork.Reconnect();
     }
 
@@ -195,9 +195,9 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
     {
         Debug.Log("Saliendo de la sala" + idSala.GetComponent<Text>().text);
         if (PhotonNetwork.LeaveRoom())
-            Debug.Log("El usuario "+ playerName +" ha abandonado la sala");
+            Debug.Log("El usuario "+ PlayerPrefs.GetString("characterPlayerName", "") + " ha abandonado la sala");
         else
-            Debug.LogError("Error inesperado cuando " + playerName + " ha intentado abandonar la sala");
+            Debug.LogError("Error inesperado cuando " + PlayerPrefs.GetString("characterPlayerName", "") + " ha intentado abandonar la sala");
     }
 
     //Busqueda de salas

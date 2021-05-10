@@ -1,0 +1,365 @@
+{
+  "Products": [
+    {
+      "id": 0,
+      "name": "PROD_TOMATO",
+      "type": 0,
+      "appearence": "Products/Tabern/tomato"
+    },
+    {
+      "id": 1,
+      "name": "PROD_LETTUCE",
+      "type": 0,
+      "appearence": "Products/Tabern/salad"
+    },
+    {
+      "id": 2,
+      "name": "PROD_BREAD",
+      "type": 0,
+      "appearence": "Products/Tabern/loaf"
+    },
+    {
+      "id": 3,
+      "name": "PROD_HONEY",
+      "type": 0,
+      "appearence": "Products/Tabern/honey"
+    },
+    {
+      "id": 4,
+      "name": "PROD_MEAT",
+      "type": 0,
+      "appearence": "Products/Tabern/meatRaw"
+    },
+    {
+      "id": 5,
+      "name": "PROD_CHERRY",
+      "type": 0,
+      "appearence": "Products/Tabern/cherries"
+    },
+
+    {
+      "id": 106,
+      "name": "TOOL_POT",
+      "type": 3,
+      "appearence": "Tools/Tabern/pot"      
+    },
+    {
+      "id": 107,
+      "name": "TOOL_PLATE",
+      "type": 3,
+      "appearence": "Tools/Tabern/plate",
+      "transitions": [
+        {
+          "src": 20,
+          "dst": 21,
+          "time": 0
+        },
+        {
+          "src": 16,
+          "dst": 22,
+          "time": 0
+        },
+        {
+          "src": 18,
+          "dst": 19,
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "name": "TOOL_BOTTLE",
+      "type": 3,
+      "appearence": "Tools/Tabern/bottle"
+    },
+    {
+      "id": 109,
+      "name": "TOOL_JAR",
+      "type": 3,
+      "appearence": "Tools/Tabern/cup"
+    },
+    {
+      "id": 110,
+      "name": "TOOL_PAN",
+      "type": 3,
+      "appearence": "Tools/Tabern/fryingPan"
+    },
+
+    {
+      "id": 10,
+      "name": "PROD_HONEY_POT",
+      "type": 1,
+      "appearence": "Products/Tabern/potHoney"
+    },
+    {
+      "id": 11,
+      "name": "PROD_WATER_HONEY_POT",
+      "type": 1,
+      "appearence": "Products/Tabern/potHoney"
+    },
+    {
+      "id": 12,
+      "name": "PROD_WATER_HONEY_POT_COOKED",
+      "type": 1,
+      "appearence": "Products/Tabern/potHoney",
+      "transitions": [
+        {
+          "src": 108,
+          "dst": 13,
+          "time": 0
+        }
+      ]
+
+    },
+    {
+      "id": 13,
+      "name": "PROD_CARBONATED_HONEY",
+      "type": 2,
+      "difficulty": 0,
+      "appearence": "Products/Tabern/carbonatedHoney"
+
+    },
+
+    {
+      "id": 14,
+      "name": "PROD_BARREL_CHERRY",
+      "type": 1,
+      "appearence": "Products/Tabern/cherries",
+      "transitions": [
+        {
+          "src": 109,
+          "dst": 15,
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "PROD_CHERRY_BEER",
+      "type": 2,
+      "difficulty": 0,
+      "appearence": "Products/Tabern/cherryBeer"
+    },
+
+    {
+      "id": 16,
+      "name": "PROD_CHOPPED_TOMATO",
+      "type": 1,
+      "appearence": "Products/Tabern/tomatoSlice",
+      "transitions": [
+        {
+          "src": 107,
+          "dst": 22,
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "PROD_TOMATO_POT",
+      "type": 1,
+      "appearence": "Products/Tabern/potTomato",
+      "AIcollapse": true
+    },
+    {
+      "id": 18,
+      "name": "PROD_COOKED_TOMATO_POT",
+      "type": 1,
+      "appearence": "Products/Tabern/potTomato",
+      "transitions": [
+        {
+          "src": 107,
+          "dst": 19,
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "name": "PROD_TOMATO_SOUP",
+      "type": 2,
+      "difficulty": 0,
+      "appearence": "Products/Tabern/tomatoSoup"
+    },
+
+    {
+      "id": 20,
+      "name": "PROD_CHOPPED_BREAD",
+      "type": 1,
+      "appearence": "Products/Tabern/bread",
+      "transitions": [
+        {
+          "src": 107,
+          "dst": 21,
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "name": "PROD_BREAD_PLATE",
+      "type": 1,
+      "appearence": "Products/Tabern/breadPlate",
+      "transitions": [
+        {
+          "src": 1,
+          "dst": 24,
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "name": "PROD_TOMATO_PLATE",
+      "type": 1,
+      "appearence": "Products/Tabern/tomatoPlate"
+    },
+    {
+      "id": 23,
+      "name": "PROD_COOKED_MEAT",
+      "type": 1,
+      "appearence": "Products/Tabern/meatCooked"
+    },
+    {
+      "id": 24,
+      "name": "PROD_BREAD_LETTUCE_PLATE",
+      "type": 1,
+      "appearence": "Products/Tabern/breadLettucePlate",
+      "transitions": [
+        {
+          "src": 16,
+          "dst": 25,
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "name": "PROD_BREAD_LETTUCE_TOMATO_PLATE",
+      "type": 1,
+      "appearence": "Products/Tabern/breadLettuceTomatoPlate",
+      "transitions": [
+        {
+          "src": 23,
+          "dst": 26,
+          "time": 0
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "name": "PROD_BURGER",
+      "type": 2,
+      "difficulty": 2,
+      "appearence": "Products/Tabern/tarioBurger"
+    },
+    {
+      "id": 27,
+      "name": "PROD_MEAT_PAN",
+      "type": 1,
+      "appearence": "Products/Tabern/meatPan",
+      "AIcollapse": true
+    }
+  ],
+
+  "Stations": [
+    {
+      "id": 0,
+      "name": "STAT_BOARD",
+      "transitions": [
+        {
+          "auto": false,
+          "src": 0,
+          "dst": 16,
+          "time": 2
+        },
+        {
+          "auto": false,
+          "src": 2,
+          "dst": 20,
+          "time": 2
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "STAT_KITCHEN",
+      "transitions": [
+        {
+          "auto": true,
+          "src": 3,
+          "dst": 10,
+          "time": 0
+        },
+        {
+          "auto": true,
+          "src": 11,
+          "dst": 12,
+          "time": 10
+        },
+        {
+          "auto": true,
+          "src": 16,
+          "dst": 17,
+          "time": 0
+        },
+        {
+          "auto": true,
+          "src": 17,
+          "dst": 18,
+          "time": 10
+        },
+        {
+          "auto": true,
+          "src": 4,
+          "dst": 27,
+          "time": 0
+        },
+        {
+          "auto": true,
+          "src": 27,
+          "dst": 23,
+          "time": 10
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "STAT_TAP",
+      "transitions": [
+        {
+          "auto": true,
+          "src": 10,
+          "dst": 11,
+          "time": 2
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "STAT_BARREL",
+      "transitions": [
+        {
+          "auto": true,
+          "src": 5,
+          "dst": 14,
+          "time": 15
+        },
+        {
+          "auto": false,
+          "src": 10,
+          "dst": 11,
+          "time": 2
+        }
+      ],
+      "no_hold": [
+        0,1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,106,107,108,109,110
+      ]
+    },
+    {
+      "id": 4,
+      "name": "STAT_TABLE",
+      "transitions": []
+    }
+  ]
+}

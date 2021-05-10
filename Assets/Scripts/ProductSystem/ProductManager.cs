@@ -10,15 +10,23 @@ public class ProductManager : MonoBehaviour
     public static Dictionary<int, Product> rawProducts = new Dictionary<int, Product>();
     public static Dictionary<int, Product> finalProducts = new Dictionary<int, Product>();
 
-    public List<Product> nonStaticRawProducts;
-    public List<Product> nonStaticFinalProducts;
-
     #region MonoBehaviour
     private void Awake()
-    {      
-        nonStaticFinalProducts = new List<Product>();
-        nonStaticRawProducts = new List<Product>();
-        loadProducts("products");
+    {
+        string filename = "";
+        switch(PlayerPrefs.GetInt("Scenary", 1))
+        {
+            case 1:
+                filename = "RecipiesJSON/tabern";
+                break;
+            case 2:
+                filename = "RecipiesJSON/smithy";
+                break;
+            case 3:
+                filename = "RecipiesJSON/potions";
+                break;
+        }
+        loadProducts(filename);
     }
 
     void Start()
@@ -49,7 +57,7 @@ public class ProductManager : MonoBehaviour
             {
                 foreach (dynamic t in entry["transitions"])
                 {
-                    transitions.Add(new Transition((int)t["src"], (int)t["dst"], (int)t["time"], true));
+                    transitions.Add(new Transition(-1, (int)t["src"], (int)t["dst"], (int)t["time"], true));
                 }
             }
             int difficulty = entry["difficulty"] != null ? entry["difficulty"] : 0;
@@ -60,12 +68,10 @@ public class ProductManager : MonoBehaviour
 
             if(product.type == ProductType.RAW)
             {
-                nonStaticRawProducts.Add(product);
                 rawProducts.Add(product.id, product);
             }
             else if(product.type == ProductType.FINAL)
             {
-                nonStaticFinalProducts.Add(product);
                 finalProducts.Add(product.id, product);
             }
 
@@ -78,7 +84,8 @@ public class ProductManager : MonoBehaviour
             {
                 foreach (dynamic t in entry["transitions"])
                 {
-                    transitions.Add(new Transition((int)t["src"], (int)t["dst"], (int)t["time"], (bool)t["auto"]));
+                    int pre = t["pre"] != null ? (int)t["pre"] : -1;
+                    transitions.Add(new Transition(pre, (int)t["src"], (int)t["dst"], (int)t["time"], (bool)t["auto"]));
                 }
             }
 
@@ -92,7 +99,9 @@ public class ProductManager : MonoBehaviour
                 }
             }
 
-            stationBlueprints.Add((int)entry["id"], new Station((int)entry["id"], (string)entry["name"], transitions, noHold));
+            bool breakable = entry["breakable"] != null ? (bool)entry["breakable"] : false;
+
+            stationBlueprints.Add((int)entry["id"], new Station((int)entry["id"], (string)entry["name"], transitions, noHold, breakable));
         }
     }
 }

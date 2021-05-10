@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 5708946646402859863}
   - component: {fileID: 9061257794649668070}
   - component: {fileID: 4176950418668627092}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: InnerPowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 9125813585309749954}
   - component: {fileID: 4160295787708967397}
   - component: {fileID: 6861869645096439665}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4967,7 +4967,7 @@ GameObject:
   - component: {fileID: 2625838200733388610}
   - component: {fileID: 2282286040638429688}
   - component: {fileID: 8830174298387674097}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5046,7 +5046,7 @@ GameObject:
   - component: {fileID: 7805284653876204085}
   - component: {fileID: 3717165506254239049}
   - component: {fileID: 10161180055923521}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Spark-3-Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9861,6 +9861,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shoes_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 300457f2fc36ea549bbe46a90ec6555d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217261369978213604, guid: 300457f2fc36ea549bbe46a90ec6555d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195816986403250107, guid: 300457f2fc36ea549bbe46a90ec6555d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 300457f2fc36ea549bbe46a90ec6555d, type: 3}

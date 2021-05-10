@@ -45,6 +45,7 @@ public class MatchManager : MonoBehaviour
     float slowStationTime = 10.0f;
     float fastMovementTime = 10.0f;
     public int numberOfPlayers;
+    public bool isPaused;
 
     void Awake()
     {
@@ -81,6 +82,13 @@ public class MatchManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isPaused)
+        {
+            pauseMatch();
+        } else
+        {            
+            unpauseMatch();
+        }
         //Uncomment when we have more than one player playing at the same time (Photon multiplayer)
         /*
         charactersLife[1] = GameObject.Find("Player2").GetComponent<PlayerMovement>().health;
@@ -207,7 +215,7 @@ public class MatchManager : MonoBehaviour
     }
 
     public void castPowerup(PlayerMovement playerMovement, PowerupType type)
-    {        
+    {
         switch (type)
         {
             // Buenos
@@ -223,7 +231,7 @@ public class MatchManager : MonoBehaviour
             case PowerupType.FAST_WALK:
                 {
                     // Acelerar movimiento
-                    if(playerMovement.team == 1)
+                    if (playerMovement.team == 1)
                         charactersTeam1.ForEach(p => p.increaseSpeed(2.0f, fastMovementTime));
                     else
                         charactersTeam2.ForEach(p => p.increaseSpeed(2.0f, fastMovementTime));
@@ -239,7 +247,7 @@ public class MatchManager : MonoBehaviour
                     else
                         stationsTeam2.ForEach(p => p.startSpeedChange(1.5f, slowStationTime));
                 }
-                break;            
+                break;
             case PowerupType.FREEZE:
                 {
                     // Congelar jugador
@@ -284,7 +292,46 @@ public class MatchManager : MonoBehaviour
                     m.GetComponent<MonsterController>().reachableTracker = tracker;
                 }
                 break;
+            case PowerupType.STAR:
+                {
+                    // Cocina instantánea!!!
+                    if (playerMovement.team == 1)
+                        stationsTeam1.ForEach(p => p.startSpeedChange(0.0f, fastStationTime));
+                    else
+                        stationsTeam2.ForEach(p => p.startSpeedChange(0.0f, fastStationTime));
+                }
+                break;
         }
+
+    }
+
+    public void pauseMatch()
+    {
+        GameObject[] players;
+        players = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerMovement>().clickMovement.stop();
+            players[i].GetComponent<PlayerMovement>().paused = true;
+            players[i].GetComponent<PlayerMovement>().iceCube.SetActive(true);
+        }
+    }
+
+    public void unpauseMatch()
+    {
+        GameObject[] players;
+        players = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerMovement>().paused = false;
+            players[i].GetComponent<PlayerMovement>().iceCube.SetActive(false);
+        }
+    }
+
+    public void updatePlayerMoneyAndExperience()
+    {
+        PlayerPrefs.SetInt("characterExperiencesName", PlayerPrefs.GetInt("characterExperiencesName", 0) + (int)punctuationTeam1 + 100);
+        PlayerPrefs.SetInt("characterMoneyName", PlayerPrefs.GetInt("characterMoneyName", 0) + (int)(punctuationTeam1/10) + 10);
     }
 
 }
