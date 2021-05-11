@@ -13508,7 +13508,7 @@ MonoBehaviour:
   InsideRoomPanel: {fileID: 1284016539}
   PlayerListEntryPrefab: {fileID: 2436386143802344396, guid: fa2ff5d8ac3836042bc4f10412c2ce7a,
     type: 3}
-  playerName: {fileID: 0}
+  playerName: {fileID: 570929941}
   idSala: {fileID: 1143998923}
   infoIdSala: {fileID: 516454302}
   opcion: 1
@@ -16432,6 +16432,7 @@ MonoBehaviour:
   characterNameText: {fileID: 570929941}
   characterMoneyText: {fileID: 1193837505}
   characterLevelText: {fileID: 1774888425}
+  characterInputFieldNameText: {fileID: 1276914788}
   menuAnimator: {fileID: 1767274033}
 --- !u!1 &1770946251
 GameObject:

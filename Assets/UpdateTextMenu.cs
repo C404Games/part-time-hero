@@ -7,14 +7,21 @@ public class UpdateTextMenu : MonoBehaviour
     public UnityEngine.UI.Text characterNameText;
     public UnityEngine.UI.Text characterMoneyText;
     public UnityEngine.UI.Text characterLevelText;
+    public UnityEngine.UI.InputField characterInputFieldNameText;
     public Animator menuAnimator;
     private string text;
 
 
     void Start()
     {
+        string name = "Ghost " + Random.Range(0, 10000);
         text = PlayerPrefs.GetString("characterPlayerName", "");
-        characterNameText.text = text;
+        if (text == ""  || text.ToUpper() == "NOMBRE")
+        {
+            PlayerPrefs.SetString("characterPlayerName", name) ;
+        }
+        name = PlayerPrefs.GetString("characterPlayerName", "");
+        characterInputFieldNameText.text = name;
         menuAnimator.SetTrigger("fadeOut");
         text = "" + PlayerPrefs.GetInt("characterMoneyName", 0);
         characterMoneyText.text = text;
@@ -34,5 +41,11 @@ public class UpdateTextMenu : MonoBehaviour
             level++;
         }
         return level + 1;
+    }
+
+    private void Update()
+    {
+
+        PlayerPrefs.SetString("characterPlayerName", characterInputFieldNameText.text.ToUpper());
     }
 }
