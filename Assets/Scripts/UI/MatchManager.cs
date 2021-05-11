@@ -289,7 +289,7 @@ public class MatchManager : MonoBehaviour
                     }
                     string monster = monsterPrefabs[(int)Random.Range(0, monsterPrefabs.Length)];
                     GameObject m = PhotonNetwork.Instantiate(
-                        Path.Combine("Mostruos", monster) ,
+                        Path.Combine("Monstruos", monster) ,
                         area.RandomPointInBounds(), 
                         Quaternion.identity
                         );
@@ -317,6 +317,7 @@ public class MatchManager : MonoBehaviour
         {
             players[i].GetComponent<PlayerMovement>().clickMovement.stop();
             players[i].GetComponent<PlayerMovement>().paused = true;
+            players[i].GetComponent<PlayerMovement>().iceCube.SetActive(true);
         }
     }
 
@@ -327,6 +328,7 @@ public class MatchManager : MonoBehaviour
         for (int i = 0; i < players.Length; i++)
         {
             players[i].GetComponent<PlayerMovement>().paused = false;
+            players[i].GetComponent<PlayerMovement>().iceCube.SetActive(false);
         }
     }
 

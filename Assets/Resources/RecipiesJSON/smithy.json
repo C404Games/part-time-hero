@@ -35,7 +35,7 @@
       "id": 4,
       "name": "PROD_IRON_BLADE",
       "type": 1,
-      "appearence": "Products/Smithy/knife"
+      "appearence": "Products/Smithy/ironBlade"
     },
     {
       "id": 5,
@@ -73,7 +73,7 @@
       "id": 9,
       "name": "PROD_IRON_BLADE_LONG",
       "type": 1,
-      "appearence": "Products/Smithy/ironSword"
+      "appearence": "Products/Smithy/ironBladeLong"
     },
     {
       "id": 10,
@@ -92,7 +92,7 @@
       "id": 12,
       "name": "PROD_COPPER_BLADE_LONG",
       "type": 1,
-      "appearence": "Products/Smithy/copperSword"
+      "appearence": "Products/Smithy/copperBladeLong"
     },
     {
       "id": 13,
@@ -105,7 +105,7 @@
       "id": 14,
       "name": "PROD_COPPER_BLADE",
       "type": 1,
-      "appearence": "Products/Smithy/knife"
+      "appearence": "Products/Smithy/ironBlade"
     }
   ],
     "Stations":[

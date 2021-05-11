@@ -9,22 +9,6 @@ using System.IO;
 
 public class MenuBehaviour : MonoBehaviour
 {
-    public class TutorialAction
-    {
-        public List<string> data = new List<string>();
-        public string type;
-        public string character;
-        public int question;
-
-        public TutorialAction()
-        {
-        }
-    }
-
-
-    public List<TutorialAction> actions = new List<TutorialAction>();
-    public enum Action { DIALOGUE, POWERUP, MONSTER, END };
-    public GameObject panelDialogue;
     public bool visible = true;
     public bool dishGenerationActive;
     private int level;
@@ -66,32 +50,7 @@ public class MenuBehaviour : MonoBehaviour
     //public Texture decorativeElement2;
     MatchManager matchManager;
 
-    void Awake()
-    {
-        if (PlayerPrefs.GetInt("tutorialActive") == 1)
-        {
-            switch (PlayerPrefs.GetInt("Scenary"))
-            {
-                case 1:
-                    {
-                        Debug.Log("1");
-                        //readActionsFromFile(Application.dataPath + "/tabernActions.txt");
-                        break;
-                    }
-                case 2:
-                    {
-                        Debug.Log("2");
-                        //readActionsFromFile(Application.dataPath + "/smithyActions.txt");
-                        break;
-                    }
-            }
-        } else
-        {
-
-        }
-    }
-
-    //  is called before the first frame update
+    // < is called before the first frame update
     void Start()
     {
         //searchedDish = Instantiate(transform.Find("Dish").gameObject);
@@ -402,60 +361,6 @@ public class MenuBehaviour : MonoBehaviour
         GetComponent<RectTransform>().sizeDelta = new Vector2(max_x - min_x, max_y - min_y);
     }
 
-    public void readActionsFromFile(string file)
-    {
-        /*
-        string[] readText = File.ReadAllLines(file);
-        foreach (string s in readText)
-        {
-            if (s.Contains("PRE"))
-            {
-                TutorialAction action = new TutorialAction();
-                action.data.Add(s.Split(':')[1]);
-                action.type = Action.PROLOGUE.ToString();
-                actions.Add(action);
-            }
-            else if (s.Contains("-"))
-            {
-                TutorialAction action = new TutorialAction();
-                action.data.Add(s.Split(':')[1]);
-                action.character = s.Split(':')[0].Split('-')[1].Split('(')[0];
-                if (s.Split(':')[1].Contains("Introduce el nombre"))
-                {
-                    action.type = Action.WRITING.ToString();
-                }
-                else if (s.Split(':')[1].Contains("opciones de dialogo"))
-                {
-                    action.type = Action.QUESTION.ToString();
-                }
-                else
-                {
-                    action.type = Action.DIALOGUE.ToString();
-                }
-                if (s.Contains("(P1)"))
-                {
-                    action.question = 1;
-                }
-                else if (s.Contains("(P2)"))
-                {
-                    action.question = 2;
-                }
-                else
-                {
-                    action.question = 0;
-                }
-                actions.Add(action);
-
-            }
-            else
-            {
-                TutorialAction action = actions[actions.Count - 1];
-                action.data.Add(s.Split(':')[1]);
-            }
-        }
-        */
-    }
-
     public void openMenu()
     {
         panel.SetActive(true);
@@ -522,7 +427,6 @@ public class MenuBehaviour : MonoBehaviour
         returnGameButton.blocksRaycasts = false;
          */
     }
-
 
     public void closeMatch()
     {

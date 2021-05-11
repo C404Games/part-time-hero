@@ -17,15 +17,15 @@ public class RecipieBook : MonoBehaviour
 
         if (recipieImage.sprite == null)
         {
-            int level = FindObjectOfType<MatchManager>().getLevel();
+            int level = PlayerPrefs.GetInt("Scenary", 1);
 
             switch (level)
             {
-                case 0:
+                case 1:
                     recipieImage.sprite = Resources.Load<Sprite>("Images/Recipies/tabern");
                     break;
-                default:
-                    recipieImage.sprite = Resources.Load<Sprite>("Images/Recipies/tabern");
+                case 2:
+                    recipieImage.sprite = Resources.Load<Sprite>("Images/Recipies/smithy");
                     break;
             }
         }

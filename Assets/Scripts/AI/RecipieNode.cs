@@ -12,6 +12,9 @@ public class RecipieNode
 
     public bool done = false;
 
+    public bool hasPre = false;
+    public bool isPre = false;
+
     public RecipieNode parent1, parent2;
 
     public RecipieNode child;
@@ -54,6 +57,8 @@ public class RecipieNode
         RecipieNode node = new RecipieNode(id);
         node.isStation = isStation;
         node.child = child;
+        node.isPre = isPre;
+        node.hasPre = hasPre;
         if(parent1 != null)
             node.parent1 = parent1.copySelf(node);
         if(parent2 != null)
