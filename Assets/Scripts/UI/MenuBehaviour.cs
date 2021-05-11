@@ -9,21 +9,8 @@ using System.IO;
 
 public class MenuBehaviour : MonoBehaviour
 {
-    public class TutorialAction
-    {
-        public List<string> data = new List<string>();
-        public string type;
-        public string character;
-        public int question;
-
-        public TutorialAction()
-        {
-        }
-    }
-
-
-    public List<TutorialAction> actions = new List<TutorialAction>();
-    public enum Action { DIALOGUE, POWERUP, MONSTER, END };
+    public UnityEngine.UI.Text textExperiencePostMatch;
+    public UnityEngine.UI.Text textMoneyPostMatch;
     public GameObject panelDialogue;
     public bool visible = true;
     public bool dishGenerationActive;
@@ -62,12 +49,19 @@ public class MenuBehaviour : MonoBehaviour
     //private GameObject searchedDish;
     private int typeOfGame;
     private int frequency = 30;
+    private bool generalMission;
     //public Texture decorativeElement1;
     //public Texture decorativeElement2;
     MatchManager matchManager;
+    private IEnumerator fadeOutCorroutine;
+    private IEnumerator fadeInCorroutine;
+    public Animator menuAnimator;
+    public bool charging;
 
     void Awake()
     {
+        fadeOutCorroutine = fadeOutScene(1.0f);
+        fadeInCorroutine = fadeInScene(1.0f);
         if (PlayerPrefs.GetInt("tutorialActive") == 1)
         {
             switch (PlayerPrefs.GetInt("Scenary"))
@@ -94,6 +88,7 @@ public class MenuBehaviour : MonoBehaviour
     //  is called before the first frame update
     void Start()
     {
+        StartCoroutine(this.fadeOutCorroutine);
         //searchedDish = Instantiate(transform.Find("Dish").gameObject);
         /*
         UnityEngine.UI.Button[] buttons = GetComponentsInChildren<UnityEngine.UI.Button>();
@@ -138,7 +133,7 @@ public class MenuBehaviour : MonoBehaviour
         }
         else
         {
-            if (!matchManager.isPaused)
+            if (!matchManager.isPaused && !charging)
             {
                 CheckForChanges();
                 this.gameObject.SetActive(visible);
@@ -164,7 +159,6 @@ public class MenuBehaviour : MonoBehaviour
                         }
                     }
                     position++;
-                    Debug.Log("Positions1: " + position);
                     if (position >= 1)
                     {
                         dish1 = matchManager.generateOrder();
@@ -204,7 +198,6 @@ public class MenuBehaviour : MonoBehaviour
                         }
                     }
                     position++;
-                    Debug.Log("Positions2: " + position);
                     if (position >= 1)
                     {
                         dish2 = matchManager.generateOrder();
@@ -248,7 +241,7 @@ public class MenuBehaviour : MonoBehaviour
                             timeText.color = Color.black;
                         }
                     }
-                    else if (seconds == 0 || seconds == 30)
+                    else if ((seconds == 0 || seconds == 30) && (int)(totalTime) > 2)
                     {
                         timeText.color = Color.red;
                     }
@@ -265,6 +258,7 @@ public class MenuBehaviour : MonoBehaviour
                     matchManager.updatePlayerMoneyAndExperience();
                     pauseButton.SetActive(false);
                     pauseMatch();
+                    StartCoroutine(fadeInCorroutine);
                 }
 
                 //PowerUps
@@ -402,59 +396,6 @@ public class MenuBehaviour : MonoBehaviour
         GetComponent<RectTransform>().sizeDelta = new Vector2(max_x - min_x, max_y - min_y);
     }
 
-    public void readActionsFromFile(string file)
-    {
-        /*
-        string[] readText = File.ReadAllLines(file);
-        foreach (string s in readText)
-        {
-            if (s.Contains("PRE"))
-            {
-                TutorialAction action = new TutorialAction();
-                action.data.Add(s.Split(':')[1]);
-                action.type = Action.PROLOGUE.ToString();
-                actions.Add(action);
-            }
-            else if (s.Contains("-"))
-            {
-                TutorialAction action = new TutorialAction();
-                action.data.Add(s.Split(':')[1]);
-                action.character = s.Split(':')[0].Split('-')[1].Split('(')[0];
-                if (s.Split(':')[1].Contains("Introduce el nombre"))
-                {
-                    action.type = Action.WRITING.ToString();
-                }
-                else if (s.Split(':')[1].Contains("opciones de dialogo"))
-                {
-                    action.type = Action.QUESTION.ToString();
-                }
-                else
-                {
-                    action.type = Action.DIALOGUE.ToString();
-                }
-                if (s.Contains("(P1)"))
-                {
-                    action.question = 1;
-                }
-                else if (s.Contains("(P2)"))
-                {
-                    action.question = 2;
-                }
-                else
-                {
-                    action.question = 0;
-                }
-                actions.Add(action);
-
-            }
-            else
-            {
-                TutorialAction action = actions[actions.Count - 1];
-                action.data.Add(s.Split(':')[1]);
-            }
-        }
-        */
-    }
 
     public void openMenu()
     {
@@ -533,4 +474,24 @@ public class MenuBehaviour : MonoBehaviour
     {
         matchManager.isPaused = !matchManager.isPaused;
     }
+
+    public IEnumerator fadeOutScene(float time)
+    {
+        charging = true;
+        menuAnimator.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(time);
+        menuAnimator.SetTrigger("introduction");
+        yield return new WaitForSeconds(9.0f);
+        charging = false;
+    }
+
+    public IEnumerator fadeInScene(float time)
+    {
+        textExperiencePostMatch.text = (int)matchManager.punctuationTeam1 + " + 100";
+        textExperiencePostMatch.text = (int)(matchManager.punctuationTeam1 / 10)  + " + 10";
+        menuAnimator.SetTrigger("fadeIn");
+        yield return new WaitForSeconds(5.0f);
+        SceneManager.LoadScene("MainMenu");
+    }
+
 }
