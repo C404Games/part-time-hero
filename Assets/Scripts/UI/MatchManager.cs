@@ -131,6 +131,7 @@ public class MatchManager : MonoBehaviour
                 randomProduct = product;
             }
         }
+        Debug.Log("Id: " + randomProduct.id + "Producto: " +randomProduct.name);
         return randomProduct.id;
 
     }
