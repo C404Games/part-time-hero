@@ -18,7 +18,7 @@ public class UpdateTextMenu : MonoBehaviour
         menuAnimator.SetTrigger("fadeOut");
         text = "" + PlayerPrefs.GetInt("characterMoneyName", 0);
         characterMoneyText.text = text;
-        text ="" + getLevelFromExperience(PlayerPrefs.GetInt("characterExperiencesName", 0));
+        text = "" + getLevelFromExperience(PlayerPrefs.GetInt("characterExperiencesName", 0));
         characterLevelText.text = text;
     }
 
@@ -27,12 +27,12 @@ public class UpdateTextMenu : MonoBehaviour
         int level = 0;
         for(int i = 0; i < 99; i ++)
         {
-            level++;
-            if (experience <= (50*level + 50*level*level))
+            if (experience <= (100*level + 500*level*level))
             {
                 return level;
             }
+            level++;
         }
-        return level ;
+        return level + 1;
     }
 }

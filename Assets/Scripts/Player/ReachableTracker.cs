@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -67,7 +66,7 @@ public class ReachableTracker : MonoBehaviour
         ProductInstance minDistProduct = null;
         foreach (ProductInstance product in reachableProducts)
         {
-            if (product.id == id && 
+            if (product.id == id &&
                 Vector3.Distance(product.transform.position, player.transform.position) < minDist)
                 minDistProduct = product;
         }
@@ -214,5 +213,16 @@ public class ReachableTracker : MonoBehaviour
         }
 
         return minDistanceMonster;
+    }
+
+    public Vector3 getRandomPointInBounds()
+    {
+        Collider myCollider = GetComponent<BoxCollider>();
+        Bounds bounds = myCollider.bounds;
+        return new Vector3(
+        Random.Range(bounds.min.x + 2, bounds.max.x - 2),
+        bounds.min.y,
+        Random.Range(bounds.min.z + 2, bounds.max.z - 2)
+    );
     }
 }

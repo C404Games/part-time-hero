@@ -1,7 +1,0 @@
-[Mission n]
-Encargado: Tu misión es (mission name)
-: Demuéstranos tu valía/Nos contaron grandes gestas cosas de ti/Estamos en tus manos, seguro que puedes conseguirlo. 
-Victoria: Sabía que lo conseguirías/Lo haces fácil/No todos los días vemos gente como tú/Pásate más a menudo por aquí, aquí tienes tu recompensa. (Point and experience menu) 
-: Nos vemos pronto por aquí (username). 
-Derrota: Otra vez será/Nadie dijo que nuestro trabajo fuera fácil/Todos tenemos un mal día, aquí tienes tu recompensa. (Point and experience menu) 
-: Nos vemos pronto por aquí (username). 

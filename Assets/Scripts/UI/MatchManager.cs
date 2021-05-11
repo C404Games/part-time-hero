@@ -34,9 +34,9 @@ public class MatchManager : MonoBehaviour
     private List<PlayerMovement> charactersTeam2;
     private List<StationInstance> stationsTeam1;
     private List<StationInstance> stationsTeam2;
-    public float punctuationTeam1;
-    public float punctuationTeam2;
-    public float initialTime;
+    private float punctuationTeam1;
+    private float punctuationTeam2;
+    private float initialTime;
     public List<Tuple<bool, int>> team1Dishes;
     public List<Tuple<bool, int>> team2Dishes;
     MenuBehaviour menuBehaviour;
@@ -57,7 +57,6 @@ public class MatchManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.initialTime = initialTime + 1;
         numberOfPlayers = PlayerPrefs.GetInt("numberOfPlayers", 1);
         level = 1;        
 
@@ -74,13 +73,16 @@ public class MatchManager : MonoBehaviour
         areasTeam2 = allAreas.Where(a => a.teamArea == 2).ToList();
         */
 
+
+        initialTime = 300.0f;
+
         menuBehaviour = FindObjectOfType<MenuBehaviour>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isPaused || menuBehaviour.charging)
+        if (isPaused)
         {
             pauseMatch();
         } else
@@ -284,7 +286,7 @@ public class MatchManager : MonoBehaviour
                     }
                     string monster = monsterPrefabs[(int)Random.Range(0, monsterPrefabs.Length)];
                     GameObject m = PhotonNetwork.Instantiate(
-                        Path.Combine("Mostruos", monster) ,
+                        Path.Combine("Monstruos", monster) ,
                         area.RandomPointInBounds(), 
                         Quaternion.identity
                         );
@@ -312,6 +314,7 @@ public class MatchManager : MonoBehaviour
         {
             players[i].GetComponent<PlayerMovement>().clickMovement.stop();
             players[i].GetComponent<PlayerMovement>().paused = true;
+            players[i].GetComponent<PlayerMovement>().iceCube.SetActive(true);
         }
     }
 
@@ -322,6 +325,7 @@ public class MatchManager : MonoBehaviour
         for (int i = 0; i < players.Length; i++)
         {
             players[i].GetComponent<PlayerMovement>().paused = false;
+            players[i].GetComponent<PlayerMovement>().iceCube.SetActive(false);
         }
     }
 
