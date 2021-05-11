@@ -104,14 +104,5 @@ public class GodScript : MonoBehaviour
             model.GetComponent<MeshFilter>().mesh = Instantiate(mesh);
         }
     }
-    public void changeSkin(Texture texture)
-    {
-        meshModels = GameObject.FindGameObjectsWithTag("Models");
-
-        foreach (GameObject model in meshModels)
-        {
-            model.GetComponent<MeshRenderer>().material.mainTexture = texture;
-        }
-    }
 
 }

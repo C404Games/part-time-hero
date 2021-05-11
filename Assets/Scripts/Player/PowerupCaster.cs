@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class PowerupCaster : MonoBehaviour
@@ -35,7 +36,7 @@ public class PowerupCaster : MonoBehaviour
             {
                 matchManager.castPowerup(playerMovement, powerup.type);
             }
-            Destroy(other.transform.parent.gameObject);
+            PhotonNetwork.Destroy(other.transform.parent.gameObject);
         }
     }
 }

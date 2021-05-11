@@ -9,22 +9,6 @@ using System.IO;
 
 public class MenuBehaviour : MonoBehaviour
 {
-    public class TutorialAction
-    {
-        public List<string> data = new List<string>();
-        public string type;
-        public string character;
-        public int question;
-
-        public TutorialAction()
-        {
-        }
-    }
-
-
-    public List<TutorialAction> actions = new List<TutorialAction>();
-    public enum Action { DIALOGUE, POWERUP, MONSTER, END };
-    public GameObject panelDialogue;
     public bool visible = true;
     public bool dishGenerationActive;
     private int level;
@@ -56,6 +40,14 @@ public class MenuBehaviour : MonoBehaviour
     private UnityEngine.UI.Text returnSceneText;
     public Texture firstPunctuationTexture;
     public Texture secondPunctuationTexture;
+    public Texture knifeTexture;
+    public Texture spearTexture;
+    public Texture ironSwordTexture;
+    public Texture woodSwordTexture;
+    public Texture carbonatedHoneyTexture;
+    public Texture tomatoSoupTexture;
+    public Texture hamburgerTexture;
+    public Texture cherryBeerTexture;
     public GameObject dishMenuPrefab;
     private Transform teamDishPanel;
     private Transform currentDishPanel;
@@ -66,32 +58,7 @@ public class MenuBehaviour : MonoBehaviour
     //public Texture decorativeElement2;
     MatchManager matchManager;
 
-    void Awake()
-    {
-        if (PlayerPrefs.GetInt("tutorialActive") == 1)
-        {
-            switch (PlayerPrefs.GetInt("Scenary"))
-            {
-                case 1:
-                    {
-                        Debug.Log("1");
-                        //readActionsFromFile(Application.dataPath + "/tabernActions.txt");
-                        break;
-                    }
-                case 2:
-                    {
-                        Debug.Log("2");
-                        //readActionsFromFile(Application.dataPath + "/smithyActions.txt");
-                        break;
-                    }
-            }
-        } else
-        {
-
-        }
-    }
-
-    //  is called before the first frame update
+    // < is called before the first frame update
     void Start()
     {
         //searchedDish = Instantiate(transform.Find("Dish").gameObject);
@@ -179,11 +146,36 @@ public class MenuBehaviour : MonoBehaviour
                         currentPanelDishName = "Dish" + (position) + "Panel";
                         currentDishPanel = team1dishPanel.Find(currentPanelDishName);
                         dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
-                        dishMenuPrefab.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1000);
                         //dishMenuPrefab = Instantiate(searchedDish);
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
                         dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
+                        UnityEngine.UI.RawImage rawImageDish = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.RawImage>();
+                        Vector2 panelSize = currentDishPanel.GetComponent<RectTransform>().sizeDelta;
+                        rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(70, 70);
+                        switch (dish1)
+                        {
+                            case 19:
+                                {
+                                    rawImageDish.texture = tomatoSoupTexture;
+                                    break;
+                                }
+                            case 26:
+                                {
+                                    rawImageDish.texture = hamburgerTexture;
+                                    break;
+                                }
+                            case 15:
+                                {
+                                    rawImageDish.texture = cherryBeerTexture;
+                                    break;
+                                }
+                            case 13:
+                                {
+                                    rawImageDish.texture = carbonatedHoneyTexture;
+                                    break;
+                                }
+                        }
                         Text dishNameText = dishMenuPrefab.GetComponentInChildren<Text>();
                         dishNameText.text = ProductManager.finalProducts[dish1].name;
                     }
@@ -219,11 +211,37 @@ public class MenuBehaviour : MonoBehaviour
                         currentPanelDishName = "Dish" + (position) + "Panel";
                         currentDishPanel = team2dishPanel.Find(currentPanelDishName);
                         dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
-                        dishMenuPrefab.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1000);
+                        //dishMenuPrefab.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1000);
                         //dishMenuPrefab = Instantiate(searchedDish);
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
                         dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
+                        UnityEngine.UI.RawImage rawImageDish = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.RawImage>();
+                        Vector2 panelSize = currentDishPanel.GetComponent<RectTransform>().sizeDelta;
+                        rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(70, 70);
+                        switch (dish1)
+                        {
+                            case 19:
+                                {
+                                    rawImageDish.texture = tomatoSoupTexture;
+                                    break;
+                                }
+                            case 26:
+                                {
+                                    rawImageDish.texture = hamburgerTexture;
+                                    break;
+                                }
+                            case 15:
+                                {
+                                    rawImageDish.texture = cherryBeerTexture;
+                                    break;
+                                }
+                            case 13:
+                                {
+                                    rawImageDish.texture = carbonatedHoneyTexture;
+                                    break;
+                                }
+                        }
                         UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
                         dishNameText.text = ProductManager.finalProducts[dish2].name;
                     }
@@ -288,7 +306,7 @@ public class MenuBehaviour : MonoBehaviour
         UnityEngine.UI.RawImage[] rawImageTeam2 = team2PointsPanel.GetComponentsInChildren<UnityEngine.UI.RawImage>();
         UnityEngine.UI.Text[] textPunctuationTeam2 = team2PointsPanel.GetComponentsInChildren<UnityEngine.UI.Text>();
 
-        if (numberOfPlayers == 1 || (numberOfPlayers == 2 && currentCharacter == 0) || (numberOfPlayers == 4 && (currentCharacter == 0 || currentCharacter == 1)))
+        if (currentCharacter == 0 || currentCharacter == 1)
         {
             if (matchManager.getPunctuationTeam1() > matchManager.getPunctuationTeam2())
             {
@@ -402,60 +420,6 @@ public class MenuBehaviour : MonoBehaviour
         GetComponent<RectTransform>().sizeDelta = new Vector2(max_x - min_x, max_y - min_y);
     }
 
-    public void readActionsFromFile(string file)
-    {
-        /*
-        string[] readText = File.ReadAllLines(file);
-        foreach (string s in readText)
-        {
-            if (s.Contains("PRE"))
-            {
-                TutorialAction action = new TutorialAction();
-                action.data.Add(s.Split(':')[1]);
-                action.type = Action.PROLOGUE.ToString();
-                actions.Add(action);
-            }
-            else if (s.Contains("-"))
-            {
-                TutorialAction action = new TutorialAction();
-                action.data.Add(s.Split(':')[1]);
-                action.character = s.Split(':')[0].Split('-')[1].Split('(')[0];
-                if (s.Split(':')[1].Contains("Introduce el nombre"))
-                {
-                    action.type = Action.WRITING.ToString();
-                }
-                else if (s.Split(':')[1].Contains("opciones de dialogo"))
-                {
-                    action.type = Action.QUESTION.ToString();
-                }
-                else
-                {
-                    action.type = Action.DIALOGUE.ToString();
-                }
-                if (s.Contains("(P1)"))
-                {
-                    action.question = 1;
-                }
-                else if (s.Contains("(P2)"))
-                {
-                    action.question = 2;
-                }
-                else
-                {
-                    action.question = 0;
-                }
-                actions.Add(action);
-
-            }
-            else
-            {
-                TutorialAction action = actions[actions.Count - 1];
-                action.data.Add(s.Split(':')[1]);
-            }
-        }
-        */
-    }
-
     public void openMenu()
     {
         panel.SetActive(true);
@@ -522,7 +486,6 @@ public class MenuBehaviour : MonoBehaviour
         returnGameButton.blocksRaycasts = false;
          */
     }
-
 
     public void closeMatch()
     {

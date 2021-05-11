@@ -23,6 +23,7 @@ public class AIManager : MonoBehaviour
     public AIAgent activeAgent;
 
     StationInstance commonTable;
+    StationInstance lastStation;
     ProductInstance commonProduct;
     ProductInstance secondaryProduct;
 
@@ -85,7 +86,7 @@ public class AIManager : MonoBehaviour
                     // En ese caso, reiniciamos el paso
                     if (stolen)
                     {
-                        commonProduct = null;
+                        //commonProduct = null;
                         resetNodeRecursive(currentNode);
                         //currentNode.parent1.parent1.done = false;
                         //currentNode.parent1.parent2.done = false;
@@ -106,7 +107,7 @@ public class AIManager : MonoBehaviour
                     // En ese caso, reiniciamos el paso
                     if (stolen)
                     {
-                        secondaryProduct = null;
+                        //secondaryProduct = null;
                         resetNodeRecursive(currentNode);
                         //currentNode.parent2.parent1.done = false;
                         //currentNode.parent2.parent2.done = false;
@@ -153,7 +154,15 @@ public class AIManager : MonoBehaviour
                             // Situación producto-mueble
                             if (currentNode.parent2.isStation)
                             {
-                                StationInstance station = activeAgent.reachableTracker.getStationOnReach(currentNode.parent2.id, false);
+                                StationInstance station = null;
+                                if (currentNode.hasPre)
+                                    station = lastStation;
+                                else
+                                {
+                                    station = activeAgent.reachableTracker.getStationOnReach(currentNode.parent2.id, false);
+                                    if (currentNode.parent1.isPre)
+                                        lastStation = station;
+                                }
                                 // SI está mueble al alcance, lo ponemos como target
                                 if (station != null)
                                 {
@@ -163,10 +172,14 @@ public class AIManager : MonoBehaviour
                                     currentNode.parent2.done = true;
 
                                     // Si es nodo final, siguiente receta
+                                    /*
                                     if (currentNode.child == null)
                                     {
+                                        step = AIStep.STEP3;
                                         nextRecipie();
                                     }
+                                    */
+                                    
                                 }
                                 // SI no, lo ponemos al alcance del compañero
                                 else
@@ -265,7 +278,7 @@ public class AIManager : MonoBehaviour
                             if (activeAgent == null)
                                 break;
 
-                            activeAgent.targetProduct = commonProduct;
+                            activeAgent.targetProduct = commonProduct != null? commonProduct : secondaryProduct;
                             activeAgent.delivering = true;
                             activeAgent.startBehaviour();
 
@@ -388,11 +401,15 @@ public class AIManager : MonoBehaviour
                     {
                         node.parent1 = createProdNode(transition.src, node);
                         node.parent2 = createStatNode(station.id, node);
+                        
                         if(transition.pre >= 0)
                         {
+                            node.hasPre = true;
                             node.parent2.parent1 = createProdNode(transition.pre, node.parent2);
                             node.parent2.parent2 = createStatNode(station.id, node.parent2);
+                            node.parent2.parent1.isPre = true;
                         }
+                        
                     }
                 }
             }
