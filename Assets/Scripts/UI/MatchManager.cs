@@ -285,7 +285,7 @@ public class MatchManager : MonoBehaviour
                     }
                     string monster = monsterPrefabs[(int)Random.Range(0, monsterPrefabs.Length)];
                     GameObject m = PhotonNetwork.Instantiate(
-                        Path.Combine("Mostruos", monster) ,
+                        Path.Combine("Monstruos", monster) ,
                         area.RandomPointInBounds(), 
                         Quaternion.identity
                         );

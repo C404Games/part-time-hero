@@ -125,11 +125,18 @@ public class AIAgent : MonoBehaviour
                             goToStation(targetStation);
                         }
                         else
+                        {
                             state = agentState.WAIT;
+                            //goToRandomPoint();
+                        }
                         break;
                     case agentState.WAIT:
                         delivering = false;
                         busy = false;
+                        if (Random.Range(0, 999) <= 1)
+                        {
+                            goToRandomPoint();
+                        }
                         break;
                 }
             }
@@ -220,6 +227,13 @@ public class AIAgent : MonoBehaviour
         NavMeshPath path = new NavMeshPath();
         NavMesh.CalculatePath(transform.position, nvAgent.destination, NavMesh.AllAreas, path);
         nvAgent.SetPath(path);
+        nvAgent.isStopped = false;
+    }
+
+    private void goToRandomPoint()
+    {
+        movement.targetType = clickTargetType.FLOOR;
+        nvAgent.SetDestination(reachableTracker.getRandomPointInBounds());
         nvAgent.isStopped = false;
     }
 }
