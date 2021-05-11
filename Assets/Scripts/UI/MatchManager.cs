@@ -34,8 +34,8 @@ public class MatchManager : MonoBehaviour
     private List<PlayerMovement> charactersTeam2;
     private List<StationInstance> stationsTeam1;
     private List<StationInstance> stationsTeam2;
-    private float punctuationTeam1;
-    private float punctuationTeam2;
+    public float punctuationTeam1;
+    public float punctuationTeam2;
     private float initialTime;
     public List<Tuple<bool, int>> team1Dishes;
     public List<Tuple<bool, int>> team2Dishes;
