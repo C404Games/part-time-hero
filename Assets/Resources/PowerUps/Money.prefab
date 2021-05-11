@@ -4851,7 +4851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 99
   reverse: 0
-  type: 3
+  type: 5
 --- !u!135 &3951921191604251380
 SphereCollider:
   m_ObjectHideFlags: 0

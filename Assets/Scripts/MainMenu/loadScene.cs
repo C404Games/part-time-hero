@@ -33,6 +33,11 @@ public class loadScene : MonoBehaviour
 
     public void changeToScenePhoton()
     {
+        if (menuAnimator == null)
+        {
+            PhotonNetwork.LoadLevel(_scene);
+            return;
+        }
         switch (_scene)
         {
             case ("HistoryFirstLevel"):

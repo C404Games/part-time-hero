@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43844584, g: 0.48652625, b: 0.5668004, a: 1}
+  m_IndirectSpecularColor: {r: 0.43844607, g: 0.4865269, b: 0.5668016, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2417,12 +2417,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f8abd52316d9346aba35c37aa0ee73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelDialogue: {fileID: 0}
   visible: 1
   dishGenerationActive: 1
+  optionsButton: {fileID: 0}
   pauseButton: {fileID: 1834672986}
   panel: {fileID: 0}
   team1PointsPanel: {fileID: 869798221}
   team2PointsPanel: {fileID: 620258754}
+  team1dishPanel: {fileID: 0}
+  team2dishPanel: {fileID: 0}
   timeText: {fileID: 1118915300}
   firstPunctuationTexture: {fileID: 2800000, guid: ac56185a11e28544aacae9b4eb67af28,
     type: 3}
@@ -5139,36 +5143,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1942552085}
     m_Modifications:
-    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
-        type: 3}
-      propertyPath: teamArea
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
-        type: 3}
-      propertyPath: powerUps.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
-        type: 3}
-      propertyPath: powerUps.Array.data[0]
-      value: Monster
-      objectReference: {fileID: 0}
-    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
-        type: 3}
-      propertyPath: powerUps.Array.data[1]
-      value: Freeze
-      objectReference: {fileID: 0}
-    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
-        type: 3}
-      propertyPath: powerUps.Array.data[2]
-      value: Speed
-      objectReference: {fileID: 0}
-    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
-        type: 3}
-      propertyPath: powerUps.Array.data[3]
-      value: Money
-      objectReference: {fileID: 0}
     - target: {fileID: 4094481370721954529, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: m_Name
@@ -19192,6 +19166,7 @@ MonoBehaviour:
   monsterPrefabs:
   - Ghost_Green Variant
   numberOfPlayers: 0
+  isPaused: 0
 --- !u!4 &2094993364
 Transform:
   m_ObjectHideFlags: 0

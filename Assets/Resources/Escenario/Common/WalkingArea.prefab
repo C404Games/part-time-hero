@@ -61,7 +61,9 @@ MonoBehaviour:
   initialBlockTimer: 2
   frequency: 100
   spawnAvailable: 1
-  powerUp1: {fileID: 100008, guid: 879451a5e2214f143a7edf5dd3e32020, type: 3}
-  powerUp2: {fileID: 100012, guid: f832b09c86bd81e4f91beb978de1ae75, type: 3}
-  powerUp3: {fileID: 100004, guid: 034e51e6d8986d04795f48b487231687, type: 3}
-  teamArea: 1
+  powerUps:
+  - Monster
+  - Freeze
+  - Speed
+  - Money
+  teamArea: 2

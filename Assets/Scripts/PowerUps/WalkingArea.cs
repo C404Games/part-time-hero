@@ -32,6 +32,13 @@ public class WalkingArea : MonoBehaviour
 
     void Start()
     {
+        //Arreglo temporal, deberían de rellenarse automaticamente
+        //desde el inpsector. Pero en vez de eso, se vacian por alguna razon.
+        powerUps[0] = "Freeze";
+        powerUps[1] = "Money";
+        powerUps[2] = "Monster";
+        powerUps[3] = "Speed";
+
         frequency = 2500;
         ratio = 1.0f;
         secondRandomNumber = -1;

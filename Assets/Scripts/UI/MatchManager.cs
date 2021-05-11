@@ -57,6 +57,9 @@ public class MatchManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Arreglo temporal, deberían de rellenarse automaticamente
+        //desde el inpsector. Pero en vez de eso, se vacian por alguna razon.
+        monsterPrefabs[0] = "Ghost_Green Variant";
         numberOfPlayers = PlayerPrefs.GetInt("numberOfPlayers", 1);
         level = 1;        
 
@@ -214,6 +217,7 @@ public class MatchManager : MonoBehaviour
         return -1;
     }
 
+    [PunRPC]
     public void castPowerup(PlayerMovement playerMovement, PowerupType type)
     {
         switch (type)
