@@ -9,6 +9,8 @@ using System.IO;
 
 public class MenuBehaviour : MonoBehaviour
 {
+    public UnityEngine.UI.Text introductionText;
+    public UnityEngine.UI.Text introductionText2;
     public UnityEngine.UI.Text textExperiencePostMatch;
     public UnityEngine.UI.Text textMoneyPostMatch;
     public GameObject panelDialogue;
@@ -68,13 +70,15 @@ public class MenuBehaviour : MonoBehaviour
             {
                 case 1:
                     {
-                        Debug.Log("1");
+                        introductionText.text = "Taberna";
+                        introductionText2.text = "Taberna";
                         //readActionsFromFile(Application.dataPath + "/tabernActions.txt");
                         break;
                     }
                 case 2:
                     {
-                        Debug.Log("2");
+                        introductionText.text = "Herrería";
+                        introductionText2.text = "Herrería";
                         //readActionsFromFile(Application.dataPath + "/smithyActions.txt");
                         break;
                     }
