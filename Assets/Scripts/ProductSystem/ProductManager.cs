@@ -45,6 +45,8 @@ public class ProductManager : MonoBehaviour
     {
         productBlueprints.Clear();
         stationBlueprints.Clear();
+        rawProducts.Clear();
+        finalProducts.Clear();
 
 
         string json = Resources.Load<TextAsset>(filename).text;

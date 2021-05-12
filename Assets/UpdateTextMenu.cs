@@ -52,6 +52,9 @@ public class UpdateTextMenu : MonoBehaviour
         characterMoneyText.text = text;
         text = "" + getLevelFromExperience(PlayerPrefs.GetInt("characterExperiencesName", 0));
         characterLevelText.text = text;
-        PlayerPrefs.SetString("language" , languageDropdown.options[languageDropdown.value].text);
+        if (languageDropdown.value < languageDropdown.options.Count && (languageDropdown.value != -1 || languageDropdown.value != null))
+        {
+            PlayerPrefs.SetString("language", languageDropdown.options[languageDropdown.value].text);
+        }
     }
 }

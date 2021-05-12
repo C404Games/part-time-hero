@@ -105,6 +105,13 @@ public class MenuBehaviour : MonoBehaviour
     //  is called before the first frame update
     void Start()
     {
+        if (PhotonNetwork.OfflineMode)
+        {
+            optionsButton.gameObject.SetActive(true);
+        } else
+        {
+            optionsButton.gameObject.SetActive(false);
+        }
         StartCoroutine(this.fadeOutCorroutine);
         //searchedDish = Instantiate(transform.Find("Dish").gameObject);
         /*
@@ -577,7 +584,17 @@ public class MenuBehaviour : MonoBehaviour
 
     public void reloadLevel()
     {
-        Debug.Log("2222222222");
+        int scene = PlayerPrefs.GetInt("Scenary",0); ;
+        if (scene != 0)
+        {
+            if (scene == 1)
+            {
+                PhotonNetwork.LoadLevel("Tabern - Level 1");
+            } else if (scene == 2)
+            {
+                PhotonNetwork.LoadLevel("Smithy - Level 1");
+            }
+        }
     }
 
 }
