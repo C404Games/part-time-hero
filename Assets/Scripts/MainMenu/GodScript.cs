@@ -40,7 +40,7 @@ public class GodScript : MonoBehaviour
     {
         bool isCorrect = true;
         
-        if (position == 1 || position == 3)
+        if (position == 1)
             if (!GetComponent<PhotonController>().OnLoginButtonClicked())
                 isCorrect = false;
 

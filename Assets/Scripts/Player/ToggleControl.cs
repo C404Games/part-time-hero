@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
@@ -18,8 +19,7 @@ public class ToggleControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (PhotonNetwork.OfflineMode)
-        {
+        if (PhotonNetwork.OfflineMode || PhotonNetwork.CurrentRoom.PlayerCount == 1) {
             clickMovement = GetComponent<ClickMovement>();
             playerMovement = GetComponent<PlayerMovement>();
             catcher = transform.GetComponentInChildren<CatcherScript>();
@@ -31,7 +31,7 @@ public class ToggleControl : MonoBehaviour
 
     public void toggle()
     {
-        if (PhotonNetwork.OfflineMode)
+        if (PhotonNetwork.OfflineMode || PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             on = !on;
             playerMovement.active = on;
