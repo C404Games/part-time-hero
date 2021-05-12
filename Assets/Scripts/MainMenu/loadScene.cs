@@ -33,12 +33,15 @@ public class loadScene : MonoBehaviour
 
     public void changeToScenePhoton()
     {
+        /*
         if (menuAnimator == null)
         {
             PhotonNetwork.LoadLevel(_scene);
             return;
         }
-        switch (_scene)
+        */
+        string scene = GameObject.Find("GodObject").GetComponent<universalParameters>().getSceneToLoad();//GetComponent<universalParameters>().getSceneToLoad();
+        switch (scene)
         {
             case "Tabern - Level 1":
                     PlayerPrefs.SetInt("Scenary", 1);
