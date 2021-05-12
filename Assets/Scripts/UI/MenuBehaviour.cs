@@ -67,7 +67,9 @@ public class MenuBehaviour : MonoBehaviour
     //public Texture decorativeElement2;
     MatchManager matchManager;
     private IEnumerator fadeOutCorroutine;
+    private IEnumerator fadeOutRestartCorroutine;
     private IEnumerator fadeInCorroutine;
+    public UnityEngine.UI.Button pauseButtonInGame;
     public Animator menuAnimator;
     public bool charging;
 
@@ -104,6 +106,13 @@ public class MenuBehaviour : MonoBehaviour
     //  is called before the first frame update
     void Start()
     {
+        if (PhotonNetwork.OfflineMode)
+        {
+            pauseButtonInGame.gameObject.SetActive(true);
+        } else
+        {
+            pauseButtonInGame.gameObject.SetActive(false);
+        }
         StartCoroutine(this.fadeOutCorroutine);
         //searchedDish = Instantiate(transform.Find("Dish").gameObject);
         /*
@@ -148,6 +157,15 @@ public class MenuBehaviour : MonoBehaviour
         }
         else
         {
+
+            if (PhotonNetwork.OfflineMode)
+            {
+                pauseButtonInGame.gameObject.SetActive(true);
+            }
+            else
+            {
+                pauseButtonInGame.gameObject.SetActive(false);
+            }
             if (!matchManager.isPaused && !charging)
             {
                 CheckForChanges();
@@ -366,37 +384,35 @@ public class MenuBehaviour : MonoBehaviour
             if (matchManager.getPunctuationTeam1() > matchManager.getPunctuationTeam2())
             {
                 textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
-                textPunctuationTeam1[1].text = "1";
-                rawImageTeam1[1].texture = firstPunctuationTexture;
+                //textPunctuationTeam1[1].text = "1";
+                //rawImageTeam1[1].texture = firstPunctuationTexture;
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
-                textPunctuationTeam2[1].text = "2";
-                rawImageTeam2[1].texture = secondPunctuationTexture;
+                //textPunctuationTeam2[1].text = "2";
+                //rawImageTeam2[1].texture = secondPunctuationTexture;
             }
             else if (matchManager.getPunctuationTeam1() == matchManager.getPunctuationTeam2())
             {
                 textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
-                textPunctuationTeam1[1].text = "1";
-                rawImageTeam1[1].texture = firstPunctuationTexture;
+                //textPunctuationTeam1[1].text = "1";
+                //rawImageTeam1[1].texture = firstPunctuationTexture;
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
-                textPunctuationTeam2[1].text = "1";
-                rawImageTeam2[1].texture = firstPunctuationTexture;
+                //textPunctuationTeam2[1].text = "1";
+                //rawImageTeam2[1].texture = firstPunctuationTexture;
             }
             else
             {
                 textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
-                textPunctuationTeam1[1].text = "2";
-                rawImageTeam1[1].texture = secondPunctuationTexture;
+                //textPunctuationTeam1[1].text = "2";
+                //rawImageTeam1[1].texture = secondPunctuationTexture;
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
-                textPunctuationTeam2[1].text = "1";
-                rawImageTeam2[1].texture = firstPunctuationTexture;
+                //textPunctuationTeam2[1].text = "1";
+                //rawImageTeam2[1].texture = firstPunctuationTexture;
             }
         }
         else
         {
-            Debug.Log("Caso 1");
             if (matchManager.getPunctuationTeam1() < matchManager.getPunctuationTeam2())
             {
-                Debug.Log("Caso 2");
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
                 textPunctuationTeam2[1].text = "1";
                 rawImageTeam1[1].texture = firstPunctuationTexture;
@@ -406,7 +422,6 @@ public class MenuBehaviour : MonoBehaviour
             }
             else if (matchManager.getPunctuationTeam1() == matchManager.getPunctuationTeam2())
             {
-                Debug.Log("Caso 3");
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
                 textPunctuationTeam2[1].text = "1";
                 rawImageTeam1[1].texture = firstPunctuationTexture;
@@ -416,7 +431,6 @@ public class MenuBehaviour : MonoBehaviour
             }
             else
             {
-                Debug.Log("Caso 4");
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
                 textPunctuationTeam2[1].text = "2";
                 rawImageTeam1[1].texture = secondPunctuationTexture;
@@ -482,6 +496,7 @@ public class MenuBehaviour : MonoBehaviour
 
     public void openMenu()
     {
+        matchManager.isPaused = !matchManager.isPaused;
         panel.SetActive(true);
         /*
         Color temp = exitMenuButton.GetComponent<UnityEngine.UI.RawImage>().color;
@@ -575,6 +590,21 @@ public class MenuBehaviour : MonoBehaviour
         //menuAnimator.SetTrigger("fadeIn");
         yield return new WaitForSeconds(5.0f);
         PhotonNetwork.LoadLevel("MainMenu");
+    }
+
+    public void reloadLevel()
+    {
+        int scene = PlayerPrefs.GetInt("Scenary",0); ;
+        if (scene != 0)
+        {
+            if (scene == 1)
+            {
+                PhotonNetwork.LoadLevel("Tabern - Level 1");
+            } else if (scene == 2)
+            {
+                PhotonNetwork.LoadLevel("Smithy - Level 1");
+            }
+        }
     }
 
 }
