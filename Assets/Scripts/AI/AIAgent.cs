@@ -84,62 +84,64 @@ public class AIAgent : MonoBehaviour
         if (movement.targetType == clickTargetType.NONE && !movement.isBlocked() && !movement.isFrozen())
         {
 
-            // Si hay monstruo, atacar                    
-            // Si hay mueble roto, reparar
-            if (!checkMonster() && !checkBrokenStation())
+
+            // SI no, seguimos con la receta
+            switch (state)
             {
-                // SI no, seguimos con la receta
-                switch (state)
-                {
-                    case agentState.FETCH:
-                        // SI llegamos al producto
+                case agentState.FETCH:
+                    // SI llegamos al producto
 
-                        if (delivering)
+                    if (delivering)
+                    {
+                        goToTargetDeliverySpot();
+                    }
+                    else
+                    {
+                        // Comprobamos que efectivamente lo hemos cogido (O se nos ha escapado en la cinta)
+                        // SI no, reiniciamos el AIManager
+                        if (catcher.getHeldProduct() == null)
                         {
-                            goToTargetDeliverySpot();
-                        }
-                        else
-                        {
-                            // Comprobamos que efectivamente lo hemos cogido (O se nos ha escapado en la cinta)
-                            // SI no, reiniciamos el AIManager
-                            if (catcher.getHeldProduct() == null)
-                            {
-                                manager.resetStep();
-                                state = agentState.WAIT;
-                            }
-                            else
-                                goToStation(targetStation);
-                        }
-                        state = agentState.CARRY;
-                        break;
-                    case agentState.CARRY:
-                        // Si llegamos al mueble
-
-                        // Si no hemos podido dejar el objeto, lo dejamos en otro lado
-                        if (!delivering && catcher.getHeldProduct() != null && targetStation.heldProduct != catcher.getHeldProduct())
-                        {
-                            targetStation = manager.getCommonStation(4);
-                            if (targetStation == null)
-                                reachableTracker.getStationOnReach(4, false);
                             manager.resetStep();
-                            goToStation(targetStation);
+                            state = agentState.WAIT;
                         }
                         else
-                        {
-                            state = agentState.WAIT;
-                            //goToRandomPoint();
-                        }
-                        break;
-                    case agentState.WAIT:
-                        delivering = false;
-                        busy = false;
+                            goToStation(targetStation);
+                    }
+                    state = agentState.CARRY;
+                    break;
+                case agentState.CARRY:
+                    // Si llegamos al mueble
+
+                    // Si no hemos podido dejar el objeto, lo dejamos en otro lado
+                    if (!delivering && catcher.getHeldProduct() != null && targetStation.heldProduct != catcher.getHeldProduct())
+                    {
+                        targetStation = manager.getCommonStation(4);
+                        if (targetStation == null)
+                            reachableTracker.getStationOnReach(4, false);
+                        manager.resetStep();
+                        goToStation(targetStation);
+                    }
+                    else
+                    {
+                        state = agentState.WAIT;
+                        //goToRandomPoint();
+                    }
+                    break;
+                case agentState.WAIT:
+                    delivering = false;
+                    busy = false;
+                    // Si hay monstruo, atacar                    
+                    // Si hay mueble roto, reparar
+                    if (!checkMonster() && !checkBrokenStation())
+                    {
                         if (Random.Range(0, 999) <= 1)
                         {
                             goToRandomPoint();
                         }
-                        break;
-                }
+                    }
+                    break;
             }
+
         }
     }
 
