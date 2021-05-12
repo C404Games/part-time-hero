@@ -39,7 +39,7 @@ public class WalkingArea : MonoBehaviour
         powerUps[2] = "Monster";
         powerUps[3] = "Speed";
 
-        frequency = 2500;
+        frequency = 5500;
         ratio = 1.0f;
         secondRandomNumber = -1;
         currentTimer = 0;
