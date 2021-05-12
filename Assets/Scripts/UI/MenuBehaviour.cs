@@ -374,29 +374,29 @@ public class MenuBehaviour : MonoBehaviour
             if (matchManager.getPunctuationTeam1() > matchManager.getPunctuationTeam2())
             {
                 textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
-                textPunctuationTeam1[1].text = "1";
-                rawImageTeam1[1].texture = firstPunctuationTexture;
+                //textPunctuationTeam1[1].text = "1";
+                //rawImageTeam1[1].texture = firstPunctuationTexture;
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
-                textPunctuationTeam2[1].text = "2";
-                rawImageTeam2[1].texture = secondPunctuationTexture;
+                //textPunctuationTeam2[1].text = "2";
+                //rawImageTeam2[1].texture = secondPunctuationTexture;
             }
             else if (matchManager.getPunctuationTeam1() == matchManager.getPunctuationTeam2())
             {
                 textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
-                textPunctuationTeam1[1].text = "1";
-                rawImageTeam1[1].texture = firstPunctuationTexture;
+                //textPunctuationTeam1[1].text = "1";
+                //rawImageTeam1[1].texture = firstPunctuationTexture;
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
-                textPunctuationTeam2[1].text = "1";
-                rawImageTeam2[1].texture = firstPunctuationTexture;
+                //textPunctuationTeam2[1].text = "1";
+                //rawImageTeam2[1].texture = firstPunctuationTexture;
             }
             else
             {
                 textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
-                textPunctuationTeam1[1].text = "2";
-                rawImageTeam1[1].texture = secondPunctuationTexture;
+                //textPunctuationTeam1[1].text = "2";
+                //rawImageTeam1[1].texture = secondPunctuationTexture;
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
-                textPunctuationTeam2[1].text = "1";
-                rawImageTeam2[1].texture = firstPunctuationTexture;
+                //textPunctuationTeam2[1].text = "1";
+                //rawImageTeam2[1].texture = firstPunctuationTexture;
             }
         }
         else
