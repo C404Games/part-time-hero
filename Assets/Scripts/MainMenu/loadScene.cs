@@ -15,7 +15,7 @@ public class loadScene : MonoBehaviour
     private void Start()
     {
         fadePhotonCorroutine = fadeOutPhotonScene(2.0f);
-        fadeNonPhotonCorroutine = fadeOutScene(2.0f);
+        fadeNonPhotonCorroutine = fadeOutScene(10.0f);
         if (string.IsNullOrEmpty(_scene))
             _scene = GetComponent<universalParameters>().getSceneToLoad();
     }

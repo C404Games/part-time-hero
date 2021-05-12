@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -17,20 +18,26 @@ public class ToggleControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        clickMovement = GetComponent<ClickMovement>();
-        playerMovement = GetComponent<PlayerMovement>();
-        catcher = transform.GetComponentInChildren<CatcherScript>();
-        playerMovement.active = on;
-        clickMovement.active = on;
-        catcher.active = on;
+        if (PhotonNetwork.OfflineMode)
+        {
+            clickMovement = GetComponent<ClickMovement>();
+            playerMovement = GetComponent<PlayerMovement>();
+            catcher = transform.GetComponentInChildren<CatcherScript>();
+            playerMovement.active = on;
+            clickMovement.active = on;
+            catcher.active = on;
+        }
     }
 
     public void toggle()
     {
-        on = !on;
-        playerMovement.active = on;
-        clickMovement.active = on;
-        catcher.active = on;
+        if (PhotonNetwork.OfflineMode)
+        {
+            on = !on;
+            playerMovement.active = on;
+            clickMovement.active = on;
+            catcher.active = on;
+        }
     }
 
 }
