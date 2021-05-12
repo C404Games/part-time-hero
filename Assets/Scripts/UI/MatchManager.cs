@@ -49,7 +49,7 @@ public class MatchManager : MonoBehaviour
 
     void Awake()
     {
-
+        initialTime++;
         team1Dishes = new List<Tuple<bool, int>>();
         team2Dishes = new List<Tuple<bool, int>>();
     }
@@ -85,7 +85,7 @@ public class MatchManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPaused)
+        if (isPaused || menuBehaviour.charging)
         {
             pauseMatch();
         } else
@@ -214,7 +214,7 @@ public class MatchManager : MonoBehaviour
                 menuBehaviour.updatePoints();
             }
             return value;
-        }
+        }    
         return -1;
     }
 
@@ -318,7 +318,6 @@ public class MatchManager : MonoBehaviour
         {
             players[i].GetComponent<PlayerMovement>().clickMovement.stop();
             players[i].GetComponent<PlayerMovement>().paused = true;
-            players[i].GetComponent<PlayerMovement>().iceCube.SetActive(true);
         }
     }
 
@@ -329,7 +328,6 @@ public class MatchManager : MonoBehaviour
         for (int i = 0; i < players.Length; i++)
         {
             players[i].GetComponent<PlayerMovement>().paused = false;
-            players[i].GetComponent<PlayerMovement>().iceCube.SetActive(false);
         }
     }
 

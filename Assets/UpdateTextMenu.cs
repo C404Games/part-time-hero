@@ -8,6 +8,7 @@ public class UpdateTextMenu : MonoBehaviour
     public UnityEngine.UI.Text characterMoneyText;
     public UnityEngine.UI.Text characterLevelText;
     public UnityEngine.UI.InputField characterInputFieldNameText;
+    public UnityEngine.UI.Dropdown languageDropdown;
     public Animator menuAnimator;
     private string text;
 
@@ -47,5 +48,10 @@ public class UpdateTextMenu : MonoBehaviour
     {
 
         PlayerPrefs.SetString("characterPlayerName", characterInputFieldNameText.text.ToUpper());
+        text = "" + PlayerPrefs.GetInt("characterMoneyName", 0);
+        characterMoneyText.text = text;
+        text = "" + getLevelFromExperience(PlayerPrefs.GetInt("characterExperiencesName", 0));
+        characterLevelText.text = text;
+        PlayerPrefs.SetString("language" , languageDropdown.options[languageDropdown.value].text);
     }
 }

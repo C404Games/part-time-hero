@@ -74,20 +74,23 @@ public class GodScript : MonoBehaviour
     public void addCoins(int coins)
     {
         playerCoins += coins;
+        PlayerPrefs.SetInt("characterMoneyName", PlayerPrefs.GetInt("characterMoneyName", 0) + coins);
     }
 
     public bool removeCoins(int coins)
     {
         if (coins < playerCoins)
-            return false;
+            PlayerPrefs.SetInt("characterMoneyName", 0);
+        return false;
 
         playerCoins -= coins;
+        PlayerPrefs.SetInt("characterMoneyName", PlayerPrefs.GetInt("characterMoneyName", 0) - coins);
         return true;
     }
 
     public int getCoins()
     {
-        return playerCoins;
+        return PlayerPrefs.GetInt("characterMoneyName", 0);
     }
 
     public void setCoins(int coins)

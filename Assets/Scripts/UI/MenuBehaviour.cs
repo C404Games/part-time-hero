@@ -9,6 +9,14 @@ using System.IO;
 
 public class MenuBehaviour : MonoBehaviour
 {
+    public Texture knifeTexture;
+    public Texture spearTexture;
+    public Texture ironSwordTexture;
+    public Texture woodSwordTexture;
+    public Texture carbonatedHoneyTexture;
+    public Texture tomatoSoupTexture;
+    public Texture hamburgerTexture;
+    public Texture cherryBeerTexture;
     public UnityEngine.UI.Text introductionText;
     public UnityEngine.UI.Text introductionText2;
     public UnityEngine.UI.Text textExperiencePostMatch;
@@ -130,8 +138,7 @@ public class MenuBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (!PhotonNetwork.OfflineMode && PhotonNetwork.LocalPlayer.ActorNumber != 1)
         {
             return;
@@ -178,11 +185,36 @@ public class MenuBehaviour : MonoBehaviour
                         currentPanelDishName = "Dish" + (position) + "Panel";
                         currentDishPanel = team1dishPanel.Find(currentPanelDishName);
                         dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
-                        dishMenuPrefab.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1000);
                         //dishMenuPrefab = Instantiate(searchedDish);
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
                         dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
+                        UnityEngine.UI.RawImage rawImageDish = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.RawImage>();
+                        Vector2 panelSize = currentDishPanel.GetComponent<RectTransform>().sizeDelta;
+                        rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(80, 90);
+                        switch (dish1)
+                        {
+                            case 19:
+                                {
+                                    rawImageDish.texture = tomatoSoupTexture;
+                                    break;
+                                }
+                            case 26:
+                                {
+                                    rawImageDish.texture = hamburgerTexture;
+                                    break;
+                                }
+                            case 15:
+                                {
+                                    rawImageDish.texture = cherryBeerTexture;
+                                    break;
+                                }
+                            case 13:
+                                {
+                                    rawImageDish.texture = carbonatedHoneyTexture;
+                                    break;
+                                }
+                        }
                         Text dishNameText = dishMenuPrefab.GetComponentInChildren<Text>();
                         dishNameText.text = ProductManager.finalProducts[dish1].name;
                     }
@@ -217,11 +249,40 @@ public class MenuBehaviour : MonoBehaviour
                         currentPanelDishName = "Dish" + (position) + "Panel";
                         currentDishPanel = team2dishPanel.Find(currentPanelDishName);
                         dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
-                        dishMenuPrefab.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1000);
+                        //dishMenuPrefab.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1000);
                         //dishMenuPrefab = Instantiate(searchedDish);
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
                         dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
+                        UnityEngine.UI.RawImage rawImageDish = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.RawImage>();
+                        Vector2 panelSize = currentDishPanel.GetComponent<RectTransform>().sizeDelta;
+                        rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(80, 90);
+                        //rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(80, 90);
+                        //rawImageDish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 150 * (Screen.height / 1920));
+                        //rawImageDish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 125 * (Screen.width / 1080));
+                        switch (dish2)
+                        {
+                            case 19:
+                                {
+                                    rawImageDish.texture = tomatoSoupTexture;
+                                    break;
+                                }
+                            case 26:
+                                {
+                                    rawImageDish.texture = hamburgerTexture;
+                                    break;
+                                }
+                            case 15:
+                                {
+                                    rawImageDish.texture = cherryBeerTexture;
+                                    break;
+                                }
+                            case 13:
+                                {
+                                    rawImageDish.texture = carbonatedHoneyTexture;
+                                    break;
+                                }
+                        }
                         UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
                         dishNameText.text = ProductManager.finalProducts[dish2].name;
                     }
@@ -235,7 +296,7 @@ public class MenuBehaviour : MonoBehaviour
                 string secondsStr = (seconds < 10) ? "0" + seconds : "" + seconds;
                 if ((matchManager.getInitialTime() - totalTime) > 0)
                 {
-                    if (minutes == 0 && seconds >= 15)
+                    if (minutes == 0 && seconds <= 15)
                     {
                         if (totalTime % 1 < 0.5)
                         {
@@ -246,7 +307,7 @@ public class MenuBehaviour : MonoBehaviour
                             timeText.color = Color.black;
                         }
                     }
-                    else if ((seconds == 0 || seconds == 30) && (int)(totalTime) > 2)
+                    else if (seconds == 0 || seconds == 30)
                     {
                         timeText.color = Color.red;
                     }
@@ -263,7 +324,6 @@ public class MenuBehaviour : MonoBehaviour
                     matchManager.updatePlayerMoneyAndExperience();
                     pauseButton.SetActive(false);
                     pauseMatch();
-                    StartCoroutine(fadeInCorroutine);
                 }
 
                 //PowerUps
@@ -286,9 +346,8 @@ public class MenuBehaviour : MonoBehaviour
 
         UnityEngine.UI.RawImage[] rawImageTeam2 = team2PointsPanel.GetComponentsInChildren<UnityEngine.UI.RawImage>();
         UnityEngine.UI.Text[] textPunctuationTeam2 = team2PointsPanel.GetComponentsInChildren<UnityEngine.UI.Text>();
-
-        if (numberOfPlayers == 1 || (numberOfPlayers == 2 && currentCharacter == 0) || (numberOfPlayers == 4 && (currentCharacter == 0 || currentCharacter == 1)))
-        {
+        
+        if (currentCharacter == 0 || currentCharacter == 1) { 
             if (matchManager.getPunctuationTeam1() > matchManager.getPunctuationTeam2())
             {
                 textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
@@ -319,8 +378,10 @@ public class MenuBehaviour : MonoBehaviour
         }
         else
         {
+            Debug.Log("Caso 1");
             if (matchManager.getPunctuationTeam1() < matchManager.getPunctuationTeam2())
             {
+                Debug.Log("Caso 2");
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
                 textPunctuationTeam2[1].text = "1";
                 rawImageTeam1[1].texture = firstPunctuationTexture;
@@ -330,6 +391,7 @@ public class MenuBehaviour : MonoBehaviour
             }
             else if (matchManager.getPunctuationTeam1() == matchManager.getPunctuationTeam2())
             {
+                Debug.Log("Caso 3");
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
                 textPunctuationTeam2[1].text = "1";
                 rawImageTeam1[1].texture = firstPunctuationTexture;
@@ -339,6 +401,7 @@ public class MenuBehaviour : MonoBehaviour
             }
             else
             {
+                Debug.Log("Caso 4");
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
                 textPunctuationTeam2[1].text = "2";
                 rawImageTeam1[1].texture = secondPunctuationTexture;
