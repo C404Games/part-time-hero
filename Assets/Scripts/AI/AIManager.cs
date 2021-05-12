@@ -66,6 +66,8 @@ public class AIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (matchManager.isPaused)
+            return;
         if (currentRecipie != null)
         {
             // Si el activeAgent ha terminado

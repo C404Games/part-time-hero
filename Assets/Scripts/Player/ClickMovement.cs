@@ -39,7 +39,7 @@ public class ClickMovement : MonoBehaviour
 
     [HideInInspector] public clickTargetType targetType = clickTargetType.FLOOR;
 
-    public bool active = true;
+    public bool active;
 
     private PhotonView photonView;
 
