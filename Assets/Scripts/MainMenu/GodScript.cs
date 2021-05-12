@@ -23,9 +23,12 @@ public class GodScript : MonoBehaviour
 
     private int lastPosition = 0;
 
+    private universalParameters uP;
+
     private void Start()
     {
         point = mainCamera.transform.position;
+        uP = GetComponent<universalParameters>();
     }
 
     private void Update()
@@ -106,6 +109,8 @@ public class GodScript : MonoBehaviour
         {
             model.GetComponent<MeshFilter>().mesh = Instantiate(mesh);
         }
+
+        uP.setMyMesh(mesh);
     }
     public void changeSkin(Texture texture)
     {
@@ -115,5 +120,7 @@ public class GodScript : MonoBehaviour
         {
             model.GetComponent<MeshRenderer>().material.mainTexture = texture;
         }
+
+        uP.setMyTexture(texture);
     }
 }
