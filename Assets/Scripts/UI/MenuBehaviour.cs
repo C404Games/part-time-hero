@@ -49,6 +49,9 @@ public class MenuBehaviour : MonoBehaviour
     public Transform team2dishPanel;
     public Text timeText;
 
+    public Text moneyFinal;
+    public Text pointsFinal;
+
     private UnityEngine.UI.Text exitSceneText;
     private UnityEngine.UI.Text returnSceneText;
     public Texture firstPunctuationTexture;
@@ -71,7 +74,7 @@ public class MenuBehaviour : MonoBehaviour
     void Awake()
     {
         fadeOutCorroutine = fadeOutScene(1.0f);
-        fadeInCorroutine = fadeInScene(1.0f);
+        //fadeInCorroutine = fadeInScene(5.0f);
         if (PlayerPrefs.GetInt("tutorialActive") == 1)
         {
             switch (PlayerPrefs.GetInt("Scenary"))
@@ -322,8 +325,20 @@ public class MenuBehaviour : MonoBehaviour
                     timeText.color = Color.red;
                     timeText.text = "00:00";
                     matchManager.updatePlayerMoneyAndExperience();
+                    //if (PhotonNetwork. < 2)
+                    //{
+                    //    moneyFinal.text = "" + matchManager.getPunctuationTeam1() / 10;
+                    //    pointsFinal.text = "" + matchManager.getPunctuationTeam1();
+                    //}
+                    //else
+                    //{
+                        moneyFinal.text = "" + matchManager.getPunctuationTeam1() / 10;
+                        pointsFinal.text = "" + matchManager.getPunctuationTeam1();
+                    //}
                     pauseButton.SetActive(false);
                     pauseMatch();
+                    GetComponent<Animator>().SetTrigger("fadeIn");
+                    StartCoroutine(fadeInScene(5.0f));
                 }
 
                 //PowerUps
@@ -535,7 +550,7 @@ public class MenuBehaviour : MonoBehaviour
 
     public void closeMatch()
     {
-        SceneManager.LoadScene("MainMenu");
+        PhotonNetwork.LoadLevel("MainMenu");
     }
 
     public void pauseMatch()
@@ -555,11 +570,11 @@ public class MenuBehaviour : MonoBehaviour
 
     public IEnumerator fadeInScene(float time)
     {
-        textExperiencePostMatch.text = (int)matchManager.punctuationTeam1 + " + 100";
-        textExperiencePostMatch.text = (int)(matchManager.punctuationTeam1 / 10) + " + 10";
-        menuAnimator.SetTrigger("fadeIn");
+        //textExperiencePostMatch.text = (int)matchManager.punctuationTeam1 + " + 100";
+        //textExperiencePostMatch.text = (int)(matchManager.punctuationTeam1 / 10) + " + 10";
+        //menuAnimator.SetTrigger("fadeIn");
         yield return new WaitForSeconds(5.0f);
-        SceneManager.LoadScene("MainMenu");
+        PhotonNetwork.LoadLevel("MainMenu");
     }
 
 }
