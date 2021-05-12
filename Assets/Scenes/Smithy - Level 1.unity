@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43682405, g: 0.48445994, b: 0.5647161, a: 1}
+  m_IndirectSpecularColor: {r: 0.43682435, g: 0.48446107, b: 0.56471705, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5795,17 +5795,27 @@ PrefabInstance:
         type: 3}
       propertyPath: team1Part
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1418536467}
     - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: team2Part
       value: 
+      objectReference: {fileID: 632163891}
+    - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: areasTeam1.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: areasTeam2.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: areasTeam1.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1490082466}
     - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: areasTeam1.Array.data[1]
@@ -5815,7 +5825,7 @@ PrefabInstance:
         type: 3}
       propertyPath: areasTeam2.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1876557051}
     - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: areasTeam2.Array.data[1]
@@ -5825,22 +5835,22 @@ PrefabInstance:
         type: 3}
       propertyPath: trackersTeam1.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1501934100}
     - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: trackersTeam1.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1836000314}
     - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: trackersTeam2.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 315935183}
     - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: trackersTeam2.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1677860037}
     - target: {fileID: 2812350023290588410, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: m_Text
@@ -5894,7 +5904,7 @@ PrefabInstance:
     - target: {fileID: 5537695480652073498, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.99991226
+      value: 0.99990845
       objectReference: {fileID: 0}
     - target: {fileID: 5537695480701899582, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
@@ -5956,6 +5966,11 @@ PrefabInstance:
       propertyPath: team2PointsPanel
       value: 
       objectReference: {fileID: 1805353983}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: pauseButtonInGame
+      value: 
+      objectReference: {fileID: 1805353989}
     - target: {fileID: 5537695481910704394, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: m_Pivot.x
@@ -6226,6 +6241,18 @@ MonoBehaviour:
   text: {fileID: 1805353987}
   maintainTextAlignment: 0
   key: MENU_OPTIONS
+--- !u!114 &1805353989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5537695480755219747, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 1805353973}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1806526217
 GameObject:
   m_ObjectHideFlags: 0
