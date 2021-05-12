@@ -69,6 +69,7 @@ public class MenuBehaviour : MonoBehaviour
     private IEnumerator fadeOutCorroutine;
     private IEnumerator fadeOutRestartCorroutine;
     private IEnumerator fadeInCorroutine;
+    public UnityEngine.UI.Button pauseButtonInGame;
     public Animator menuAnimator;
     public bool charging;
 
@@ -107,10 +108,10 @@ public class MenuBehaviour : MonoBehaviour
     {
         if (PhotonNetwork.OfflineMode)
         {
-            optionsButton.gameObject.SetActive(true);
+            pauseButtonInGame.gameObject.SetActive(true);
         } else
         {
-            optionsButton.gameObject.SetActive(false);
+            pauseButtonInGame.gameObject.SetActive(false);
         }
         StartCoroutine(this.fadeOutCorroutine);
         //searchedDish = Instantiate(transform.Find("Dish").gameObject);
@@ -156,6 +157,15 @@ public class MenuBehaviour : MonoBehaviour
         }
         else
         {
+
+            if (PhotonNetwork.OfflineMode)
+            {
+                pauseButtonInGame.gameObject.SetActive(true);
+            }
+            else
+            {
+                pauseButtonInGame.gameObject.SetActive(false);
+            }
             if (!matchManager.isPaused && !charging)
             {
                 CheckForChanges();

@@ -17999,7 +17999,7 @@ PrefabInstance:
     - target: {fileID: 5537695480652073498, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.9999428
+      value: 0.9999275
       objectReference: {fileID: 0}
     - target: {fileID: 5537695480701899582, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
@@ -18061,6 +18061,11 @@ PrefabInstance:
       propertyPath: team2PointsPanel
       value: 
       objectReference: {fileID: 2737442951295747776}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: pauseButtonInGame
+      value: 
+      objectReference: {fileID: 2737442951295747777}
     - target: {fileID: 5537695481910704394, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: m_Pivot.x
@@ -18271,6 +18276,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2737442951295747770}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2737442951295747777 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5537695480755219747, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 2737442951295747770}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3845512552191684507
 PrefabInstance:
   m_ObjectHideFlags: 0
