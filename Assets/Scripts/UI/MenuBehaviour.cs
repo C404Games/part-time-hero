@@ -191,7 +191,7 @@ public class MenuBehaviour : MonoBehaviour
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
                         UnityEngine.UI.RawImage rawImageDish = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.RawImage>();
                         Vector2 panelSize = currentDishPanel.GetComponent<RectTransform>().sizeDelta;
-                        rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(80, 90);
+                        rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(190, 158);
                         switch (dish1)
                         {
                             case 19:
@@ -256,7 +256,7 @@ public class MenuBehaviour : MonoBehaviour
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
                         UnityEngine.UI.RawImage rawImageDish = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.RawImage>();
                         Vector2 panelSize = currentDishPanel.GetComponent<RectTransform>().sizeDelta;
-                        rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(80, 90);
+                        rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(190, 158);
                         //rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(80, 90);
                         //rawImageDish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 150 * (Screen.height / 1920));
                         //rawImageDish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 125 * (Screen.width / 1080));
