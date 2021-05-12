@@ -639,7 +639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &558995079
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1273,10 +1273,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherPlayers:
+  - {fileID: 1634833232}
   - {fileID: 557036106}
   - {fileID: 2093369766}
   - {fileID: 1874711875}
   numberOtherPlayers: 2
+  swordIndicator: {fileID: 658313503}
+  god: {fileID: 0}
 --- !u!4 &1631771402
 Transform:
   m_ObjectHideFlags: 0
@@ -1316,6 +1319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scene: 
+  menuAnimator: {fileID: 0}
 --- !u!1 &1634833232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,7 +1333,7 @@ GameObject:
   - component: {fileID: 1634833234}
   - component: {fileID: 1634833236}
   m_Layer: 5
-  m_Name: Sprite
+  m_Name: SpritePlayerOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
