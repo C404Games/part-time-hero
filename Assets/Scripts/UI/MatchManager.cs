@@ -77,7 +77,7 @@ public class MatchManager : MonoBehaviour
         */
 
 
-        initialTime = 5.0f;
+        initialTime = 300.0f;
 
         menuBehaviour = FindObjectOfType<MenuBehaviour>();
     }
