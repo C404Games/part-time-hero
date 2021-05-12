@@ -352,7 +352,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000010538092382, guid: e067a1df356d3e84bb3f15113b018f67, type: 3}
       propertyPath: m_Name
-      value: Gohst
+      value: Ghost
       objectReference: {fileID: 0}
     - target: {fileID: 1000010538092382, guid: e067a1df356d3e84bb3f15113b018f67, type: 3}
       propertyPath: m_TagString

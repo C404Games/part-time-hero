@@ -59,7 +59,7 @@ public class MatchManager : MonoBehaviour
     {
         //Arreglo temporal, deberían de rellenarse automaticamente
         //desde el inpsector. Pero en vez de eso, se vacian por alguna razon.
-        monsterPrefabs[0] = "Ghost_Green Variant";
+        // monsterPrefabs[0] = "Ghost_Green Variant";
         numberOfPlayers = PlayerPrefs.GetInt("numberOfPlayers", 1);
         level = 1;        
 
@@ -312,22 +312,28 @@ public class MatchManager : MonoBehaviour
 
     public void pauseMatch()
     {
+        isPaused = true;
         GameObject[] players;
         players = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < players.Length; i++)
         {
-            players[i].GetComponent<PlayerMovement>().clickMovement.stop();
+            players[i].GetComponent<PlayerMovement>().clickMovement.active = false;
             players[i].GetComponent<PlayerMovement>().paused = true;
         }
     }
 
     public void unpauseMatch()
     {
+        isPaused = false;
         GameObject[] players;
         players = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < players.Length; i++)
         {
-            players[i].GetComponent<PlayerMovement>().paused = false;
+            if (players[i].GetComponent<PlayerMovement>().active)
+            {
+                players[i].GetComponent<PlayerMovement>().paused = false;
+                players[i].GetComponent<PlayerMovement>().clickMovement.active = true;
+            }
         }
     }
 

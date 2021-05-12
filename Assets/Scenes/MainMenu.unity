@@ -18834,7 +18834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scene: LoadScreen
-  menuAnimator: {fileID: 0}
+  menuAnimator: {fileID: 1767274033}
 --- !u!114 &1912565971
 MonoBehaviour:
   m_ObjectHideFlags: 0

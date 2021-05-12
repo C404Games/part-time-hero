@@ -792,6 +792,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 804535326008443858, guid: e542469c5280a1749bd032fc43b8bd9c,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 937832568287360110, guid: e542469c5280a1749bd032fc43b8bd9c,
         type: 3}
       propertyPath: team
@@ -861,6 +866,11 @@ PrefabInstance:
         type: 3}
       propertyPath: team
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6838987516350884061, guid: e542469c5280a1749bd032fc43b8bd9c,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e542469c5280a1749bd032fc43b8bd9c, type: 3}
@@ -1575,7 +1585,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 735571844}
-  m_RootOrder: 7
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9188,6 +9198,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5172293988926989936, guid: 2f7d98729552fc54a9fe049e59353672,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f7d98729552fc54a9fe049e59353672, type: 3}
 --- !u!4 &985864339 stripped
@@ -9561,10 +9576,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team1Part: {fileID: 1611416521}
   team2Part: {fileID: 2099231898}
+  trackersTeam1: []
+  trackersTeam2: []
+  areasTeam1: []
+  areasTeam2: []
   monsterPrefabs:
-  - {fileID: 1898609953145535182, guid: 2f7d98729552fc54a9fe049e59353672, type: 3}
-  team1Dishes: 
-  team2Dishes: 
+  - 
+  punctuationTeam1: 0
+  punctuationTeam2: 0
+  numberOfPlayers: 0
+  isPaused: 0
 --- !u!4 &1015519888
 Transform:
   m_ObjectHideFlags: 0
@@ -10912,17 +10933,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f8abd52316d9346aba35c37aa0ee73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knifeTexture: {fileID: 0}
+  spearTexture: {fileID: 0}
+  ironSwordTexture: {fileID: 0}
+  woodSwordTexture: {fileID: 0}
+  carbonatedHoneyTexture: {fileID: 0}
+  tomatoSoupTexture: {fileID: 0}
+  hamburgerTexture: {fileID: 0}
+  cherryBeerTexture: {fileID: 0}
+  introductionText: {fileID: 0}
+  introductionText2: {fileID: 0}
+  textExperiencePostMatch: {fileID: 0}
+  textMoneyPostMatch: {fileID: 0}
+  panelDialogue: {fileID: 0}
   visible: 1
   dishGenerationActive: 1
+  optionsButton: {fileID: 0}
+  pauseButton: {fileID: 0}
+  panel: {fileID: 0}
+  team1PointsPanel: {fileID: 0}
+  team2PointsPanel: {fileID: 0}
+  team1dishPanel: {fileID: 0}
+  team2dishPanel: {fileID: 0}
+  timeText: {fileID: 0}
   firstPunctuationTexture: {fileID: 2800000, guid: ac56185a11e28544aacae9b4eb67af28,
     type: 3}
   secondPunctuationTexture: {fileID: 2800000, guid: bfaf12e9f3476024c8ea8863f7b51167,
     type: 3}
   dishMenuPrefab: {fileID: 6590090751565906922, guid: 76468521e356e934a892582c1e0bac3e,
     type: 3}
-  frequency: 30
-  decorativeElement1: {fileID: 2800000, guid: c9cd9885843f426459dba83833c9ccd7, type: 3}
-  decorativeElement2: {fileID: 2800000, guid: a6a734a3b027c18469e49f74fa79fb60, type: 3}
+  menuAnimator: {fileID: 0}
+  charging: 0
 --- !u!4 &1336639925 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 42096eb8eb448c24d83e4306b66bbff0,
@@ -14785,6 +14826,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 704277193636348363, guid: 4d5cbba94a826b34885f874dc7395a90,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4992562542508671503, guid: 4d5cbba94a826b34885f874dc7395a90,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6966981279011721801, guid: 4d5cbba94a826b34885f874dc7395a90,
         type: 3}
       propertyPath: m_Name
@@ -17112,6 +17163,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1328506893}
     m_Modifications:
+    - target: {fileID: -2524024749940585549, guid: 92a0d828eccd0e94fbeb174075b6f7c5,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4980078776452004891, guid: 92a0d828eccd0e94fbeb174075b6f7c5,
         type: 3}
       propertyPath: m_Name
@@ -17501,6 +17557,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5172293988926989936, guid: 2f7d98729552fc54a9fe049e59353672,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f7d98729552fc54a9fe049e59353672, type: 3}
