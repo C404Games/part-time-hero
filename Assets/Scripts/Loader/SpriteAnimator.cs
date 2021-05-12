@@ -29,4 +29,10 @@ public class SpriteAnimator : MonoBehaviour
             spriteRenderer.sprite = frameArray[currentFrame];
         }
     }
+
+    public void stopSecuence()
+    {
+        framerate = 0;
+        currentFrame = 1;
+    }
 }
