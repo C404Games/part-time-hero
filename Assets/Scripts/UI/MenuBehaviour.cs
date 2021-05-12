@@ -549,8 +549,12 @@ public class MenuBehaviour : MonoBehaviour
     public void closeMatch()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         Debug.Log("pppppp");
 
+=======
+        PhotonNetwork.LoadLevel("MainMenu");
+>>>>>>> f884debd385e8e46f1afcae1b0e15c2979b84bf2
 =======
         PhotonNetwork.LoadLevel("MainMenu");
 >>>>>>> f884debd385e8e46f1afcae1b0e15c2979b84bf2
@@ -578,11 +582,14 @@ public class MenuBehaviour : MonoBehaviour
         //menuAnimator.SetTrigger("fadeIn");
         yield return new WaitForSeconds(5.0f);
         PhotonNetwork.LoadLevel("MainMenu");
+<<<<<<< HEAD
     }
 
     public void reloadLevel()
     {
         Debug.Log("2222222222");
+=======
+>>>>>>> f884debd385e8e46f1afcae1b0e15c2979b84bf2
     }
 
 }
