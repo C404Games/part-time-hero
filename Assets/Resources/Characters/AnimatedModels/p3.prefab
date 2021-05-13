@@ -70,21 +70,21 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isRunning
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: Attack
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: Hold
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: Chop
   m_SynchronizeLayers:
-  - SynchronizeType: 0
+  - SynchronizeType: 1
     LayerIndex: 0
-  - SynchronizeType: 0
+  - SynchronizeType: 1
     LayerIndex: 1
 --- !u!1001 &3522044909520883797
 PrefabInstance:
