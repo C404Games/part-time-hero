@@ -26,7 +26,9 @@ public class Product
 
     public bool AIcollapse;
 
-    public Product(int id, string name, ProductType type, int difficulty, string appearence, List<Transition> transitions, bool AIcollapse)
+    public float time;
+
+    public Product(int id, string name, ProductType type, int difficulty, string appearence, List<Transition> transitions, bool AIcollapse, float time)
     {
         this.id = id;
         this.name = name;
@@ -35,5 +37,6 @@ public class Product
         this.appearence = appearence;
         this.transitions = transitions;
         this.AIcollapse = AIcollapse;
+        this.time = time;
     }
 }

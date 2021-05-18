@@ -29,25 +29,35 @@ public class MatchManager : MonoBehaviour
 
     public string[] monsterPrefabs;
 
+    public GameObject[] team1DishPanels;
+    public GameObject[] team2DishPanels;
+
     private int level;
     private List<PlayerMovement> charactersTeam1;
     private List<PlayerMovement> charactersTeam2;
     private List<StationInstance> stationsTeam1;
     private List<StationInstance> stationsTeam2;
-    public float punctuationTeam1;
-    public float punctuationTeam2;
-    public int moneyTeam1;
-    public int moneyTeam2;
-    private float initialTime;
-    public List<Tuple<bool, int>> team1Dishes;
-    public List<Tuple<bool, int>> team2Dishes;
+    [HideInInspector] public float punctuationTeam1;
+    [HideInInspector] public float punctuationTeam2;
+    [HideInInspector] public int moneyTeam1;
+    [HideInInspector] public int moneyTeam2;
+    
+    [HideInInspector] public List<Tuple<bool, int>> team1Dishes;
+    [HideInInspector] public List<Tuple<bool, int>> team2Dishes;
+
+    [HideInInspector] public float[] team1DishTime;
+    [HideInInspector] public float[] team2DishTime;
+
+    [HideInInspector] public int numberOfPlayers;
+    [HideInInspector] public bool isPaused;
+
     MenuBehaviour menuBehaviour;
+    float initialTime;
     float freezeTime = 10.0f;
     float fastStationTime = 10.0f;
     float slowStationTime = 10.0f;
     float fastMovementTime = 10.0f;
-    public int numberOfPlayers;
-    public bool isPaused;
+
 
     void Awake()
     {
@@ -82,6 +92,9 @@ public class MatchManager : MonoBehaviour
         initialTime = 300.0f;
 
         menuBehaviour = FindObjectOfType<MenuBehaviour>();
+
+        team1DishTime = new float[4];
+        team2DishTime = new float[4];
     }
 
     // Update is called once per frame
@@ -94,6 +107,27 @@ public class MatchManager : MonoBehaviour
         {            
             unpauseMatch();
         }
+
+        // Comprobar si se ha acabado el tiempo de las recetas
+        for (int i = 0; i < team1Dishes.Count; i++)
+        {
+            if (team1Dishes[i] != null && team1Dishes[i].Item1)
+            {
+                team1DishTime[i] -= Time.deltaTime;
+                if (team1DishTime[i] <= 0)
+                    deleteOrder(1, team1Dishes[i].Item2);
+            }
+        }
+        for (int i = 0; i < team2Dishes.Count; i++)
+        {
+            if (team2Dishes[i] != null && team2Dishes[i].Item1)
+            {
+                team2DishTime[i] -= Time.deltaTime;
+                if (team2DishTime[i] <= 0)
+                    deleteOrder(2, team2Dishes[i].Item2);
+            }
+        }
+
         //Uncomment when we have more than one player playing at the same time (Photon multiplayer)
         /*
         charactersLife[1] = GameObject.Find("Player2").GetComponent<PlayerMovement>().health;
@@ -143,6 +177,25 @@ public class MatchManager : MonoBehaviour
 
     }
 
+    // Devuelve true si había algún pedido con ese id
+    public bool deleteOrder(int team, int id)
+    {
+        List<Tuple<bool, int>> dishes = team == 1? team1Dishes : team2Dishes;
+        for(int i = 0; i < dishes.Count; i++)
+        {
+            Tuple<bool, int> tuple = dishes[i];
+            if (tuple.Item1 && tuple.Item2 == id)
+            {
+                tuple.Item1 = false;
+                GameObject dishPanel = team == 1 ? team1DishPanels[i] : team2DishPanels[i];
+                Transform currentDishPanel = dishPanel.transform.Find("Dish(Clone)");
+                PhotonNetwork.Destroy(currentDishPanel.gameObject);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getLevel()
     {
         return this.level;
@@ -174,52 +227,25 @@ public class MatchManager : MonoBehaviour
         return this.initialTime;
     }
 
-    public int deliverProduct(int team, int id)
+    public bool deliverProduct(int team, int id)
     {
-        Tuple<bool, int> deliveryTuple = new Tuple<bool, int>(true,id);
-        if (team == 1)
+        if (deleteOrder(team, id))
         {
-            int value = -1;
-            for (int  i = 0; i < team1Dishes.Count; i++)
+            if (team == 1)
             {
-                if (team1Dishes[i].Item1 && team1Dishes[i].Item2 == id)
-                {
-                    value = i;
-                    break;
-                }
-            }
-            if (value != -1)
-            {
-                deliveryTuple.Item1 = false;
-                team1Dishes[value] = deliveryTuple;
                 punctuationTeam1 += (ProductManager.finalProducts[id].difficulty + 1) * 10;
                 moneyTeam1 += (ProductManager.finalProducts[id].difficulty + 1) * 5;
                 menuBehaviour.updatePoints();
             }
-            return value;
-        }
-        else if(team == 2)
-        {
-            int value = -1;
-            for (int i = 0; i < team2Dishes.Count; i++)
-            {
-                if (team2Dishes[i].Item1 && team2Dishes[i].Item2 == id)
-                {
-                    value = i;
-                    break;
-                } 
-            }
-            if (value !=  -1)
-            {
-                deliveryTuple.Item1 = false;
-                team2Dishes[value] = deliveryTuple;
+            else if (team == 2)
+            {              
                 punctuationTeam2 += (ProductManager.finalProducts[id].difficulty + 1) * 10;
                 moneyTeam2 += (ProductManager.finalProducts[id].difficulty + 1) * 5;
                 menuBehaviour.updatePoints();
             }
-            return value;
-        }    
-        return -1;
+            return true;
+        }
+        return false;
     }
 
     [PunRPC]

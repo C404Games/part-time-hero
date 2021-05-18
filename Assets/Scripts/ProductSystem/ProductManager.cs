@@ -65,7 +65,8 @@ public class ProductManager : MonoBehaviour
             int difficulty = entry["difficulty"] != null ? entry["difficulty"] : 0;
             string appearence = (string)entry["appearence"];
             bool collapse = entry["AIcollapse"] != null;
-            Product product = new Product((int)entry["id"], (string)entry["name"], (ProductType)((int)entry["type"]), difficulty, appearence, transitions, collapse);
+            float time = entry["time"] != null ? (float)entry["time"] : 0;
+            Product product = new Product((int)entry["id"], (string)entry["name"], (ProductType)((int)entry["type"]), difficulty, appearence, transitions, collapse, time);
             productBlueprints.Add((int)entry["id"], product);
 
             if(product.type == ProductType.RAW)

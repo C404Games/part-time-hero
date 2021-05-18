@@ -4189,7 +4189,7 @@ PrefabInstance:
     - target: {fileID: 6966981279011721805, guid: 4d5cbba94a826b34885f874dc7395a90,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6966981279011721805, guid: 4d5cbba94a826b34885f874dc7395a90,
         type: 3}
@@ -7249,7 +7249,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
 --- !u!1001 &755533774
 PrefabInstance:
@@ -9686,7 +9686,7 @@ PrefabInstance:
     - target: {fileID: 7273134981602404648, guid: bb1ff726fe85f7943bc3d280834e2a0a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7273134981602404648, guid: bb1ff726fe85f7943bc3d280834e2a0a,
         type: 3}
@@ -17451,71 +17451,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4cecbe210fa0644e9bdd3973c8d577a, type: 3}
---- !u!1 &2094993362
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2094993364}
-  - component: {fileID: 2094993363}
-  m_Layer: 0
-  m_Name: MatchManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &2094993363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2094993362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 243d15ae7ab0ad54aab01af464523f11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  team1Part: {fileID: 2099231898}
-  team2Part: {fileID: 1611416521}
-  trackersTeam1:
-  - {fileID: 1336489224}
-  - {fileID: 446114799}
-  trackersTeam2:
-  - {fileID: 1796865014}
-  - {fileID: 1455059369}
-  areasTeam1:
-  - {fileID: 317281552}
-  - {fileID: 1521815760}
-  areasTeam2:
-  - {fileID: 1085767409}
-  - {fileID: 1973062377}
-  monsterPrefabs:
-  - Ghost
-  punctuationTeam1: 0
-  punctuationTeam2: 0
-  moneyTeam1: 0
-  moneyTeam2: 0
-  numberOfPlayers: 0
-  isPaused: 0
---- !u!4 &2094993364
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2094993362}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4984524, y: -0.42603874, z: -3.521019}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2099223286 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3bc633e8b857864eab8d947be8998f0,
@@ -17990,6 +17925,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
+      propertyPath: isPaused
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
       propertyPath: team1Part
       value: 
       objectReference: {fileID: 2099231898}
@@ -18020,6 +17960,16 @@ PrefabInstance:
       objectReference: {fileID: 1973062377}
     - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
+      propertyPath: team1DishPanels.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: team2DishPanels.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
       propertyPath: trackersTeam1.Array.data[0]
       value: 
       objectReference: {fileID: 1336489224}
@@ -18038,6 +17988,46 @@ PrefabInstance:
       propertyPath: trackersTeam2.Array.data[1]
       value: 
       objectReference: {fileID: 1455059369}
+    - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: team1DishPanels.Array.data[0]
+      value: 
+      objectReference: {fileID: 7576322788626940440}
+    - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: team1DishPanels.Array.data[1]
+      value: 
+      objectReference: {fileID: 7576322787753353638}
+    - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: team1DishPanels.Array.data[2]
+      value: 
+      objectReference: {fileID: 7576322788423986733}
+    - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: team1DishPanels.Array.data[3]
+      value: 
+      objectReference: {fileID: 7576322787706612047}
+    - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: team2DishPanels.Array.data[0]
+      value: 
+      objectReference: {fileID: 7576322787739048506}
+    - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: team2DishPanels.Array.data[1]
+      value: 
+      objectReference: {fileID: 7576322786920661104}
+    - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: team2DishPanels.Array.data[2]
+      value: 
+      objectReference: {fileID: 7576322787186283890}
+    - target: {fileID: 2737442951295747749, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: team2DishPanels.Array.data[3]
+      value: 
+      objectReference: {fileID: 7576322787624604276}
     - target: {fileID: 2812350023290588410, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: m_Text
@@ -18286,7 +18276,7 @@ PrefabInstance:
     - target: {fileID: 5537695481910704394, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5537695481910704394, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}

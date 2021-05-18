@@ -116,7 +116,8 @@
       "name": "PROD_CARBONATED_HONEY",
       "type": 2,
       "difficulty": 0,
-      "appearence": "Products/Tabern/carbonatedHoney"
+      "appearence": "Products/Tabern/carbonatedHoney",
+      "time":  80
 
     },
 
@@ -138,7 +139,8 @@
       "name": "PROD_CHERRY_BEER",
       "type": 2,
       "difficulty": 0,
-      "appearence": "Products/Tabern/cherryBeer"
+      "appearence": "Products/Tabern/cherryBeer",
+      "time": 60
     },
 
     {
@@ -179,7 +181,8 @@
       "name": "PROD_TOMATO_SOUP",
       "type": 2,
       "difficulty": 0,
-      "appearence": "Products/Tabern/tomatoSoup"
+      "appearence": "Products/Tabern/tomatoSoup",
+      "time": 60
     },
 
     {
@@ -251,7 +254,8 @@
       "name": "PROD_BURGER",
       "type": 2,
       "difficulty": 2,
-      "appearence": "Products/Tabern/tarioBurger"
+      "appearence": "Products/Tabern/tarioBurger",
+      "time": 120
     },
     {
       "id": 27,

@@ -238,6 +238,7 @@ public class MenuBehaviour : MonoBehaviour
                         }
                         Text dishNameText = dishMenuPrefab.GetComponentInChildren<Text>();
                         dishNameText.text = ProductManager.finalProducts[dish1].name;
+                        matchManager.team1DishTime[position-1] = ProductManager.finalProducts[dish1].time;
                     }
                     position = -1;
                     if (matchManager.team2Dishes.Count < 4)
@@ -270,17 +271,11 @@ public class MenuBehaviour : MonoBehaviour
                         currentPanelDishName = "Dish" + (position) + "Panel";
                         currentDishPanel = team2dishPanel.Find(currentPanelDishName);
                         dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
-                        //dishMenuPrefab.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1000);
-                        //dishMenuPrefab = Instantiate(searchedDish);
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
                         dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
-                        UnityEngine.UI.RawImage rawImageDish = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.RawImage>();
+                        RawImage rawImageDish = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.RawImage>();
                         Vector2 panelSize = currentDishPanel.GetComponent<RectTransform>().sizeDelta;
-                        //rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(190, 158);
-                        //rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(80, 90);
-                        //rawImageDish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 150 * (Screen.height / 1920));
-                        //rawImageDish.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 125 * (Screen.width / 1080));
                         switch (dish2)
                         {
                             case 19:
@@ -304,8 +299,9 @@ public class MenuBehaviour : MonoBehaviour
                                     break;
                                 }
                         }
-                        UnityEngine.UI.Text dishNameText = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
+                        Text dishNameText = dishMenuPrefab.GetComponentInChildren<Text>();
                         dishNameText.text = ProductManager.finalProducts[dish2].name;
+                        matchManager.team2DishTime[position-1] = ProductManager.finalProducts[dish2].time;
                     }
                     currentTime = 0;
                 }
@@ -358,13 +354,6 @@ public class MenuBehaviour : MonoBehaviour
                     GetComponent<Animator>().SetTrigger("fadeIn");
                     StartCoroutine(fadeInScene(5.0f));
                 }
-
-                //PowerUps
-                /*
-                Transform powerUpPanel = transform.FindChild("PanelPowerUps");
-                UnityEngine.UI.RawImage rawImagePowerUp = powerUpPanel.GetComponentInChildren<UnityEngine.UI.RawImage>();
-                rawImagePowerUp.enabled = matchManager.getCharactersFrozen()[currentCharacter];
-                */
             }
         }
     }
@@ -384,29 +373,17 @@ public class MenuBehaviour : MonoBehaviour
             if (matchManager.getPunctuationTeam1() > matchManager.getPunctuationTeam2())
             {
                 textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
-                //textPunctuationTeam1[1].text = "1";
-                //rawImageTeam1[1].texture = firstPunctuationTexture;
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
-                //textPunctuationTeam2[1].text = "2";
-                //rawImageTeam2[1].texture = secondPunctuationTexture;
             }
             else if (matchManager.getPunctuationTeam1() == matchManager.getPunctuationTeam2())
             {
                 textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
-                //textPunctuationTeam1[1].text = "1";
-                //rawImageTeam1[1].texture = firstPunctuationTexture;
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
-                //textPunctuationTeam2[1].text = "1";
-                //rawImageTeam2[1].texture = firstPunctuationTexture;
             }
             else
             {
                 textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
-                //textPunctuationTeam1[1].text = "2";
-                //rawImageTeam1[1].texture = secondPunctuationTexture;
                 textPunctuationTeam2[0].text = "" + matchManager.getPunctuationTeam2();
-                //textPunctuationTeam2[1].text = "1";
-                //rawImageTeam2[1].texture = firstPunctuationTexture;
             }
         }
         else
@@ -498,68 +475,11 @@ public class MenuBehaviour : MonoBehaviour
     {
         matchManager.isPaused = !matchManager.isPaused;
         panel.SetActive(true);
-        /*
-        Color temp = exitMenuButton.GetComponent<UnityEngine.UI.RawImage>().color;
-        temp.a = 1.0f;
-        exitMenuButton.GetComponent<UnityEngine.UI.RawImage>().color = temp;
-        exitMenuButton.interactable = true;
-        temp = exitButton.GetComponent<UnityEngine.UI.RawImage>().color;
-        temp.a = 1.0f;
-        exitButton.GetComponent<UnityEngine.UI.RawImage>().color = temp;
-        exitButton.interactable = true;
-        temp = returnGameButton.GetComponent<UnityEngine.UI.RawImage>().color;
-        temp.a = 1.0f;
-        returnGameButton.GetComponent<UnityEngine.UI.RawImage>().color = temp;
-        returnGameButton.interactable = true;
-        temp = menuBackground.color;
-        temp.a = 1.0f;
-        exitMenuButton.gameObject.SetActive(true);
-        exitButton.gameObject.SetActive(true);
-        returnGameButton.gameObject.SetActive(true);
-        menuBackground.color = temp;
-        menuBackground.gameObject.SetActive(true);
-        exitSceneImage.color = temp;
-        exitSceneImage.gameObject.SetActive(true);
-        returnSceneImage.color = temp;
-        returnSceneImage.gameObject.SetActive(true);
-        */
     }
 
     public void closeMenu()
     {
         panel.SetActive(false);
-        /*
-        Color temp = exitMenuButton.GetComponent<UnityEngine.UI.RawImage>().color;
-        temp.a = 0f;
-        exitMenuButton.GetComponent<UnityEngine.UI.RawImage>().color = temp;
-        exitMenuButton.interactable = false;
-        temp = exitButton.GetComponent<UnityEngine.UI.RawImage>().color;
-        temp.a = 0f;
-        exitButton.GetComponent<UnityEngine.UI.RawImage>().color = temp;
-        exitButton.interactable = false;
-        temp = returnGameButton.GetComponent<UnityEngine.UI.RawImage>().color;
-        temp.a = 0f;
-        returnGameButton.GetComponent<UnityEngine.UI.RawImage>().color = temp;
-        returnGameButton.interactable = false;
-        temp = menuBackground.color;
-        temp.a = 0f;
-        exitMenuButton.gameObject.SetActive(false);
-        exitButton.gameObject.SetActive(false);
-        returnGameButton.gameObject.SetActive(false);
-        menuBackground.color = temp;
-        menuBackground.gameObject.SetActive(false);
-        exitSceneImage.color = temp;
-        exitSceneImage.gameObject.SetActive(false);
-        returnSceneImage.color = temp;
-        returnSceneImage.gameObject.SetActive(false);
-        /*         
-        exitMenuButton.GetComponent<UnityEngine.UI.RawImage>().alpha = 0f;
-        exitMenuButton.blocksRaycasts = false;
-        exitButton.GetComponent<UnityEngine.UI.RawImage>().alpha = 0f;
-        exitButton.blocksRaycasts = false;
-        returnGameButton.GetComponent<UnityEngine.UI.RawImage>().alpha = 0f;
-        returnGameButton.blocksRaycasts = false;
-         */
     }
 
 
@@ -585,9 +505,6 @@ public class MenuBehaviour : MonoBehaviour
 
     public IEnumerator fadeInScene(float time)
     {
-        //textExperiencePostMatch.text = (int)matchManager.punctuationTeam1 + " + 100";
-        //textExperiencePostMatch.text = (int)(matchManager.punctuationTeam1 / 10) + " + 10";
-        //menuAnimator.SetTrigger("fadeIn");
         yield return new WaitForSeconds(5.0f);
         PhotonNetwork.LoadLevel("MainMenu");
     }

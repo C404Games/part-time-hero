@@ -42,7 +42,8 @@
       "name": "PROD_KNIFE",
       "type": 2,
       "appearence": "Products/Smithy/knife",
-      "difficulty": 0
+      "difficulty": 0,
+      "time":  60
     },
     {
       "id": 6,
@@ -66,8 +67,10 @@
     {
       "id": 8,
       "name": "PROD_SPEAR",
-      "type": 1,
-      "appearence": "Products/Smithy/spear"
+      "type": 2,
+      "appearence": "Products/Smithy/spear",
+      "difficulty": 1,
+      "time": 80
     },
     {
       "id": 9,
@@ -80,7 +83,8 @@
       "name": "PROD_IRON_SWORD",
       "type": 2,
       "appearence": "Products/Smithy/ironSword",
-      "difficulty": 1
+      "difficulty": 1,
+      "time": 80
     },
     {
       "id": 11,
@@ -99,7 +103,8 @@
       "name": "PROD_COPPER_SWORD",
       "type": 2,
       "appearence": "Products/Smithy/copperSword",
-      "difficulty": 1
+      "difficulty": 1,
+      "time": 80
     },
     {
       "id": 14,
