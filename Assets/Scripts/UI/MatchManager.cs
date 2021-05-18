@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class MatchManager : MonoBehaviour
@@ -372,6 +373,22 @@ public class MatchManager : MonoBehaviour
             {
                 players[i].GetComponent<PlayerMovement>().paused = false;
                 players[i].GetComponent<PlayerMovement>().clickMovement.active = true;
+            }
+        }
+    }
+
+    public void restartMatch()
+    {
+        if (PhotonNetwork.OfflineMode)
+        {
+            switch (PlayerPrefs.GetInt("scenary"))
+            {
+                case 1:
+                    PhotonNetwork.LoadLevel("Tabern - Level 1");
+                    break;
+                case 2:
+                    PhotonNetwork.LoadLevel("Smithy - Level 1");
+                    break;
             }
         }
     }
