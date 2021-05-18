@@ -9,6 +9,8 @@ public class universalParameters : MonoBehaviour
     private static Mesh myMesh;
     private static Texture myTexture;
 
+    private static float _sound;
+    private static float _music;
 
     public string getSceneToLoad()
     {
@@ -37,4 +39,25 @@ public class universalParameters : MonoBehaviour
     {
         myTexture = texture;
     }
+
+    public float getSound()
+    {
+        return _sound;
+    }
+
+    public void setSound(float sound)
+    {
+        _sound = sound;
+    }
+
+    public float getMusic()
+    {
+        return _music;
+    }
+
+    public void setMusic(float music)
+    {
+        _music = music;
+    }
+
 }
