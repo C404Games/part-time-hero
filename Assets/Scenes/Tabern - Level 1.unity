@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0040010842, g: 0.00021826083, b: 0.00000005190644,
+  m_IndirectSpecularColor: {r: 0.0040010894, g: 0.00021826132, b: 0.00000005190644,
     a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -956,29 +956,49 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
+      propertyPath: teamArea
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
       propertyPath: powerUps.Array.size
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[0]
-      value: 
-      objectReference: {fileID: 100008, guid: 06e54c05f68078d47bf15218eb741712, type: 3}
+      value: FastTime
+      objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[1]
-      value: 
-      objectReference: {fileID: 100008, guid: 879451a5e2214f143a7edf5dd3e32020, type: 3}
+      value: Freeze
+      objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[2]
-      value: 
-      objectReference: {fileID: 100004, guid: 034e51e6d8986d04795f48b487231687, type: 3}
+      value: Money
+      objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[3]
-      value: 
-      objectReference: {fileID: 100012, guid: f832b09c86bd81e4f91beb978de1ae75, type: 3}
+      value: Monster
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[4]
+      value: SlowTime
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[5]
+      value: Speed
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[6]
+      value: Star
+      objectReference: {fileID: 0}
     - target: {fileID: 4094481370721954529, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: m_Name
@@ -2528,28 +2548,43 @@ PrefabInstance:
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.size
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[0]
-      value: 
-      objectReference: {fileID: 100008, guid: 06e54c05f68078d47bf15218eb741712, type: 3}
+      value: FastTime
+      objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[1]
-      value: 
-      objectReference: {fileID: 100008, guid: 879451a5e2214f143a7edf5dd3e32020, type: 3}
+      value: Freeze
+      objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[2]
-      value: 
-      objectReference: {fileID: 100004, guid: 034e51e6d8986d04795f48b487231687, type: 3}
+      value: Money
+      objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[3]
-      value: 
-      objectReference: {fileID: 100012, guid: f832b09c86bd81e4f91beb978de1ae75, type: 3}
+      value: Monster
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[4]
+      value: SlowTime
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[5]
+      value: Speed
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[6]
+      value: Star
+      objectReference: {fileID: 0}
     - target: {fileID: 4094481370721954529, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: m_Name
@@ -4950,28 +4985,43 @@ PrefabInstance:
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.size
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[0]
-      value: 
-      objectReference: {fileID: 100008, guid: 06e54c05f68078d47bf15218eb741712, type: 3}
+      value: FastTime
+      objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[1]
-      value: 
-      objectReference: {fileID: 100008, guid: 879451a5e2214f143a7edf5dd3e32020, type: 3}
+      value: Freeze
+      objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[2]
-      value: 
-      objectReference: {fileID: 100004, guid: 034e51e6d8986d04795f48b487231687, type: 3}
+      value: Money
+      objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[3]
-      value: 
-      objectReference: {fileID: 100012, guid: f832b09c86bd81e4f91beb978de1ae75, type: 3}
+      value: Monster
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[4]
+      value: SlowTime
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[5]
+      value: Speed
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[6]
+      value: Star
+      objectReference: {fileID: 0}
     - target: {fileID: 4094481370721954529, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: m_Name
@@ -16320,29 +16370,49 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
+      propertyPath: teamArea
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
       propertyPath: powerUps.Array.size
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[0]
-      value: 
-      objectReference: {fileID: 100008, guid: 06e54c05f68078d47bf15218eb741712, type: 3}
+      value: FastTime
+      objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[1]
-      value: 
-      objectReference: {fileID: 100008, guid: 879451a5e2214f143a7edf5dd3e32020, type: 3}
+      value: Freeze
+      objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[2]
-      value: 
-      objectReference: {fileID: 100004, guid: 034e51e6d8986d04795f48b487231687, type: 3}
+      value: Money
+      objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.data[3]
-      value: 
-      objectReference: {fileID: 100012, guid: f832b09c86bd81e4f91beb978de1ae75, type: 3}
+      value: Monster
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[4]
+      value: SlowTime
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[5]
+      value: Speed
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[6]
+      value: Star
+      objectReference: {fileID: 0}
     - target: {fileID: 4094481370721954529, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: m_Name
@@ -17428,6 +17498,8 @@ MonoBehaviour:
   - Ghost
   punctuationTeam1: 0
   punctuationTeam2: 0
+  moneyTeam1: 0
+  moneyTeam2: 0
   numberOfPlayers: 0
   isPaused: 0
 --- !u!4 &2094993364
@@ -18334,7 +18406,7 @@ PrefabInstance:
     - target: {fileID: 5537695482108459059, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.5500336
+      value: -1.5500488
       objectReference: {fileID: 0}
     - target: {fileID: 5537695482108459059, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}

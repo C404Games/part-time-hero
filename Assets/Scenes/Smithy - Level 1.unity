@@ -2307,6 +2307,8 @@ MonoBehaviour:
   - Gohst
   punctuationTeam1: 0
   punctuationTeam2: 0
+  moneyTeam1: 0
+  moneyTeam2: 0
   numberOfPlayers: 0
   isPaused: 0
 --- !u!4 &717528237
@@ -3161,7 +3163,7 @@ PrefabInstance:
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
@@ -3192,6 +3194,11 @@ PrefabInstance:
         type: 3}
       propertyPath: powerUps.Array.data[5]
       value: FastTime
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[6]
+      value: Money
       objectReference: {fileID: 0}
     - target: {fileID: 4094481370721954529, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
@@ -3296,7 +3303,7 @@ PrefabInstance:
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: powerUps.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
@@ -3327,6 +3334,11 @@ PrefabInstance:
         type: 3}
       propertyPath: powerUps.Array.data[5]
       value: FastTime
+      objectReference: {fileID: 0}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: powerUps.Array.data[6]
+      value: Money
       objectReference: {fileID: 0}
     - target: {fileID: 4094481370721954529, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
@@ -8265,6 +8277,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4733581482650195329, guid: 3b1ed14940c497041b931880e40b8b0c,
+        type: 3}
+      propertyPath: speed
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4733581482650195332, guid: 3b1ed14940c497041b931880e40b8b0c,
         type: 3}
       propertyPath: m_Name
@@ -8563,6 +8580,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.307
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733581482650195329, guid: 3b1ed14940c497041b931880e40b8b0c,
+        type: 3}
+      propertyPath: speed
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4733581482650195332, guid: 3b1ed14940c497041b931880e40b8b0c,
         type: 3}

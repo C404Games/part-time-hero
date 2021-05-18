@@ -36,6 +36,8 @@ public class MatchManager : MonoBehaviour
     private List<StationInstance> stationsTeam2;
     public float punctuationTeam1;
     public float punctuationTeam2;
+    public int moneyTeam1;
+    public int moneyTeam2;
     private float initialTime;
     public List<Tuple<bool, int>> team1Dishes;
     public List<Tuple<bool, int>> team2Dishes;
@@ -191,6 +193,7 @@ public class MatchManager : MonoBehaviour
                 deliveryTuple.Item1 = false;
                 team1Dishes[value] = deliveryTuple;
                 punctuationTeam1 += (ProductManager.finalProducts[id].difficulty + 1) * 10;
+                moneyTeam1 += (ProductManager.finalProducts[id].difficulty + 1) * 5;
                 menuBehaviour.updatePoints();
             }
             return value;
@@ -211,6 +214,7 @@ public class MatchManager : MonoBehaviour
                 deliveryTuple.Item1 = false;
                 team2Dishes[value] = deliveryTuple;
                 punctuationTeam2 += (ProductManager.finalProducts[id].difficulty + 1) * 10;
+                moneyTeam2 += (ProductManager.finalProducts[id].difficulty + 1) * 5;
                 menuBehaviour.updatePoints();
             }
             return value;
@@ -306,6 +310,15 @@ public class MatchManager : MonoBehaviour
                         stationsTeam2.ForEach(p => p.startSpeedChange(0.0f, fastStationTime));
                 }
                 break;
+            case PowerupType.MONEY:
+                {
+                    // Plata o plomo
+                    if(playerMovement.team == 1)
+                        moneyTeam1 += 10;
+                    else
+                        moneyTeam2 += 10;                        
+                }
+                break;
         }
 
     }
@@ -339,8 +352,8 @@ public class MatchManager : MonoBehaviour
 
     public void updatePlayerMoneyAndExperience()
     {
-        PlayerPrefs.SetInt("characterExperiencesName", PlayerPrefs.GetInt("characterExperiencesName", 0) + (int)punctuationTeam1 + 100);
-        PlayerPrefs.SetInt("characterMoneyName", PlayerPrefs.GetInt("characterMoneyName", 0) + (int)(punctuationTeam1/10) + 10);
+        PlayerPrefs.SetInt("characterExperiencesName", PlayerPrefs.GetInt("characterExperiencesName", 0) + (int)punctuationTeam1);
+        PlayerPrefs.SetInt("characterMoneyName", PlayerPrefs.GetInt("characterMoneyName", 0) + moneyTeam1);
     }
 
 }

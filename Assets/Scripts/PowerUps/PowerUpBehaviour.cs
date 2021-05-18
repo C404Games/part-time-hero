@@ -9,7 +9,8 @@ public enum PowerupType
     FAST_TIME,
     MONSTER,
     FAST_WALK,
-    STAR
+    STAR,
+    MONEY
 }
 
 public class PowerUpBehaviour : MonoBehaviour
