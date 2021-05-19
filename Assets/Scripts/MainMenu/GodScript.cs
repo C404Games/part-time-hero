@@ -11,19 +11,26 @@ public class GodScript : MonoBehaviour
     public Transform point1;
     public Transform point2;
     public Transform point3;
-
+    
+    [HideInInspector]
+    public Vector3 point;
+    
+    [HideInInspector]
+    public int position = 0;
+    
     [SerializeField] 
     private GameObject[] subMenus;
 
     private GameObject[] meshModels;
-
-    private Vector3 point;
-
+    
+    
     private int playerCoins = 0;
 
     private int lastPosition = 0;
 
     private universalParameters uP;
+
+   
 
     private void Start()
     {
@@ -38,22 +45,23 @@ public class GodScript : MonoBehaviour
 
     public void accionButton(int position)
     {
-        bool isCorrect = true;
-        
-        if (position == 1)
-            if (!GetComponent<PhotonController>().OnLoginButtonClicked())
-                isCorrect = false;
+        this.position = position;
 
-        if (isCorrect)
+        foreach (GameObject subMenu in subMenus)
+        {
+            subMenu.SetActive(false);
+        }
+
+        subMenus[position].SetActive(true);
+
+        if (position == 1 || position == 3) {
+            GetComponent<PhotonController>().OnLoginButtonClicked();
+        }
+        else
         {
             lastPosition = position;
 
-            foreach (GameObject subMenu in subMenus)
-            {
-                subMenu.SetActive(false);
-            }
-
-            subMenus[position].SetActive(true);
+            
 
             point = point2.position;
         }
@@ -66,11 +74,15 @@ public class GodScript : MonoBehaviour
 
     public void volverButtonFromList()
     {
-        point = lastPosition == 1 ? point2.position : point1.position;
+        if (position == 3)
+            GetComponent<PhotonController>().onDisconnectButtonclicked();
+        point = (position != 3) ? point2.position : point1.position;
+        position = 0;
     }
 
     public void volverButton()
     {
+        position = 0;
         point = point1.position;
     }
 
@@ -83,8 +95,10 @@ public class GodScript : MonoBehaviour
     public bool removeCoins(int coins)
     {
         if (coins < playerCoins)
+        {
             PlayerPrefs.SetInt("characterMoneyName", 0);
-        return false;
+            return false;
+        }
 
         playerCoins -= coins;
         PlayerPrefs.SetInt("characterMoneyName", PlayerPrefs.GetInt("characterMoneyName", 0) - coins);

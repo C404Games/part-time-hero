@@ -16,10 +16,10 @@ public class ToolSource : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!PhotonNetwork.OfflineMode && PhotonNetwork.LocalPlayer.ActorNumber != 1)
-        {
-            return;
-        }
+        //if (!PhotonNetwork.OfflineMode && PhotonNetwork.LocalPlayer.ActorNumber != 1)
+        //{
+        //    return;
+        //}
         if (heldTool == null || heldTool.GetComponent<ProductInstance>().getHolder() != transform)
         {
             heldTool = PhotonNetwork.Instantiate(

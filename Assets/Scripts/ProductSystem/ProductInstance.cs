@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProductInstance : MonoBehaviour
+public class ProductInstance : MonoBehaviourPun
 {
     public int id;
 
@@ -76,6 +76,7 @@ public class ProductInstance : MonoBehaviour
         return holder != null && holder.GetComponent<StationInstance>() != null;
     }
 
+    
 
     // Si hay alguna transición con este producto, se hace
     public bool applyResource(int resourceId)
@@ -107,12 +108,31 @@ public class ProductInstance : MonoBehaviour
         nextStep();
     }
 
+    [PunRPC]
+    void ChatMessage(string a, string b)
+    {
+        Debug.Log(string.Format("ChatMessage {0} {1}", a, b));
+    }
+
+    [PunRPC]
+    void SaveAppearence(GameObject appe)
+    {
+        Debug.Log("estoy aqui================================");
+        appearence = appe;
+    }
+
+    //OGM Coger productos
     private void updateAppearence()
     {
         if (!photonView.IsMine)
         {
             return;
         }
+
+
+        
+        photonView.RPC("ChatMessage", RpcTarget.All, "jup", "and jup.");
+
         if (appearence != null)
             PhotonNetwork.Destroy(appearence);
         if (blueprint.appearence != null)
@@ -124,10 +144,15 @@ public class ProductInstance : MonoBehaviour
                 );
             appearence.transform.parent = transform;
             appearence.transform.localPosition = new Vector3(0, 0, 0);
+            Debug.Log(appearence.ToString());
+            photonView.RPC("SaveAppearence", RpcTarget.All, appearence);
         }
     }
 
-    private void nextStep()
+
+    
+
+private void nextStep()
     {
         if (appearence != null)
             PhotonNetwork.Destroy(appearence);

@@ -22,6 +22,10 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
     public GameObject idSala;
     public GameObject infoIdSala;
 
+    [Header("Conectividad")]
+    public bool conectado = false;
+
+
     public void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -32,7 +36,8 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
         Taberna = 1,
         Herrería = 2
     }
-    [Header("Seleccion de mapa multijugador")]
+    [Header("Seleccion opciones multijugador")]
+    public Text numJugadores;
     public Map opcion = Map.Taberna;
 
     private Dictionary<string, RoomInfo> cachedRoomList;
@@ -69,12 +74,30 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
         return false;
     }
 
+    //Se 
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("Me he contectado al servidor con OnConnectedToMaster");
+        conectado = true;
+        GodScript gS = GetComponent<GodScript>();
+        if (gS.position == 1)
+        {
+            gS.point = gS.point2.position;
+        }
+        else if (gS.position == 3)
+        {
+            GetComponent<PhotonController>().OnJoinRandomRoomButtonClicked();
+            gS.point = gS.point3.position;
+
+        }
+    }
+
     public void onDisconnectButtonclicked()
     {
         Debug.Log("Jugador " + PlayerPrefs.GetString("characterPlayerName", "") + " desconectandose");
         PhotonNetwork.Disconnect();
+        conectado = false;
         Debug.Log("Desconectado");
-
     }
 
     public bool reconnectPlayer()
@@ -88,8 +111,8 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
     {
         string roomName = Random.Range(1000, 10000).ToString();
 
-        byte maxPlayers = 4;
-        maxPlayers = (byte)Mathf.Clamp(maxPlayers, 2, 8);
+        byte maxPlayers = byte.Parse(numJugadores.text);
+        //maxPlayers = (byte)Mathf.Clamp(maxPlayers, 2, 8);
 
         RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers, PlayerTtl = 10000 };
         options.IsVisible = true;
@@ -107,8 +130,6 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
         }
 
     }
-
-    //Unión a sala
 
     /**
      * Union a sala aleatoria
@@ -185,7 +206,7 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
 
             playerListEntries.Add(p.ActorNumber, entry);
 
-            if(!PhotonNetwork.OfflineMode)
+            if (!PhotonNetwork.OfflineMode)
                 GetComponent<GodScript>().accionButtonToList();
         }
     }
