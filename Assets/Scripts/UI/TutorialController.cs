@@ -4,11 +4,12 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Polyglot;
 
 public class TutorialController : MonoBehaviour
 {
 
-    public Text text;
+    public LocalizedText key;
 
     public GameObject arrowPrefab;
 
@@ -48,7 +49,7 @@ public class TutorialController : MonoBehaviour
         }
 
         steps[index].gameObject.SetActive(true);
-        text.text = steps[index].text;
+        key.Key = steps[index].text;
     }
 
     public void onClick(InputAction.CallbackContext context)
@@ -64,7 +65,7 @@ public class TutorialController : MonoBehaviour
             {
                 steps[index++].gameObject.SetActive(false);
                 steps[index].gameObject.SetActive(true);
-                text.text = steps[index].text;
+                key.Key = steps[index].text;
             }
         }
 
