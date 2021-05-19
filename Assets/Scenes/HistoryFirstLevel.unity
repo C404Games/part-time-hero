@@ -2013,7 +2013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -403.8, y: 14.774}
+  m_AnchoredPosition: {x: -403.8, y: -10}
   m_SizeDelta: {x: 295.78168, y: 272.076}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1361407720
@@ -2391,6 +2391,7 @@ MonoBehaviour:
   backgroundTexture: {fileID: 2800000, guid: ca4d9c9b91017df4ea0347a1f4a0ed36, type: 3}
   barkeeperTexture: {fileID: 2800000, guid: eaad1ae2d81a2a9459addfceeeb17d99, type: 3}
   blacksmithTexture: {fileID: 2800000, guid: d7a76a988150c0e4499f06defe7c15d5, type: 3}
+  unknownTexture: {fileID: 2800000, guid: 40090e8d2b895b34d810b4aab2c4ddec, type: 3}
   magicTexture: {fileID: 2800000, guid: 3e11d3e5269b74d4881d498199e1ce00, type: 3}
   town1: {fileID: 2800000, guid: 3780f7c1c667b85429b749ce64a634e0, type: 3}
   town2: {fileID: 2800000, guid: be522e539cd74694e89468dc955f88c9, type: 3}
