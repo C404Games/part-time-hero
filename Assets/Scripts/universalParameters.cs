@@ -6,7 +6,7 @@ public class universalParameters : MonoBehaviour
 {
     private static string _sceneToLoad;
 
-    private static Mesh myMesh;
+    private static int model;
     private static Texture myTexture;
 
     private static float _sound;
@@ -21,14 +21,14 @@ public class universalParameters : MonoBehaviour
     {
         _sceneToLoad = sceneToLoad;
     }
-    public Mesh getMyMesh()
+    public int getModel()
     {
-        return myMesh;
+        return model;
     }
 
-    public void setMyMesh(Mesh mesh)
+    public void setModel(int m)
     {
-        myMesh = mesh;
+        model = m;
     }
     public Texture getMyTexture()
     {

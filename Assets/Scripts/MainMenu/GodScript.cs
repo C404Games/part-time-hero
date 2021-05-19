@@ -21,7 +21,8 @@ public class GodScript : MonoBehaviour
     [SerializeField] 
     private GameObject[] subMenus;
 
-    private GameObject[] meshModels;
+    public GameObject[] modelList1;
+    public GameObject[] modelList2;
     
     
     private int playerCoins = 0;
@@ -36,6 +37,19 @@ public class GodScript : MonoBehaviour
     {
         point = mainCamera.transform.position;
         uP = GetComponent<universalParameters>();
+        for(int i = 0; i < modelList1.Length; i++)
+        {
+            if (i == uP.getModel())
+            {
+                modelList1[i].SetActive(true);
+                modelList2[i].SetActive(true);
+            }
+            else
+            {
+                modelList1[i].SetActive(false);
+                modelList2[i].SetActive(false);
+            }
+        }
     }
 
     private void Update()
@@ -115,19 +129,19 @@ public class GodScript : MonoBehaviour
         playerCoins = coins;
     }
 
-    public void changeModels(Mesh mesh)
+    public void changeModels(int idx)
     {
-        meshModels = GameObject.FindGameObjectsWithTag("Models");
-        
-        foreach (GameObject model in meshModels)
-        {
-            model.GetComponent<MeshFilter>().mesh = Instantiate(mesh);
-        }
+        modelList1[uP.getModel()].gameObject.SetActive(false);
+        modelList2[uP.getModel()].gameObject.SetActive(false);
 
-        uP.setMyMesh(mesh);
+        modelList1[idx].gameObject.SetActive(true);
+        modelList2[idx].gameObject.SetActive(true);
+
+        uP.setModel(idx);
     }
     public void changeSkin(Texture texture)
     {
+        /*
         meshModels = GameObject.FindGameObjectsWithTag("Models");
 
         foreach (GameObject model in meshModels)
@@ -136,5 +150,6 @@ public class GodScript : MonoBehaviour
         }
 
         uP.setMyTexture(texture);
+        */
     }
 }
