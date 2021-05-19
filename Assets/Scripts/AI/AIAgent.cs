@@ -134,7 +134,7 @@ public class AIAgent : MonoBehaviour
                     // Si hay mueble roto, reparar
                     if (!checkMonster() && !checkBrokenStation())
                     {
-                        if (Random.Range(0, 999) <= 1)
+                        if (movement.active && Random.Range(0, 999) <= 1)
                         {
                             goToRandomPoint();
                         }
