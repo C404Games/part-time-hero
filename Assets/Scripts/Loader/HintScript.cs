@@ -15,12 +15,12 @@ public class HintScript : MonoBehaviour
         //Cargar los elementos de un archivo, para intentar evitar hacerlo mediante hardcode
         // hints = cargarElementos();
         hints = new List<string>();
-        hints.Add("Pista 1");
-        hints.Add("Pista 2");
-        hints.Add("Pista no tan secreta");
-        hints.Add("El rino hace buenas espadas");
-        hints.Add("La cerveza de cereza no le ha molado al profe");
-        hints.Add("Soy un estegosaurio");
+        hints.Add("Los platos sencillos se hacen más rapido");
+        hints.Add("Intenta quitar objetos a tus rivales");
+        hints.Add("No te pierdas las últimas noticias, sigue a @C404Games en Twitter");
+        hints.Add("A Karmelin le gusta coleccionar monedas antiguas");
+        hints.Add("Tario aprendió a cocinar gracias a su padre");
+        hints.Add("Overcooked está pasado de moda");
         hints.Add("I like trains");
 
         hint = Random.Range(0, hints.Count);

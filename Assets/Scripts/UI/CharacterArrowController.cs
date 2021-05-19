@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,9 @@ public class CharacterArrowController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!PhotonNetwork.OfflineMode)
+            return;
+
         offset = new Vector3(0, 0.15f * Screen.height, 0);
         arrows = new Dictionary<ToggleControl, GameObject>();
         foreach(ToggleControl toggle in FindObjectsOfType<ToggleControl>())
@@ -27,7 +31,10 @@ public class CharacterArrowController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(KeyValuePair<ToggleControl,GameObject> entry in arrows)
+        if (!PhotonNetwork.OfflineMode)
+            return;
+
+        foreach (KeyValuePair<ToggleControl,GameObject> entry in arrows)
         {
             if (entry.Key.on)
             {
