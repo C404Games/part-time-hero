@@ -10,6 +10,8 @@ public class ProductManager : MonoBehaviour
     public static Dictionary<int, Product> rawProducts = new Dictionary<int, Product>();
     public static Dictionary<int, Product> finalProducts = new Dictionary<int, Product>();
 
+    public static Dictionary<int, Sprite> finalProductImage = new Dictionary<int, Sprite>();
+
     #region MonoBehaviour
     private void Awake()
     {
@@ -47,7 +49,7 @@ public class ProductManager : MonoBehaviour
         stationBlueprints.Clear();
         rawProducts.Clear();
         finalProducts.Clear();
-
+        finalProductImage.Clear();
 
         string json = Resources.Load<TextAsset>(filename).text;
         Dictionary<string, dynamic> dic = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(json);
@@ -76,6 +78,7 @@ public class ProductManager : MonoBehaviour
             else if(product.type == ProductType.FINAL)
             {
                 finalProducts.Add(product.id, product);
+                finalProductImage.Add(product.id, Resources.Load<Sprite>((string)entry["card"]));
             }
 
         }

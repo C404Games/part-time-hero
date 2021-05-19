@@ -1928,7 +1928,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 190.83, y: 45.45}
+  m_AnchoredPosition: {x: 190.83002, y: 45.44995}
   m_SizeDelta: {x: -548.17554, y: -154.22168}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5537695480556594052
@@ -2553,7 +2553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24400002, y: 0.53651756}
   m_AnchorMax: {x: 0.75600004, y: 0.76600003}
-  m_AnchoredPosition: {x: -4.203247, y: 4.220619}
+  m_AnchoredPosition: {x: -4.203247, y: 4.2206116}
   m_SizeDelta: {x: 2.401001, y: 35.38266}
   m_Pivot: {x: 0.5619472, y: 0.11928858}
 --- !u!222 &5537695480701899581
@@ -4754,7 +4754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.768066, y: 0.1000061}
+  m_AnchoredPosition: {x: -12.768066, y: 0.10003662}
   m_SizeDelta: {x: -57.983574, y: -22.427858}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5537695481440711493
@@ -6648,15 +6648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f8abd52316d9346aba35c37aa0ee73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knifeTexture: {fileID: 2800000, guid: 553e64881eb09e645908c3039472d167, type: 3}
-  spearTexture: {fileID: 2800000, guid: b7caada985dff134898f4731f7e15109, type: 3}
-  ironSwordTexture: {fileID: 2800000, guid: 43f4db84a2bcef4469001036958316fd, type: 3}
-  woodSwordTexture: {fileID: 2800000, guid: 842204bd95f158749b92628c7b69a4ca, type: 3}
-  carbonatedHoneyTexture: {fileID: 2800000, guid: 75e02f1793583af4b8ad4060330c244a,
-    type: 3}
-  tomatoSoupTexture: {fileID: 2800000, guid: afed01aa156e281469e71f03327310e5, type: 3}
-  hamburgerTexture: {fileID: 2800000, guid: 3e182d4f2a0085140af3f32d58d6fe0c, type: 3}
-  cherryBeerTexture: {fileID: 2800000, guid: ea953786eb3ba944fb8fab56859c59f5, type: 3}
   introductionText: {fileID: 5537695480565454633}
   introductionText2: {fileID: 5537695481174245363}
   textExperiencePostMatch: {fileID: 5537695482079805354}
@@ -6709,7 +6700,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5537695481910704497}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 243d15ae7ab0ad54aab01af464523f11, type: 3}
   m_Name: 

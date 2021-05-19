@@ -50,7 +50,7 @@ public class MatchManager : MonoBehaviour
     [HideInInspector] public float[] team2DishTime;
 
     [HideInInspector] public int numberOfPlayers;
-    [HideInInspector] public bool isPaused;
+    public bool isPaused;
 
     MenuBehaviour menuBehaviour;
     float initialTime;

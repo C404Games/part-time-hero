@@ -117,8 +117,8 @@
       "type": 2,
       "difficulty": 0,
       "appearence": "Products/Tabern/carbonatedHoney",
-      "time":  80
-
+      "time": 80,
+      "card": "Images/DishCards/carbonatedHoney"
     },
 
     {
@@ -140,7 +140,8 @@
       "type": 2,
       "difficulty": 0,
       "appearence": "Products/Tabern/cherryBeer",
-      "time": 60
+      "time": 60,
+      "card": "Images/DishCards/cherryBeer"
     },
 
     {
@@ -182,7 +183,8 @@
       "type": 2,
       "difficulty": 0,
       "appearence": "Products/Tabern/tomatoSoup",
-      "time": 60
+      "time": 60,
+      "card": "Images/DishCards/tomatoSoup"
     },
 
     {
@@ -255,7 +257,8 @@
       "type": 2,
       "difficulty": 2,
       "appearence": "Products/Tabern/tarioBurger",
-      "time": 120
+      "time": 120,
+      "card": "Images/DishCards/hamburger"
     },
     {
       "id": 27,
