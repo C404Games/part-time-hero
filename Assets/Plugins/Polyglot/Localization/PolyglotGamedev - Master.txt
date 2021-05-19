@@ -655,8 +655,16 @@ MENU_JOIN		Join		Unirse
 SHOP_COINS_PACK		Coins Pack		Pack De Monedas																									
 SHOP_COINS_MEGA_PACK		Mega Coins Pack		Mega Pack de Monedas																									
 SHOP_COINS_CHEST		Mega Chest Pack		Mega Cofre de Monedas																									
-SHOP_BESTSELLER		The Bestseller		El Más Vendido																									
-SHOP_MORE_BENEFITS		More Benefits		El Más Beneficioso																									
-MENU_ROOM_CODE		Code		Código																									
+SHOP_BESTSELLER		The Bestseller		El Mas Vendido																									
+SHOP_MORE_BENEFITS		More Benefits		El Mas Beneficioso																									
+MENU_ROOM_CODE		Code		Codigo																									
 MENU_START		Start		Empezar																									
 TRANSLATIONS		Spanish: C404 Team English:  Chinesse: Yun Wang Special Thanks for PolyglotGameDev Proyect		Español: C404 Team English:  Chino: Yun Wang Gracias al Proyecto PolyglotGameDev																									
+PAUSE_PAUSE		PAUSE		PAUSA																									
+PAUSE_RESUME		RESUME		REANUDAR																									
+PAUSE_EXIT		EXIT GAME		ABANDONAR PARTIDA																									
+PAUSE_RESET		RESET		REINICIAR																									
+TUTORIAL_TABERN_1		Welcome to Tario's Tavern!		¡Bienvenido a la Taberna de Tario!																									
+TUTORIAL_TABERN_2		Collect the products you need from the belts		Recoge los producto que necesitas de las cintas																									
+TUTORIAL_TABERN_3		You can click on the book to see the recipe booklet.		Puedes pulsar el libro para ver el recetario																									
+TUTORIAL_TABERN_4		Brings finished recipes to the point of delivery.		Lleva las recetas terminadas al punto de enterega																									

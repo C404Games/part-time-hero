@@ -45,6 +45,7 @@ public class AIAgent : MonoBehaviour
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
+        
         if (PhotonNetwork.OfflineMode || PhotonNetwork.LocalPlayer.ActorNumber == 1)
         {
             // Carga personaje aleatorio
@@ -58,6 +59,7 @@ public class AIAgent : MonoBehaviour
             model.GetComponent<SwordVisibility>().playerMovement = playerMovement;
             playerMovement.animator = model.GetComponent<Animator>();
         }
+        
     }
 
     // Start is called before the first frame update
@@ -134,7 +136,7 @@ public class AIAgent : MonoBehaviour
                     // Si hay mueble roto, reparar
                     if (!checkMonster() && !checkBrokenStation())
                     {
-                        if (Random.Range(0, 999) <= 1)
+                        if (movement.active && Random.Range(0, 999) <= 1)
                         {
                             goToRandomPoint();
                         }

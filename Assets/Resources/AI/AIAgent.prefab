@@ -77,6 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 4733581482650195329}
   reachableTracker: {fileID: 7405521787735649516}
+  active: 1
 --- !u!65 &4733581481164316531
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -231,12 +232,15 @@ MonoBehaviour:
   speedFactor: 1
   currentTimeOfMaxSpeed: 0
   timeMaxSpeed: 0
+  paused: 0
   frozen: 0
   currentTimeOfFrozen: 0
   timeFrozen: 0
   animator: {fileID: 0}
   iceCube: {fileID: 3690593690956923700}
+  clickMovement: {fileID: 0}
   attackBusy: 0
+  active: 1
 --- !u!195 &4733581482650195330
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -310,6 +314,7 @@ MonoBehaviour:
   targetProduct: {fileID: 0}
   targetBook: {fileID: 0}
   targetType: 1
+  active: 0
 --- !u!114 &4733581482650195339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,10 +328,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  characterPrefabs:
-  - {fileID: 1536781255009892536, guid: 3a4c4c169e259454d8e4065e8169e976, type: 3}
-  - {fileID: 1970845008520801083, guid: c3410cd84d1a3ec419db75c6d67cd425, type: 3}
-  - {fileID: 4332947720369745156, guid: c16c4f04169b53749b42884aabfa4cc8, type: 3}
   modelWrapper: {fileID: 3158445103985046460}
   reachableTracker: {fileID: 0}
   catcher: {fileID: 4733581481164316540}

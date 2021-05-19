@@ -112,8 +112,13 @@ public class MatchManager : MonoBehaviour
         // Comprobar si se ha acabado el tiempo de las recetas
         for (int i = 0; i < team1Dishes.Count; i++)
         {
+            menuBehaviour.updateDishStatus(1, i, team1DishTime[i], ProductManager.finalProducts[team1Dishes[i].Item2].time);
             if (team1Dishes[i] != null && team1Dishes[i].Item1)
             {
+                if (i == 0)
+                {
+                    Debug.Log("Tiempo: " + team1DishTime[0]);
+                }
                 team1DishTime[i] -= Time.deltaTime;
                 if (team1DishTime[i] <= 0)
                     deleteOrder(1, team1Dishes[i].Item2);
@@ -121,6 +126,7 @@ public class MatchManager : MonoBehaviour
         }
         for (int i = 0; i < team2Dishes.Count; i++)
         {
+            menuBehaviour.updateDishStatus(2, i, team2DishTime[i], ProductManager.finalProducts[team2Dishes[i].Item2].time);
             if (team2Dishes[i] != null && team2Dishes[i].Item1)
             {
                 team2DishTime[i] -= Time.deltaTime;
@@ -173,7 +179,6 @@ public class MatchManager : MonoBehaviour
                 randomProduct = product;
             }
         }
-        Debug.Log("Id: " + randomProduct.id + "Producto: " +randomProduct.name);
         return randomProduct.id;
 
     }
@@ -189,8 +194,10 @@ public class MatchManager : MonoBehaviour
             {
                 tuple.Item1 = false;
                 GameObject dishPanel = team == 1 ? team1DishPanels[i] : team2DishPanels[i];
-                Transform currentDishPanel = dishPanel.transform.Find("Dish(Clone)");
-                PhotonNetwork.Destroy(currentDishPanel.gameObject);
+                Transform currentDishPanel = dishPanel.transform.Find("Image");
+                Transform currentTimeBarPanel = dishPanel.transform.Find("GameObject");
+                currentDishPanel.gameObject.SetActive(false);
+                currentTimeBarPanel.gameObject.SetActive(false);
                 return true;
             }
         }
@@ -388,6 +395,7 @@ public class MatchManager : MonoBehaviour
                     break;
                 case 2:
                     PhotonNetwork.LoadLevel("Smithy - Level 1");
+                    break;
                     break;
             }
         }

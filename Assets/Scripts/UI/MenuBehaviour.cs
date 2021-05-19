@@ -52,6 +52,17 @@ public class MenuBehaviour : MonoBehaviour
     public Text moneyFinal;
     public Text pointsFinal;
 
+    private UnityEngine.UI.RawImage team1Dish1Countdown;
+    private UnityEngine.UI.RawImage team1Dish2Countdown;
+    private UnityEngine.UI.RawImage team1Dish3Countdown;
+    private UnityEngine.UI.RawImage team1Dish4Countdown;
+
+
+    private UnityEngine.UI.RawImage team2Dish1Countdown;
+    private UnityEngine.UI.RawImage team2Dish2Countdown;
+    private UnityEngine.UI.RawImage team2Dish3Countdown;
+    private UnityEngine.UI.RawImage team2Dish4Countdown;
+
     private UnityEngine.UI.Text exitSceneText;
     private UnityEngine.UI.Text returnSceneText;
     public Texture firstPunctuationTexture;
@@ -72,9 +83,44 @@ public class MenuBehaviour : MonoBehaviour
     public UnityEngine.UI.Button pauseButtonInGame;
     public Animator menuAnimator;
     public bool charging;
+    public GameObject timeBarTeam1Dish1;
+    public GameObject timeBarTeam1Dish2;
+    public GameObject timeBarTeam1Dish3;
+    public GameObject timeBarTeam1Dish4;
+    public GameObject timeBarTeam2Dish1;
+    public GameObject timeBarTeam2Dish2;
+    public GameObject timeBarTeam2Dish3;
+    public GameObject timeBarTeam2Dish4;
+
+    public GameObject dishTeam1Dish1;
+    public GameObject dishTeam1Dish2;
+    public GameObject dishTeam1Dish3;
+    public GameObject dishTeam1Dish4;
+    public GameObject dishTeam2Dish1;
+    public GameObject dishTeam2Dish2;
+    public GameObject dishTeam2Dish3;
+    public GameObject dishTeam2Dish4;
+
+    public Gradient gradientCountdown;
 
     void Awake()
     {
+        timeBarTeam1Dish1.SetActive(false);
+        timeBarTeam1Dish2.SetActive(false);
+        timeBarTeam1Dish3.SetActive(false);
+        timeBarTeam1Dish4.SetActive(false);
+        timeBarTeam2Dish1.SetActive(false);
+        timeBarTeam2Dish2.SetActive(false);
+        timeBarTeam2Dish3.SetActive(false);
+        timeBarTeam2Dish4.SetActive(false);
+        dishTeam1Dish1.SetActive(false);
+        dishTeam1Dish2.SetActive(false);
+        dishTeam1Dish3.SetActive(false);
+        dishTeam1Dish4.SetActive(false);
+        dishTeam2Dish1.SetActive(false);
+        dishTeam2Dish2.SetActive(false);
+        dishTeam2Dish3.SetActive(false);
+        dishTeam2Dish4.SetActive(false);
         fadeOutCorroutine = fadeOutScene(1.0f);
         //fadeInCorroutine = fadeInScene(5.0f);
         if (PlayerPrefs.GetInt("tutorialActive") == 1)
@@ -110,7 +156,8 @@ public class MenuBehaviour : MonoBehaviour
         if (PhotonNetwork.OfflineMode)
         {
             pauseButtonInGame.gameObject.SetActive(true);
-        } else
+        }
+        else
         {
             pauseButtonInGame.gameObject.SetActive(false);
         }
@@ -151,7 +198,8 @@ public class MenuBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         if (!PhotonNetwork.OfflineMode && PhotonNetwork.LocalPlayer.ActorNumber != 1)
         {
             return;
@@ -215,6 +263,33 @@ public class MenuBehaviour : MonoBehaviour
                     position++;
                     if (position >= 1)
                     {
+                        switch (position)
+                        {
+                            case 1:
+                                {
+                                    dishTeam1Dish1.SetActive(true);
+                                    timeBarTeam1Dish1.SetActive(true);
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    dishTeam1Dish2.SetActive(true);
+                                    timeBarTeam1Dish2.SetActive(true);
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    dishTeam1Dish3.SetActive(true);
+                                    timeBarTeam1Dish3.SetActive(true);
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    dishTeam1Dish4.SetActive(true);
+                                    timeBarTeam1Dish4.SetActive(true);
+                                    break;
+                                }
+                        }
                         dish1 = matchManager.generateOrder();
                         if (position == (matchManager.team1Dishes.Count + 1))
                         {
@@ -226,18 +301,13 @@ public class MenuBehaviour : MonoBehaviour
                         }
                         currentPanelDishName = "Dish" + (position) + "Panel";
                         currentDishPanel = team1dishPanel.Find(currentPanelDishName);
-                        dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
+                        currentDishPanel.gameObject.SetActive(true);
                         //dishMenuPrefab = Instantiate(searchedDish);
-                        dishMenuPrefab.transform.SetParent(currentDishPanel);
-                        dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
-                        dishMenuPrefab.transform.SetParent(currentDishPanel);
-                        Image imageDish = dishMenuPrefab.GetComponentInChildren<Image>(true);
-                        Vector2 panelSize = currentDishPanel.GetComponent<RectTransform>().sizeDelta;
+                        Image[] imageDish = currentDishPanel.GetComponentsInChildren<Image>(true);
                         //rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(190, 158);
-                        imageDish.overrideSprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish1].id];
-                        Text dishNameText = dishMenuPrefab.GetComponentInChildren<Text>();
-                        dishNameText.text = ProductManager.finalProducts[dish1].name;
-                        matchManager.team1DishTime[position-1] = ProductManager.finalProducts[dish1].time;
+                        imageDish[imageDish.Length - 1].sprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish1].id];
+                        imageDish[imageDish.Length - 1].gameObject.SetActive(true);
+                        matchManager.team1DishTime[position - 1] = ProductManager.finalProducts[dish1].time;
                     }
                     position = -1;
                     if (matchManager.team2Dishes.Count < 4)
@@ -258,6 +328,33 @@ public class MenuBehaviour : MonoBehaviour
                     position++;
                     if (position >= 1)
                     {
+                        switch (position)
+                        {
+                            case 1:
+                                {
+                                    dishTeam2Dish1.SetActive(true);
+                                    timeBarTeam2Dish1.SetActive(true);
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    dishTeam2Dish2.SetActive(true);
+                                    timeBarTeam2Dish2.SetActive(true);
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    dishTeam2Dish3.SetActive(true);
+                                    timeBarTeam2Dish3.SetActive(true);
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    dishTeam2Dish4.SetActive(true);
+                                    timeBarTeam2Dish4.SetActive(true);
+                                    break;
+                                }
+                        }
                         dish2 = matchManager.generateOrder();
                         if (position == (matchManager.team2Dishes.Count + 1))
                         {
@@ -269,18 +366,14 @@ public class MenuBehaviour : MonoBehaviour
                         }
                         currentPanelDishName = "Dish" + (position) + "Panel";
                         currentDishPanel = team2dishPanel.Find(currentPanelDishName);
-                        dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
-                        dishMenuPrefab.transform.SetParent(currentDishPanel);
-                        dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
-                        dishMenuPrefab.transform.SetParent(currentDishPanel);
-                        Image imageDish = dishMenuPrefab.GetComponentInChildren<Image>(true);
-                        Vector2 panelSize = currentDishPanel.GetComponent<RectTransform>().sizeDelta;
-                        imageDish.sprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish1].id];
-                        Text dishNameText = dishMenuPrefab.GetComponentInChildren<Text>();
-                        dishNameText.text = ProductManager.finalProducts[dish2].name;
-                        matchManager.team2DishTime[position-1] = ProductManager.finalProducts[dish2].time;
+                        currentDishPanel.gameObject.SetActive(true);
+                        //dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
+                        Image[] imageDish = currentDishPanel.GetComponentsInChildren<Image>(true);
+                        imageDish[imageDish.Length - 1].sprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish2].id];
+                        imageDish[imageDish.Length - 1].gameObject.SetActive(true);
+                        matchManager.team2DishTime[position - 1] = ProductManager.finalProducts[dish2].time;
+                        currentTime = 0;
                     }
-                    currentTime = 0;
                 }
 
                 //Timer countdown
@@ -327,18 +420,19 @@ public class MenuBehaviour : MonoBehaviour
                     //}
                     //else
                     //{
-                        moneyFinal.text = "" + matchManager.getPunctuationTeam1() / 10;
-                        pointsFinal.text = "" + matchManager.getPunctuationTeam1();
+                    moneyFinal.text = "" + matchManager.getPunctuationTeam1() / 10;
+                    pointsFinal.text = "" + matchManager.getPunctuationTeam1();
                     //}
                     pauseButton.SetActive(false);
                     pauseMatch();
                     GetComponent<Animator>().SetTrigger("fadeIn");
                     StartCoroutine(fadeInScene(5.5f));
                 }
+                Debug.Log("Lista1: " + matchManager.team1Dishes.Count);
+                Debug.Log("Lista2: " + matchManager.team2Dishes.Count);
             }
         }
     }
-
     public void updatePoints()
     {
 
@@ -349,8 +443,9 @@ public class MenuBehaviour : MonoBehaviour
 
         UnityEngine.UI.RawImage[] rawImageTeam2 = team2PointsPanel.GetComponentsInChildren<UnityEngine.UI.RawImage>();
         UnityEngine.UI.Text[] textPunctuationTeam2 = team2PointsPanel.GetComponentsInChildren<UnityEngine.UI.Text>();
-        
-        if (currentCharacter == 0 || currentCharacter == 1) { 
+
+        if (currentCharacter == 0 || currentCharacter == 1)
+        {
             if (matchManager.getPunctuationTeam1() > matchManager.getPunctuationTeam2())
             {
                 textPunctuationTeam1[0].text = "" + matchManager.getPunctuationTeam1();
@@ -492,17 +587,69 @@ public class MenuBehaviour : MonoBehaviour
 
     public void reloadLevel()
     {
-        int scene = PlayerPrefs.GetInt("Scenary",0); ;
+        int scene = PlayerPrefs.GetInt("Scenary", 0); ;
         if (scene != 0)
         {
             if (scene == 1)
             {
                 PhotonNetwork.LoadLevel("Tabern - Level 1");
-            } else if (scene == 2)
+            }
+            else if (scene == 2)
             {
                 PhotonNetwork.LoadLevel("Smithy - Level 1");
             }
         }
     }
 
+    public void updateDishStatus(int team, int position, float currentTime, float totalTime)
+    {
+        currentTime = ((currentTime + 5) < totalTime)? currentTime + 5: totalTime;
+        if (team == 1)
+        {
+            if (position == 0)
+            {
+                timeBarTeam1Dish1.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
+                timeBarTeam1Dish1.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+            }
+            if (position == 1)
+            {
+                timeBarTeam1Dish2.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
+                timeBarTeam1Dish2.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+            }
+            if (position == 2)
+            {
+                timeBarTeam1Dish3.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
+                timeBarTeam1Dish3.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+            }
+            if (position == 3)
+            {
+                timeBarTeam1Dish4.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
+                timeBarTeam1Dish4.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+            }
+        }
+        else if (team == 2)
+        {
+            if (position == 0)
+            {
+                timeBarTeam2Dish1.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
+                timeBarTeam2Dish1.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+            }
+            if (position == 1)
+            {
+                timeBarTeam2Dish2.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
+                timeBarTeam2Dish2.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+            }
+            if (position == 2)
+            {
+                timeBarTeam2Dish3.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
+                timeBarTeam2Dish3.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+            }
+            if (position == 3)
+            {
+                timeBarTeam2Dish4.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
+                timeBarTeam2Dish4.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+            }
+
+        }
+    }
 }
