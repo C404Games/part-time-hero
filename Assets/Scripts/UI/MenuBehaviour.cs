@@ -610,21 +610,25 @@ public class MenuBehaviour : MonoBehaviour
             {
                 timeBarTeam1Dish1.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
                 timeBarTeam1Dish1.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+                timeBarTeam1Dish1.GetComponentInChildren<UnityEngine.UI.RawImage>().color = gradientCountdown.Evaluate(currentTime/totalTime);
             }
             if (position == 1)
             {
                 timeBarTeam1Dish2.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
                 timeBarTeam1Dish2.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+                timeBarTeam1Dish2.GetComponentInChildren<UnityEngine.UI.RawImage>().color = gradientCountdown.Evaluate(currentTime / totalTime);
             }
             if (position == 2)
             {
                 timeBarTeam1Dish3.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
                 timeBarTeam1Dish3.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+                timeBarTeam1Dish3.GetComponentInChildren<UnityEngine.UI.RawImage>().color = gradientCountdown.Evaluate(currentTime / totalTime);
             }
             if (position == 3)
             {
                 timeBarTeam1Dish4.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
                 timeBarTeam1Dish4.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+                timeBarTeam1Dish4.GetComponentInChildren<UnityEngine.UI.RawImage>().color = gradientCountdown.Evaluate(currentTime / totalTime);
             }
         }
         else if (team == 2)
@@ -633,21 +637,25 @@ public class MenuBehaviour : MonoBehaviour
             {
                 timeBarTeam2Dish1.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
                 timeBarTeam2Dish1.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+                timeBarTeam2Dish1.GetComponentInChildren<UnityEngine.UI.RawImage>().color = gradientCountdown.Evaluate(currentTime / totalTime);
             }
             if (position == 1)
             {
                 timeBarTeam2Dish2.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
                 timeBarTeam2Dish2.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+                timeBarTeam2Dish2.GetComponentInChildren<UnityEngine.UI.RawImage>().color = gradientCountdown.Evaluate(currentTime / totalTime);
             }
             if (position == 2)
             {
                 timeBarTeam2Dish3.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
                 timeBarTeam2Dish3.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+                timeBarTeam2Dish3.GetComponentInChildren<UnityEngine.UI.RawImage>().color = gradientCountdown.Evaluate(currentTime / totalTime);
             }
             if (position == 3)
             {
                 timeBarTeam2Dish4.GetComponentInChildren<UnityEngine.UI.Slider>().maxValue = totalTime;
                 timeBarTeam2Dish4.GetComponentInChildren<UnityEngine.UI.Slider>().value = currentTime;
+                timeBarTeam2Dish4.GetComponentInChildren<UnityEngine.UI.RawImage>().color = gradientCountdown.Evaluate(currentTime / totalTime);
             }
 
         }

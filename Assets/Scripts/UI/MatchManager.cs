@@ -115,10 +115,6 @@ public class MatchManager : MonoBehaviour
             menuBehaviour.updateDishStatus(1, i, team1DishTime[i], ProductManager.finalProducts[team1Dishes[i].Item2].time);
             if (team1Dishes[i] != null && team1Dishes[i].Item1)
             {
-                if (i == 0)
-                {
-                    Debug.Log("Tiempo: " + team1DishTime[0]);
-                }
                 team1DishTime[i] -= Time.deltaTime;
                 if (team1DishTime[i] <= 0)
                     deleteOrder(1, team1Dishes[i].Item2);
