@@ -384,7 +384,7 @@ public class MenuBehaviour : MonoBehaviour
                     pauseButton.SetActive(false);
                     pauseMatch();
                     GetComponent<Animator>().SetTrigger("fadeIn");
-                    StartCoroutine(fadeInScene(5.0f));
+                    StartCoroutine(fadeInScene(5.5f));
                 }
             }
         }

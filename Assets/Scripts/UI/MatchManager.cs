@@ -61,6 +61,7 @@ public class MatchManager : MonoBehaviour
 
     void Awake()
     {
+        initialTime = 10;
         initialTime++;
         team1Dishes = new List<Tuple<bool, int>>();
         team2Dishes = new List<Tuple<bool, int>>();
