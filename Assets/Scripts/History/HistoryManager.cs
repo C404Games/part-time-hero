@@ -20,7 +20,7 @@ public class HistoryManager : MonoBehaviour
 
 
     public List<HistoryAction> actions = new List<HistoryAction>();
-    public enum Action {PROLOGUE, DIALOGUE, POWERUP, MONSTER, QUESTION, WRITING };
+    public enum Action {PROLOGUE, DIALOGUE, POWERUP, MONSTER, QUESTION, WRITING, BACKGROUND};
     private UnityEngine.UI.Text globalText;
     private UnityEngine.UI.RawImage character1RawImage;
     private UnityEngine.UI.RawImage option1Selected;
@@ -56,6 +56,7 @@ public class HistoryManager : MonoBehaviour
     public Texture backgroundTexture;
     public Texture barkeeperTexture;
     public Texture blacksmithTexture;
+    public Texture unknownTexture;
     public Texture magicTexture;
     public Texture town1;
     public Texture town2;
@@ -141,8 +142,13 @@ public class HistoryManager : MonoBehaviour
                 }
                 actions.Add(action);
 
-            } else
+            } else if (s.Contains("="))
             {
+                HistoryAction action = new HistoryAction();
+                action.type = Action.BACKGROUND.ToString();
+                action.data.Add(s.Split('=')[1]);
+                actions.Add(action);
+            } else {
                 HistoryAction action = actions[actions.Count - 1];
                 action.data.Add(s.Split(':')[1]);
             }
@@ -192,7 +198,7 @@ public class HistoryManager : MonoBehaviour
             }
         } else
         {
-            if (nextInputField.transform.localScale[0] == 1 && nextInputField.text.ToString().Length == 0)
+            if ((nextInputField.transform.localScale[0] == 1 && nextInputField.text.ToString().Length == 0 ) || actions[currentStep].type == Action.QUESTION.ToString() && currentConversationStep == 1)
             {
                 nextButton.interactable = false;
             }
@@ -207,96 +213,119 @@ public class HistoryManager : MonoBehaviour
     {
         HistoryAction action = actions[currentStep];
         string type = action.type;
-        if ((selectedQuestion != 0 && action.question != selectedQuestion) || ((currentStep+1) == actions.Count && (currentConversationStep + 1) == actions[currentStep].data.Count))
+        if ((currentStep+1) == actions.Count && (currentConversationStep + 1) == actions[currentStep].data.Count)
         {
-            historyAnimator.SetTrigger("townSelectionTrigger");
+            PlayerPrefs.SetString("characterPlayerName", nextInputField.text);
+            historyAnimator.SetTrigger("finishDialogue");
+            StartCoroutine(fadeCorroutine);
         } else
         {
-            if (action.character != "Player")
-            {
-                characterNameText.text = action.character;
-                switch (action.character){
-                    case "Mago":
-                        {
-                            characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
-                            characterSpeaker.texture = magicTexture;
-                            break;
-                        }
-                    case "Tabernero":
-                        {
-                            characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
-                            characterSpeaker.texture = barkeeperTexture;
-                            break;
-                        }
-                    case "Herrero":
-                        {
-                            characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
-                            characterSpeaker.texture = blacksmithTexture;
-                            break;
-                        }
-
-                }
-            }
-            if (nextInputField.transform.localScale[0] == 1)
-            {
-                characterName = nextInputField.text.ToString();
-                nextInputField.transform.localScale = new Vector3(0, 0, 0);
-            }
-            if (textOption1.text != "")
-            {
-                selectedQuestion = button;
-                for (int i = currentStep; i < actions.Count; i++)
-                {
-                    if (actions[i].question == button)
-                    {
-                        currentStep = i;
-                        currentConversationStep = 0;
-                        nextButton.transform.localScale = new Vector3(1, 1, 1);
-                        option1Button.transform.localScale = new Vector3(0, 0, 0);
-                        option2Button.transform.localScale = new Vector3(0, 0, 0);
-                        action = actions[currentStep];
-                        type = action.type;
-                        break;
-                    }
-                }
-            }
-            if (type == Action.DIALOGUE.ToString())
-            {
-                globalText.text = actions[currentStep].data[currentConversationStep];
-                textOption1.text = "";
-                textOption2.text = "";
-                nextButton.interactable = true;
-                option1Button.transform.localScale = new Vector3(0, 0, 0);
-                option2Button.transform.localScale = new Vector3(0, 0, 0);
-            }
-            else if (type == Action.QUESTION.ToString())
+            if (globalText.text.Contains("Ufff ya llegué a mi destino"))
             {
                 globalText.text = "";
-                textOption1.text = actions[currentStep].data[1];
-                textOption2.text = actions[currentStep].data[2];
-                nextButton.interactable = false;
-                option1Button.transform.localScale = new Vector3(1, 1, 1);
-                option2Button.transform.localScale = new Vector3(1, 1, 1);
-            }
-            else if (type == Action.WRITING.ToString())
+                nextHistoryStep(button);
+            } else
             {
-                globalText.text = "";
-                textOption1.text = "";
-                textOption2.text = "";
-                nextButton.interactable = false;
-                nextInputField.transform.localScale = new Vector3(1, 1, 1);
-                option1Button.transform.localScale = new Vector3(0, 0, 0);
-                option2Button.transform.localScale = new Vector3(0, 0, 0);
-            }
-            currentConversationStep++;
-            if (action.data.Count == currentConversationStep)
-            {
-                currentConversationStep = 0;
-                if (actions.Count > (currentStep + 1))
+                if (action.type == Action.BACKGROUND.ToString())
                 {
                     currentStep++;
+                    action = actions[currentStep];
+                    type = action.type;
+                    currentConversationStep = 0;
+                    Debug.Log("Cambio de escenario");
                 }
-            }
+                if (action.character != "Player")
+                {
+                    characterNameText.text = action.character;
+                    switch (action.character)
+                    {
+                        case "Kamerlín":
+                            {
+                                characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
+                                characterSpeaker.texture = magicTexture;
+                                break;
+                            }
+                        case "Tario":
+                            {
+                                characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
+                                characterSpeaker.texture = barkeeperTexture;
+                                break;
+                            }
+                        case "Rairon":
+                            {
+                                characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
+                                characterSpeaker.texture = blacksmithTexture;
+                                break;
+                            }
+                        case "???":
+                            {
+                                characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
+                                characterSpeaker.texture = unknownTexture;
+                                break;
+                            }
+                    }
+                }
+                if (nextInputField.transform.localScale[0] == 1)
+                {
+                    characterName = nextInputField.text.ToString();
+                    nextInputField.transform.localScale = new Vector3(0, 0, 0);
+                }
+                if (textOption1.text != "")
+                {
+                    selectedQuestion = button;
+                    for (int i = currentStep; i < actions.Count; i++)
+                    {
+                        if (actions[i].question == button)
+                        {
+                            currentStep = i;
+                            currentConversationStep = 0;
+                            nextButton.transform.localScale = new Vector3(1, 1, 1);
+                            option1Button.transform.localScale = new Vector3(0, 0, 0);
+                            option2Button.transform.localScale = new Vector3(0, 0, 0);
+                            action = actions[currentStep];
+                            type = action.type;
+                            break;
+                        }
+                    }
+                }
+                if (type == Action.DIALOGUE.ToString())
+                {
+                    globalText.text = actions[currentStep].data[currentConversationStep];
+                    textOption1.text = "";
+                    textOption2.text = "";
+                    nextButton.interactable = true;
+                    option1Button.transform.localScale = new Vector3(0, 0, 0);
+                    option2Button.transform.localScale = new Vector3(0, 0, 0);
+                }
+                else if (type == Action.QUESTION.ToString())
+                {
+                    globalText.text = "";
+                    textOption1.text = actions[currentStep].data[1];
+                    textOption2.text = actions[currentStep].data[2];
+                    nextButton.interactable = false;
+                    option1Button.transform.localScale = new Vector3(1, 1, 1);
+                    option2Button.transform.localScale = new Vector3(1, 1, 1);
+                }
+                else if (type == Action.WRITING.ToString())
+                {
+                    globalText.text = "";
+                    textOption1.text = "";
+                    textOption2.text = "";
+                    nextButton.interactable = false;
+                    nextInputField.transform.localScale = new Vector3(1, 1, 1);
+                    option1Button.transform.localScale = new Vector3(0, 0, 0);
+                    option2Button.transform.localScale = new Vector3(0, 0, 0);
+                }
+                currentConversationStep++;
+                if (action.data.Count == currentConversationStep)
+                {
+                    currentConversationStep = 0;
+                    if (actions.Count > (currentStep + 1))
+                    {
+                        currentStep++;
+                    }
+                }
+            }            
         }        
     }
 
