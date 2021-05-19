@@ -42,7 +42,15 @@ public class MenuBehaviour : MonoBehaviour
     //public UnityEngine.UI.RawImage menuBackground;
     //public UnityEngine.UI.RawImage exitSceneImage;
     //public UnityEngine.UI.RawImage returnSceneImage;
-
+    public AudioSource audioClipLoop1;
+    public AudioSource audioClipLoop2;
+    public AudioSource audioClipLoop3;
+    private int currentClip;
+    private float currentBackgroundSoundTime;
+    private float limitBackgroundSoundTime;
+    private bool playingBackgroundClip1;
+    private bool playingBackgroundClip2;
+    private bool playingBackgroundClip3;
     public Transform team1PointsPanel;
     public Transform team2PointsPanel;
     public Transform team1dishPanel;
@@ -166,9 +174,29 @@ public class MenuBehaviour : MonoBehaviour
             {
                 pauseButtonInGame.gameObject.SetActive(false);
             }
-            if (!matchManager.isPaused && !charging)
+            if (!matchManager.isPaused && !charging && !GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("showSceneName") &&
+                !GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("showTutorial") && !GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("3_2_1") &&
+                !GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("MaskFadeOutMatchMenu"))
             {
                 CheckForChanges();
+                currentBackgroundSoundTime += Time.deltaTime;
+                int soundTimeMod = (int)(currentBackgroundSoundTime / 8);
+                //Play each loop background clip each 8 seconds
+                if ((soundTimeMod % 3) == 0 && !playingBackgroundClip1 && currentTime == 0)
+                {
+                    audioClipLoop1.Play();
+
+                }
+                /*else if ((soundTimeMod % 3) == 2 && playingBackgroundClip2)
+                {
+                    audioClipLoop1.Stop();
+                    audioClipLoop2.Stop();
+                    audioClipLoop3.Play();
+                    playingBackgroundClip1 = false;
+                    playingBackgroundClip2 = false;
+                    playingBackgroundClip3 = true;
+                }
+                */
                 this.gameObject.SetActive(visible);
                 currentTime += Time.deltaTime;
                 totalTime += Time.deltaTime;
@@ -336,6 +364,10 @@ public class MenuBehaviour : MonoBehaviour
                 }
                 else
                 {
+                    audioClipLoop1.Stop();
+                    playingBackgroundClip1 = false;
+                    playingBackgroundClip2 = false;
+                    playingBackgroundClip3 = false;
                     timeText.color = Color.red;
                     timeText.text = "00:00";
                     matchManager.updatePlayerMoneyAndExperience();
