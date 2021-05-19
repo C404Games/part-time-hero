@@ -43,7 +43,8 @@
       "type": 2,
       "appearence": "Products/Smithy/knife",
       "difficulty": 0,
-      "time":  60
+      "time": 60,
+      "card": "Images/DishCards/pedidocuchillo"
     },
     {
       "id": 6,
@@ -70,7 +71,8 @@
       "type": 2,
       "appearence": "Products/Smithy/spear",
       "difficulty": 1,
-      "time": 80
+      "time": 80,
+      "card": "Images/DishCards/pedidolanza"
     },
     {
       "id": 9,
@@ -84,7 +86,8 @@
       "type": 2,
       "appearence": "Products/Smithy/ironSword",
       "difficulty": 1,
-      "time": 80
+      "time": 80,
+      "card": "Images/DishCards/pedidoespadahierro"
     },
     {
       "id": 11,
@@ -104,13 +107,15 @@
       "type": 2,
       "appearence": "Products/Smithy/copperSword",
       "difficulty": 1,
-      "time": 80
+      "time": 80,
+      "card": "Images/DishCards/pedidoespadacobre"
     },
     {
       "id": 14,
       "name": "PROD_COPPER_BLADE",
       "type": 1,
       "appearence": "Products/Smithy/ironBlade"
+
     }
   ],
     "Stations":[

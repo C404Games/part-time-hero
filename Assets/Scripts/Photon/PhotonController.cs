@@ -110,8 +110,9 @@ public class PhotonController : MonoBehaviourPunCallbacks, IMatchmakingCallbacks
     public void OnCreateRoomButtonClicked()
     {
         string roomName = Random.Range(1000, 10000).ToString();
-
-        byte maxPlayers = byte.Parse(numJugadores.text);
+        byte maxPlayers = 1;
+        if (!PhotonNetwork.OfflineMode)
+            maxPlayers = byte.Parse(numJugadores.text);
         //maxPlayers = (byte)Mathf.Clamp(maxPlayers, 2, 8);
 
         RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers, PlayerTtl = 10000 };

@@ -1,5 +1,6 @@
 ﻿using Photon.Pun;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -207,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
         if (recipieBookInReach.isOpen())
         {
             recipieBookInReach.closeBook();
-            blocked = false;
+            blocked = false;            
         }
         else
         {
@@ -215,6 +216,10 @@ public class PlayerMovement : MonoBehaviour
             waitPosition = transform.position;
             waitRotation = transform.forward;
             blocked = true;
+        }
+        foreach (PlayerMovement pm in FindObjectsOfType<PlayerMovement>().Where(p => p.team == team))
+        {
+            pm.blocked = blocked;
         }
     }
 

@@ -9,14 +9,6 @@ using System.IO;
 
 public class MenuBehaviour : MonoBehaviour
 {
-    public Texture knifeTexture;
-    public Texture spearTexture;
-    public Texture ironSwordTexture;
-    public Texture woodSwordTexture;
-    public Texture carbonatedHoneyTexture;
-    public Texture tomatoSoupTexture;
-    public Texture hamburgerTexture;
-    public Texture cherryBeerTexture;
     public UnityEngine.UI.Text introductionText;
     public UnityEngine.UI.Text introductionText2;
     public UnityEngine.UI.Text textExperiencePostMatch;
@@ -109,6 +101,7 @@ public class MenuBehaviour : MonoBehaviour
         {
 
         }
+
     }
 
     //  is called before the first frame update
@@ -238,32 +231,10 @@ public class MenuBehaviour : MonoBehaviour
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
                         dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
-                        UnityEngine.UI.RawImage rawImageDish = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.RawImage>();
+                        Image imageDish = dishMenuPrefab.GetComponentInChildren<Image>(true);
                         Vector2 panelSize = currentDishPanel.GetComponent<RectTransform>().sizeDelta;
                         //rawImageDish.GetComponent<RectTransform>().sizeDelta = new Vector2(190, 158);
-                        switch (dish1)
-                        {
-                            case 19:
-                                {
-                                    rawImageDish.texture = tomatoSoupTexture;
-                                    break;
-                                }
-                            case 26:
-                                {
-                                    rawImageDish.texture = hamburgerTexture;
-                                    break;
-                                }
-                            case 15:
-                                {
-                                    rawImageDish.texture = cherryBeerTexture;
-                                    break;
-                                }
-                            case 13:
-                                {
-                                    rawImageDish.texture = carbonatedHoneyTexture;
-                                    break;
-                                }
-                        }
+                        imageDish.overrideSprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish1].id];
                         Text dishNameText = dishMenuPrefab.GetComponentInChildren<Text>();
                         dishNameText.text = ProductManager.finalProducts[dish1].name;
                         matchManager.team1DishTime[position-1] = ProductManager.finalProducts[dish1].time;
@@ -302,31 +273,9 @@ public class MenuBehaviour : MonoBehaviour
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
                         dishMenuPrefab.transform.position = currentDishPanel.gameObject.transform.position;
                         dishMenuPrefab.transform.SetParent(currentDishPanel);
-                        RawImage rawImageDish = dishMenuPrefab.GetComponentInChildren<UnityEngine.UI.RawImage>();
+                        Image imageDish = dishMenuPrefab.GetComponentInChildren<Image>(true);
                         Vector2 panelSize = currentDishPanel.GetComponent<RectTransform>().sizeDelta;
-                        switch (dish2)
-                        {
-                            case 19:
-                                {
-                                    rawImageDish.texture = tomatoSoupTexture;
-                                    break;
-                                }
-                            case 26:
-                                {
-                                    rawImageDish.texture = hamburgerTexture;
-                                    break;
-                                }
-                            case 15:
-                                {
-                                    rawImageDish.texture = cherryBeerTexture;
-                                    break;
-                                }
-                            case 13:
-                                {
-                                    rawImageDish.texture = carbonatedHoneyTexture;
-                                    break;
-                                }
-                        }
+                        imageDish.sprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish1].id];
                         Text dishNameText = dishMenuPrefab.GetComponentInChildren<Text>();
                         dishNameText.text = ProductManager.finalProducts[dish2].name;
                         matchManager.team2DishTime[position-1] = ProductManager.finalProducts[dish2].time;
@@ -384,7 +333,7 @@ public class MenuBehaviour : MonoBehaviour
                     pauseButton.SetActive(false);
                     pauseMatch();
                     GetComponent<Animator>().SetTrigger("fadeIn");
-                    StartCoroutine(fadeInScene(5.0f));
+                    StartCoroutine(fadeInScene(5.5f));
                 }
             }
         }
