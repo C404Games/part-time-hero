@@ -603,7 +603,7 @@ public class MenuBehaviour : MonoBehaviour
 
     public void updateDishStatus(int team, int position, float currentTime, float totalTime)
     {
-        currentTime = ((currentTime + 5) < totalTime)? currentTime + 5: totalTime;
+        currentTime = ((currentTime + currentTime / 10) < totalTime)? currentTime + currentTime/10: totalTime;
         if (team == 1)
         {
             if (position == 0)
