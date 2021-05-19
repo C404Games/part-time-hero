@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class MatchManager : MonoBehaviour
@@ -49,7 +50,7 @@ public class MatchManager : MonoBehaviour
     [HideInInspector] public float[] team2DishTime;
 
     [HideInInspector] public int numberOfPlayers;
-    [HideInInspector] public bool isPaused;
+    public bool isPaused;
 
     MenuBehaviour menuBehaviour;
     float initialTime;
@@ -92,7 +93,7 @@ public class MatchManager : MonoBehaviour
 
         initialTime = 300.0f;
 
-        menuBehaviour = FindObjectOfType<MenuBehaviour>();
+        menuBehaviour = GetComponent<MenuBehaviour>();
 
         team1DishTime = new float[4];
         team2DishTime = new float[4];
@@ -373,6 +374,22 @@ public class MatchManager : MonoBehaviour
             {
                 players[i].GetComponent<PlayerMovement>().paused = false;
                 players[i].GetComponent<PlayerMovement>().clickMovement.active = true;
+            }
+        }
+    }
+
+    public void restartMatch()
+    {
+        if (PhotonNetwork.OfflineMode)
+        {
+            switch (PlayerPrefs.GetInt("scenary"))
+            {
+                case 1:
+                    PhotonNetwork.LoadLevel("Tabern - Level 1");
+                    break;
+                case 2:
+                    PhotonNetwork.LoadLevel("Smithy - Level 1");
+                    break;
             }
         }
     }

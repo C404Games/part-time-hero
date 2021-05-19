@@ -9,7 +9,6 @@ public class hideButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
         if (null != PhotonNetwork.CurrentRoom && PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
         {
             GetComponent<Image>().color = new Color(
