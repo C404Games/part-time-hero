@@ -20245,6 +20245,16 @@ PrefabInstance:
       objectReference: {fileID: 2737442951295747772}
     - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
+      propertyPath: knifeTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: ebca9779818908940ab1250747640da4, type: 3}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: spearTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 5172829d05431e642a8a959c70bc6845, type: 3}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
       propertyPath: audioClipLoop1
       value: 
       objectReference: {fileID: 1931899924}
@@ -20265,14 +20275,44 @@ PrefabInstance:
       objectReference: {fileID: 1931899924}
     - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
+      propertyPath: hamburgerTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 72aff22c96df08b4a801ad17a38f9cc5, type: 3}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: ironSwordTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 2ddf9320b4d4bfa4cb721ff4c3770eeb, type: 3}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
       propertyPath: team2PointsPanel
       value: 
       objectReference: {fileID: 2737442951295747776}
     - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
+      propertyPath: woodSwordTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 61c6677e6223e004893fc994c24000a9, type: 3}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: cherryBeerTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 8f0f9a3e1e0fc27478221a040c61f4b0, type: 3}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
       propertyPath: pauseButtonInGame
       value: 
       objectReference: {fileID: 2737442951295747777}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: tomatoSoupTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 22603dc1ec7ac644184fd15102a99f49, type: 3}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: carbonatedHoneyTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 88ea0ea851c35244190cdd22bdba7001, type: 3}
     - target: {fileID: 5537695481910704394, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: m_Pivot.x
