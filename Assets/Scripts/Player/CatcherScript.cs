@@ -35,7 +35,7 @@ public class CatcherScript : MonoBehaviour
 
     public void OnGrab(InputAction.CallbackContext context)
     {
-        if (!photonView.IsMine)
+        if (!PhotonNetwork.OfflineMode && !photonView.IsMine)
         {
             return;
         }
