@@ -118,7 +118,7 @@
       "difficulty": 0,
       "appearence": "Products/Tabern/carbonatedHoney",
       "time": 80,
-      "card": "Images/DishCards/carbonatedHoney"
+      "card": "Images/DishCards/pedidohoney"
     },
 
     {
@@ -141,7 +141,7 @@
       "difficulty": 0,
       "appearence": "Products/Tabern/cherryBeer",
       "time": 60,
-      "card": "Images/DishCards/cherryBeer"
+      "card": "Images/DishCards/pedidocherrybeer"
     },
 
     {
@@ -184,7 +184,7 @@
       "difficulty": 0,
       "appearence": "Products/Tabern/tomatoSoup",
       "time": 60,
-      "card": "Images/DishCards/tomatoSoup"
+      "card": "Images/DishCards/pedidosoup"
     },
 
     {
@@ -258,7 +258,7 @@
       "difficulty": 2,
       "appearence": "Products/Tabern/tarioBurger",
       "time": 120,
-      "card": "Images/DishCards/hamburger"
+      "card": "Images/DishCards/pedidoburger"
     },
     {
       "id": 27,

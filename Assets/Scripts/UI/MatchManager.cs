@@ -92,7 +92,7 @@ public class MatchManager : MonoBehaviour
 
         initialTime = 300.0f;
 
-        menuBehaviour = FindObjectOfType<MenuBehaviour>();
+        menuBehaviour = GetComponent<MenuBehaviour>();
 
         team1DishTime = new float[4];
         team2DishTime = new float[4];
