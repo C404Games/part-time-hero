@@ -1,0 +1,45 @@
+PRE:Once upon a time heroes were revered.
+PRE:Great warriors who fought evil sorcerers and monsters.
+PRE:All for the peace and prosperity of the kingdom. Without looking for anything in return.
+PRE:Many long years passed.
+PRE:And those heroes were gone.
+PRE:But...
+PRE:There are still some who are still seeking glory.
+=BOSQUE
+-???:Kamerlin's beard! For eons no one has dropped in these parts.
+-Kamerlín:Let me introde myself, little lad. I'm Kamerlin, the wizard of this land.
+:I believe you are looking for adventure, isn't it?. I can see it in your eyes.
+:¿What's your name? 
+-Player:(Introduce el nombre)
+-Kamerlín:Nice to meet you, Any question?
+-Player:(Dos opciones de dialogo)
+:Where I am?
+:I wanna be a Hero!
+-Kamerlín(P1):I'm glad you asked . This is the most powerful region of the kingdom, QUESTVILLE.
+:Lands of Heroes. The most famous heroes in the world came from here.
+:Some of them were my pupils. Good times!
+:Ups! I'm beating around the bush.  
+:If you are looking for an adventure and you want to be a heroe, you are in the correct place.
+:Also you are talking to the correct person.
+:But before continuing, accompany me to my cabin. My old legs can't take it anymore.
+:I have witnessed thousands of battles, but I cannot fight old age.
+-Kamerlín(P2): Hohoho, be patient, young adventurer.
+:All in due time. Great heroes are not created overnight.
+:I still remember those nights in the depths of the Questville's woods when ...
+:Ups! I'm beating around the bush.  
+:If you are looking for adventures and be a hero, you are in the correct place.
+:Also you are talking to the correct person.
+:But before continuing, accompany me to my cabin. My old legs can't take it anymore.
+:I have witnessed thousands of battles, but I cannot fight old age.
+=CABAÑA
+-Kamerlín: Thank you for coming with me. Young people wouldn't listen to this poor old man.
+:They don't understand about companionship or solidarity.
+:But you are different.
+:What was I saying? Oh! Of course! You want to be a HERO!
+:You have the stuff. I can see it. You are strong and brave.
+:Strong and brave are good skills to become a hero, but it's not enough to be the GREATEST Hero. 
+:Trust me, I have been a mentor to many of them.
+:If you want to be the greatest hero, you need ...
+-???: ¡¡¡¡KAMERLIIIIIINN!!!!
+-Kamerlín: Oh no! Sounds like Tario, the bartender, is in trouble.
+:¡Hurry up! There's no time to lose.

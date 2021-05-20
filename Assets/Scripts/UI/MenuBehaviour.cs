@@ -63,8 +63,10 @@ public class MenuBehaviour : MonoBehaviour
     private UnityEngine.UI.RawImage team2Dish3Countdown;
     private UnityEngine.UI.RawImage team2Dish4Countdown;
 
-    private UnityEngine.UI.Text exitSceneText;
-    private UnityEngine.UI.Text returnSceneText;
+    public UnityEngine.UI.Text exitSceneText;
+    public UnityEngine.UI.Text returnSceneText;
+    public UnityEngine.UI.Text restartSceneText;
+    public UnityEngine.UI.Text pauseSceneText;
     public Texture firstPunctuationTexture;
     public Texture secondPunctuationTexture;
     public GameObject dishMenuPrefab;
@@ -103,6 +105,8 @@ public class MenuBehaviour : MonoBehaviour
 
     public Gradient gradientCountdown;
 
+    private string language;
+
     void Awake()
     {
         timeBarTeam1Dish1.SetActive(false);
@@ -123,35 +127,82 @@ public class MenuBehaviour : MonoBehaviour
         dishTeam2Dish4.SetActive(false);
         fadeOutCorroutine = fadeOutScene(1.0f);
         //fadeInCorroutine = fadeInScene(5.0f);
+        language = PlayerPrefs.GetString("language", "Spanish");
+        if (language == "English")
+        {
+            exitSceneText.text = "EXIT MENU";
+            restartSceneText.text = "RESTART MATCH";
+            returnSceneText.text = "RETURN TO THE MATCH";
+        }
+        else if (language == "Simplified Chinese")
+        {
+            exitSceneText.text = "退出菜單";
+            restartSceneText.text = "重新開始遊戲";
+            returnSceneText.text = "回到遊戲";
+        }
         if (PlayerPrefs.GetInt("tutorialActive") == 1)
         {
             switch (PlayerPrefs.GetInt("Scenary"))
             {
                 case 1:
                     {
-                        introductionText.text = "Taberna";
-                        introductionText2.text = "Taberna";
+                        if (language == "Spanish")
+                        {
+                            introductionText.text = "Taberna";
+                            introductionText2.text = "Taberna";
+                        }
+                        else if (language == "English")
+                        {
+                            introductionText.text = "Tavern";
+                            introductionText2.text = "Tavern";
+                        }
+                        else if (language == "Simplified Chinese")
+                        {
+                            introductionText.text = "酒館";
+                            introductionText2.text = "酒館";
+                        }
                         //readActionsFromFile(Application.dataPath + "/tabernActions.txt");
                         break;
                     }
                 case 2:
                     {
-                        introductionText.text = "Herrería";
-                        introductionText2.text = "Herrería";
+                        if (language == "Spanish")
+                        {
+                            introductionText.text = "Herrería";
+                            introductionText2.text = "Herrería";
+                        }
+                        else if (language == "English")
+                        {
+                            introductionText.text = "Smithy";
+                            introductionText2.text = "Smithy";
+                        }
+                        else if (language == "Simplified Chinese")
+                        {
+                            introductionText.text = "鐵匠鋪";
+                            introductionText2.text = "鐵匠鋪";
+                        }
                         //readActionsFromFile(Application.dataPath + "/smithyActions.txt");
                         break;
                     }
             }
         }
-        else
+        if (language == "Spanish")
         {
+            pauseSceneText.text = "Pausa";
+        }
+        else if (language == "English")
+        {
+            pauseSceneText.text = "Pause";
+        }
+        else if (language == "Simplified Chinese")
+        {
+            pauseSceneText.text = "暫停";
 
         }
-
     }
 
-    //  is called before the first frame update
-    void Start()
+        //  is called before the first frame update
+        void Start()
     {
         if (PhotonNetwork.OfflineMode)
         {

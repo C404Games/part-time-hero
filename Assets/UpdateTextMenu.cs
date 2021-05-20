@@ -46,7 +46,6 @@ public class UpdateTextMenu : MonoBehaviour
 
     private void Update()
     {
-
         PlayerPrefs.SetString("characterPlayerName", characterInputFieldNameText.text.ToUpper());
         text = "" + PlayerPrefs.GetInt("characterMoneyName", 0);
         characterMoneyText.text = text;
