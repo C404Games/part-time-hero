@@ -47,12 +47,16 @@ public class loadScene : MonoBehaviour
         if(loadPanel != null)
             loadPanel.SetActive(true);
 
+        // Ñapa fea, pero nos vale. Se desbloquea el primer nivel tras el prólogo
+        if(_scene == "HistoryFirstLevel")
+            PlayerPrefs.SetInt("LEVEL_UNLOCKED", 1);
+
         string scene = GameObject.Find("GodObject").GetComponent<universalParameters>().getSceneToLoad();//GetComponent<universalParameters>().getSceneToLoad();
         switch (scene)
         {
             case "Tabern - Level 1":
-                    PlayerPrefs.SetInt("Scenary", 1);
-                    break;
+                PlayerPrefs.SetInt("Scenary", 1);
+                break;
             case "Smithy - Level 1":
                 PlayerPrefs.SetInt("Scenary", 2);
                 break;

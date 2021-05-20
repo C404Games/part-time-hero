@@ -28,6 +28,13 @@ public class ModelInstantiator : MonoBehaviour
         if (!view.IsMine)
             return;
 
+        view.RPC("InstantiateModel", RpcTarget.All);
+        
+    }
+
+    [PunRPC]
+    void InstantiateModel()
+    {
         int idx;
         if (PhotonNetwork.OfflineMode && isMain)
         {
@@ -38,13 +45,6 @@ public class ModelInstantiator : MonoBehaviour
             idx = Random.Range(0, models.Length - 1);
         }
 
-        view.RPC("InstantiateModel", RpcTarget.All, idx);
-        
-    }
-
-    [PunRPC]
-    void InstantiateModel(int idx)
-    {
         GameObject model = Instantiate(models[idx], Vector3.zero, Quaternion.identity);
         model.transform.parent = wrapper;
         model.transform.localPosition = new Vector3(0, 0, 0);

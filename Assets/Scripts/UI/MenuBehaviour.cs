@@ -475,6 +475,18 @@ public class MenuBehaviour : MonoBehaviour
                     pauseMatch();
                     GetComponent<Animator>().SetTrigger("fadeIn");
                     StartCoroutine(fadeInScene(5.5f));
+
+                    // Actualizar nivel desbloqueado
+                    if(PhotonNetwork.OfflineMode && matchManager.getPunctuationTeam1() > matchManager.getPunctuationTeam2())
+                    {
+                        switch(PlayerPrefs.GetInt("scenary", 1))
+                        {
+                            case 1:
+                                PlayerPrefs.SetInt("LEVEL_UNLOCKED", 2);
+                                break;
+                                // Más niveles...
+                        }
+                    }
                 }
             }
         }
