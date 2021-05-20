@@ -16,11 +16,14 @@ public class UpdateTextMenu : MonoBehaviour
     public UnityEngine.UI.Text tavernDescriptionText;
     public UnityEngine.UI.Text smithyMainText;
     public UnityEngine.UI.Text smithyDescriptionText;
+    public AudioSource backgroundMusic;
     private string text;
 
 
     void Start()
     {
+        backgroundMusic.volume = 0;
+        backgroundMusic.Play();
         string name = "Ghost " + Random.Range(0, 10000);
         text = PlayerPrefs.GetString("characterPlayerName", "");
         if (text == ""  || text.ToUpper() == "NOMBRE")
@@ -53,6 +56,10 @@ public class UpdateTextMenu : MonoBehaviour
 
     private void Update()
     {
+        if (backgroundMusic.volume < 1)
+        {
+            backgroundMusic.volume += 0.005f;
+        }
         PlayerPrefs.SetString("characterPlayerName", characterInputFieldNameText.text.ToUpper());
         text = "" + PlayerPrefs.GetInt("characterMoneyName", 0);
         characterMoneyText.text = text;
