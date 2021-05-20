@@ -10,6 +10,12 @@ public class UpdateTextMenu : MonoBehaviour
     public UnityEngine.UI.InputField characterInputFieldNameText;
     public UnityEngine.UI.Dropdown languageDropdown;
     public Animator menuAnimator;
+    public UnityEngine.UI.Text prologueMainText;
+    public UnityEngine.UI.Text prologueDescriptionText;
+    public UnityEngine.UI.Text tavernMainText;
+    public UnityEngine.UI.Text tavernDescriptionText;
+    public UnityEngine.UI.Text smithyMainText;
+    public UnityEngine.UI.Text smithyDescriptionText;
     private string text;
 
 
@@ -28,6 +34,7 @@ public class UpdateTextMenu : MonoBehaviour
         characterMoneyText.text = text;
         text = "" + getLevelFromExperience(PlayerPrefs.GetInt("characterExperiencesName", 0));
         characterLevelText.text = text;
+        UpdateTextOnePlayerMenu();
     }
 
     private int getLevelFromExperience(int experience)
@@ -54,6 +61,45 @@ public class UpdateTextMenu : MonoBehaviour
         if (languageDropdown.value < languageDropdown.options.Count && (languageDropdown.value != -1 || languageDropdown.value != null))
         {
             PlayerPrefs.SetString("language", languageDropdown.options[languageDropdown.value].text);
+            UpdateTextOnePlayerMenu();
+        }
+    }
+
+    void UpdateTextOnePlayerMenu()
+    {
+        string language = PlayerPrefs.GetString("language", "Spanish");
+        switch (language)
+        {
+            case "Spanish":
+                {
+                    prologueMainText.text = "PRÓLOGO";
+                    prologueDescriptionText.text = "Empieza una nueva aventura";
+                    tavernMainText.text = "TABERNA";
+                    tavernDescriptionText.text = "Tario necesita tu ayuda, ponte manos a la masa";
+                    smithyMainText.text = "HERRERÍA";
+                    smithyDescriptionText.text = "Ayuda a Rairon en sus tareas al rojo vivo";
+                    break;
+                }
+            case "English":
+                {
+                    prologueMainText.text = "PROLOGUE";
+                    prologueDescriptionText.text = "Start a new adventure";
+                    tavernMainText.text = "TAVERN";
+                    tavernDescriptionText.text = "Tario needs help, give him a hand in the kitchen";
+                    smithyMainText.text = "SMITHY";
+                    smithyDescriptionText.text = "Help rairon with his hot smithy tasks";
+                    break;
+                }
+            case "Simplified Chinese":
+                {
+                    prologueMainText.text = "前言";
+                    prologueDescriptionText.text = "開始新的冒險";
+                    tavernMainText.text = "酒館";
+                    tavernDescriptionText.text = "塔里奧需要幫助，請他幫忙";
+                    smithyMainText.text = "史密斯";
+                    smithyDescriptionText.text = "幫助Rairon完成他的鐵匠鋪任務";
+                    break;
+                }
         }
     }
 }
