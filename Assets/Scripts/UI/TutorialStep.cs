@@ -10,7 +10,7 @@ public class TutorialStep : MonoBehaviour
 
     public string text;
 
-    public GameObject arrowPrefab;
+    [HideInInspector] public GameObject arrowPrefab;
 
     private Vector3 offset;
 
