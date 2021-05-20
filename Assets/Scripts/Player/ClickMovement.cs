@@ -194,7 +194,7 @@ public class ClickMovement : MonoBehaviour
                 // Ignorar Layer de Items
                 int layerMask = LayerMask.GetMask("Item", "Player", "Catcher", "Ignore Raycast");
 
-                Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+                Ray ray = Camera.main.ScreenPointToRay(Touchscreen.current.position.ReadValue());
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~layerMask))
                 {
