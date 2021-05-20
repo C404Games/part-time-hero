@@ -49,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
 
     private PhotonView photonView;
 
+    MatchManager matchManager;
+
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
