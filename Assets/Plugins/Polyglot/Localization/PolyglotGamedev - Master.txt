@@ -652,9 +652,9 @@ PRIVATE_ROOM_CREATE_ROOM		Create Room		Crear Sala
 PRIVATE_ROOM_INSERT_CODE		Insert Code		Inserta Código																									
 PRIVATE_ROOM_ENTER_CODE		Enter Code		Inserta Código																									
 MENU_JOIN		Join		Unirse																									
-SHOP_COINS_PACK		Coins Pack		Pack De Monedas																									
-SHOP_COINS_MEGA_PACK		Mega Coins Pack		Mega Pack de Monedas																									
-SHOP_COINS_CHEST		Mega Chest Pack		Mega Cofre de Monedas																									
+SHOP_COINS_PACK		Gems Pack		Pack De Gemas																									
+SHOP_COINS_MEGA_PACK		MegaCoins Pack		MegaPack de Gemas																									
+SHOP_COINS_CHEST		Mega Chest Pack		Mega Cofre de Gemas																									
 SHOP_BESTSELLER		The Bestseller		El Mas Vendido																									
 SHOP_MORE_BENEFITS		More Benefits		El Mas Beneficioso																									
 MENU_ROOM_CODE		Code		Codigo																									
