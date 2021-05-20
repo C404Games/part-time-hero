@@ -130,15 +130,19 @@ public class AIAgent : MonoBehaviour
                     }
                     break;
                 case agentState.WAIT:
+                    Debug.Log("waiting");
                     delivering = false;
                     busy = false;
                     // Si hay monstruo, atacar                    
                     // Si hay mueble roto, reparar
-                    if (!checkMonster() && !checkBrokenStation())
+                    if (catcher.getHeldProduct() == null)
                     {
-                        if (movement.active && Random.Range(0, 999) <= 1)
+                        if (!checkMonster() && !checkBrokenStation())
                         {
-                            goToRandomPoint();
+                            if (movement.active && Random.Range(0, 999) <= 1)
+                            {
+                                goToRandomPoint();
+                            }
                         }
                     }
                     break;
