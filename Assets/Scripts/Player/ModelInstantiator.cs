@@ -9,17 +9,27 @@ public class ModelInstantiator : MonoBehaviour
 
     public Transform wrapper;
 
+    public GameObject[] models;
+
+    PhotonView view;
+
+    /*
     string[] models = {
         "p1",
         "p2",
         "p3"
     };
+    */
 
     // Start is called before the first frame update
     void Awake()
     {
+        view = GetComponent<PhotonView>();
+        if (!view.IsMine)
+            return;
+
         int idx;
-        if (isMain)
+        if (PhotonNetwork.OfflineMode && isMain)
         {
             idx = FindObjectOfType<universalParameters>().getModel();
         }
@@ -28,7 +38,14 @@ public class ModelInstantiator : MonoBehaviour
             idx = Random.Range(0, models.Length - 1);
         }
 
-        GameObject model = PhotonNetwork.Instantiate(Path.Combine("Characters", "AnimatedModels", models[idx]), Vector3.zero, Quaternion.identity);
+        view.RPC("InstantiateModel", RpcTarget.All, idx);
+        
+    }
+
+    [PunRPC]
+    void InstantiateModel(int idx)
+    {
+        GameObject model = Instantiate(models[idx], Vector3.zero, Quaternion.identity);
         model.transform.parent = wrapper;
         model.transform.localPosition = new Vector3(0, 0, 0);
         model.transform.localRotation = Quaternion.identity;

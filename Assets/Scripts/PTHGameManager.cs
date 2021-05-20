@@ -10,7 +10,7 @@ public class PTHGameManager : MonoBehaviourPunCallbacks
     public string avatarPrefabName = "Player";
 
     public List<GameObject> charactersList;
-    public List<GameObject> animatorsList;
+    //public List<GameObject> animatorsList;
     public List<GameObject> catcherList;
     public GameObject botList;
 
@@ -45,7 +45,7 @@ public class PTHGameManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
         {
             charactersList[1].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(2));
-            animatorsList[1].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(2));
+            //animatorsList[1].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(2));
             catcherList[1].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(2));
 
             charactersList[2].SetActive(false);
@@ -64,8 +64,8 @@ public class PTHGameManager : MonoBehaviourPunCallbacks
             charactersList[2].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(3));
             charactersList[3].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(4));
 
-            animatorsList[2].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(3));
-            animatorsList[3].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(4));
+            //animatorsList[2].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(3));
+            //animatorsList[3].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(4));
 
             catcherList[2].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(2));
             catcherList[3].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(2));

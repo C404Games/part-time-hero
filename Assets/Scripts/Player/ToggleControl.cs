@@ -31,7 +31,7 @@ public class ToggleControl : MonoBehaviour
 
     public void toggle()
     {
-        if (!playerMovement.blocked && (PhotonNetwork.OfflineMode || PhotonNetwork.CurrentRoom.PlayerCount == 1))
+        if (PhotonNetwork.OfflineMode || PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             on = !on;
             playerMovement.active = on;
