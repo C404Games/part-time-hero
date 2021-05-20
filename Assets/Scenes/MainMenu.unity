@@ -20708,7 +20708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 1870562652}
   maintainTextAlignment: 0
-  key: LOADING
+  key: MENU_IO_LOADING
 --- !u!114 &1870562652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20741,7 +20741,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '[LOADING]'
+  m_Text: Cargando...
 --- !u!222 &1870562653
 CanvasRenderer:
   m_ObjectHideFlags: 0
