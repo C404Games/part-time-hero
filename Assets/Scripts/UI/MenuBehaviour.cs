@@ -106,9 +106,11 @@ public class MenuBehaviour : MonoBehaviour
     public Gradient gradientCountdown;
 
     private string language;
+    private PhotonView photonView;
 
     void Awake()
     {
+        photonView = GetComponent<PhotonView>();
         timeBarTeam1Dish1.SetActive(false);
         timeBarTeam1Dish2.SetActive(false);
         timeBarTeam1Dish3.SetActive(false);
@@ -354,10 +356,7 @@ public class MenuBehaviour : MonoBehaviour
                         currentDishPanel = team1dishPanel.Find(currentPanelDishName);
                         currentDishPanel.gameObject.SetActive(true);
                         //dishMenuPrefab = Instantiate(searchedDish);
-                        Image[] imageDish = currentDishPanel.GetComponentsInChildren<Image>(true);                       
-                        //imageDish[imageDish.Length - 1].GetComponent<RectTransform>().sizeDelta = new Vector2(50, 50);
-                        imageDish[imageDish.Length - 1].sprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish1].id];
-                        imageDish[imageDish.Length - 1].gameObject.SetActive(true);
+                        photonView.RPC("team1Disk", RpcTarget.All, position);
                         matchManager.team1DishTime[position - 1] = ProductManager.finalProducts[dish1].time;
                     }
                     position = -1;
@@ -419,10 +418,7 @@ public class MenuBehaviour : MonoBehaviour
                         currentDishPanel = team2dishPanel.Find(currentPanelDishName);
                         currentDishPanel.gameObject.SetActive(true);
                         //dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
-                        Image[] imageDish = currentDishPanel.GetComponentsInChildren<Image>(true);
-                        //imageDish[imageDish.Length - 1].GetComponent<RectTransform>().sizeDelta = new Vector2(50, 50);
-                        imageDish[imageDish.Length - 1].sprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish2].id];
-                        imageDish[imageDish.Length - 1].gameObject.SetActive(true);
+                        photonView.RPC("team2Disk", RpcTarget.All, position);
                         matchManager.team2DishTime[position - 1] = ProductManager.finalProducts[dish2].time;
                         currentTime = 0;
                     }
@@ -710,4 +706,21 @@ public class MenuBehaviour : MonoBehaviour
 
         }
     }
+
+    [PunRPC]
+    void team1Disk(int position)
+    {
+        Image[] imageDish = currentDishPanel.GetComponentsInChildren<Image>(true);
+        imageDish[imageDish.Length - 1].sprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish1].id];
+        imageDish[imageDish.Length - 1].gameObject.SetActive(true);
+    }
+
+    [PunRPC]
+    void team2Disk(int position)
+    {
+        Image[] imageDish = currentDishPanel.GetComponentsInChildren<Image>(true);
+        imageDish[imageDish.Length - 1].sprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish2].id];
+        imageDish[imageDish.Length - 1].gameObject.SetActive(true);
+    }
+   
 }

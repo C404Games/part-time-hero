@@ -109,16 +109,17 @@ public class ProductInstance : MonoBehaviourPun
     }
 
     [PunRPC]
-    void ChatMessage(string a, string b)
+    void setAppearence(string appearenceName)
     {
-        Debug.Log(string.Format("ChatMessage {0} {1}", a, b));
-    }
-
-    [PunRPC]
-    void SaveAppearence(GameObject appe)
-    {
-        Debug.Log("estoy aqui================================");
-        appearence = appe;
+        GameObject product = Resources.Load(appearenceName, typeof(GameObject)) as GameObject;
+        appearence = Instantiate(
+                product,
+                Vector3.zero,
+                Quaternion.Euler(Vector3.zero)
+                );
+        appearence.transform.parent = transform;
+        appearence.transform.localPosition = new Vector3(0, 0, 0);
+        Debug.Log(appearence.ToString());
     }
 
     //OGM Coger productos
@@ -129,23 +130,12 @@ public class ProductInstance : MonoBehaviourPun
             return;
         }
 
-
-        
-        photonView.RPC("ChatMessage", RpcTarget.All, "jup", "and jup.");
-
         if (appearence != null)
             PhotonNetwork.Destroy(appearence);
         if (blueprint.appearence != null)
         {
-            appearence = PhotonNetwork.Instantiate(
-                blueprint.appearence,
-                Vector3.zero,
-                Quaternion.Euler(Vector3.zero)
-                );
-            appearence.transform.parent = transform;
-            appearence.transform.localPosition = new Vector3(0, 0, 0);
-            Debug.Log(appearence.ToString());
-            photonView.RPC("SaveAppearence", RpcTarget.All, appearence);
+            photonView.RPC("setAppearence", RpcTarget.All, blueprint.appearence);
+            
         }
     }
 
