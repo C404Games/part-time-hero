@@ -57,7 +57,7 @@ public class ProductManager : MonoBehaviour
         foreach (dynamic entry in dic["Products"])
         {
             List<Transition> transitions = new List<Transition>();
-            if (entry["transitions"] != null)
+            if (null != entry["transitions"])
             {
                 foreach (dynamic t in entry["transitions"])
                 {
