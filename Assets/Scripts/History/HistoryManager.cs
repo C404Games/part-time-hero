@@ -18,7 +18,7 @@ public class HistoryManager : MonoBehaviour
         }
     }
 
-
+    public AudioSource backgroundMusic;
     public List<HistoryAction> actions = new List<HistoryAction>();
     public enum Action {PROLOGUE, DIALOGUE, POWERUP, MONSTER, QUESTION, WRITING, BACKGROUND};
     private UnityEngine.UI.Text globalText;
@@ -176,6 +176,7 @@ public class HistoryManager : MonoBehaviour
 
     void Start()
     {
+        backgroundMusic.Play();
         fadeCorroutine = fadeOutScene(2.5f);
         prologueActive = true;
         prologueText.text = actions[currentStep].data[0];
@@ -244,11 +245,13 @@ public class HistoryManager : MonoBehaviour
         if ((currentStep+1) == actions.Count && (currentConversationStep + 1) == actions[currentStep].data.Count)
         {
             PlayerPrefs.SetString("characterPlayerName", nextInputField.text);
+            prologueText.text = "";
             historyAnimator.SetTrigger("finishDialogue");
             StartCoroutine(fadeCorroutine);
         } else
         {
-            if (globalText.text.Contains("Ufff ya llegué a mi destino"))
+            if (globalText.text.Contains("Ufff ya llegué a mi destino") || globalText.text.Contains("Ufff I finally arrive to this civilization") ||
+                globalText.text.Contains("我已經到達目的地了"))
             {
                 globalText.text = "";
                 nextHistoryStep(button);
@@ -380,6 +383,7 @@ public class HistoryManager : MonoBehaviour
 
     public IEnumerator fadeOutScene(float time)
     {
+        backgroundMusic.Stop();
         yield return new WaitForSeconds(time);
         SceneManager.LoadScene("MainMenu");
     }

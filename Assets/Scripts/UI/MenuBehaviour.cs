@@ -480,8 +480,6 @@ public class MenuBehaviour : MonoBehaviour
                     GetComponent<Animator>().SetTrigger("fadeIn");
                     StartCoroutine(fadeInScene(5.5f));
                 }
-                Debug.Log("Lista1: " + matchManager.team1Dishes.Count);
-                Debug.Log("Lista2: " + matchManager.team2Dishes.Count);
             }
         }
     }
