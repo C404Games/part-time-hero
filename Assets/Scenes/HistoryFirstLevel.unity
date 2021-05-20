@@ -2388,6 +2388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a8e957eb7f0a34f918d90001a5fe2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextButtonText: {fileID: 1636865222}
+  nextInputField: {fileID: 1844286709}
   backgroundTexture: {fileID: 2800000, guid: ca4d9c9b91017df4ea0347a1f4a0ed36, type: 3}
   barkeeperTexture: {fileID: 2800000, guid: eaad1ae2d81a2a9459addfceeeb17d99, type: 3}
   blacksmithTexture: {fileID: 2800000, guid: d7a76a988150c0e4499f06defe7c15d5, type: 3}

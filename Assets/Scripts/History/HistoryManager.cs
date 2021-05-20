@@ -40,7 +40,8 @@ public class HistoryManager : MonoBehaviour
     private UnityEngine.UI.Button option2Button;
     private UnityEngine.UI.Button town1Button;
     private UnityEngine.UI.Button town2Button;
-    private UnityEngine.UI.InputField nextInputField;
+    public UnityEngine.UI.Text nextButtonText;
+    public UnityEngine.UI.InputField nextInputField;
     private string characterName;
     private Animator historyAnimator;
     private int currentStep;
@@ -52,6 +53,7 @@ public class HistoryManager : MonoBehaviour
     private string town2Name;
     private bool prologueActive;
     private bool nextStepIsTaken;
+    private string language;
     private IEnumerator fadeCorroutine;
     public Texture backgroundTexture;
     public Texture barkeeperTexture;
@@ -64,6 +66,7 @@ public class HistoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        language = PlayerPrefs.GetString("language","Spanish");
         town1Name = "TOMATELANDIA";
         town2Name = "PATATALANDIA";
         town1Description = "Ciudad que te proporcionará un bonus de experiencia y emociones que te permitirá mejorar rápidamente tu rango social";
@@ -106,6 +109,22 @@ public class HistoryManager : MonoBehaviour
         town1Button.onClick.AddListener(delegate { townSelection(0); });
         town2Button.onClick.AddListener(delegate { townSelection(1); });
         string[] readText = File.ReadAllLines(Application.dataPath + "/history.txt");
+        if (language == "Spanish")
+        {
+            nextButtonText.text = "Siguiente...";
+            nextInputField.placeholder.GetComponent<UnityEngine.UI.Text>().text = "Introduce el nombre...";
+            readText = File.ReadAllLines(Application.dataPath + "/history.txt");
+        } else if (language == "English")
+        {
+            nextButtonText.text = "Next...";
+            nextInputField.placeholder.GetComponent<UnityEngine.UI.Text>().text = "Write your name...";
+            readText = File.ReadAllLines(Application.dataPath + "/en-story1.txt");
+        } else if (language == "Simplified Chinese")
+        {
+            nextButtonText.text = "下列的...";
+            nextInputField.placeholder.GetComponent<UnityEngine.UI.Text>().text = "寫你的名字";
+            readText = File.ReadAllLines(Application.dataPath + "/cn-story1.txt");
+        }
         foreach (string s in readText)
         {
             if (s.Contains("PRE"))
@@ -164,7 +183,16 @@ public class HistoryManager : MonoBehaviour
         option1Selected.transform.localScale = new Vector3(0, 0, 0);
         option2Selected.transform.localScale = new Vector3(0, 0, 0);
         characterSpeaker.transform.localScale = new Vector3(0, 0, 0);
-        globalText.text = "(Ufff ya llegué a mi destino, creo que este hombre que se acerca me ayudará a encontrar lo que buscaba)";
+        if (language == "Spanish")
+        {
+            globalText.text = "(Ufff ya llegué a mi destino, creo que este hombre que se acerca me ayudará a encontrar lo que buscaba)";
+        } else if (language == "English")
+        {
+            globalText.text = "(Ufff I finally arrive to this civilization, I think that man will help me about what I'm looking for)";
+        } else if (language == "Simplified Chinese")
+        {
+            globalText.text = "(我已經到達目的地了，我認為這個正在接近的人將幫助我找到想要的東西)";
+        }
         textOption1.text = "";
         textOption2.text = "";
         currentConversationStep = 0;
