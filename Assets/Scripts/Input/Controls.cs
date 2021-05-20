@@ -28,7 +28,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""MouseClick"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""70742361-d4fa-4eb9-8e02-55506fa204e6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

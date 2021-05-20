@@ -8,6 +8,9 @@ public class loadScene : MonoBehaviour
 {
     public string _scene;
     public Animator menuAnimator;
+
+    public GameObject loadPanel;
+
     private IEnumerator fadePhotonCorroutine;
     private IEnumerator fadeNonPhotonCorroutine;
 
@@ -40,6 +43,10 @@ public class loadScene : MonoBehaviour
             return;
         }
         */
+
+        if(loadPanel != null)
+            loadPanel.SetActive(true);
+
         string scene = GameObject.Find("GodObject").GetComponent<universalParameters>().getSceneToLoad();//GetComponent<universalParameters>().getSceneToLoad();
         switch (scene)
         {
