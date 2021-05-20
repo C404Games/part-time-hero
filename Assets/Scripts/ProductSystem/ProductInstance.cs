@@ -25,9 +25,9 @@ public class ProductInstance : MonoBehaviourPun
     {
         photonView = GetComponent<PhotonView>();
     }
-    
+
     #region MonoBehavior
-        // Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -60,7 +60,7 @@ public class ProductInstance : MonoBehaviourPun
         return blueprint.type;
     }
 
-    public void setHolder(Transform holder )
+    public void setHolder(Transform holder)
     {
         currentClampTime = 0;
         this.holder = holder;
@@ -76,7 +76,7 @@ public class ProductInstance : MonoBehaviourPun
         return holder != null && holder.GetComponent<StationInstance>() != null;
     }
 
-    
+
 
     // Si hay alguna transición con este producto, se hace
     public bool applyResource(int resourceId)
@@ -135,26 +135,23 @@ public class ProductInstance : MonoBehaviourPun
         if (blueprint.appearence != null)
         {
             photonView.RPC("setAppearence", RpcTarget.All, blueprint.appearence);
-            
+
         }
     }
 
 
-    
 
-private void nextStep()
+
+    private void nextStep()
+    {
+        photonView.RPC("destoyAppearence", RpcTarget.All);
+        photonView.RPC("setAppearence", RpcTarget.All, blueprint.appearence);
+    }
+
+    [PunRPC]
+    void destoyAppearence()
     {
         if (appearence != null)
-            PhotonNetwork.Destroy(appearence);
-        if (blueprint.appearence != null)
-        {
-            appearence = PhotonNetwork.Instantiate(
-                blueprint.appearence,
-                Vector3.zero,
-                Quaternion.Euler(Vector3.zero)
-                );
-            appearence.transform.parent = transform;
-            appearence.transform.localPosition = new Vector3(0, 0, 0);
-        }
+            Destroy(appearence);
     }
 }

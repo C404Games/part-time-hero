@@ -392,7 +392,6 @@ public class MatchManager : MonoBehaviour
                 case 2:
                     PhotonNetwork.LoadLevel("Smithy - Level 1");
                     break;
-                    break;
             }
         }
     }

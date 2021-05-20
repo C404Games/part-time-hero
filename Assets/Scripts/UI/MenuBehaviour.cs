@@ -352,11 +352,8 @@ public class MenuBehaviour : MonoBehaviour
                         {
                             matchManager.team1Dishes[position - 1] = new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish1].id);
                         }
-                        currentPanelDishName = "Dish" + (position) + "Panel";
-                        currentDishPanel = team1dishPanel.Find(currentPanelDishName);
-                        currentDishPanel.gameObject.SetActive(true);
                         //dishMenuPrefab = Instantiate(searchedDish);
-                        photonView.RPC("team1Disk", RpcTarget.All, position);
+                        photonView.RPC("team1Disk", RpcTarget.All, position, dish1);
                         matchManager.team1DishTime[position - 1] = ProductManager.finalProducts[dish1].time;
                     }
                     position = -1;
@@ -414,11 +411,8 @@ public class MenuBehaviour : MonoBehaviour
                         {
                             matchManager.team2Dishes[position - 1] = new MatchManager.Tuple<bool, int>(true, ProductManager.finalProducts[dish2].id);
                         }
-                        currentPanelDishName = "Dish" + (position) + "Panel";
-                        currentDishPanel = team2dishPanel.Find(currentPanelDishName);
-                        currentDishPanel.gameObject.SetActive(true);
                         //dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
-                        photonView.RPC("team2Disk", RpcTarget.All, position);
+                        photonView.RPC("team2Disk", RpcTarget.All, position, dish2);
                         matchManager.team2DishTime[position - 1] = ProductManager.finalProducts[dish2].time;
                         currentTime = 0;
                     }
@@ -720,16 +714,23 @@ public class MenuBehaviour : MonoBehaviour
     }
 
     [PunRPC]
-    void team1Disk(int position)
+    void team1Disk(int position, int dish1)
     {
+        currentPanelDishName = "Dish" + (position) + "Panel";
+        currentDishPanel = team1dishPanel.Find(currentPanelDishName);
+        currentDishPanel.gameObject.SetActive(true);
         Image[] imageDish = currentDishPanel.GetComponentsInChildren<Image>(true);
         imageDish[imageDish.Length - 1].sprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish1].id];
         imageDish[imageDish.Length - 1].gameObject.SetActive(true);
     }
 
     [PunRPC]
-    void team2Disk(int position)
+    void team2Disk(int position, int dish2)
     {
+
+        currentPanelDishName = "Dish" + (position) + "Panel";
+        currentDishPanel = team2dishPanel.Find(currentPanelDishName);
+        currentDishPanel.gameObject.SetActive(true);
         Image[] imageDish = currentDishPanel.GetComponentsInChildren<Image>(true);
         imageDish[imageDish.Length - 1].sprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish2].id];
         imageDish[imageDish.Length - 1].gameObject.SetActive(true);
