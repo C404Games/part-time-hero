@@ -1,4 +1,6 @@
 ﻿using Photon.Pun;
+using Photon.Realtime;
+using ExitGames.Client.Photon;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,6 +37,16 @@ public class ProductInstance : MonoBehaviourPun
         updateAppearence();
     }
 
+    private void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
+    private void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -64,6 +76,8 @@ public class ProductInstance : MonoBehaviourPun
     {
         currentClampTime = 0;
         this.holder = holder;
+        if (!rigidbody.isKinematic)
+            photonView.RPC("disableGravity", RpcTarget.All, photonView.ViewID);
     }
 
     public Transform getHolder()
@@ -109,9 +123,19 @@ public class ProductInstance : MonoBehaviourPun
     }
 
     [PunRPC]
+    void disableGravity(int id)
+    {
+        if (id != photonView.ViewID)
+            return;
+        rigidbody.isKinematic = true;
+        rigidbody.useGravity = false;
+    }
+
+    [PunRPC]
     void setAppearence(string appearenceName)
     {
         GameObject product = Resources.Load(appearenceName, typeof(GameObject)) as GameObject;
+        PhotonView photonView = product.GetComponent<PhotonView>();
         appearence = Instantiate(
                 product,
                 Vector3.zero,
@@ -138,9 +162,6 @@ public class ProductInstance : MonoBehaviourPun
 
         }
     }
-
-
-
 
     private void nextStep()
     {
