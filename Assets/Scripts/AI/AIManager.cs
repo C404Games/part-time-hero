@@ -73,6 +73,7 @@ public class AIManager : MonoBehaviour
             // Si el activeAgent ha terminado
             if (activeAgent == null || !activeAgent.busy)
             {
+
                 // COmprobamos si nos han gitaneado el producto primario
                 if (currentNode != null && commonProduct != null)
                 {
@@ -147,7 +148,15 @@ public class AIManager : MonoBehaviour
                                 }
                             }
                             if (activeAgent == null)
+                            {
+                                foreach(AIAgent agent in agents)
+                                {
+                                    if (agent.isTargetStationBusy())
+                                        return;
+                                }
+                                resetStep();
                                 break;
+                            }
 
                             secondaryProduct = commonProduct;
 
@@ -337,7 +346,12 @@ public class AIManager : MonoBehaviour
         //int idx = 3;
         if (matchManager.team2Dishes.Count > 0)
         {
-            int id = matchManager.team2Dishes[0].Item2;
+            int id = matchManager.getOldestRecipie(2);//team2Dishes[0].Item2;
+            if (id < 0)
+            {
+                currentRecipie = null;
+                return;
+            }
             currentRecipie = recipies.Find(n => n.id == id).copySelf(null);
         }
         else

@@ -402,4 +402,23 @@ public class MatchManager : MonoBehaviour
         PlayerPrefs.SetInt("characterMoneyName", PlayerPrefs.GetInt("characterMoneyName", 0) + moneyTeam1);
     }
 
+    public int getOldestRecipie(int team)
+    {
+        float[] dishTime = team == 1 ? team1DishTime : team2DishTime;
+        List<Tuple<bool, int>> dishes = team == 1 ? team1Dishes : team2Dishes;
+
+        float lowerTime = 999;
+        int chosenRecipie = -1;
+
+        for (int i = 0; i < dishes.Count; i++)
+        {
+            if(dishes[i].Item1 && dishTime[i] < lowerTime && dishTime[i] > 10)
+            {
+                chosenRecipie = dishes[i].Item2;
+            }
+        }
+
+        return chosenRecipie;
+    }
+
 }

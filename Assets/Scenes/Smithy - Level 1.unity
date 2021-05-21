@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43682405, g: 0.48445994, b: 0.5647161, a: 1}
+  m_IndirectSpecularColor: {r: 0.43682435, g: 0.48446107, b: 0.56471705, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1807,6 +1807,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 461359150}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &461359153 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3876972384253890338, guid: f55e01bfc1d0ef0438905ebd2c5088bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 461359150}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461359152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be4d93affb1f3144a887bcaeb85c865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &487086991 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9215654014260927867, guid: f40b235cfde701a4a92ebd5544c36650,
@@ -4649,7 +4661,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5630,7 +5642,7 @@ PrefabInstance:
     - target: {fileID: 8306849867602768390, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8306849867602768390, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
@@ -5692,6 +5704,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8306849867602768391, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: recipieBook
+      value: 
+      objectReference: {fileID: 461359153}
     - target: {fileID: 8306849867602768392, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.size
@@ -5971,7 +5988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 313094553, guid: 8ecd1cbd13afab64b9fa4a75eec915ea, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.099884
+      value: 1.0998611
       objectReference: {fileID: 0}
     - target: {fileID: 313094553, guid: 8ecd1cbd13afab64b9fa4a75eec915ea, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8572,7 +8589,7 @@ PrefabInstance:
     - target: {fileID: 8306849867602768390, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8306849867602768390, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
@@ -8634,6 +8651,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8306849867602768391, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: recipieBook
+      value: 
+      objectReference: {fileID: 461359153}
     - target: {fileID: 8306849867602768392, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.size
@@ -10579,6 +10601,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8306849867602768391, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: recipieBook
+      value: 
+      objectReference: {fileID: 461359153}
     - target: {fileID: 8306849867602768392, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.size
@@ -10764,6 +10791,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8306849867602768391, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: recipieBook
+      value: 
+      objectReference: {fileID: 461359153}
     - target: {fileID: 8306849867602768392, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.size

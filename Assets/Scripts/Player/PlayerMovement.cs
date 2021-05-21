@@ -165,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (monsterInReach != null)
                 attack();
-            else if (recipieBookInReach != null)
+            else if (recipieBook != null)
                 openCloseBook();                
         }
     }
@@ -222,6 +222,8 @@ public class PlayerMovement : MonoBehaviour
         }
         foreach (PlayerMovement pm in FindObjectsOfType<PlayerMovement>().Where(p => p.team == team))
         {
+            pm.waitPosition = pm.transform.position;
+            pm.waitRotation = pm.transform.forward;
             pm.blocked = blocked;
         }
     }

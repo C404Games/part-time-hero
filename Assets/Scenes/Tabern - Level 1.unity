@@ -13447,6 +13447,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f55e01bfc1d0ef0438905ebd2c5088bd, type: 3}
+--- !u!114 &1600092122 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3876972384253890338, guid: f55e01bfc1d0ef0438905ebd2c5088bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1600092121}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072135999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be4d93affb1f3144a887bcaeb85c865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1602042376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18444,6 +18456,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8306849867602768391, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: recipieBook
+      value: 
+      objectReference: {fileID: 3845512552191684508}
     - target: {fileID: 8306849867602768392, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_ActionEvents.Array.size
@@ -18618,6 +18635,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8306849867602768391, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: recipieBook
+      value: 
+      objectReference: {fileID: 3845512552191684508}
     - target: {fileID: 8306849867602768392, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_ActionEvents.Array.size
@@ -18792,6 +18814,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8306849867602768391, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: recipieBook
+      value: 
+      objectReference: {fileID: 1600092122}
     - target: {fileID: 8306849867602768392, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_ActionEvents.Array.size
@@ -18971,6 +18998,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8306849867602768391, guid: 7a2acbea691c434468cd9dc428254868,
+        type: 3}
+      propertyPath: recipieBook
+      value: 
+      objectReference: {fileID: 1600092122}
     - target: {fileID: 8306849867602768392, guid: 7a2acbea691c434468cd9dc428254868,
         type: 3}
       propertyPath: m_ActionEvents.Array.size
@@ -21317,6 +21349,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f55e01bfc1d0ef0438905ebd2c5088bd, type: 3}
+--- !u!114 &3845512552191684508 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3876972384253890338, guid: f55e01bfc1d0ef0438905ebd2c5088bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 3845512552191684507}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832602907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be4d93affb1f3144a887bcaeb85c865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4468784678600240641 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7890282529953049758, guid: 87e46eb7c661f87458f8db162f7f193c,
