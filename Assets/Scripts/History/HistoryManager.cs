@@ -114,22 +114,27 @@ public class HistoryManager : MonoBehaviour
         option2Button.onClick.AddListener(delegate { nextHistoryStep(2); });
         town1Button.onClick.AddListener(delegate { townSelection(0); });
         town2Button.onClick.AddListener(delegate { townSelection(1); });
-        string[] readText = File.ReadAllLines(Application.dataPath + "/es-story1.txt");
+        TextAsset mytxtData = (TextAsset)Resources.Load("es-story1");
+        string[] readText = mytxtData.text.Split('\n');
+        //string[] readText = File.ReadAllLines(Application.dataPath + "/es-story1.txt");
         if (language == "Spanish")
         {
             nextButtonText.text = "Siguiente...";
             nextInputField.placeholder.GetComponent<UnityEngine.UI.Text>().text = "Introduce el nombre...";
-            readText = File.ReadAllLines(Application.dataPath + "/es-story" + episode + ".txt");
+            mytxtData = (TextAsset)Resources.Load("es-story" + episode );
+            readText = mytxtData.text.Split('\n');
         } else if (language == "English")
         {
             nextButtonText.text = "Next...";
             nextInputField.placeholder.GetComponent<UnityEngine.UI.Text>().text = "Write your name...";
-            readText = File.ReadAllLines(Application.dataPath + "/en-story" + episode + ".txt");
+            mytxtData = (TextAsset)Resources.Load("en-story" + episode);
+            readText = mytxtData.text.Split('\n');
         } else if (language == "Simplified Chinese")
         {
             nextButtonText.text = "下列的...";
             nextInputField.placeholder.GetComponent<UnityEngine.UI.Text>().text = "寫你的名字";
-            readText = File.ReadAllLines(Application.dataPath + "/cn-story" + episode + ".txt");
+            mytxtData = (TextAsset)Resources.Load("cn-story" + episode);
+            readText = mytxtData.text.Split('\n');
         }
         foreach (string s in readText)
         {

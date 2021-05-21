@@ -472,7 +472,7 @@ public class MenuBehaviour : MonoBehaviour
             GetComponent<Animator>().SetTrigger("fadeIn");
             StartCoroutine(fadeInScene(5.5f));
             string language = PlayerPrefs.GetString("language", "Spanish");
-            if (matchManager.getPunctuationTeam1() < matchManager.getPunctuationTeam2())
+            if (matchManager.getPunctuationTeam1() >= matchManager.getPunctuationTeam2())
             {
                 if (language == "Spanish")
                 {
