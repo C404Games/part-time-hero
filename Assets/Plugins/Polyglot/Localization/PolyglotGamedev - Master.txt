@@ -646,7 +646,7 @@ MENU_VR_VIRTUAL_REALITY		Virtual Reality	Réalité virtuelle	Realidad Virtual	Vi
 MENU_MODE_MULTIPLAYER_PUBLIC		Random Online		Aleatoria Online															公共多人游戏										
 MENU_MODE_MULTIPLAYER_PRIVATE		Private Room		Sala Privada															私人多人										
 MENU_RETURN		Return		Volver																									
-MENU_SKINS		Skins		Personalización																									
+MENU_SKINS		Shop		Tienda																									
 PRIVATE_ROOM_CREATE_NEW		Create New		Crear Nueva																									
 PRIVATE_ROOM_CREATE_ROOM		Create Room		Crear Sala																									
 PRIVATE_ROOM_INSERT_CODE		Insert Code		Inserta Código																									
