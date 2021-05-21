@@ -643,30 +643,31 @@ MENU_VERSION_TRIAL	Trial version [short]	Trial	Essai	Prueba	Trial	Prova	Teste	Te
 MENU_VR_COMFORT_MODE	For sensitive people in VR	VR comfort mode	Mode de comfort VR	Modo de confort VR	VR Comfort Mode	Modalità comfort VR	Zona de Conforto RV	Zona de Conforto RV	Комфортный режим VR	VR λειτουργία άνεσης	VR konfor modu	VR komfort tilstand	VR komfort modus	VR komfortläge	VR comfortmodus	Tryb komfortu WR	VR mukavuustila	VR向けモード	虚拟现实舒适模式	虛擬現實舒適模式	VR 효과 줄이기	VR komfortní režim	VR komfort mód	Mod de confort RV	โหมดถนอมสายตา	Режим на удобство при ВР	מציאות-מדומה נוחה	طور الواقع الافتراضي الاسترخائي	VR comfort mode
 MENU_VR_HMD_ORIENT_RESET	Using abbrev. HMD (Head mounted display)	HMD orientation reset	Restaurer l'orientation du HDM	Reiniciar orientación de HMD	HMD-Orientierung zurücksetzen	Resetta orientazione HMD	Reiniciar orientação HMD	Reiniciar orientação HMD	Сброс ориентации VR-шлема	HMD προσανατολισμό επαναφορά	Görüş Ünitesi yön sıfırla.	Nulstil HMD orientering	Nullstill HMD orientering	Nollställ orientering av VR-hjälm	Reset HMD orientatie	Resetuj orientację HMD	HMD suunta alkutilaan	HMDの画面位置設定をリセット	HMD方向重置	HMD方向重置	HMD 방향 재설정	Vyresetovat orientaci HMD	HMD Orientáció beálítás	Resetare orientare HMD 	หน่วยแสดงผลสวมศีรษะ	Нулиране на ориентацията на ППС	HMD	نسيان ضبط شاشة الوجه	HMD orjentacija
 MENU_VR_VIRTUAL_REALITY		Virtual Reality	Réalité virtuelle	Realidad Virtual	Virtuelle Realität	Realtà Virtuale	Realidade Virtual	Realidade Virtual	Виртуальная реальность	Εικονική πραγματικότητα	Sanal Gerçeklik	Virtual Reality	Virtuell virkelighet	Virtuell verklighet	Virtuele Realiteit	Wirtualna Rzeczywistość	Virtuaalitodellisuus	バーチャルリアリティ	虚拟现实	虛擬現實	가상현실	Virtuální realita	Virtuális valóság	Realitate Virtuala	ภาพเสมือน	Виртуална реалност	מציאות-מדומה	الواقع الافتراضي VR	VR
-MENU_MODE_MULTIPLAYER_PUBLIC		Random Online		Aleatoria Online															公共多人游戏										
-MENU_MODE_MULTIPLAYER_PRIVATE		Private Room		Sala Privada															私人多人										
-MENU_RETURN		Return		Volver																									
-MENU_SKINS		Shop		Tienda																									
-PRIVATE_ROOM_CREATE_NEW		Create New		Crear Nueva																									
-PRIVATE_ROOM_CREATE_ROOM		Create Room		Crear Sala																									
-PRIVATE_ROOM_INSERT_CODE		Insert Code		Inserta Código																									
-PRIVATE_ROOM_ENTER_CODE		Enter Code		Inserta Código																									
-MENU_JOIN		Join		Unirse																									
-SHOP_COINS_PACK		Gems Pack		Pack De Gemas																									
-SHOP_COINS_MEGA_PACK		Mega Gems Pack		Mega Pack de Gemas																									
-SHOP_COINS_CHEST		Mega Chest Pack		Mega Cofre de Gemas																									
-SHOP_BESTSELLER		The Bestseller		El Mas Vendido																									
-SHOP_MORE_BENEFITS		More Benefits		El Mas Beneficioso																									
-MENU_ROOM_CODE		Code		Codigo																									
-MENU_START		Start		Empezar																									
-TRANSLATIONS		Spanish: C404 Team English:  Chinesse: Yun Wang Special Thanks for PolyglotGameDev Proyect		Español: C404 Team English:  Chino: Yun Wang Gracias al Proyecto PolyglotGameDev																									
-PAUSE_PAUSE		PAUSE		PAUSA																									
-PAUSE_RESUME		RESUME		REANUDAR																									
-PAUSE_EXIT		EXIT GAME		ABANDONAR PARTIDA																									
-PAUSE_RESET		RESET		REINICIAR																									
-TUTORIAL_TABERN_1		Welcome to Tario's Tavern!		¡Bienvenido a la Taberna de Tario!																									
-TUTORIAL_TABERN_2		Collect the products you need from the belts		Recoge los producto que necesitas de las cintas																									
-TUTORIAL_TABERN_3		You can click on the book to see the recipe booklet.		Puedes pulsar el libro para ver el recetario																									
-TUTORIAL_TABERN_4		Brings finished recipes to the point of delivery.		Lleva las recetas terminadas al punto de enterega																									
-SITE_TABERN		TABERN		TABERNA																									
-SITE_SMITHY		SMITHY		HERRERIA																									
+MENU_MODE_MULTIPLAYER_PUBLIC		Random Online		Aleatoria Online															随即在线										
+MENU_MODE_MULTIPLAYER_PRIVATE		Private Room		Sala Privada															私人房间										
+MENU_RETURN		Return		Volver															返回										
+MENU_SKINS		Skins		Personalización															皮肤										
+PRIVATE_ROOM_CREATE_NEW		Create New		Crear Nueva															创建新的										
+PRIVATE_ROOM_CREATE_ROOM		Create Room		Crear Sala															创建房间										
+PRIVATE_ROOM_INSERT_CODE		Insert Code		Inserta Código															插入代码										
+PRIVATE_ROOM_ENTER_CODE		Enter Code		Inserta Código															输入代码										
+MENU_JOIN		Join		Unirse															加入										
+SHOP_COINS_PACK		Gems Pack		Pack De Gemas															宝石包										
+SHOP_COINS_MEGA_PACK		Mega Gems Pack		Mega Pack de Gemas															巨型宝石包										
+SHOP_COINS_CHEST		Mega Chest Pack		Mega Cofre de Gemas															巨型宝箱宝石包										
+SHOP_BESTSELLER		The Bestseller		El Mas Vendido															销售最多的										
+SHOP_MORE_BENEFITS		More Benefits		El Mas Beneficioso															收益最高的										
+MENU_ROOM_CODE		Code		Codigo															代码										
+MENU_START		Start		Empezar															开始										
+TRANSLATIONS		Spanish: C404 Team English:  Chinesse: Yun Wang Special Thanks for PolyglotGameDev Proyect		Español: C404 Team English:  Chino: Yun Wang Gracias al Proyecto PolyglotGameDev															西班牙语l: C404 Team  英语:   中文: Yun Wang  感谢 Proyecto PolyglotGameDev										
+PAUSE_PAUSE		PAUSE		PAUSA															暂停										
+PAUSE_RESUME		RESUME		REANUDAR															继续										
+PAUSE_EXIT		EXIT GAME		ABANDONAR PARTIDA															退出游戏										
+PAUSE_RESET		RESET		REINICIAR															重新开始										
+TUTORIAL_TABERN_1		Welcome to Tario's Tavern!		¡Bienvenido a la Taberna de Tario!															欢迎来到塔里奥酒馆!										
+TUTORIAL_TABERN_2		Collect the products you need from the belts		Recoge los producto que necesitas de las cintas															从皮带上收集你需要的产品										
+TUTORIAL_TABERN_3		You can click on the book to see the recipe booklet.		Puedes pulsar el libro para ver el recetario															你可以点击这本书，来查看食谱。										
+TUTORIAL_TABERN_4		Brings finished recipes to the point of delivery.		Lleva las recetas terminadas al punto de enterega															将完成的菜谱带到交货点。										
+SITE_TABERN		TABERN		TABERNA															酒馆										
+SITE_SMITHY		SMITHY		HERRERIA															铁匠铺										
+TUTORIAL_HERRERIA_1		Welcome to Rhino's Smithy		¡Bienvenido a la herrería de Rhino!															欢迎来到犀牛的铁匠铺										
