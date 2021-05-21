@@ -1,0 +1,16 @@
+PRE: After bringing back Tario's clientele, our hero prepares to rest.
+PRE: Next day, he received a message from Kamerlin.
+PRE: "I'm waiting for you at the smithy." 
+-Kamerlín: Thank the Gods you came! This is Rhiron, Questville's blacksmith.
+:The weapons of the great heroes were forged in this smithy. He is quite an eminence. 
+-Rhiron: ...
+-Kamerlín: As you can see, he is not very talkative. Rhiron, don't be shy and tell us what happened.
+-Rhiron: ... ...
+:... ...
+:... ... help.
+-Kamerlín: Understood.
+:As he has just explained to you, the neighboring town has reviled Rhiron's smithy by saying that all their weapons are fake.
+:We can not afford that.
+:You must fight alongside Rhiron to prevent the neighboring town from destroying Questville.
+:We're counting on you.
+Rhiron: ... on you.

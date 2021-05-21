@@ -1,0 +1,16 @@
+PRE: Trás haber recuperado la clientela de Tario, nuestro heroe se dispuso a descansar.
+PRE: Al día siguiente, recibió un mensaje de Kamerlín.
+PRE: "Te espero en la herreria." 
+-Kamerlín: ¡Gracias a los dioses que has venido! Te presento a Rhiron, el herrero de Recadelia.
+:En su herreria se forjaron las armas de los grandes heroes. Es toda una eminencia. 
+-Rhiron: ...
+-Kamerlín: Como ves no es muy hablador. No seas tímido y cuentanos qué ha ocurrido.
+-Rhiron: ... ...
+:... ...
+:... ... ayuda.
+-Kamerlín: Comprendo.
+:Como te acaba de explicar, el pueblo vecino ha injuriado la herreria de Rhiron diciendo que todas sus armas son falsas.
+:Y no lo podemos permitir.
+:Deberás luchar junto a Rhiron para impedir que el pueblo vecino destruyan Recadelia.
+:¡Contamos contigo!
+Rhiron: ... contigo.

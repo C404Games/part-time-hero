@@ -5,7 +5,6 @@ PRE:Many long years passed.
 PRE:And those heroes were gone.
 PRE:But...
 PRE:There are still some who are still seeking glory.
-=BOSQUE
 -???:Kamerlin's beard! For eons no one has dropped in these parts.
 -Kamerlín:Let me introde myself, little lad. I'm Kamerlin, the wizard of this land.
 :I believe you are looking for adventure, isn't it?. I can see it in your eyes.
@@ -29,10 +28,9 @@ PRE:There are still some who are still seeking glory.
 :Ups! I'm beating around the bush.  
 :If you are looking for adventures and be a hero, you are in the correct place.
 :Also you are talking to the correct person.
-:But before continuing, accompany me to my cabin. My old legs can't take it anymore.
+:But before continuing, let me sit down. My old legs can't take it anymore.
 :I have witnessed thousands of battles, but I cannot fight old age.
-=CABAÑA
--Kamerlín: Thank you for coming with me. Young people wouldn't listen to this poor old man.
+-Kamerlín: Forget this poor old man. Young people are not usually patient.
 :They don't understand about companionship or solidarity.
 :But you are different.
 :What was I saying? Oh! Of course! You want to be a HERO!

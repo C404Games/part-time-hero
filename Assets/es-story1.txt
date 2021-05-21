@@ -1,0 +1,43 @@
+PRE:Hubo un tiempo en que los heroes eran venerados.
+PRE:Grandes guerreros que lucharon contra malvados hechiceros y monstruos.
+PRE:Todo por la paz y la prosperidad del reino. Sin buscar nada a cambio.
+PRE:Largos años han pasado desde aquello.
+PRE:Aquellos heroes ya no están.
+PRE:Pero...
+PRE:Aún quedan algunos que siguen buscando esa gloria.
+-???:¡Por mis barbas! Hacia eones que nadie se dejaba caer por estos lares.
+-Kamerlín:Deja que me presente zagal, me llamo Kamerlín y soy el hechicero de estas tierras.
+:Imagino que habrás venido en busca de aventuras. Lo puedo ver en tus ojos.
+:¿Cuál es tu nombre? 
+-Player:(Introduce el nombre)
+-Kamerlín:Encantado, ¿Hay algo que quieras preguntar?
+-Player:(Dos opciones de dialogo)
+:¿Qué lugar es este?
+:¡Quiero convertirme en un heroe!
+-Kamerlín(P1):Me alegro que me lo preguntes. Tienes ante tí la región más poderosa del reino, RECADELIA.
+:Tierra de heroes. De aquí salieron los heroes más fámosos del mundo.
+:Algunos fueron pupilos míos. ¡Qué tiempos aquellos!
+:¡Uy! Creo que me estoy yendo por las ramas.  
+:Si lo que buscas es vivir aventuras y convertirte en un heroe, has llegado al lugar indicado.
+:Y más aún, estás hablando con la persona correcta.
+:Pero antes de seguir, acompañame hasta mi cabaña. Mis viejas piernas ya no aguantan más.
+:Habré presenciado miles de batallas, pero creo que la del tiempo es la única en la que no puedo vencer.
+-Kamerlín(P2): Jajaja, paciencia joven aventurero.
+:Todo a su tiempo. Los grandes heroes no se crean de la noche a la mañana.
+:Aún recuerdo aquellas noches en las profundidades del bosque de Recadelia cuando...
+:¡Uy! Creo que me estoy yendo por las ramas.  
+:Si lo que buscas es vivir aventuras y convertirte en un heroe, has llegado al lugar indicado.
+:Y más aún, estás hablando con la persona correcta.
+:Pero antes de seguir, deja que me siente. Mis viejas piernas ya no aguantan más.
+:Habré presenciado miles de batallas, pero creo que la del tiempo es la única en la que no puedo vencer.
+-Kamerlín:Perdona a este pobre viejo. Los jovenes de hoy en día no tienen paciencia.
+:No entienden lo que es compañerismo ni la solidaridad.
+:Pero veo que tu eres diferente.
+:¿En dónde estabamos? ¡Ah sí! ¡Quieres convertirte en un heroe!
+:Tienes madera, lo percibo. Se ve que eres valiente y fuerte. 
+:Valentia y fuerza son dos buenas cualidades para un heroe; pero no es suficiente para convertirte en un GRAN heroe.
+:Créeme, he sido mentor de muchos de ellos.
+:Para convertirte en un gran heroe necesitas...
+-???: ¡¡¡¡KAMERLÍIIIIINN!!!!
+-Kamerlín: ¡Oh no! Parece que Tario, el tabernero, está en serios problemas.
+:¡Rápido, muchacho! No hay tiempo que perder.

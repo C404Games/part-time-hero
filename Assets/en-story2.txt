@@ -1,0 +1,17 @@
+PRE: After hearing the shout of Tario, the bartender.
+PRE: Our hero and Karmelin run to help him.
+-Tario: ¡Mamma mía! This's horrible.
+-Kamerlín: What's happen, Tario?
+-Tario: Oh! Kamerlín, I'm glad to see you. Something horrible has happened.
+:It's worse than when I confused the mushrooms and poisoned half the inhabitants of Questville.
+-Kamerlín: Calm down Tario! Now, tell me what happened.
+-Tario: ...
+:In the neighboring town they have opened a new tavern and all my customers were gone.
+:If this continues, I will have to close and people will definitely leave Recadelia..
+-Kamerlín: We can not afford that.
+-Tario: What can we do?
+-Kamerlín: It's your turn.
+:As I mentioned before, in order to become the greatest hero you need to prove your WORTH.
+:Worth to do tasks for others.
+:Your duty as hero is to help the villagers with their problems. Your first mission is to help Tario.
+-Tario: We're counting on you.

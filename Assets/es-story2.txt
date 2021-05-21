@@ -1,0 +1,17 @@
+PRE: Trás oir el grito de Tario, el tabernero de Recadelia.
+PRE: Nuestro heroe, junto a Kamerlín, corren en su ayuda.
+-Tario: ¡Mamma mía! Esto es terrible.
+-Kamerlín: ¿Qué ocurre Tario?
+-Tario: ¡Oh! Kamerlín, me alegro de que hayas venido. Algo terrible ha ocurrido.
+:Es peor que cuando me confundí de champiñones y envenene a media Recadelia.
+-Kamerlín: Tranquilizate Tario y cuentanos que ha ocurrido.
+-Tario: ...
+:En el pueblo vecino han abierto una nueva taberna y todos mis clientes se han esfumado.
+:Si esto continua así, tendré que cerrar y la gente se irá definitivamente de Recadelia.
+-Kamerlín: Eso no lo podemos permitir.
+-Tario:¿Y qué podemos hacer?
+-Kamerlín: Ha llegado tu turno.
+:Como te comentaba antes, para poder convertirte en un gran heroe necesitas VALIA.
+:VALIA para hacer todo tipo de tareas por el prójimo.
+:Tu deber como heroe es ayudar a los aldeanos con sus problemas. Tu primera misión es ayudar a Tario.
+-Tario: ¡Contamos contigo!

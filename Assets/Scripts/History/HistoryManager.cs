@@ -19,6 +19,7 @@ public class HistoryManager : MonoBehaviour
     }
 
     public AudioSource backgroundMusic;
+    public AudioSource forestgroundMusic;
     public List<HistoryAction> actions = new List<HistoryAction>();
     public enum Action {PROLOGUE, DIALOGUE, POWERUP, MONSTER, QUESTION, WRITING, BACKGROUND};
     private UnityEngine.UI.Text globalText;
@@ -52,6 +53,7 @@ public class HistoryManager : MonoBehaviour
     private string town1Name;
     private string town2Name;
     private bool prologueActive;
+    private bool musicActive;
     private bool nextStepIsTaken;
     private string language;
     private IEnumerator fadeCorroutine;
@@ -62,11 +64,14 @@ public class HistoryManager : MonoBehaviour
     public Texture magicTexture;
     public Texture town1;
     public Texture town2;
+    public int episode;
+    private string place;
 
     // Start is called before the first frame update
     void Awake()
     {
         language = PlayerPrefs.GetString("language","Spanish");
+        place = "BOSQUE";
         town1Name = "TOMATELANDIA";
         town2Name = "PATATALANDIA";
         town1Description = "Ciudad que te proporcionará un bonus de experiencia y emociones que te permitirá mejorar rápidamente tu rango social";
@@ -108,22 +113,22 @@ public class HistoryManager : MonoBehaviour
         option2Button.onClick.AddListener(delegate { nextHistoryStep(2); });
         town1Button.onClick.AddListener(delegate { townSelection(0); });
         town2Button.onClick.AddListener(delegate { townSelection(1); });
-        string[] readText = File.ReadAllLines(Application.dataPath + "/history.txt");
+        string[] readText = File.ReadAllLines(Application.dataPath + "/es-story1.txt");
         if (language == "Spanish")
         {
             nextButtonText.text = "Siguiente...";
             nextInputField.placeholder.GetComponent<UnityEngine.UI.Text>().text = "Introduce el nombre...";
-            readText = File.ReadAllLines(Application.dataPath + "/history.txt");
+            readText = File.ReadAllLines(Application.dataPath + "/es-story" + episode + ".txt");
         } else if (language == "English")
         {
             nextButtonText.text = "Next...";
             nextInputField.placeholder.GetComponent<UnityEngine.UI.Text>().text = "Write your name...";
-            readText = File.ReadAllLines(Application.dataPath + "/en-story1.txt");
+            readText = File.ReadAllLines(Application.dataPath + "/en-story" + episode + ".txt");
         } else if (language == "Simplified Chinese")
         {
             nextButtonText.text = "下列的...";
             nextInputField.placeholder.GetComponent<UnityEngine.UI.Text>().text = "寫你的名字";
-            readText = File.ReadAllLines(Application.dataPath + "/cn-story1.txt");
+            readText = File.ReadAllLines(Application.dataPath + "/cn-story" + episode + ".txt");
         }
         foreach (string s in readText)
         {
@@ -179,6 +184,7 @@ public class HistoryManager : MonoBehaviour
         backgroundMusic.Play();
         fadeCorroutine = fadeOutScene(2.5f);
         prologueActive = true;
+        musicActive = false;
         prologueText.text = actions[currentStep].data[0];
         nextInputField.transform.localScale = new Vector3(0, 0, 0);
         option1Selected.transform.localScale = new Vector3(0, 0, 0);
@@ -186,14 +192,34 @@ public class HistoryManager : MonoBehaviour
         characterSpeaker.transform.localScale = new Vector3(0, 0, 0);
         if (language == "Spanish")
         {
-            globalText.text = "(Ufff ya llegué a mi destino, creo que este hombre que se acerca me ayudará a encontrar lo que buscaba)";
+            if ( episode == 1) {
+                globalText.text = "(Ufff ya llegué a mi destino, creo que este hombre que se acerca me ayudará a encontrar lo que buscaba.)";
+            } else if ( episode == 2) {
+                globalText.text = "(Mmmm ¡Qué bien huele! Qué hambre me está entrando.)";
+            } else if ( episode == 3) {
+                globalText.text = "(¡Vaya! Qué ordenado está todo.)";
+            }
+
         } else if (language == "English")
         {
-            globalText.text = "(Ufff I finally arrive to this civilization, I think that man will help me about what I'm looking for)";
+            if ( episode == 1) {
+                globalText.text = "(Ufff I finally arrive to this civilization, I think that man will help me about what I'm looking for.)";
+            } else if ( episode == 2) {
+                globalText.text = "(Mmmm Smells so good! I'm hungry.)";
+            } else if ( episode == 3) {
+                globalText.text = "(Wow! It's very tidy!)";
+            }
         } else if (language == "Simplified Chinese")
         {
-            globalText.text = "(我已經到達目的地了，我認為這個正在接近的人將幫助我找到想要的東西)";
+            if ( episode == 1) {
+                globalText.text = "(我已經到達目的地了，我認為這個正在接近的人將幫助我找到想要的東西。)";
+            } else if ( episode == 2) {
+                globalText.text = "(嗯，闻起来好香啊! 我很饿。)";
+            } else if ( episode == 3) {
+                globalText.text = "(哇! 非常整洁!)";
+            }
         }
+
         textOption1.text = "";
         textOption2.text = "";
         currentConversationStep = 0;
@@ -202,6 +228,7 @@ public class HistoryManager : MonoBehaviour
 
     void Update()
     {
+
         if (prologueActive)
         {
             if (historyAnimator.GetCurrentAnimatorStateInfo(0).IsName("textShowIdle"))
@@ -227,6 +254,11 @@ public class HistoryManager : MonoBehaviour
             }
         } else
         {
+            backgroundMusic.Stop();
+            if (!musicActive ){
+                musicActive = true;
+                forestgroundMusic.Play();
+            }
             if ((nextInputField.transform.localScale[0] == 1 && nextInputField.text.ToString().Length == 0 ) || actions[currentStep].type == Action.QUESTION.ToString() && currentConversationStep == 1)
             {
                 nextButton.interactable = false;
@@ -263,7 +295,7 @@ public class HistoryManager : MonoBehaviour
                     action = actions[currentStep];
                     type = action.type;
                     currentConversationStep = 0;
-                    Debug.Log("Cambio de escenario");
+                    Debug.Log("Cambio de escenario:" + action.data[currentStep]);
                 }
                 if (action.character != "Player")
                 {
@@ -272,26 +304,26 @@ public class HistoryManager : MonoBehaviour
                     {
                         case "Kamerlín":
                             {
-                                characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
+                                characterSpeaker.transform.localScale = new Vector3(1.8f, 1.8f, 1);
                                 characterSpeaker.texture = magicTexture;
                                 break;
                             }
                         case "Tario":
                             {
-                                characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
+                                characterSpeaker.transform.localScale = new Vector3(1.2f, 2.5f, 1);
                                 characterSpeaker.texture = barkeeperTexture;
                                 break;
                             }
-                        case "Rairon":
+                        case "Rhiron":
                             {
-                                characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
+                                characterSpeaker.transform.localScale = new Vector3(1.4f, 2, 1);
                                 characterSpeaker.texture = blacksmithTexture;
                                 break;
                             }
                         case "???":
                             {
-                                characterSpeaker.transform.localScale = new Vector3(1, 1, 1);
-                                characterSpeaker.texture = unknownTexture;
+                                characterSpeaker.transform.localScale = new Vector3(1.8f, 1.8f, 1);
+                                characterSpeaker.texture = magicTexture;
                                 break;
                             }
                     }
