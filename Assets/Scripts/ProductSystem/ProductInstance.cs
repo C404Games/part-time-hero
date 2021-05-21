@@ -9,7 +9,7 @@ public class ProductInstance : MonoBehaviourPun
 {
     public int id;
 
-    private Transform holder;
+    public Transform holder;
 
     private Product blueprint;
 
@@ -89,8 +89,8 @@ public class ProductInstance : MonoBehaviourPun
         if (rigidbody != null && !rigidbody.isKinematic)
             photonView.RPC("disableGravity", RpcTarget.All, photonView.ViewID);
             */
-        if (id != photonView.ViewID)
-            return;
+        //if (id != photonView.ViewID)
+        //    return;
         photonView.RPC("setHolderRPC", RpcTarget.All, name, isTable);
     }
 

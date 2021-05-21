@@ -20,6 +20,7 @@ public class ToolSource : MonoBehaviour
         //{
         //    return;
         //}
+
         if (heldTool == null || heldTool.GetComponent<ProductInstance>().getHolder() != transform)
         {
             heldTool = PhotonNetwork.Instantiate(
@@ -31,8 +32,9 @@ public class ToolSource : MonoBehaviour
             ProductInstance product = heldTool.GetComponent<ProductInstance>();
             product.id = toolId;
             product.setHolder(gameObject.name, true);
+            product.holder = transform;
         }
-
+        
     }
 
     public void returnTool(ProductInstance tool)
