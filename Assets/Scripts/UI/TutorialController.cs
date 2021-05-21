@@ -59,7 +59,7 @@ public class TutorialController : MonoBehaviour
             if (index >= steps.Length - 1)
             {
                 animator.SetBool("tutorialDone", true);
-                gameObject.SetActive(false);
+                Destroy(gameObject);
             }
             else
             {
