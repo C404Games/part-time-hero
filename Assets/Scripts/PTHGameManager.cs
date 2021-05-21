@@ -24,40 +24,24 @@ public class PTHGameManager : MonoBehaviourPunCallbacks
         //{
         //    return;
         //}
+        charactersList[2].SetActive(false);
+        charactersList[3].SetActive(false);
         if (PhotonNetwork.OfflineMode || PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
-            charactersList[2].SetActive(false);
-            charactersList[3].SetActive(false);
-
-            //PhotonNetwork.Instantiate(
-            //Path.Combine("Characters", avatarPrefabName),
-            //spawnPoints[0].transform.position,
-            //spawnPoints[0].transform.rotation
-            //);
-            //PhotonNetwork.Instantiate(
-            //Path.Combine("Characters", avatarPrefabName),
-            //spawnPoints[1].transform.position,
-            //spawnPoints[1].transform.rotation
-            //);
+            
         }
         if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
-        {
+        {   
             charactersList[1].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(2));
-            //animatorsList[1].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(2));
             catcherList[1].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(2));
 
-            charactersList[2].SetActive(false);
-            charactersList[3].SetActive(false);
-
-            //PhotonNetwork.Instantiate(
-            //Path.Combine("Characters", avatarPrefabName), 
-            //spawnPoints[PhotonNetwork.LocalPlayer.ActorNumber - 1].transform.position,
-            //spawnPoints[PhotonNetwork.LocalPlayer.ActorNumber - 1].transform.rotation
-            //);
         }
         if (PhotonNetwork.CurrentRoom.PlayerCount > 2)
         {
             botList.SetActive(false);
+
+            charactersList[2].SetActive(true);
+            charactersList[3].SetActive(true);
 
             charactersList[2].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(3));
             charactersList[3].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(4));
