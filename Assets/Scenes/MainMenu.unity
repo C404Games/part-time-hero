@@ -153,8 +153,8 @@ RectTransform:
   m_Father: {fileID: 21730429}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -964,8 +964,8 @@ RectTransform:
   m_Father: {fileID: 112855081}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7498,7 +7498,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9403,8 +9403,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734412538}
-  m_LocalRotation: {x: -0.541685, y: 0.5059475, z: 0.49467093, w: 0.45375678}
-  m_LocalPosition: {x: 0.13, y: 1.24, z: -0.28828442}
+  m_LocalRotation: {x: -0.5070616, y: 0.5406424, z: 0.46359986, w: 0.48545814}
+  m_LocalPosition: {x: 0.26188135, y: 1.2450198, z: -0.28828442}
   m_LocalScale: {x: 7.50412, y: 7.50412, z: 7.50412}
   m_Children:
   - {fileID: 1872064249}
@@ -9412,7 +9412,7 @@ Transform:
   - {fileID: 1534941772}
   m_Father: {fileID: 1932439517}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -95.696, y: -5.435974, z: 95.979}
+  m_LocalEulerAnglesHint: {x: -96.487, y: -29, z: 119.672}
 --- !u!1 &739246856
 GameObject:
   m_ObjectHideFlags: 0
@@ -13551,7 +13551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1187913035
 Transform:
   m_ObjectHideFlags: 0
@@ -13602,7 +13602,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14072,7 +14072,7 @@ GameObject:
   - component: {fileID: 1223046427}
   - component: {fileID: 1223046428}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: S Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14149,7 +14149,18 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1401536849}
+        m_MethodName: updateSoundOrMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1226378822
 GameObject:
   m_ObjectHideFlags: 0
@@ -16019,6 +16030,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed74a1d094683347b721ccfe1dc7f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicS: {fileID: 1705105896}
+  soundS: {fileID: 1223046428}
 --- !u!114 &1401536850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18507,7 +18520,7 @@ GameObject:
   - component: {fileID: 1705105896}
   - component: {fileID: 1705105897}
   m_Layer: 5
-  m_Name: Slider (1)
+  m_Name: S Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18584,7 +18597,18 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1401536849}
+        m_MethodName: updateSoundOrMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1705105897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23249,7 +23273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2030324604
 Transform:
   m_ObjectHideFlags: 0

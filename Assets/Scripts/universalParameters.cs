@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class universalParameters : MonoBehaviour
 {
@@ -9,8 +10,11 @@ public class universalParameters : MonoBehaviour
     private static int model;
     private static Texture myTexture;
 
-    private static float _sound;
-    private static float _music;
+    private static float _sound = 1f;
+    private static float _music = 1f;
+
+    public Slider musicS;
+    public Slider soundS;
 
     public string getSceneToLoad()
     {
@@ -58,6 +62,12 @@ public class universalParameters : MonoBehaviour
     public void setMusic(float music)
     {
         _music = music;
+    }
+
+    public void updateSoundOrMusic()
+    {
+        _music = musicS.value;
+        _sound = soundS.value;
     }
 
 }
