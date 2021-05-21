@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class StationInstance : MonoBehaviour
 {
+    public AudioSource choppingMusic;
+    public AudioSource cauldronMusic;
 
     public int id;
 
@@ -198,8 +200,14 @@ public class StationInstance : MonoBehaviour
             {
                 if(heldProduct.id == transition.src && transition.pre < 0)
                 {
-                    Product product = ProductManager.rawProducts[heldProduct.id];
-                    Debug.Log(product.name);
+                    if (id == 0)
+                    {
+                        choppingMusic.Play();
+                    }
+                    if (id == 1)
+                    {
+                        cauldronMusic.Play();
+                    }
                     busy = true;
 
                     float time = transition.time;

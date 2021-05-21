@@ -143,6 +143,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -263,6 +273,16 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 6398728184335941412, guid: 2aba7a4767a61914f82afdd6e210fcc5,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 6398728184335941412, guid: 2aba7a4767a61914f82afdd6e210fcc5,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 6898615373967398635, guid: 2aba7a4767a61914f82afdd6e210fcc5,
         type: 3}
       propertyPath: m_RootOrder
@@ -562,6 +582,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -672,6 +702,16 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 6398728184335941412, guid: 2aba7a4767a61914f82afdd6e210fcc5,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 6398728184335941412, guid: 2aba7a4767a61914f82afdd6e210fcc5,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 6898615373967398635, guid: 2aba7a4767a61914f82afdd6e210fcc5,
         type: 3}
       propertyPath: m_RootOrder
@@ -875,6 +915,16 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 6398728184335941412, guid: 2aba7a4767a61914f82afdd6e210fcc5,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 6398728184335941412, guid: 2aba7a4767a61914f82afdd6e210fcc5,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 6898615373967398635, guid: 2aba7a4767a61914f82afdd6e210fcc5,
         type: 3}
       propertyPath: m_RootOrder
@@ -1183,6 +1233,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -1516,6 +1576,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -1641,6 +1711,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8165408125036599320, guid: 956f91bc14269af45a46a148a6c17138,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 8165408125036599320, guid: 956f91bc14269af45a46a148a6c17138,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 8512168527335698903, guid: 956f91bc14269af45a46a148a6c17138,
         type: 3}
       propertyPath: m_RootOrder
@@ -1710,6 +1790,133 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 223870457}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &432246872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 432246874}
+  - component: {fileID: 432246873}
+  m_Layer: 0
+  m_Name: ChoppingAudioSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &432246873
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432246872}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 736f9195aa583a24786d59efb83e89ab, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &432246874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432246872}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.99962, y: 1.3981037, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &460224098 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 813f282e877a3844d950b22790632701,
@@ -2099,6 +2306,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -2559,6 +2776,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1822841117878404277, guid: 4b51a80b7448798498dbdf95172551ef,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 1822841117878404277, guid: 4b51a80b7448798498dbdf95172551ef,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 2178650502041038202, guid: 4b51a80b7448798498dbdf95172551ef,
         type: 3}
       propertyPath: m_RootOrder
@@ -2740,6 +2967,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1822841117878404277, guid: 4b51a80b7448798498dbdf95172551ef,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 1822841117878404277, guid: 4b51a80b7448798498dbdf95172551ef,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 2178650502041038202, guid: 4b51a80b7448798498dbdf95172551ef,
         type: 3}
       propertyPath: m_RootOrder
@@ -4046,6 +4283,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -4129,6 +4376,133 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2461863753412787294, guid: 1929c445a06112444b7bec3e8226d580, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1929c445a06112444b7bec3e8226d580, type: 3}
+--- !u!1 &1159642999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1159643001}
+  - component: {fileID: 1159643000}
+  m_Layer: 0
+  m_Name: CauldronAudioSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1159643000
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159642999}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 02cf34f005b12d94b98af71856a4435b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1159643001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159642999}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.99962, y: 1.3981037, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1160805967
 GameObject:
   m_ObjectHideFlags: 0
@@ -8198,6 +8572,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -9398,6 +9782,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -9513,6 +9907,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -9630,6 +10034,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -9887,6 +10301,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -9982,6 +10406,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1822841117878404277, guid: 4b51a80b7448798498dbdf95172551ef,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 1822841117878404277, guid: 4b51a80b7448798498dbdf95172551ef,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 2178650502041038202, guid: 4b51a80b7448798498dbdf95172551ef,
         type: 3}
       propertyPath: m_RootOrder
@@ -10160,6 +10594,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1754790059}
     m_Modifications:
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -10245,6 +10689,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -10381,6 +10835,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -10476,6 +10940,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -10591,6 +11065,16 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6398728184335941412, guid: 2aba7a4767a61914f82afdd6e210fcc5,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 6398728184335941412, guid: 2aba7a4767a61914f82afdd6e210fcc5,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 6898615373967398635, guid: 2aba7a4767a61914f82afdd6e210fcc5,
         type: 3}
       propertyPath: m_RootOrder
@@ -11042,6 +11526,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8165408125036599320, guid: 956f91bc14269af45a46a148a6c17138,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 8165408125036599320, guid: 956f91bc14269af45a46a148a6c17138,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 8512168527335698903, guid: 956f91bc14269af45a46a148a6c17138,
         type: 3}
       propertyPath: m_RootOrder
@@ -11301,6 +11795,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 1112229253376466850, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_RootOrder
@@ -11402,6 +11906,16 @@ PrefabInstance:
       propertyPath: doubleSided
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1822841117878404277, guid: 4b51a80b7448798498dbdf95172551ef,
+        type: 3}
+      propertyPath: cauldronMusic
+      value: 
+      objectReference: {fileID: 1159643000}
+    - target: {fileID: 1822841117878404277, guid: 4b51a80b7448798498dbdf95172551ef,
+        type: 3}
+      propertyPath: choppingMusic
+      value: 
+      objectReference: {fileID: 432246873}
     - target: {fileID: 2178650502041038202, guid: 4b51a80b7448798498dbdf95172551ef,
         type: 3}
       propertyPath: m_RootOrder
