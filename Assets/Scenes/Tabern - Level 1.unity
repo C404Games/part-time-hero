@@ -979,6 +979,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 481424045}
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
       propertyPath: teamArea
       value: 1
       objectReference: {fileID: 0}
@@ -2893,6 +2898,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1942552085}
     m_Modifications:
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 679500534}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: teamArea
@@ -4827,6 +4837,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1942552085}
     m_Modifications:
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 683422419}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: teamArea
@@ -16655,6 +16670,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1942552085}
     m_Modifications:
+    - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1713098538}
     - target: {fileID: -2699657327690283958, guid: 2238795293c0dd649a7ff49fa9608c87,
         type: 3}
       propertyPath: teamArea
