@@ -6462,7 +6462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 252232586, guid: 8ecd1cbd13afab64b9fa4a75eec915ea, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.15000725
+      value: -0.15000916
       objectReference: {fileID: 0}
     - target: {fileID: 286153733, guid: 8ecd1cbd13afab64b9fa4a75eec915ea, type: 3}
       propertyPath: m_AnchorMax.x
@@ -6534,7 +6534,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 313094553, guid: 8ecd1cbd13afab64b9fa4a75eec915ea, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.0998001
+      value: 1.0997696
       objectReference: {fileID: 0}
     - target: {fileID: 313094553, guid: 8ecd1cbd13afab64b9fa4a75eec915ea, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7023,6 +7023,10 @@ PrefabInstance:
     - target: {fileID: 1577912576, guid: 8ecd1cbd13afab64b9fa4a75eec915ea, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -7.369997
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624586173, guid: 8ecd1cbd13afab64b9fa4a75eec915ea, type: 3}
+      propertyPath: key
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1651118545, guid: 8ecd1cbd13afab64b9fa4a75eec915ea, type: 3}
       propertyPath: m_IsActive
@@ -8552,76 +8556,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1806526218}
     m_Modifications:
-    - target: {fileID: 5537695481600580017, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537695481820915232, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537695481820915235, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 39.641754
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537695481820915235, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -17.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: moneyFinal
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: pointsFinal
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: audioClipLoop1
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: audioClipLoop2
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: audioClipLoop3
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: team2PointsPanel
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: pauseButtonInGame
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537695481910704394, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537695481910704394, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5537695481910704394, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 585320464976639597, guid: 1929c445a06112444b7bec3e8226d580,
         type: 3}
       propertyPath: m_IsActive
@@ -8726,6 +8660,76 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Table (4) M
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481600580017, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481820915232, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481820915235, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 39.641754
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481820915235, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -17.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: moneyFinal
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: pointsFinal
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: audioClipLoop1
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: audioClipLoop2
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: audioClipLoop3
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: team2PointsPanel
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: pauseButtonInGame
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481910704394, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481910704394, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481910704394, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2461863753412787294, guid: 1929c445a06112444b7bec3e8226d580, type: 3}
