@@ -150,7 +150,7 @@ public class StationInstance : MonoBehaviour
                 heldProduct = product;
                 if (!blueprint.noHold.Contains(product.id))
                 {
-                    heldProduct.setHolder(transform);
+                    heldProduct.setHolder(gameObject.name, true);
                     catcher.releaseHeldProduct();
                 }
                 return activate();

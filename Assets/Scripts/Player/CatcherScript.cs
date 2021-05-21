@@ -28,6 +28,12 @@ public class CatcherScript : MonoBehaviour
         animator = transform.parent.GetComponentInChildren<Animator>();
     }
 
+    private void Update()
+    {
+        if(animator == null)
+            animator = transform.parent.GetComponentInChildren<Animator>();
+    }
+
     public ProductInstance getHeldProduct()
     {
         return heldObject;
@@ -109,7 +115,7 @@ public class CatcherScript : MonoBehaviour
             animator.SetBool("Hold", true);
             heldObject = product;
             //product.transform.SetParent(transform);
-            product.setHolder(transform);            
+            product.setHolder(playerMovement.gameObject.name, false);            
             //product.GetComponent<BoxCollider>().isTrigger = true;
         }
     }
@@ -117,7 +123,7 @@ public class CatcherScript : MonoBehaviour
     public void releaseHeldProduct()
     {
         if (heldObject.getHolder() == transform)
-            heldObject.setHolder(null);
+            heldObject.setHolder("", true);
         heldObject = null;
         animator.SetBool("Hold", false);
     }

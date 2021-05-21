@@ -71,13 +71,27 @@ public class ProductInstance : MonoBehaviourPun
     {
         return blueprint.type;
     }
-
+    /*
     public void setHolder(Transform holder)
     {
         currentClampTime = 0;
         this.holder = holder;
-        if (!rigidbody.isKinematic)
+        if (rigidbody != null && !rigidbody.isKinematic)
             photonView.RPC("disableGravity", RpcTarget.All, photonView.ViewID);
+    }
+    */
+
+    public void setHolder(string name, bool isTable)
+    {
+        /*
+        currentClampTime = 0;
+        this.holder = holder;
+        if (rigidbody != null && !rigidbody.isKinematic)
+            photonView.RPC("disableGravity", RpcTarget.All, photonView.ViewID);
+            */
+        if (id != photonView.ViewID)
+            return;
+        photonView.RPC("setHolderRPC", RpcTarget.All, name, isTable);
     }
 
     public Transform getHolder()
@@ -121,12 +135,28 @@ public class ProductInstance : MonoBehaviourPun
         blueprint = ProductManager.productBlueprints[id];
         nextStep();
     }
-
+    /*
     [PunRPC]
     void disableGravity(int id)
     {
         if (id != photonView.ViewID)
             return;
+        rigidbody.isKinematic = true;
+        rigidbody.useGravity = false;
+    }
+    */
+    [PunRPC]
+    void setHolderRPC(string name, bool isTable)
+    {
+        currentClampTime = 0;
+        Transform t = null;
+        if (isTable)
+            t = GameObject.Find(name).transform;
+        else{
+            t = GameObject.Find(name).transform.GetComponentInChildren<CatcherScript>().transform;
+        }
+        holder = t;
+
         rigidbody.isKinematic = true;
         rigidbody.useGravity = false;
     }

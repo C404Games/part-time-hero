@@ -906,7 +906,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (2)
+      value: Table (2) R
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -2066,7 +2066,7 @@ PrefabInstance:
     - target: {fileID: 954429844696036770, guid: b36f606e31b9e9a4cb9ad22cfbd134fc,
         type: 3}
       propertyPath: m_Name
-      value: Barrel
+      value: Barrel R
       objectReference: {fileID: 0}
     - target: {fileID: 8851557157487446787, guid: b36f606e31b9e9a4cb9ad22cfbd134fc,
         type: 3}
@@ -2152,7 +2152,7 @@ PrefabInstance:
     - target: {fileID: 1915778740746064447, guid: 87e46eb7c661f87458f8db162f7f193c,
         type: 3}
       propertyPath: m_Name
-      value: Bottle Source
+      value: Bottle Source R
       objectReference: {fileID: 0}
     - target: {fileID: 2345046864520915755, guid: 87e46eb7c661f87458f8db162f7f193c,
         type: 3}
@@ -2580,7 +2580,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (3)
+      value: Table (3) L
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -4059,7 +4059,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (4)
+      value: Table (4) R
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -4181,7 +4181,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (2)
+      value: Table (2) C
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -4406,7 +4406,7 @@ PrefabInstance:
     - target: {fileID: 6905594053878010594, guid: b62cd0c1ccf2ced43b31da86dcc2b3d9,
         type: 3}
       propertyPath: m_Name
-      value: Kitchen
+      value: Kitchen L
       objectReference: {fileID: 0}
     - target: {fileID: 8909021595567234661, guid: b62cd0c1ccf2ced43b31da86dcc2b3d9,
         type: 3}
@@ -6247,7 +6247,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (4)
+      value: Table (4) L
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -6605,7 +6605,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table
+      value: Table C
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -6838,7 +6838,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (4)
+      value: Table (4) C
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -6947,7 +6947,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (6)
+      value: Table (6) L
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -7222,7 +7222,7 @@ PrefabInstance:
     - target: {fileID: 1915778740746064447, guid: 87e46eb7c661f87458f8db162f7f193c,
         type: 3}
       propertyPath: m_Name
-      value: Jar Source
+      value: Jar Source L
       objectReference: {fileID: 0}
     - target: {fileID: 2345046864520915755, guid: 87e46eb7c661f87458f8db162f7f193c,
         type: 3}
@@ -8604,7 +8604,7 @@ PrefabInstance:
     - target: {fileID: 1915778740746064447, guid: 87e46eb7c661f87458f8db162f7f193c,
         type: 3}
       propertyPath: m_Name
-      value: Plate Source
+      value: Plate Source L
       objectReference: {fileID: 0}
     - target: {fileID: 2345046864520915755, guid: 87e46eb7c661f87458f8db162f7f193c,
         type: 3}
@@ -10245,7 +10245,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (5)
+      value: Table (5) R
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -10586,7 +10586,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table
+      value: Table R
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -10799,7 +10799,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (1)
+      value: Table (1) R
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -11286,7 +11286,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (1)
+      value: Table (1) C
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -11638,7 +11638,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (5)
+      value: Table (5) L
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -11918,7 +11918,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (3)
+      value: Table (3) R
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -12200,7 +12200,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table
+      value: Table L
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -12753,7 +12753,7 @@ PrefabInstance:
     - target: {fileID: 1915778740746064447, guid: 87e46eb7c661f87458f8db162f7f193c,
         type: 3}
       propertyPath: m_Name
-      value: Bottle Source
+      value: Bottle Source L
       objectReference: {fileID: 0}
     - target: {fileID: 2345046864520915755, guid: 87e46eb7c661f87458f8db162f7f193c,
         type: 3}
@@ -13172,7 +13172,7 @@ PrefabInstance:
     - target: {fileID: 3876972384253890339, guid: f55e01bfc1d0ef0438905ebd2c5088bd,
         type: 3}
       propertyPath: m_Name
-      value: Book Table
+      value: Book Table  R
       objectReference: {fileID: 0}
     - target: {fileID: 4152152397154438540, guid: f55e01bfc1d0ef0438905ebd2c5088bd,
         type: 3}
@@ -14704,7 +14704,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (6)
+      value: Table (6) R
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -15312,7 +15312,7 @@ PrefabInstance:
     - target: {fileID: 4505958497538494793, guid: 50558dc9664ae9b49b0bd269b6a5b543,
         type: 3}
       propertyPath: m_Name
-      value: Cutting Board
+      value: Cutting Board C
       objectReference: {fileID: 0}
     - target: {fileID: 4690533649365945201, guid: 50558dc9664ae9b49b0bd269b6a5b543,
         type: 3}
@@ -15492,7 +15492,7 @@ PrefabInstance:
     - target: {fileID: 1915778740746064447, guid: 87e46eb7c661f87458f8db162f7f193c,
         type: 3}
       propertyPath: m_Name
-      value: Plate Source
+      value: Plate Source R
       objectReference: {fileID: 0}
     - target: {fileID: 2345046864520915755, guid: 87e46eb7c661f87458f8db162f7f193c,
         type: 3}
@@ -15781,7 +15781,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (3)
+      value: Table (3) C
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -16332,7 +16332,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (2)
+      value: Table (2) L
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -16621,7 +16621,7 @@ PrefabInstance:
     - target: {fileID: 7171276074440241987, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
       propertyPath: m_Name
-      value: Table (1)
+      value: Table (1) L
       objectReference: {fileID: 0}
     - target: {fileID: 7249670016464194936, guid: 496e9a9f76b102f4dbac2565eb96ad4b,
         type: 3}
@@ -17271,7 +17271,7 @@ PrefabInstance:
     - target: {fileID: 7782733025461877196, guid: 0ed1d3f2c28bd704c9487050066fa973,
         type: 3}
       propertyPath: m_Name
-      value: Delivery (1)
+      value: Delivery (1) L
       objectReference: {fileID: 0}
     - target: {fileID: 7823340717900212291, guid: 0ed1d3f2c28bd704c9487050066fa973,
         type: 3}
@@ -18011,7 +18011,7 @@ PrefabInstance:
     - target: {fileID: 954429844696036770, guid: b36f606e31b9e9a4cb9ad22cfbd134fc,
         type: 3}
       propertyPath: m_Name
-      value: Barrel
+      value: Barrel L
       objectReference: {fileID: 0}
     - target: {fileID: 8851557157487446787, guid: b36f606e31b9e9a4cb9ad22cfbd134fc,
         type: 3}
@@ -20748,7 +20748,7 @@ PrefabInstance:
     - target: {fileID: 3876972384253890339, guid: f55e01bfc1d0ef0438905ebd2c5088bd,
         type: 3}
       propertyPath: m_Name
-      value: Book Table
+      value: Book Table L
       objectReference: {fileID: 0}
     - target: {fileID: 4152152397154438540, guid: f55e01bfc1d0ef0438905ebd2c5088bd,
         type: 3}
@@ -20851,7 +20851,7 @@ PrefabInstance:
     - target: {fileID: 4505958497538494793, guid: 50558dc9664ae9b49b0bd269b6a5b543,
         type: 3}
       propertyPath: m_Name
-      value: Cutting Board 2
+      value: Cutting Board 2 C
       objectReference: {fileID: 0}
     - target: {fileID: 4690533649365945201, guid: 50558dc9664ae9b49b0bd269b6a5b543,
         type: 3}
@@ -20935,7 +20935,7 @@ PrefabInstance:
     - target: {fileID: 1915778740746064447, guid: 87e46eb7c661f87458f8db162f7f193c,
         type: 3}
       propertyPath: m_Name
-      value: Jar Source
+      value: Jar Source R
       objectReference: {fileID: 0}
     - target: {fileID: 2345046864520915755, guid: 87e46eb7c661f87458f8db162f7f193c,
         type: 3}
@@ -21143,7 +21143,7 @@ PrefabInstance:
     - target: {fileID: 6905594053878010594, guid: b62cd0c1ccf2ced43b31da86dcc2b3d9,
         type: 3}
       propertyPath: m_Name
-      value: Kitchen
+      value: Kitchen R
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b62cd0c1ccf2ced43b31da86dcc2b3d9, type: 3}
@@ -21285,7 +21285,7 @@ PrefabInstance:
     - target: {fileID: 7782733025461877196, guid: 0ed1d3f2c28bd704c9487050066fa973,
         type: 3}
       propertyPath: m_Name
-      value: Delivery
+      value: Delivery R
       objectReference: {fileID: 0}
     - target: {fileID: 7823340717900212291, guid: 0ed1d3f2c28bd704c9487050066fa973,
         type: 3}
