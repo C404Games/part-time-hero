@@ -20,6 +20,7 @@ public class HistoryManager : MonoBehaviour
 
     public AudioSource backgroundMusic;
     public AudioSource forestgroundMusic;
+    public AudioSource voice;
     public List<HistoryAction> actions = new List<HistoryAction>();
     public enum Action {PROLOGUE, DIALOGUE, POWERUP, MONSTER, QUESTION, WRITING, BACKGROUND};
     private UnityEngine.UI.Text globalText;
@@ -182,6 +183,9 @@ public class HistoryManager : MonoBehaviour
     void Start()
     {
         backgroundMusic.Play();
+        if (language == "Spanish"){
+            voice.Play();
+        }
         fadeCorroutine = fadeOutScene(2.5f);
         prologueActive = true;
         musicActive = false;
@@ -228,7 +232,6 @@ public class HistoryManager : MonoBehaviour
 
     void Update()
     {
-
         if (prologueActive)
         {
             if (historyAnimator.GetCurrentAnimatorStateInfo(0).IsName("textShowIdle"))
