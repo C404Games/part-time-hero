@@ -520,7 +520,7 @@ public class MenuBehaviour : MonoBehaviour
                     VictoryOrDefeatBackText.color = Color.black;
                 }
             }
-
+            /*
             // Actualizar nivel desbloqueado
             if (PhotonNetwork.OfflineMode && matchManager.getPunctuationTeam1() > matchManager.getPunctuationTeam2())
             {
@@ -532,6 +532,7 @@ public class MenuBehaviour : MonoBehaviour
                         // Más niveles...
                 }
             }
+            */
         }
     }
 

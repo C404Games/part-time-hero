@@ -16771,14 +16771,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401536845}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0f2c244513df824595e314c42a3b549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   levelButtons:
   - {fileID: 73243006}
+  - {fileID: 2050136072}
   - {fileID: 1547298913}
+  - {fileID: 299473647}
   - {fileID: 2055834682}
 --- !u!114 &1401536851
 MonoBehaviour:
