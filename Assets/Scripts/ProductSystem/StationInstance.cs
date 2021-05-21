@@ -139,7 +139,7 @@ public class StationInstance : MonoBehaviour
                         catcher.holdProduct(heldProduct);
                         heldProduct = null;
                     }
-                    PhotonNetwork.Destroy(product.gameObject);
+                    product.selfDestroy();
                     return time;
                 }
                 return 0;

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7890282529953049758}
   - component: {fileID: 3666724813552468993}
   - component: {fileID: 5499555908900082186}
+  - component: {fileID: 2319151930742892114}
   m_Layer: 10
   m_Name: Tool Source
   m_TagString: ToolSource
@@ -61,6 +62,29 @@ MonoBehaviour:
   toolId: 0
   prefab: {fileID: 9195745361884966598, guid: fd4a68297d4a4044880158fd0c3cfa7f, type: 3}
   heldTool: {fileID: 0}
+  photonView: {fileID: 0}
+--- !u!114 &2319151930742892114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915778740746064447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &3191414289644951162
 PrefabInstance:
   m_ObjectHideFlags: 0
