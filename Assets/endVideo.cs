@@ -31,6 +31,7 @@ public class endVideo : MonoBehaviour
     }
     void EndReached(UnityEngine.Video.VideoPlayer vp)
     {
+        Debug.Log("Cambio a MainMenu");
         SceneManager.LoadScene("MainMenu");
     }
 }
