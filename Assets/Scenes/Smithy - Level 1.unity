@@ -6376,6 +6376,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 14314152, guid: 8ecd1cbd13afab64b9fa4a75eec915ea, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 128966238, guid: 8ecd1cbd13afab64b9fa4a75eec915ea, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -7301,6 +7305,31 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.2376709
       objectReference: {fileID: 0}
+    - target: {fileID: 5537695481501286239, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481883715459, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -207.1897
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481883715459, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -193.51022
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481883715459, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -3.5999756
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537695481883715459, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.399994
+      objectReference: {fileID: 0}
     - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: audioClipLoop1
@@ -7356,6 +7385,11 @@ PrefabInstance:
       propertyPath: dishTeam2Dish4
       value: 
       objectReference: {fileID: 1624586187}
+    - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: pauseSceneText
+      value: 
+      objectReference: {fileID: 1624586196}
     - target: {fileID: 5537695481910704392, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: timeBarTeam1Dish1
@@ -8134,6 +8168,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1624586157}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1624586196 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 14314152, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 1624586157}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1641174395
 GameObject:
   m_ObjectHideFlags: 0
