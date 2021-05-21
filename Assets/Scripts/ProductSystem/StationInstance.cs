@@ -180,7 +180,7 @@ public class StationInstance : MonoBehaviour
                     float time = transition.time;
 
                     busy = true;
-                    transitionTime = time;
+                    transitionTime = time * speedFactor;
                     currentTransitionTime = 0;
                     transitionDst = transition.dst;
 
@@ -210,7 +210,7 @@ public class StationInstance : MonoBehaviour
                     }
                     busy = true;
 
-                    float time = transition.time;
+                    float time = transition.time * speedFactor;
                     
                     busy = true;
                     transitionTime = time;
