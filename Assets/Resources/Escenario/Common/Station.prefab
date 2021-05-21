@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8609220199597709597}
   - component: {fileID: 8073282221380481234}
   - component: {fileID: 2947360533387817346}
+  - component: {fileID: 555982215152586038}
   m_Layer: 10
   m_Name: Station
   m_TagString: Target
@@ -50,6 +51,7 @@ MonoBehaviour:
   mainModel: {fileID: 0}
   brokenModel: {fileID: 3435893528323486081}
   heldProduct: {fileID: 0}
+  doubleSided: 0
   transitionTime: 0
   currentTransitionTime: 0
 --- !u!135 &2947360533387817346
@@ -65,6 +67,28 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &555982215152586038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41593000955733948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7123552321133675064
 GameObject:
   m_ObjectHideFlags: 0

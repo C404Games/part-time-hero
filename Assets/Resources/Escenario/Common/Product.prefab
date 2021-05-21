@@ -49,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   holder: {fileID: 0}
+  appearence: {fileID: 0}
+  rigidbody: {fileID: 0}
 --- !u!65 &2477802558995312546
 BoxCollider:
   m_ObjectHideFlags: 0

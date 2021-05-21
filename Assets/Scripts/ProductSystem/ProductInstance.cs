@@ -13,11 +13,11 @@ public class ProductInstance : MonoBehaviourPun
 
     private Product blueprint;
 
-    private GameObject appearence;
+    public GameObject appearence;
 
     private float clampSpeed = 10;
 
-    private Rigidbody rigidbody;
+    public Rigidbody rigidbody;
 
     private float clampTime = 0.5f;
     private float currentClampTime = 0;
@@ -150,11 +150,13 @@ public class ProductInstance : MonoBehaviourPun
     {
         currentClampTime = 0;
         Transform t = null;
+        GameObject go = GameObject.Find(name);
+
         if (isTable)
-            t = GameObject.Find(name).transform;
-        else{
-            t = GameObject.Find(name).transform.GetComponentInChildren<CatcherScript>().transform;
-        }
+            t = go == null ? null : go.transform;
+        else
+            t = go == null ? null : go.transform.GetComponentInChildren<CatcherScript>().transform;
+        
         holder = t;
 
         rigidbody.isKinematic = true;
@@ -174,6 +176,16 @@ public class ProductInstance : MonoBehaviourPun
         appearence.transform.parent = transform;
         appearence.transform.localPosition = new Vector3(0, 0, 0);
         Debug.Log(appearence.ToString());
+    }
+
+    [PunRPC]
+    void selfDestoyRPC() {
+        Destroy(this.gameObject);
+    }
+
+    public void selfDestroy()
+    {
+        photonView.RPC("selfDestroyRPC", RpcTarget.All);
     }
 
     //OGM Coger productos

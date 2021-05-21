@@ -13,6 +13,13 @@ public class ToolSource : MonoBehaviour
 
     public GameObject heldTool;
 
+    public PhotonView photonView;
+
+    private void Start()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -20,7 +27,8 @@ public class ToolSource : MonoBehaviour
         //{
         //    return;
         //}
-
+        if (!photonView.IsMine)
+            return;
         if (heldTool == null || heldTool.GetComponent<ProductInstance>().getHolder() != transform)
         {
             heldTool = PhotonNetwork.Instantiate(
@@ -31,10 +39,10 @@ public class ToolSource : MonoBehaviour
             heldTool.GetComponent<Rigidbody>().isKinematic = true;
             ProductInstance product = heldTool.GetComponent<ProductInstance>();
             product.id = toolId;
+            product.rigidbody = product.GetComponent<Rigidbody>();
             product.setHolder(gameObject.name, true);
             product.holder = transform;
-        }
-        
+        }        
     }
 
     public void returnTool(ProductInstance tool)
