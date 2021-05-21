@@ -25,6 +25,8 @@ public class WalkingArea : MonoBehaviour
 
     private MatchManager matchManager;
 
+    public GameObject player;
+
     void Awake()
     {
         myCollider = GetComponent<BoxCollider>();
@@ -75,6 +77,7 @@ public class WalkingArea : MonoBehaviour
 
     private void GeneratePowerUp()
     {
+
         if (PhotonNetwork.OfflineMode || PhotonNetwork.LocalPlayer.ActorNumber == 1)
         {
             PhotonNetwork.Instantiate(Path.Combine("PowerUps", powerUps[(int)Random.Range(0, powerUps.Count)]), RandomPointInBounds(), Quaternion.identity);
@@ -84,6 +87,7 @@ public class WalkingArea : MonoBehaviour
     public Vector3 RandomPointInBounds()
     {
         Bounds bounds = myCollider.bounds;
+        
         return new Vector3(
             Random.Range(bounds.min.x, bounds.max.x),
             bounds.min.y,
