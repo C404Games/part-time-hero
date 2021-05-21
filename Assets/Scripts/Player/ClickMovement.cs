@@ -154,6 +154,8 @@ public class ClickMovement : MonoBehaviour
                     else
                     {
                         targetProduct = null;
+                        nvAgent.isStopped = true;
+                        nvAgent.ResetPath();
                     }
                     break;
             }

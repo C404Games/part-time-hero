@@ -179,7 +179,7 @@ public class ProductInstance : MonoBehaviourPun
     }
 
     [PunRPC]
-    void selfDestoyRPC() {
+    void selfDestroyRPC() {
         Destroy(this.gameObject);
     }
 
