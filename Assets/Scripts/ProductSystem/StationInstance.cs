@@ -127,7 +127,9 @@ public class StationInstance : MonoBehaviour
                         catcher.holdProduct(heldProduct);
                         heldProduct = null;
                     }
+                    GameObject ap = product.appearence;
                     PhotonNetwork.Destroy(product.gameObject);
+                    Destroy(ap);
                     return activate();
                 }
                 float time = activateSpecial(product.id);

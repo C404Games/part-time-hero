@@ -13,7 +13,7 @@ public class ProductInstance : MonoBehaviourPun
 
     private Product blueprint;
 
-    private GameObject appearence;
+    public GameObject appearence;
 
     private float clampSpeed = 10;
 
