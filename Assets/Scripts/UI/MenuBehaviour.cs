@@ -478,21 +478,21 @@ public class MenuBehaviour : MonoBehaviour
                 {
                     victoryOrDefeatText.text = "VICTORIA";
                     VictoryOrDefeatBackText.text = "VICTORIA";
-                    victoryOrDefeatText.color = Color.red;
+                    victoryOrDefeatText.color = Color.green;
                     VictoryOrDefeatBackText.color = Color.black;
                 }
                 if (language == "English")
                 {
                     victoryOrDefeatText.text = "VICTORY";
                     VictoryOrDefeatBackText.text = "VICTORY";
-                    victoryOrDefeatText.color = Color.red;
+                    victoryOrDefeatText.color = Color.green;
                     VictoryOrDefeatBackText.color = Color.black;
                 }
                 if (language == "Simplified Chinese")
                 {
                     victoryOrDefeatText.text = "勝利";
                     VictoryOrDefeatBackText.text = "勝利";
-                    victoryOrDefeatText.color = Color.red;
+                    victoryOrDefeatText.color = Color.green;
                     VictoryOrDefeatBackText.color = Color.black;
                 }
             } else
@@ -501,21 +501,21 @@ public class MenuBehaviour : MonoBehaviour
                 {
                     victoryOrDefeatText.text = "DERROTA";
                     VictoryOrDefeatBackText.text = "DERROTA";
-                    victoryOrDefeatText.color = Color.green;
+                    victoryOrDefeatText.color = Color.red;
                     VictoryOrDefeatBackText.color = Color.black;
                 }
                 if (language == "English")
                 {
                     victoryOrDefeatText.text = "DEFEAT";
                     VictoryOrDefeatBackText.text = "DEFEAT";
-                    victoryOrDefeatText.color = Color.green;
+                    victoryOrDefeatText.color = Color.red;
                     VictoryOrDefeatBackText.color = Color.black;
                 }
                 if (language == "Simplified Chinese")
                 {
                     victoryOrDefeatText.text = "打敗";
                     VictoryOrDefeatBackText.text = "打敗";
-                    victoryOrDefeatText.color = Color.green;
+                    victoryOrDefeatText.color = Color.red;
                     VictoryOrDefeatBackText.color = Color.black;
                 }
             }
