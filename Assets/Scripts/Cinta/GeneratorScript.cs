@@ -13,13 +13,15 @@ public class GeneratorScript : MonoBehaviour
 
     private List<int> cumulativeProbabilities;
 
+    private AIManager aiManager;
+
     // Start is called before the first frame update
     void Start()
     {
         cumulativeProbabilities = new List<int>();
         for(int i = 0; i < ProductManager.rawProducts.Count; i++)
             cumulativeProbabilities.Add(1);
-
+        //aiManager = FindObjectOfType<AIManager>();
         actualizarValores();
     }
 
@@ -35,6 +37,8 @@ public class GeneratorScript : MonoBehaviour
         if(tiempo >= tiempoAparicion)
         {
             List<int> uniformList = new List<int>();
+
+            actualizarValores();
 
             for(int i = 0; i < ProductManager.rawProducts.Count; i++)
             {
