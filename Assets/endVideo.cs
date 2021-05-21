@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class endVideo : MonoBehaviour
 {
+
+    private float time = 0f;
+
     private void Start()
     {
         // Will attach a VideoPlayer to the main camera.
@@ -33,5 +36,13 @@ public class endVideo : MonoBehaviour
     {
         Debug.Log("Cambio a MainMenu");
         SceneManager.LoadScene("MainMenu");
+    }
+
+    private void Update()
+    {
+        time += Time.deltaTime;
+        if (time >= 5f)
+            SceneManager.LoadScene("MainMenu");
+
     }
 }
