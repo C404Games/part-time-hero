@@ -121,7 +121,7 @@ public class MonsterController : MonoBehaviour
 
     public void die()
     {
-        Destroy(this.gameObject);
+        PhotonNetwork.Destroy(this.gameObject);
     }
 
     private IEnumerator hideHealthBar(int lastHealth)
