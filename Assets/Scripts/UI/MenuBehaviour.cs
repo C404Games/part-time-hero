@@ -294,6 +294,7 @@ public class MenuBehaviour : MonoBehaviour
                 this.gameObject.SetActive(visible);
                 currentTime += Time.deltaTime;
                 totalTime += Time.deltaTime;
+                photonView.RPC("updateClock", RpcTarget.All, currentTime, totalTime);
                 //Generation of dishes 0s - 30s - 1m 00s...
                 if ((currentTime > frequency || matchManager.team1Dishes.Count == 0) && dishGenerationActive)
                 {
@@ -354,7 +355,6 @@ public class MenuBehaviour : MonoBehaviour
                         }
                         //dishMenuPrefab = Instantiate(searchedDish);
                         photonView.RPC("team1Disk", RpcTarget.All, position, dish1);
-                        matchManager.team1DishTime[position - 1] = ProductManager.finalProducts[dish1].time;
                     }
                     position = -1;
                     if (matchManager.team2Dishes.Count < 4)
@@ -413,78 +413,76 @@ public class MenuBehaviour : MonoBehaviour
                         }
                         //dishMenuPrefab = PhotonNetwork.Instantiate(Path.Combine("UI", "Dish"), Vector3.zero, Quaternion.Euler(Vector3.zero));
                         photonView.RPC("team2Disk", RpcTarget.All, position, dish2);
-                        matchManager.team2DishTime[position - 1] = ProductManager.finalProducts[dish2].time;
                         currentTime = 0;
                     }
                 }
 
-                //Timer countdown
-                int minutes = (int)(matchManager.getInitialTime() - totalTime) / 60;
-                int seconds = (int)(matchManager.getInitialTime() - totalTime) % 60;
-                string minutesStr = (minutes < 10) ? "0" + minutes : "" + minutes;
-                string secondsStr = (seconds < 10) ? "0" + seconds : "" + seconds;
-                if ((matchManager.getInitialTime() - totalTime) > 0)
+                photonView.RPC("clock", RpcTarget.All);
+            }
+        }
+    }
+
+    [PunRPC]
+    void clock()
+    {
+        //Timer countdown
+        int minutes = (int)(matchManager.getInitialTime() - totalTime) / 60;
+        int seconds = (int)(matchManager.getInitialTime() - totalTime) % 60;
+        string minutesStr = (minutes < 10) ? "0" + minutes : "" + minutes;
+        string secondsStr = (seconds < 10) ? "0" + seconds : "" + seconds;
+        if ((matchManager.getInitialTime() - totalTime) > 0)
+        {
+            if (minutes == 0 && seconds <= 15)
+            {
+                if (totalTime % 1 < 0.5)
                 {
-                    if (minutes == 0 && seconds <= 15)
-                    {
-                        if (totalTime % 1 < 0.5)
-                        {
-                            timeText.color = Color.red;
-                        }
-                        else
-                        {
-                            timeText.color = Color.black;
-                        }
-                    }
-                    else if (seconds == 0 || seconds == 30)
-                    {
-                        timeText.color = Color.red;
-                    }
-                    else
-                    {
-                        timeText.color = Color.black;
-                    }
-                    timeText.text = minutesStr + ":" + secondsStr;
+                    timeText.color = Color.red;
                 }
                 else
                 {
-                    audioClipLoop1.Stop();
-                    playingBackgroundClip1 = false;
-                    playingBackgroundClip2 = false;
-                    playingBackgroundClip3 = false;
-                    timeText.color = Color.red;
-                    timeText.text = "00:00";
-                    matchManager.updatePlayerMoneyAndExperience();
-                    //if (PhotonNetwork. < 2)
-                    //{
-                    //    moneyFinal.text = "" + matchManager.getPunctuationTeam1() / 10;
-                    //    pointsFinal.text = "" + matchManager.getPunctuationTeam1();
-                    //}
-                    //else
-                    //{
-                    moneyFinal.text = "" + matchManager.getPunctuationTeam1() / 10;
-                    pointsFinal.text = "" + matchManager.getPunctuationTeam1();
-                    //}
-                    pauseButton.SetActive(false);
-                    pauseMatch();
-                    GetComponent<Animator>().SetTrigger("fadeIn");
-                    StartCoroutine(fadeInScene(5.5f));
+                    timeText.color = Color.black;
+                }
+            }
+            else if (seconds == 0 || seconds == 30)
+            {
+                timeText.color = Color.red;
+            }
+            else
+            {
+                timeText.color = Color.black;
+            }
+            timeText.text = minutesStr + ":" + secondsStr;
+        }
+        else
+        {
+            audioClipLoop1.Stop();
+            playingBackgroundClip1 = false;
+            playingBackgroundClip2 = false;
+            playingBackgroundClip3 = false;
+            timeText.color = Color.red;
+            timeText.text = "00:00";
+            matchManager.updatePlayerMoneyAndExperience();
+            moneyFinal.text = "" + matchManager.getPunctuationTeam1() / 10;
+            pointsFinal.text = "" + matchManager.getPunctuationTeam1();
+            pauseButton.SetActive(false);
+            pauseMatch();
+            GetComponent<Animator>().SetTrigger("fadeIn");
+            StartCoroutine(fadeInScene(5.5f));
 
-                    // Actualizar nivel desbloqueado
-                    if(PhotonNetwork.OfflineMode && matchManager.getPunctuationTeam1() > matchManager.getPunctuationTeam2())
-                    {
-                        switch(PlayerPrefs.GetInt("scenary", 1))
-                        {
-                            case 1:
-                                PlayerPrefs.SetInt("LEVEL_UNLOCKED", 2);
-                                break;
-                                // Más niveles...
-                        }
-                    }
+            // Actualizar nivel desbloqueado
+            if (PhotonNetwork.OfflineMode && matchManager.getPunctuationTeam1() > matchManager.getPunctuationTeam2())
+            {
+                switch (PlayerPrefs.GetInt("scenary", 1))
+                {
+                    case 1:
+                        PlayerPrefs.SetInt("LEVEL_UNLOCKED", 2);
+                        break;
+                        // Más niveles...
                 }
             }
         }
     }
+
     public void updatePoints()
     {
 
@@ -722,6 +720,8 @@ public class MenuBehaviour : MonoBehaviour
         Image[] imageDish = currentDishPanel.GetComponentsInChildren<Image>(true);
         imageDish[imageDish.Length - 1].sprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish1].id];
         imageDish[imageDish.Length - 1].gameObject.SetActive(true);
+
+        matchManager.team1DishTime[position - 1] = ProductManager.finalProducts[dish1].time;
     }
 
     [PunRPC]
@@ -734,6 +734,14 @@ public class MenuBehaviour : MonoBehaviour
         Image[] imageDish = currentDishPanel.GetComponentsInChildren<Image>(true);
         imageDish[imageDish.Length - 1].sprite = ProductManager.finalProductImage[ProductManager.finalProducts[dish2].id];
         imageDish[imageDish.Length - 1].gameObject.SetActive(true);
+
+        matchManager.team2DishTime[position - 1] = ProductManager.finalProducts[dish2].time;
     }
-   
+
+    [PunRPC]
+   void updateClock(float currentTime, float totalTime)
+   {
+        this.currentTime = currentTime;
+        this.totalTime = totalTime;
+   }
 }
