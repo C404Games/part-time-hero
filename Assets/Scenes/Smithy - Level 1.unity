@@ -2196,7 +2196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1a4d9144feb4648ab9ac8ce1ee60e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiempoAparicion: 2
+  tiempoAparicion: 4
   prefab: {fileID: 9195745361884966598, guid: fd4a68297d4a4044880158fd0c3cfa7f, type: 3}
 --- !u!4 &705021237 stripped
 Transform:
@@ -3681,7 +3681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1a4d9144feb4648ab9ac8ce1ee60e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiempoAparicion: 2
+  tiempoAparicion: 4
   prefab: {fileID: 9195745361884966598, guid: fd4a68297d4a4044880158fd0c3cfa7f, type: 3}
 --- !u!4 &1127152565 stripped
 Transform:
