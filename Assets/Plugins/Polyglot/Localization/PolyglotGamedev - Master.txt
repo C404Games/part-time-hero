@@ -671,7 +671,11 @@ TUTORIAL_TABERN_4		Brings finished recipes to the point of delivery.		Lleva las 
 SITE_TABERN		TABERN		TABERNA															酒馆										
 SITE_SMITHY		SMITHY		HERRERIA															铁匠铺										
 TUTORIAL_HERRERIA_1		Welcome to Rhino's Smithy		¡Bienvenido a la herrería de Rhino!															欢迎来到犀牛的铁匠铺										
-DESCRIPTION_TABERN		Tario needs your help, let's get started!		Tario necesita tu ayuda, ponte manos a la masa																									
-LEVEL_PROLOGUE		PROLOGUE		PROLOGO																									
-DESCRIPTION_PROLOGUE		A new adventure begins		Empieza una nueva aventura																									
-DESCRIPTION_SMITHY		Help Rhiron with his red hot duties		Ayuda a Rairon en sus tareas al rojo vivo																									
+DESCRIPTION_TABERN		Tario needs your help, let's get started!		Tario necesita tu ayuda, ponte manos a la masa															塔利奥需要你的帮助，让我们开始吧!										
+LEVEL_PROLOGUE		PROLOGUE		PROLOGO															序言										
+DESCRIPTION_PROLOGUE		A new adventure begins		Empieza una nueva aventura															一个新的冒险开始了										
+DESCRIPTION_SMITHY		Help Rhiron with his red hot duties		Ayuda a Rairon en sus tareas al rojo vivo															帮助Rhiron完成他的红色任务										
+TITLE_EPISODE_1		EPISODE 1		EPISODIO 1															第一集										
+TITLE_EPISODE_2		EPISODE 2		EPISODIO 2															第二集										
+DESCRIPTION_EPISODE_1		What happen to Tario?		¿Que le pasa a Tario?															塔里奥怎么了？										
+DESCRIPTION_EPISODE_2		Meet to Rhiron the blacksmith		Conoce a Rhiron, el herrero															与铁匠Rhiron会面										
