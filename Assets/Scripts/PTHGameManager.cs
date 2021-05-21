@@ -19,9 +19,7 @@ public class PTHGameManager : MonoBehaviourPunCallbacks
     private void Awake()
     {
         Debug.Log("El modo offline esta: " + PhotonNetwork.OfflineMode);
-    }
-    void Start()
-    {
+
         //if (!PhotonNetwork.OfflineMode && PhotonNetwork.CurrentRoom.Players[0].ActorNumber != 1)
         //{
         //    return;
@@ -71,7 +69,7 @@ public class PTHGameManager : MonoBehaviourPunCallbacks
             catcherList[3].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.CurrentRoom.GetPlayer(2));
         }
 
-            if (PhotonNetwork.OfflineMode || PhotonNetwork.LocalPlayer.ActorNumber == 1)
+        if (PhotonNetwork.OfflineMode || PhotonNetwork.LocalPlayer.ActorNumber == 1)
         {
             //PhotonNetwork.Instantiate(
             //Path.Combine("AI", "IAManager"),
@@ -80,6 +78,10 @@ public class PTHGameManager : MonoBehaviourPunCallbacks
             //);
 
         }
+    }
+    void Start()
+    {
+        
 
     }
 }
