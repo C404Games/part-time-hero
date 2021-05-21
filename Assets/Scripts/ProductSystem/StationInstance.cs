@@ -200,11 +200,11 @@ public class StationInstance : MonoBehaviour
             {
                 if(heldProduct.id == transition.src && transition.pre < 0)
                 {
-                    if (id == 0)
+                    if (PlayerPrefs.GetInt("scenary") == 1 && id == 0)
                     {
                         choppingMusic.Play();
                     }
-                    if (id == 1)
+                    if (PlayerPrefs.GetInt("scenary") == 2 && id == 1)
                     {
                         cauldronMusic.Play();
                     }

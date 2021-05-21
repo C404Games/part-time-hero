@@ -30,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject iceCube;
 
+    public RecipieBook recipieBook;
+    RecipieBook recipieBookInReach;
+
     private Vector3 waitPosition;
     private Vector3 waitRotation;
 
@@ -42,8 +45,6 @@ public class PlayerMovement : MonoBehaviour
 
     MonsterController monsterInReach;
     public bool attackBusy = false;
-
-    RecipieBook recipieBookInReach;
 
     public bool active = true;
 
@@ -164,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (monsterInReach != null)
                 attack();
-            else if (recipieBookInReach != null)
+            else if (recipieBook != null)
                 openCloseBook();                
         }
     }
@@ -207,27 +208,29 @@ public class PlayerMovement : MonoBehaviour
 
     public void openCloseBook()
     {
-        if (recipieBookInReach.isOpen())
+        if (recipieBook.isOpen())
         {
-            recipieBookInReach.closeBook();
+            recipieBook.closeBook();
             blocked = false;            
         }
         else
         {
-            recipieBookInReach.openBook();
+            recipieBook.openBook();
             waitPosition = transform.position;
             waitRotation = transform.forward;
             blocked = true;
         }
         foreach (PlayerMovement pm in FindObjectsOfType<PlayerMovement>().Where(p => p.team == team))
         {
+            pm.waitPosition = pm.transform.position;
+            pm.waitRotation = pm.transform.forward;
             pm.blocked = blocked;
         }
     }
 
     public bool isBookOpen()
     {
-        return recipieBookInReach != null && recipieBookInReach.isOpen() && blocked;
+        return recipieBook.isOpen() && blocked;
     }
 
     public void blockMovement(float time, Vector3 waitPosition, Vector3 waitRotation)

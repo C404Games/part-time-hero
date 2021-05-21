@@ -25,6 +25,8 @@ public class DeliverySpot : MonoBehaviour
             particles.Stop();
             particles.Play();
         }
+        GameObject ap = product.appearence;
         PhotonNetwork.Destroy(product.gameObject);
+        Destroy(ap);
     }
 }

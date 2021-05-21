@@ -667,9 +667,12 @@ PAUSE_RESET		RESET		REINICIAR															重新开始
 TUTORIAL_TABERN_1		Welcome to Tario's Tavern!		¡Bienvenido a la Taberna de Tario!															欢迎来到塔里奥酒馆!										
 TUTORIAL_TABERN_2		Collect the products you need from the belts		Recoge los producto que necesitas de las cintas															从皮带上收集你需要的产品										
 TUTORIAL_TABERN_3		You can click on the book to see the recipe booklet.		Puedes pulsar el libro para ver el recetario															你可以点击这本书，来查看食谱。										
-TUTORIAL_TABERN_4		Brings finished recipes to the point of delivery.		Lleva las recetas terminadas al punto de enterega		 													将完成的菜谱带到交货点。										
+TUTORIAL_TABERN_4		Brings finished recipes to the point of delivery.		Lleva las recetas terminadas al punto de enterega															将完成的菜谱带到交货点。										
 SITE_TABERN		TABERN		TABERNA															酒馆										
 SITE_SMITHY		SMITHY		HERRERIA															铁匠铺										
+<<<<<<< HEAD
+TUTORIAL_HERRERIA_1		Welcome to Rhino's Smithy		¡Bienvenido a la herrería de Rhino!															欢迎来到犀牛的铁匠铺										
+=======
 TUTORIAL_HERRERIA_1		Welcome to Rhino's Smithy		¡Bienvenido a la herrería de Rhino!															欢迎来到犀牛的铁匠铺										
 DESCRIPTION_TABERN		Tario needs your help, let's get started!		Tario necesita tu ayuda, ponte manos a la masa															塔利奥需要你的帮助，让我们开始吧!										
 LEVEL_PROLOGUE		PROLOGUE		PROLOGO															序言										
@@ -679,3 +682,4 @@ TITLE_EPISODE_1		EPISODE 1		EPISODIO 1															第一集
 TITLE_EPISODE_2		EPISODE 2		EPISODIO 2															第二集										
 DESCRIPTION_EPISODE_1		What happen to Tario?		¿Que le pasa a Tario?															塔里奥怎么了？										
 DESCRIPTION_EPISODE_2		Meet to Rhiron the blacksmith		Conoce a Rhiron, el herrero															与铁匠Rhiron会面										
+>>>>>>> 74a47bbb5dc14bed0d13386a415cbf10d428208a

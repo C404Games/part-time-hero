@@ -27,6 +27,8 @@ public class AIAgent : MonoBehaviour
 
     ClickMovement movement;
 
+    public PlayerMovement playerMovement;
+
     public RecipieNode currentNode;
 
     public ProductInstance targetProduct;
@@ -45,6 +47,7 @@ public class AIAgent : MonoBehaviour
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
+        playerMovement = GetComponent<PlayerMovement>();
         
         if (PhotonNetwork.OfflineMode || PhotonNetwork.LocalPlayer.ActorNumber == 1)
         {
@@ -243,5 +246,10 @@ public class AIAgent : MonoBehaviour
         movement.targetType = clickTargetType.FLOOR;
         nvAgent.SetDestination(reachableTracker.getRandomPointInBounds());
         nvAgent.isStopped = false;
+    }
+
+    public bool isTargetStationBusy()
+    {
+        return targetStation != null && targetStation.isBusy();
     }
 }
