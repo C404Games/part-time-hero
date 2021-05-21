@@ -20434,6 +20434,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.016357422
       objectReference: {fileID: 0}
+    - target: {fileID: 3987940041144442000, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 63097c3e364050746bd7b8b0c4863891,
+        type: 3}
+    - target: {fileID: 3987940041144442000, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.57254905
+      objectReference: {fileID: 0}
     - target: {fileID: 5537695480175161563, guid: 8ecd1cbd13afab64b9fa4a75eec915ea,
         type: 3}
       propertyPath: m_AnchoredPosition.x
