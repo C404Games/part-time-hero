@@ -198,6 +198,8 @@ public class StationInstance : MonoBehaviour
             {
                 if(heldProduct.id == transition.src && transition.pre < 0)
                 {
+                    //Product product = ProductManager.rawProducts[heldProduct.id];
+                    //Debug.Log(product.name);
                     busy = true;
 
                     float time = transition.time;

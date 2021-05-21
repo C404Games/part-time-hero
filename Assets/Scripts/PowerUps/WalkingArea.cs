@@ -104,7 +104,7 @@ public class WalkingArea : MonoBehaviour
                 distance = 4;
                 break;
             case 2:
-                distance = 12;
+                distance = 8;
                 break;
         }
         if ((Mathf.Abs(player.transform.position[0] - coordX) + Mathf.Abs(player.transform.position[2] - coordZ)) > distance)
