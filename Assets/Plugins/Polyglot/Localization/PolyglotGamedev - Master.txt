@@ -653,7 +653,7 @@ PRIVATE_ROOM_INSERT_CODE		Insert Code		Inserta Código
 PRIVATE_ROOM_ENTER_CODE		Enter Code		Inserta Código																									
 MENU_JOIN		Join		Unirse																									
 SHOP_COINS_PACK		Gems Pack		Pack De Gemas																									
-SHOP_COINS_MEGA_PACK		MegaCoins Pack		MegaPack de Gemas																									
+SHOP_COINS_MEGA_PACK		Mega Gems Pack		Mega Pack de Gemas																									
 SHOP_COINS_CHEST		Mega Chest Pack		Mega Cofre de Gemas																									
 SHOP_BESTSELLER		The Bestseller		El Mas Vendido																									
 SHOP_MORE_BENEFITS		More Benefits		El Mas Beneficioso																									
@@ -668,3 +668,5 @@ TUTORIAL_TABERN_1		Welcome to Tario's Tavern!		¡Bienvenido a la Taberna de Tari
 TUTORIAL_TABERN_2		Collect the products you need from the belts		Recoge los producto que necesitas de las cintas																									
 TUTORIAL_TABERN_3		You can click on the book to see the recipe booklet.		Puedes pulsar el libro para ver el recetario																									
 TUTORIAL_TABERN_4		Brings finished recipes to the point of delivery.		Lleva las recetas terminadas al punto de enterega																									
+SITE_TABERN		TABERN		TABERNA																									
+SITE_SMITHY		SMITHY		HERRERIA																									

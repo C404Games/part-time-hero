@@ -130,7 +130,7 @@ public class AIAgent : MonoBehaviour
                     }
                     break;
                 case agentState.WAIT:
-                    Debug.Log("waiting");
+                    //Debug.Log("waiting");
                     delivering = false;
                     busy = false;
                     // Si hay monstruo, atacar                    

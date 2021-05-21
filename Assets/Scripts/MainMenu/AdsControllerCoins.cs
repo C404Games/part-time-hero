@@ -15,10 +15,12 @@ public class AdsControllerCoins : MonoBehaviour
     private Cronometer cronometer;
     private GameObject readyIndicator;
     private Button button;
+    private GodScript god;
 
     // Start is called before the first frame update
     void Start()
     {
+        god = GameObject.Find("GodObject").GetComponent<GodScript>();
         Monetization.Initialize(appId, true);
         cronometer = GameObject.Find("Cronometer").GetComponent<Cronometer>();
         cronometer.setTimer(0);
@@ -29,7 +31,7 @@ public class AdsControllerCoins : MonoBehaviour
     private void Update()
     {
         button.enabled = (cronometer.getTime() <= 0) ? true : false;
-        readyIndicator.SetActive((cronometer.getTime() <= 0) ? false : true);
+        readyIndicator.SetActive((cronometer.getTime() <= 0) ? true : false);
     }
 
     public void showAds()
@@ -47,7 +49,7 @@ public class AdsControllerCoins : MonoBehaviour
     }
     private void setAction()
     {
-        coins += numberOfCoins;
+        god.addCoins(numberOfCoins);
 
         cronometer.initializeTimer();
     }
