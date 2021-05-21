@@ -356,12 +356,15 @@ public class MatchManager : MonoBehaviour
     public void pauseMatch()
     {
         isPaused = true;
-        GameObject[] players;
+        GameObject[] players;        
         players = GameObject.FindGameObjectsWithTag("Player");
-        for (int i = 0; i < players.Length; i++)
+        if (players.Length > 0)
         {
-            players[i].GetComponent<PlayerMovement>().clickMovement.active = false;
-            players[i].GetComponent<PlayerMovement>().paused = true;
+            for (int i = 0; i < players.Length; i++)
+            {
+                players[i].GetComponent<PlayerMovement>().clickMovement.active = false;
+                players[i].GetComponent<PlayerMovement>().paused = true;
+            }
         }
     }
 

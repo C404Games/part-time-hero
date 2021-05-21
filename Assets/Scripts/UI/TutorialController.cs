@@ -26,13 +26,13 @@ public class TutorialController : MonoBehaviour
     {
         matchManager = FindObjectOfType<MatchManager>();
 
-        if (!PhotonNetwork.OfflineMode)
+        if (!PhotonNetwork.OfflineMode || PlayerPrefs.GetInt("scenary") == 2)
         {
             animator.SetBool("tutorialDone", true);
             return;
         }
 
-        matchManager.pauseMatch();
+        //matchManager.pauseMatch();
 
         steps = transform.GetComponentsInChildren<TutorialStep>();
         if (steps.Length == 0)
