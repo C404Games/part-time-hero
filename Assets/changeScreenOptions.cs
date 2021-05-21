@@ -16,16 +16,16 @@ public class changeScreenOptions : MonoBehaviour
 
         switch (Screen.height)
         {
-            case 2160:
+            case 480:
                 dropResolution.GetComponent<Dropdown>().value = 0;
                 break;
-            case 1080:
+            case 720:
                 dropResolution.GetComponent<Dropdown>().value = 1;
                 break;
-            case 720:
+            case 1080:
                 dropResolution.GetComponent<Dropdown>().value = 2;
                 break;
-            case 480:
+            case 2160:
                 dropResolution.GetComponent<Dropdown>().value = 3;
                 break;
         }
@@ -54,19 +54,19 @@ public class changeScreenOptions : MonoBehaviour
 
         switch (GetComponent<Dropdown>().value)
         {
-            case 0:
+            case 3:
                 width = 3840;
                 height = 2160;
                 break;
-            case 1:
+            case 2:
                 width = 1920;
                 height = 1080;
                 break;
-            case 2:
+            case 1:
                 width = 1280;
                 height = 720;
                 break;
-            case 3:
+            case 0:
                 width = 852;
                 height = 480;
                 break;
