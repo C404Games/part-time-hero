@@ -14,4 +14,4 @@ To access the website, go to the following url: [c404games.github.io](https://c4
 Si quieres descargar y probar nuestro juego, tanto en PC como en Android, puedes descargarlo desde nuestra página oficial de [itch.io](https://c404games.itch.io/part-time-hero)
 
 # How To Compilate
-To compile the project, please read the document "Documents/Manual de compilación.pdf" (In Spanish).
+To compile the project, please read the document ["Documents/Manual de compilación.pdf"](https://github.com/C404Games/part-time-hero/blob/main/Documents/Manual%20de%20compilaci%C3%B3n.pdf) (In Spanish).
